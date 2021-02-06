@@ -10,18 +10,24 @@ body {
 
 .fork {
     display: inline-block;
-    position: absolute;
+    position: relative;
     width: 300px;
 }
 
 svg {
     position: absolute;
-    top: -59px;
+    top: -88px;
+}
+
+.input-group {
+    display: inline-block;
 }
 
 .search-form {
     border: 1px solid #cccccc;
     padding: 16px;
+    margin: 0px -4px;
+    font-size: 14px;
 }
 
 .button-primary {
@@ -30,4 +36,5 @@ svg {
     background: #888888;
     color: white;
     padding: 16px;
+    font-size: 14px;
 }
