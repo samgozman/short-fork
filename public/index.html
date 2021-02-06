@@ -5,62 +5,57 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Short fork</title>
+    <!-- Google Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
+    <!-- Styles -->
     <link rel="stylesheet" href="./css/styles.css">
 </head>
 
 <body>
     <div class="container">
-        <form action="">
-            <input class="button-primary" type="submit" value="Search">
-            <input class="search-form" type="text" placeholder="Ticker" id="ticker">
-            <div class="fork">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 100">
-                    <defs>
-                        <style>
-                            .cls-1 {
-                                fill: none;
-                                stroke: #ccc;
-                                stroke-linecap: round;
-                                stroke-linejoin: round;
-                                stroke-width: 1px;
-                            }
+        <div class="row">
+            <h2>Short Fork</h2>
+            <p>
+                lorem ipsum dolor sit amet, consectetur adipis, lorem ipsum dolor sit amet, consectetur adipis, lorem ipsum dolor sit amet, consectetur adipis
+            </p>
+        </div>
+        <div class="row">
+            <!-- Form -->
+            <form action="">
+                <input class="button-primary" type="submit" value="Search">
+                <input class="search-form" type="text" placeholder="Ticker" id="ticker">
 
-                            .cls-2 {
-                                font-size: 10px;
-                                font-family: MyriadPro-Regular, Myriad Pro;
-                            }
-                        </style>
-                    </defs>
-                    <g id="lines">
-                        <g id="LINE">
-                            <line class="cls-1" x1="0.35" y1="35.4" x2="71.22" y2="35.4" />
+                <div class="fork">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 108.13 91.57">
+                        <g id="lines">
+                            <line class="g-line" y1="20.75" x2="30" y2="20.75" />
+                            <line class="g-line" x1="30" y1="20.75" x2="44.14" y2="6.61" />
+                            <line class="g-line" x1="44.14" y1="6.61" x2="74.14" y2="6.61" />
+                            <line class="g-line" y1="70.75" x2="30" y2="70.75" />
+                            <line class="g-line" x1="30" y1="70.75" x2="44.14" y2="84.89" />
+                            <line class="g-line" x1="44.14" y1="84.89" x2="74.14" y2="84.89" />
+                            <line class="g-line" y1="45.75" x2="74.14" y2="45.75" />
                         </g>
-                        <g id="LINE-2" data-name="LINE">
-                            <line class="cls-1" x1="71.22" y1="35.4" x2="101.29" y2="5.34" />
+                        <g id="text">
+                            <text class="g-text" transform="translate(77.16 10.04)">Text1</text>
+                            <text class="g-text" transform="translate(77.15 49.87)">Text2</text>
+                            <text class="g-text" transform="matrix(1, 0, 0, 1, 77.15, 88.43)">Text3</text>
                         </g>
-                        <g id="LINE-3" data-name="LINE">
-                            <line class="cls-1" x1="101.29" y1="5.34" x2="143.81" y2="5.34" />
-                        </g>
-                        <g id="LINE-4" data-name="LINE">
-                            <line class="cls-1" x1="0.35" y1="49.58" x2="142.09" y2="49.58" />
-                        </g>
-                        <g id="LINE-5" data-name="LINE">
-                            <line class="cls-1" x1="101.29" y1="93.82" x2="143.81" y2="93.82" />
-                        </g>
-                        <g id="LINE-6" data-name="LINE">
-                            <line class="cls-1" x1="0.35" y1="63.75" x2="71.22" y2="63.75" />
-                        </g>
-                        <g id="LINE-7" data-name="LINE">
-                            <line class="cls-1" x1="71.22" y1="63.75" x2="101.29" y2="93.82" />
-                        </g>
-                    </g>
-                    <g id="text">
-                        <text class="cls-2" transform="translate(148 8.5)">TEXT1</text>
-                        <text class="cls-2" transform="translate(148 52)">TEXT2</text>
-                        <text class="cls-2" transform="translate(148 96.5)">TEXT3</text>
-                    </g>
-                </svg>
-            </div>
+                    </svg>
+                </div>
+
+        </div>
+        <div class="row">
+            <!-- Financial data -->
+            <p class="financial">
+                <strong>Price: </strong><span id="cl1">10</span><br>
+                <strong>P/E: </strong><span id="cl2">10</span><br>
+                <strong>P/S: </strong><span id="cl3">10</span><br>
+                <strong>ROE: </strong><span id="cl4">10</span><br>
+                <strong>ROA: </strong><span id="cl5">10</span><br>
+                <strong>Debt/Eq: </strong><span id="cl6">10</span><br>
+            </p>
+        </div>
 
         </form>
     </div>

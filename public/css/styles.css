@@ -1,22 +1,33 @@
 body {
-    max-width: 650px;
+    max-width: 350px;
+    font-family: 'Roboto',
+    'Helvetica Neue',
+    'Helvetica',
+    'Arial',
+    sans-serif;
+    color: #606c76;
     margin: 0 auto;
-    padding: 0 16px;
     min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
+.row {
+    width: 100%;
+    display: block;
+    padding: 10px 0px;
+}
+
 .fork {
     display: inline-block;
     position: relative;
-    width: 300px;
+    width: 108.13px;
 }
 
 svg {
     position: absolute;
-    top: -88px;
+    top: -51px;
 }
 
 .input-group {
@@ -27,7 +38,8 @@ svg {
     border: 1px solid #cccccc;
     padding: 16px;
     margin: 0px -4px;
-    font-size: 14px;
+    font-size: 15px;
+    width: 100px;
 }
 
 .button-primary {
@@ -36,5 +48,23 @@ svg {
     background: #888888;
     color: white;
     padding: 16px;
-    font-size: 14px;
+    font-size: 15px;
+}
+
+/* SVG Fork styles */
+.g-line {
+    fill: none;
+    stroke: #cccccc;
+    stroke-miterlimit: 10;
+    stroke-width: 1px;
+}
+
+.g-text {
+    font-size: 13px;
+}
+
+/* Financial */
+.financial strong {
+    display: inline-block;
+    width: 80px;
 }
