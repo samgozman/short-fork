@@ -1,10 +1,10 @@
 body {
     max-width: 350px;
     font-family: 'Roboto',
-    'Helvetica Neue',
-    'Helvetica',
-    'Arial',
-    sans-serif;
+        'Helvetica Neue',
+        'Helvetica',
+        'Arial',
+        sans-serif;
     color: #606c76;
     margin: 0 auto;
     min-height: 100vh;
@@ -19,39 +19,68 @@ body {
     padding: 10px 0px;
 }
 
-.fork {
-    display: inline-block;
-    position: relative;
-    width: 108.13px;
-}
-
-svg {
-    position: absolute;
-    top: -51px;
-}
-
 .input-group {
     display: inline-block;
 }
 
 .search-form {
-    border: 1px solid #cccccc;
-    padding: 16px;
-    margin: 0px -4px;
+    height: 50px;
+    position: relative;
+    z-index: 2;
+    background-color: transparent;
+    border: 0px;
+    font-family: 'Roboto',
+        'Helvetica Neue',
+        'Helvetica',
+        'Arial',
+        sans-serif;
+    font-weight: 400;
     font-size: 15px;
-    width: 100px;
+    padding: 0px 16px;
+    margin: 0px -4px;
+    width: 68px;
 }
 
 .button-primary {
+    width: 50px;
+    height: 50px;
+    position: relative;
+    z-index: 2;
     cursor: pointer;
-    border: 1px solid #888888;
-    background: #888888;
-    color: white;
-    padding: 16px;
-    font-size: 15px;
+    border: 0px;
+    background: transparent;
+    color: #888888;
+    font-family: 'Roboto',
+        'Helvetica Neue',
+        'Helvetica',
+        'Arial',
+        sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+}
+
+.button-primary:hover {
+    color: #1e68f3;
+}
+
+form {
+    height: 266px;
 }
 
 /* SVG Fork styles */
+.fork {
+    display: inline-block;
+    position: relative;
+    z-index: 1;
+}
+
+svg {
+    position: absolute;
+    top: -50px;
+    left: -150px;
+    height: 266px;
+}
+
 .g-line {
     fill: none;
     stroke: #cccccc;
@@ -63,8 +92,11 @@ svg {
     font-size: 13px;
 }
 
-/* Financial */
-.financial strong {
-    display: inline-block;
-    width: 80px;
+#svg-text a:link,
+#svg-text a:visited {
+    cursor: pointer;
+}
+
+#svg-text a:hover {
+    text-decoration: underline;
 }
