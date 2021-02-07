@@ -4,7 +4,10 @@
   "version": "1.0.0",
   "main": "index.js",
   "dependencies": {
-    "express": "^4.17.1"
+    "@stonksjs/finviz": "^1.0.0",
+    "express": "^4.17.1",
+    "nakedshort": "^1.0.0",
+    "shortsqueeze": "^1.0.1"
   },
   "devDependencies": {
     "nodemon": "^2.0.7"

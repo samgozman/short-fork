@@ -20,15 +20,17 @@
                 ipsum dolor sit amet, consectetur adipis
             </p>
             <p>
-                <strong>Company: </strong><span>Lorem, ipsum dolor sit amet consectetur adipisicing elit</span>
+                <strong>Company: </strong><span id="resp_name">Lorem, ipsum dolor sit amet consectetur adipisicing
+                    elit</span>
             </p>
         </div>
         <div class="row">
             <!-- Form -->
             <form action="">
-                <input class="button-primary" type="submit" value="⮑">
-                <input class="search-form" type="text" placeholder="Ticker" id="ticker">
+                <input class="button-primary" id="submit_button" type="submit" value="⮑">
+                <input class="search-form" id="input_ticker" type="text" placeholder="Ticker">
 
+                <!-- SVG UI -->
                 <div class="fork">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 266">
                         <g id="lines">
@@ -75,34 +77,37 @@
                             <text class="g-text" transform="translate(25.5 260.2)">Debt/Eq:</text>
                         </g>
                         <g id="text-financials">
-                            <text class="g-text" transform="translate(89.1 107.3)">1344444 $</text>
-                            <text class="g-text" transform="translate(90.4 137.92)">123.1</text>
-                            <text class="g-text" transform="translate(90.4 168.53)">123.1</text>
-                            <text class="g-text" transform="translate(90.4 198.99)">-130 %</text>
-                            <text class="g-text" transform="translate(90.4 229.74)">-130 %</text>
-                            <text class="g-text" transform="translate(90.4 260.2)">100.25</text>
+                            <text class="g-text" id="resp_price" transform="translate(89.1 107.3)">$</text>
+                            <text class="g-text" id="resp_pe" transform="translate(90.4 137.92)"></text>
+                            <text class="g-text" id="resp_ps" transform="translate(90.4 168.53)"></text>
+                            <text class="g-text" id="resp_roe" transform="translate(90.4 198.99)">%</text>
+                            <text class="g-text" id="resp_roa" transform="translate(90.4 229.74)">%</text>
+                            <text class="g-text" id="resp_debteq" transform="translate(90.4 260.2)"></text>
                         </g>
                         <g id="svg-text">
                             <text class="g-text" transform="translate(229.32 10.3)">
-                                <tspan>146.66 %</tspan>
+                                <tspan id="resp_naked">%</tspan>
                                 <a href="https://nakedshortreport.com/" target="_blank"> naked</a>
                             </text>
                             <text class="g-text" transform="translate(229.32 48.88)">
-                                <tspan>146.66 %</tspan>
+                                <tspan id="resp_squeeze">%</tspan>
                                 <a href="https://shortsqueeze.com/" target="_blank"> squeeze</a>
                             </text>
                             <text class="g-text" transform="translate(229.32 88.56)">
-                                <tspan>146.66 %</tspan>
+                                <tspan id="resp_finviz">%</tspan>
                                 <a href="https://finviz.com/" target="_blank"> finviz</a>
                             </text>
                         </g>
                     </svg>
                 </div>
-
+                <!-- End of SVG UI -->
         </div>
-
         </form>
+        <!-- End of Form -->
     </div>
+
+    <!-- Scripts -->
+    <script src="./js/app.js"></script>
 </body>
 
 </html>

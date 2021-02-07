@@ -19,6 +19,10 @@ body {
     padding: 10px 0px;
 }
 
+p {
+    text-align: justify;
+}
+
 .input-group {
     display: inline-block;
 }
