@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "dependencies": {
-    "@stonksjs/finviz": "^1.0.0",
+    "@stonksjs/finviz": "^1.0.1",
     "express": "^4.17.1",
     "nakedshort": "^1.0.0",
     "shortsqueeze": "^1.0.1"
@@ -13,6 +13,7 @@
     "nodemon": "^2.0.7"
   },
   "scripts": {
+    "start": "node src/index.js",
     "dev": "nodemon src/index.js -e js,html,css"
   },
   "repository": {
