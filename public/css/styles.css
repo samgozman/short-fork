@@ -78,7 +78,7 @@ form {
     z-index: 1;
 }
 
-svg {
+.fork svg {
     position: absolute;
     top: -50px;
     left: -150px;
@@ -103,4 +103,34 @@ svg {
 
 #svg-text a:hover {
     text-decoration: underline;
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+    body {
+        align-items: unset;
+    }
+}
+
+@media (max-width: 350px) {
+    body {
+        max-width: 300px;
+        align-items: unset;
+    }
+
+    .fork svg {
+        left: -149px;
+        top: -48px;
+        height: unset;
+        width: 100vw;
+    }
+
+    .button-primary {
+        width: 48px;
+        height: 48px;
+    }
+
+    .search-form {
+        height: 48px;
+    }
 }
