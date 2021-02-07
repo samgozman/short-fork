@@ -1,0 +1,26 @@
+{
+  "name": "short-fork",
+  "description": "",
+  "version": "1.0.0",
+  "main": "index.js",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  },
+  "scripts": {
+    "dev": "nodemon src/index.js -e js,html,css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://samgozman@github.com/samgozman/short-fork.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/samgozman/short-fork/issues"
+  },
+  "homepage": "https://github.com/samgozman/short-fork#readme"
+}
