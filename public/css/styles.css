@@ -28,6 +28,10 @@ p {
     text-align: justify;
 }
 
+.example {
+    cursor: pointer;
+}
+
 .input-group {
     display: inline-block;
 }
@@ -45,6 +49,7 @@ p {
         sans-serif;
     font-weight: 400;
     font-size: 15px;
+    text-transform: uppercase;
     padding: 0px 16px;
     margin: 0px -4px;
     width: 68px;
@@ -73,7 +78,7 @@ p {
 }
 
 form {
-    height: 266px;
+    height: 250px;
 }
 
 /* SVG Fork styles */

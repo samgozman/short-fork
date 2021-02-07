@@ -14,17 +14,20 @@ let pageObj = {
 
 const form = document.querySelector('form')
 const ticker = document.querySelector('#input_ticker')
+const error_message = document.querySelector('#error-message')
+const examples = document.querySelectorAll('.example')
 
 // Erase values in DOM
-const erase = () => {
+const erase = (word = ' empty ') => {
     for (const key in pageObj) {
-        pageObj[key].textContent = ' empty '
+        pageObj[key].textContent = word
     }
+    error_message.textContent = ''
 }
 
 // Set signs for values
 const setSigns = () => {
-    pageObj.resp_price.textContent = '$' +pageObj.resp_price.textContent
+    pageObj.resp_price.textContent = '$' + pageObj.resp_price.textContent
     pageObj.resp_naked.textContent += '%'
     pageObj.resp_squeeze.textContent += '%'
 }
@@ -40,14 +43,30 @@ erase()
 form.addEventListener('submit', async (e) => {
     // Prevent from refreshing the browser once form submited 
     e.preventDefault()
-    erase()
+    try {
+        if (!ticker.value) {
+            throw new Error()
+        }
 
-    const response = await getResponse()
+        erase(' Loading ')
 
-    // Set values
-    for (const key in pageObj) {
-        pageObj[key].textContent = response[key] || 'none'
+        const response = await getResponse()
+
+        // Set values
+        for (const key in pageObj) {
+            pageObj[key].textContent = response[key] || '-'
+        }
+
+        setSigns()
+    } catch (error) {
+        erase(' error ')
+        error_message.textContent = 'Error! Please provide a valid ticker'
     }
+})
 
-    setSigns()
+// Insert example
+examples.forEach(element => {
+    element.addEventListener('click', () => {
+        ticker.value = element.innerHTML
+    })
 })
