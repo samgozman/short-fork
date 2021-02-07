@@ -1,3 +1,7 @@
+html {
+    height: -webkit-fill-available;
+}
+
 body {
     max-width: 350px;
     font-family: 'Roboto',
@@ -7,7 +11,8 @@ body {
         sans-serif;
     color: #606c76;
     margin: 0 auto;
-    min-height: 100vh;
+    /* mobile viewport bug fix */
+    min-height: -webkit-fill-available;
     display: flex;
     justify-content: center;
     align-items: center;
