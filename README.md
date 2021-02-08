@@ -1,6 +1,6 @@
 # Short Fork
 
-This simple project aims to display a Short Float percentage indicator from three different data sources in one place. 
+This simple project aims to display a Short Float and Short Volume percentage indicator from three different data sources in one place. 
 
 I made this project for myself, as here are the main parameters that I pay attention to quickly form an opinion on the company's quotes.
 

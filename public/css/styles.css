@@ -146,19 +146,24 @@ form {
         align-items: unset;
     }
 
+    form {
+        height: 200px;
+    }
+
     .fork svg {
-        left: -149px;
-        top: -48px;
+        left: -146px;
+        top: -46px;
         height: unset;
-        width: 100vw;
+        width: 95vw;
     }
 
     .button-primary {
-        width: 48px;
-        height: 48px;
+        width: 46px;
+        height: 46px;
     }
 
     .search-form {
-        height: 48px;
+        height: 46px;
+        font-size: 14px;
     }
 }
