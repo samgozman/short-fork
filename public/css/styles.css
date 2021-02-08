@@ -71,6 +71,8 @@ p {
         sans-serif;
     font-weight: 400;
     font-size: 16px;
+
+    animation: pulse 3s ease infinite alternate;
 }
 
 .button-primary:hover {
@@ -131,6 +133,21 @@ form {
 .octocat .octocat-arm,
 .octocat .octocat-body {
     fill: #f4f5f6;
+}
+
+/* Animation */
+@keyframes pulse {
+
+    0%,
+    100% {
+        transform: scale(0.9);
+        color: #888888;
+    }
+
+    50% {
+        transform: scale(1.0);
+        color: #01d7fd;
+    }
 }
 
 /* Mobile */
