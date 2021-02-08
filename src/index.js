@@ -21,8 +21,7 @@ app.get('/request', async (req, res) => {
         })
     }
     try {
-        //! Fix ticker (spaces, symbols, etc)
-        const data = await getStockData(req.query.ticker)
+        const data = await getStockData(req.query.ticker.trim())
         res.send(data)
     } catch (error) {
          res.status(500).send()

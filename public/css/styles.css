@@ -115,6 +115,24 @@ form {
     text-decoration: underline;
 }
 
+/* Octocat */
+.octocat {
+    border: 0;
+    color: #f4f5f6;
+    fill: #333;
+    height: 4rem;
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: 4rem;
+    z-index: 2;
+}
+
+.octocat .octocat-arm,
+.octocat .octocat-body {
+    fill: #f4f5f6;
+}
+
 /* Mobile */
 @media (max-width: 480px) {
     body {
