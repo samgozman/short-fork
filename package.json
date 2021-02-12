@@ -1,11 +1,11 @@
 {
   "name": "short-fork",
   "description": "",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "index.js",
   "dependencies": {
-    "@stonksjs/finviz": "^1.0.1",
     "express": "^4.17.1",
+    "finvizor": "^1.0.0",
     "nakedshort": "^1.0.0",
     "shortsqueeze": "^1.0.1"
   },
