@@ -30,7 +30,7 @@ const setSigns = () => {
     pageObj.resp_price.textContent = '$' + pageObj.resp_price.textContent
     pageObj.resp_naked.textContent += '% SV'
     pageObj.resp_squeeze.textContent += '% SF'
-    pageObj.resp_finviz.textContent += ' SF'
+    pageObj.resp_finviz.textContent += '% SF'
 }
 
 // Get response from server side
