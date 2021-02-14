@@ -1,5 +1,4 @@
 const quotes = require('is-on-tinkoff-invest')
-const fs = require('fs')
 
 let tickers = []
 
