@@ -23,6 +23,9 @@ const resp_finviz_target = document.querySelector('#resp_finviz_target')
 const resp_finviz_rsi = document.querySelector('#resp_finviz_rsi')
 const resp_finviz_recom = document.querySelector('#resp_finviz_recom')
 
+// Widget div
+const tradingview = document.querySelector('.tradingview')
+
 // Erase values in DOM
 const erase = (word = ' none ') => {
     for (const key in pageObj) {
@@ -41,6 +44,8 @@ const erase = (word = ' none ') => {
     resp_finviz_target.classList.remove(...['upside', 'downside', 'hold'])
     resp_finviz_rsi.classList.remove(...['upside', 'downside', 'hold'])
     resp_finviz_recom.classList.remove(...['upside', 'downside', 'hold'])
+
+    tradingview.classList.add('h0')
 }
 
 // Set signs for values
@@ -60,6 +65,38 @@ const getResponse = async () => {
 // Set default values
 erase()
 
+
+//  ! Tradingview Widget
+const widget = (ticker = '') => {
+    const quote = ticker.toUpperCase()
+    let html = `
+        <!-- TradingView Widget BEGIN -->
+        <div class="tradingview-widget-container">
+            <div class="tradingview-widget-container__widget"></div>
+            <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/symbols/${quote}/technicals/"
+                    rel="noopener" target="_blank"><span class="blue-text">Technical Analysis for ${quote}</span></a> by
+                TradingView</div>
+            <script type="text/javascript"
+                src="https://s3.tradingview.com/external-embedding/embed-widget-technical-analysis.js" async>
+                {
+                    "interval": "1D",
+                    "width": "100%",
+                    "isTransparent": true,
+                    "height": "100%",
+                    "symbol": "${quote}",
+                    "showIntervalTabs": true,
+                    "locale": "en",
+                    "colorTheme": "light"
+                }
+            </script>
+        </div>
+        <!-- TradingView Widget END -->
+    `
+    tradingview.classList.remove('h0')
+    iframe.src = 'data:text/html;charset=utf-8,' + encodeURI(html)
+}
+
+
 form.addEventListener('submit', async (e) => {
     // Prevent from refreshing the browser once form submited 
     e.preventDefault()
@@ -78,7 +115,7 @@ form.addEventListener('submit', async (e) => {
         }
 
         // Set tinkoff indicator
-        if(response.resp_tinkoff) {
+        if (response.resp_tinkoff) {
             resp_tinkoff.textContent = 'TinkON'
             resp_tinkoff.classList.add('active')
         } else {
@@ -87,7 +124,7 @@ form.addEventListener('submit', async (e) => {
         }
 
         // Set target indicator
-        if(response.resp_finviz_target > 0) {
+        if (response.resp_finviz_target > 0) {
             resp_finviz_target.textContent = '+' + response.resp_finviz_target
             resp_finviz_target.classList.add('upside')
         } else {
@@ -97,7 +134,7 @@ form.addEventListener('submit', async (e) => {
 
         // Set RSI indicator
         resp_finviz_rsi.textContent = response.resp_finviz_rsi
-        if(response.resp_finviz_rsi > 70) {
+        if (response.resp_finviz_rsi > 70) {
             resp_finviz_rsi.classList.add('downside')
         } else if (response.resp_finviz_rsi < 70 && response.resp_finviz_rsi > 30) {
             resp_finviz_rsi.classList.add('hold')
@@ -106,18 +143,22 @@ form.addEventListener('submit', async (e) => {
         }
 
         // Set analytics recomendation indicator
-        if(response.resp_finviz_recom < 3) {
+        if (response.resp_finviz_recom < 3) {
             resp_finviz_recom.textContent = response.resp_finviz_recom + ' - Buy'
             resp_finviz_recom.classList.add('upside')
         } else if (response.resp_finviz_recom > 3 && response.resp_finviz_recom < 4) {
             resp_finviz_recom.textContent = response.resp_finviz_recom + ' - Hold'
             resp_finviz_recom.classList.add('hold')
-        } else if(response.resp_finviz_recom > 4) {
+        } else if (response.resp_finviz_recom > 4) {
             resp_finviz_recom.textContent = response.resp_finviz_recom + ' - Sell'
             resp_finviz_recom.classList.add('downside')
         }
 
         setSigns()
+
+        // ! APPEND TRADINGVIEW WIDGET
+        widget(ticker.value)
+
     } catch (error) {
         erase(' error ')
         error_message.textContent = 'Error! Please provide a valid ticker'

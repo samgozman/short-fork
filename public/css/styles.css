@@ -175,6 +175,19 @@ form {
     border: 2px solid #db3737;
 }
 
+/* Tradingview */
+.tradingview,
+.tradingview #iframe {
+    height: 420px
+}
+
+#iframe {
+    width: 100%;
+}
+
+.h0, .h0 > #iframe {
+    height: 0px!important;
+}
 /* Octocat */
 .octocat {
     border: 0;
