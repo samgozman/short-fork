@@ -29,6 +29,10 @@ p {
     text-align: justify;
 }
 
+a {
+    color: #2196f3;
+}
+
 .example {
     cursor: pointer;
 }
@@ -185,9 +189,11 @@ form {
     width: 100%;
 }
 
-.h0, .h0 > #iframe {
-    height: 0px!important;
+.h0,
+.h0>#iframe {
+    height: 0px !important;
 }
+
 /* Octocat */
 .octocat {
     border: 0;

@@ -9,7 +9,8 @@ let pageObj = {
     resp_debteq: document.querySelector('#resp_debteq'),
     resp_naked: document.querySelector('#resp_naked'),
     resp_squeeze: document.querySelector('#resp_squeeze'),
-    resp_finviz: document.querySelector('#resp_finviz')
+    resp_finviz: document.querySelector('#resp_finviz'),
+    resp_site: document.querySelector('#resp_site')
 }
 
 const form = document.querySelector('form')
@@ -114,6 +115,9 @@ form.addEventListener('submit', async (e) => {
             pageObj[key].textContent = response[key] || '-'
         }
 
+        // Set site href
+        pageObj.resp_site.setAttribute('href', response.resp_site)
+        
         // Set tinkoff indicator
         if (response.resp_tinkoff) {
             resp_tinkoff.textContent = 'TinkON'
