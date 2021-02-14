@@ -124,7 +124,7 @@ form {
 
 /* Right data block */
 .extension {
-    width: 140px;
+    width: 160px;
     height: 140px;
     position: absolute;
     bottom: 0;
@@ -148,12 +148,12 @@ form {
 .extension .label {
     font-size: 13px;
     display: inline-block;
-    width: 70px;
+    width: 90px;
     text-align: left;
 }
 
 #resp_tinkoff {
-    width: 130px;
+    width: 150px;
 }
 
 #resp_tinkoff.active {

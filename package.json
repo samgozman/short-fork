@@ -15,7 +15,8 @@
   },
   "scripts": {
     "start": "node src/index.js",
-    "dev": "nodemon src/index.js -e js,html,css"
+    "dev": "nodemon src/index.js -e js,html,css",
+    "check-heroku": "heroku logs --app short-fork  --tail"
   },
   "repository": {
     "type": "git",
