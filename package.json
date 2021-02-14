@@ -1,13 +1,14 @@
 {
   "name": "short-fork",
-  "description": "",
-  "version": "1.0.1",
+  "description": "Stock market helper: display a Short Float & Volume percentage indicator from three different data sources in one place.",
+  "version": "1.0.2",
   "main": "index.js",
   "dependencies": {
     "express": "^4.17.1",
     "finvizor": "^1.0.0",
-    "nakedshort": "^1.0.0",
-    "shortsqueeze": "^1.0.1"
+    "is-on-tinkoff-invest": "^1.0.0",
+    "nakedshort": "^1.0.1",
+    "shortsqueeze": "^1.0.2"
   },
   "devDependencies": {
     "nodemon": "^2.0.7"
@@ -21,8 +22,8 @@
     "url": "git+https://samgozman@github.com/samgozman/short-fork.git"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Sam Gozman <sam@gozman.space>",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/samgozman/short-fork/issues"
   },

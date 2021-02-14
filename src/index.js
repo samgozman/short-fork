@@ -1,6 +1,7 @@
 const express = require('express')
 const path = require('path')
 const getStockData = require('./utils/getstockdata')
+const tinkoff = require('./utils/tinkoffstocks')
 
 const app = express()
 const port = process.env.PORT || 3000
@@ -17,18 +18,20 @@ app.get('', (req, res) => {
 app.get('/request', async (req, res) => {
     if (!req.query.ticker) {
         return res.send({
-            error: 'You must provide ticker'
+            error: 'You must provide a ticker'
         })
     }
     try {
         const data = await getStockData(req.query.ticker.trim())
         res.send(data)
     } catch (error) {
-         res.status(500).send()
+        res.status(500).send()
     }
-    
+
 })
 
-app.listen(port, () => {
+app.listen(port, async () => {
+    // Update tinkoff stock set
+    await tinkoff.update()
     console.log('Server is up on port ' + port)
 })

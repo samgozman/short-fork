@@ -22,10 +22,15 @@ body {
     width: 100%;
     display: block;
     padding: 10px 0px;
+    position: relative;
 }
 
 p {
     text-align: justify;
+}
+
+a {
+    color: #2196f3;
 }
 
 .example {
@@ -117,6 +122,78 @@ form {
     text-decoration: underline;
 }
 
+/* Right data block */
+.extension {
+    width: 140px;
+    height: 140px;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    text-align: right;
+    z-index: 2;
+}
+
+.indicator {
+    display: inline-block;
+    font-size: 13px;
+    text-align: center;
+    margin: 4px 0px;
+    border: 2px solid #cccccc;
+    border-radius: 1rem;
+    height: 1.4rem;
+    line-height: 1.4rem;
+    padding: 0 2px;
+}
+
+.extension .label {
+    font-size: 13px;
+    display: inline-block;
+    width: 70px;
+    text-align: left;
+}
+
+#resp_tinkoff {
+    width: 130px;
+}
+
+#resp_tinkoff.active {
+    border: 2px solid #fddc2c;
+}
+
+#resp_finviz_target,
+#resp_finviz_recom,
+#resp_finviz_rsi {
+    display: inline-block;
+    width: 60px;
+}
+
+.upside {
+    border: 2px solid #0f9960;
+}
+
+.hold {
+    border: 2px solid #daae1e;
+}
+
+.downside {
+    border: 2px solid #db3737;
+}
+
+/* Tradingview */
+.tradingview,
+.tradingview #iframe {
+    height: 420px
+}
+
+#iframe {
+    width: 100%;
+}
+
+.h0,
+.h0>#iframe {
+    height: 0px !important;
+}
+
 /* Octocat */
 .octocat {
     border: 0;
@@ -164,7 +241,7 @@ form {
     }
 
     form {
-        height: 200px;
+        height: 220px;
     }
 
     .fork svg {
