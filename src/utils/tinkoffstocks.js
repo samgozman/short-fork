@@ -1,6 +1,5 @@
 const quotes = require('is-on-tinkoff-invest')
 const fs = require('fs')
-const filePath = __dirname + '/tinkoff-tickers.json'
 
 let tickers = []
 
@@ -13,9 +12,6 @@ const update = async () => {
     stocks.forEach(stock => {
         tickers.push(stock.quote)
     })
-
-    const data = JSON.stringify(tickers)
-    fs.writeFileSync(filePath, data)
 }
 
 /**
@@ -25,8 +21,7 @@ const update = async () => {
  * @return {boolean}
  */
 const isTinkoff = (ticker = '') => {
-    const data = JSON.parse(fs.readFileSync(filePath))
-    return data.includes(ticker.toUpperCase())
+    return tickers.includes(ticker.toUpperCase())
 }
 
 module.exports = {
