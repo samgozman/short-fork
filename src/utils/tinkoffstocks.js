@@ -25,10 +25,8 @@ const update = async () => {
  * @return {boolean}
  */
 const isTinkoff = (ticker = '') => {
-    const data = JSON.parse(fs.readFileSync(filePath)) || [],
-        dataSet = new Set(data)
-
-    return dataSet.has(ticker)
+    const data = JSON.parse(fs.readFileSync(filePath))
+    return data.includes(ticker.toUpperCase())
 }
 
 module.exports = {
