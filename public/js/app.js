@@ -16,6 +16,7 @@ const form = document.querySelector('form')
 const ticker = document.querySelector('#input_ticker')
 const error_message = document.querySelector('#error-message')
 const examples = document.querySelectorAll('.example')
+const resp_tinkoff = document.querySelector('#resp_tinkoff')
 
 // Erase values in DOM
 const erase = (word = ' empty ') => {
@@ -23,6 +24,9 @@ const erase = (word = ' empty ') => {
         pageObj[key].textContent = word
     }
     error_message.textContent = ''
+    
+    resp_tinkoff.textContent = 'TinkOFF'
+    resp_tinkoff.classList.remove('active')
 }
 
 // Set signs for values
@@ -57,6 +61,16 @@ form.addEventListener('submit', async (e) => {
         for (const key in pageObj) {
             pageObj[key].textContent = response[key] || '-'
         }
+
+        // Set tinkoff indicator
+        if(response.resp_tinkoff) {
+            resp_tinkoff.textContent = 'TinkON'
+            resp_tinkoff.classList.add('active')
+        } else {
+            resp_tinkoff.textContent = 'TinkOFF'
+            resp_tinkoff.classList.remove('active')
+        }
+        
 
         setSigns()
     } catch (error) {
