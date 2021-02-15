@@ -28,7 +28,7 @@ const resp_finviz_recom = document.querySelector('#resp_finviz_recom')
 const tradingview = document.querySelector('.tradingview')
 
 // Erase values in DOM
-const erase = (word = ' none ') => {
+const erase = (word = ' пусто ') => {
     for (const key in pageObj) {
         pageObj[key].textContent = word
     }
@@ -40,7 +40,7 @@ const erase = (word = ' none ') => {
 
     resp_finviz_target.textContent = '0'
     resp_finviz_rsi.textContent = '0'
-    resp_finviz_recom.textContent = '0 - None'
+    resp_finviz_recom.textContent = '0 - Нет'
 
     resp_finviz_target.classList.remove(...['upside', 'downside', 'hold'])
     resp_finviz_rsi.classList.remove(...['upside', 'downside', 'hold'])
@@ -86,7 +86,7 @@ const widget = (ticker = '') => {
                     "height": "100%",
                     "symbol": "${quote}",
                     "showIntervalTabs": true,
-                    "locale": "en",
+                    "locale": "ru",
                     "colorTheme": "light"
                 }
             </script>
@@ -164,8 +164,8 @@ form.addEventListener('submit', async (e) => {
         widget(ticker.value)
 
     } catch (error) {
-        erase(' error ')
-        error_message.textContent = 'Error! Please provide a valid ticker'
+        erase(' ошибка ')
+        error_message.textContent = 'Ошибка! Введите правильный тикер'
     }
 })
 

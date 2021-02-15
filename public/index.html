@@ -16,21 +16,22 @@
         <div class="row">
             <h2>Short Fork</h2>
             <p>
-                Quickly compare Short Float and Short Volume percent values between three popular providers and evaluate
-                important financial
-                indicators.
-                Example: <u class="example">LMT</u> or <u class="example">SPCE</u>.
+                Быстрый взгляд на финансовые индикаторы и технический анализ иностранных компаний в компактном варианте. 
+                <br><a href="https://github.com/samgozman/short-fork/tree/main/doc/HOWTOUSE.md" target="_blank">Инструкция по работе с приложением</a><br>
             </p>
             <p>
-                <strong>Site: </strong><a id="resp_site" href="" target="_blank"></a> <br>
-                <strong>Company: </strong><span id="resp_name"></span>
+                Пример: <u class="example">LRN</u> или <u class="example">FLWS</u>.
+            </p>
+            <p>
+                <strong>Сайт: </strong><a id="resp_site" href="" target="_blank"></a> <br>
+                <strong>Компания: </strong><span id="resp_name"></span>
             </p>
         </div>
         <div id="main" class="row">
             <!-- Form -->
             <form>
                 <input class="button-primary" id="submit_button" type="submit" value="⮑">
-                <input class="search-form" id="input_ticker" type="text" placeholder="Ticker">
+                <input class="search-form" id="input_ticker" type="text" placeholder="Тикер">
 
                 <!-- SVG UI -->
                 <div class="fork">
@@ -75,8 +76,8 @@
                             <text class="g-text" transform="translate(25.5 137.78)">P/E: </text>
                             <text class="g-text" transform="translate(25.5 168.38)">P/S: </text>
                             <text class="g-text" transform="translate(25.5 198.99)">ROE: </text>
-                            <text class="g-text" transform="translate(25.5 229.6)">ROA:</text>
-                            <text class="g-text" transform="translate(25.5 260.2)">Debt/Eq:</text>
+                            <text class="g-text" transform="translate(25.5 229.6)">ROA: </text>
+                            <text class="g-text" transform="translate(25.5 260.2)">Debt/Eq: </text>
                         </g>
                         <g id="text-financials">
                             <text class="g-text" id="resp_price" transform="translate(89.1 107.3)">$</text>
@@ -106,35 +107,41 @@
             </form>
             <!-- End of Form -->
             <div class="extension">
-                <span id="resp_tinkoff" class="indicator"></span>
-                <span class="label">Target: </span><span id="resp_finviz_target" class="indicator">+1900%</span>
-                <span class="label">RSI (14): </span><span id="resp_finviz_rsi" class="indicator">46</span>
-                <span class="label">Finviz recom: </span><span id="resp_finviz_recom" class="indicator">2 - Buy</span>
+                <span id="resp_tinkoff" class="indicator" title="TinkON - если доступна на Тинькофф. TinkOFF если нет."></span>
+                <span class="label">Target: </span><span id="resp_finviz_target" class="indicator" title="Разница между текущей стоимостью акции и её средней целевой ценой от аналитиков.">+1900%</span>
+                <span class="label">RSI (14): </span><span id="resp_finviz_rsi" class="indicator" title="RSI на дневных свечах с периодом 14. Если больше 70 - красная зона. Ниже 30 - зелёная.">46</span>
+                <span class="label">Finviz recom: </span><span id="resp_finviz_recom" class="indicator" title="Средняя рекомендация к действию от аналитиков. 1-3 покупать, 3-4 держать, 4-5 продавать.">2 - Buy</span>
             </div>
         </div>   
         <div class="row tradingview h0">
             <iframe src="" frameborder="0" id="iframe"></iframe>
         </div>
         <div class="row sponsor">
-            <p>Sponsored by: <a href="https://t.me/rezinv" target="_blank">https://t.me/rezinv</a></p>
+            <p><strong>Спонсор проекта: </strong><a href="https://t.me/rezinv" target="_blank">https://t.me/rezinv</a></p>
         </div>
         <div class="row">
             <p>
                 <strong id="error-message"></strong>
             </p>
             <hr>
+            <p>Обозначения:</p>
             <ul>
-                <li>SV - short % of volume</li>
-                <li>SF - short % of float</li>
-                <li>P/E - price to earnings</li>
-                <li>P/S - price to sales</li>
-                <li>ROE - return on equity</li>
-                <li>ROA - return on assets</li>
-                <li>Debt/eq - total debt to equity</li>
+                <li>SV - % шортовых позиций по сделкам за прошлый день</li>
+                <li>SF - общий % акций в шорте</li>
+                <li>P/E - отношение цены к прибыли</li>
+                <li>P/S - отношение цены к выручке</li>
+                <li>ROE - отдача от капитала</li>
+                <li>ROA - отдача от всех активов</li>
+                <li>Debt/eq - отношение долгов к капиталу</li>
+                <li>Target - разница между текущей стоимостью акции и её средней целевой ценой от аналитиков.</li>
+                <li>RSI - индекс относительной силы на дневных свечах с периодом 14. Если больше 70 - красная зона. Ниже 30 - зелёная.</li>
+                <li>Finviz recom - средняя рекомендация к действию от аналитиков. 1-3 покупать, 3-4 держать, 4-5 продавать.</li>
             </ul>
+            <br>
+            <p>Не является индивидуальной инвестиционной рекомендацией!</p>
         </div>
         <div class="row">
-            <p>Created by: <a href="https://github.com/samgozman" target="_blank">samgozman</a></p>
+            <p>Создано: <a href="https://github.com/samgozman" target="_blank">samgozman</a></p>
             <p>Tinkoff Pulse: <a href="https://www.tinkoff.ru/invest/social/profile/aqua_disco/" target="_blank">aqua_disco</a></p>
         </div>
     </div>
