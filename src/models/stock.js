@@ -2,18 +2,16 @@ const mongoose = require('mongoose')
 
 // Class schema for stock instance
 const stockSchema = mongoose.Schema({
-    quote: {
+    ticker: {
         type: String,
         required: true,
         unique: true
     },
     name: {
-        type: String,
-        required: true
+        type: String
     },
     price: {
-        type: Number,
-        required: true
+        type: Number
     },
     pe: {
         type: Number,
@@ -68,7 +66,7 @@ const stockSchema = mongoose.Schema({
         default: null
     },
     site: {
-        type: Number,
+        type: String,
         default: null
     },
 
