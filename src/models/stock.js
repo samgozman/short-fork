@@ -5,7 +5,8 @@ const stockSchema = mongoose.Schema({
     ticker: {
         type: String,
         required: true,
-        unique: true
+        unique: true,
+        uppercase: true
     },
     name: {
         type: String

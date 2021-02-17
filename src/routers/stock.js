@@ -19,20 +19,21 @@ router.get('/stocks', async (req, res) => {
     try {
         // ! 2. Find ticker in data base
         let stock = await Stock.findOne({
-            ticker
+            ticker: ticker.toUpperCase()
         })
 
         // ! 3. Check if ticker is exist in DB and its "freshness"
         // 21600000 - 6h, 14400000 - 4h, 30000 - 30s
         const keepFreshFor = 14400000
-        if (stock && (new Date() - stock.updatedAt) < keepFreshFor) {
+        if (stock && stock.price && (new Date() - stock.updatedAt) < keepFreshFor) {
             // ! 3.1 if stock is good - send it!
             return res.status(200).send(stock)
         } else if (stock) {
             // ! 3.2 If old stock is exist - update it and send it back
             const data = await getStockData(req.query.ticker.trim())
-            const updates = Object.keys(data)
+            if(!data) res.status(404).send()
 
+            const updates = Object.keys(data)
             updates.forEach((update) => stock[update] = data[update])
             await stock.save()
 
@@ -40,6 +41,7 @@ router.get('/stocks', async (req, res) => {
         } else {
             // ! 3.3 If stock is not exist - create it and send it back
             const data = await getStockData(req.query.ticker.trim())
+            if(!data) return res.status(404).send()
             stock = new Stock({
                 ticker,
                 ...data
