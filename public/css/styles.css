@@ -85,7 +85,16 @@ a {
 }
 
 form {
-    height: 250px;
+        height: 276px;
+}
+
+.upd-message {
+    color: #aaa;
+    font-size: 10px;
+}
+
+.upd-message > a{
+    color: #aaa;
 }
 
 /* SVG Fork styles */
@@ -182,7 +191,8 @@ form {
 /* Tradingview */
 .tradingview,
 .tradingview #iframe {
-    height: 420px
+    height: 420px;
+    padding: 0px;
 }
 
 #iframe {
@@ -238,6 +248,10 @@ form {
     body {
         max-width: 300px;
         align-items: unset;
+    }
+    
+    form {
+        height: 246px;
     }
 
     .fork svg {
