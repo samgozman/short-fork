@@ -1,11 +1,12 @@
 const express = require('express')
 const Stock = require('../models/stock')
 const getStockData = require('../utils/getstockdata')
+const stocksLimiter = require('../middleware/rateLimiter')
 const router = new express.Router()
 
 // Get stock by quote
 // if stock is not found - create one. Otherwise, check updatedAt. If it's older than N hours - update.
-router.get('/stocks', async (req, res) => {
+router.get('/stocks', stocksLimiter, async (req, res) => {
     const ticker = req.query.ticker
 
     // ! 1. Check if ticker is provided
