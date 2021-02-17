@@ -148,14 +148,15 @@ form.addEventListener('submit', async (e) => {
         }
 
         // Set analytics recomendation indicator
+        console.log(response.recomendation)
         if (response.recomendation < 3) {
             resp_finviz_recom.textContent = response.recomendation + ' - Buy'
             resp_finviz_recom.classList.add('upside')
         } else if (response.recomendation > 3 && response.recomendation < 4) {
-            resp_finviz_recom.recomendation = response.recomendation + ' - Hold'
+            resp_finviz_recom.textContent = response.recomendation + ' - Hold'
             resp_finviz_recom.classList.add('hold')
         } else if (response.recomendation > 4) {
-            resp_finviz_recom.textContent = response.resp_finviz_recom + ' - Sell'
+            resp_finviz_recom.textContent = response.recomendation + ' - Sell'
             resp_finviz_recom.classList.add('downside')
         }
 
