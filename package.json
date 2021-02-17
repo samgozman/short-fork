@@ -7,16 +7,19 @@
     "express": "^4.17.1",
     "finvizor": "^1.0.0",
     "is-on-tinkoff-invest": "^1.0.0",
+    "mongoose": "^5.11.16",
     "nakedshort": "^1.0.1",
     "shortsqueeze": "^1.0.2"
   },
   "devDependencies": {
+    "dotenv": "^8.2.0",
     "nodemon": "^2.0.7"
   },
   "scripts": {
     "start": "node src/index.js",
-    "dev": "nodemon src/index.js -e js,html,css",
-    "check-heroku": "heroku logs --app short-fork  --tail"
+    "dev": "nodemon -r dotenv/config src/index.js -e js,html,css dotenv_config_path=config/dev.env",
+    "check-heroku": "heroku logs --app short-fork  --tail",
+    "dev-run-mongodb": "/Users/samgozman/mongodb/bin/mongod --dbpath=/Users/samgozman/mongodb-data"
   },
   "repository": {
     "type": "git",

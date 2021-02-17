@@ -85,7 +85,16 @@ a {
 }
 
 form {
-    height: 250px;
+        height: 276px;
+}
+
+.upd-message {
+    color: #aaa;
+    font-size: 10px;
+}
+
+.upd-message > a{
+    color: #aaa;
 }
 
 /* SVG Fork styles */
@@ -99,7 +108,7 @@ form {
     position: absolute;
     top: -50px;
     left: -150px;
-    height: 266px;
+    height: 296px;
 }
 
 .g-line {
@@ -182,7 +191,8 @@ form {
 /* Tradingview */
 .tradingview,
 .tradingview #iframe {
-    height: 420px
+    height: 420px;
+    padding: 0px;
 }
 
 #iframe {
@@ -239,9 +249,9 @@ form {
         max-width: 300px;
         align-items: unset;
     }
-
+    
     form {
-        height: 220px;
+        height: 246px;
     }
 
     .fork svg {
