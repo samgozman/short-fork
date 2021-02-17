@@ -1,7 +1,6 @@
 const express = require('express')
 const Stock = require('../models/stock')
 const getStockData = require('../utils/getstockdata')
-const tinkoff = require('is-on-tinkoff-invest')
 const router = new express.Router()
 
 // Get stock by quote
@@ -52,39 +51,6 @@ router.get('/stocks', async (req, res) => {
 
     } catch (err) {
         res.status(500).send(err.message)
-    }
-})
-
-// ! DEV ROUTE
-// Update tinkoff indicator
-router.patch('/tinkoff/update', async (req, res) => {
-    if(req.query.token !== process.env.SECRET_KEY) {
-        return res.status(401).send()
-    }
-
-    try {
-        const tinkoffStocks = await tinkoff.getTinkoffStocks()
-        // ! Save tinkoff status to DB. If stock is not there - create it.
-        for (const item of tinkoffStocks) {
-            // Try to find existing
-            let stock = await Stock.findOne({
-                ticker: item.quote
-            })
-
-            if(stock) {
-                stock.tinkoff = true
-            } else {
-                stock = new Stock({
-                    ticker: item.quote,
-                    name: item.name,
-                    tinkoff: true
-                })
-            }
-            await stock.save()
-        }
-        res.status(200).send('Tinkoff indicator updated! ' + tinkoffStocks.length)
-    } catch (err) {
-        res.status(400).send(err.message)
     }
 })
 
