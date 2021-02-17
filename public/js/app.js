@@ -60,7 +60,16 @@ const setSigns = () => {
 
 // Get response from server side
 const getResponse = async () => {
-    return (await fetch('/stocks?ticker=' + ticker.value)).json()
+
+    try {
+        const resp = await fetch('/stocks?ticker=' + ticker.value)
+        if (resp.status !== 200) {
+            throw new Error(resp.status)
+        }
+        return resp.json()
+    } catch (error) {
+        return error
+    }
 }
 
 // Set default values
@@ -109,6 +118,9 @@ form.addEventListener('submit', async (e) => {
         erase(' Loading ')
 
         const response = await getResponse()
+        if (response.message) {
+            throw new Error(response.message)
+        }
 
         // Set values
         for (const key in pageObj) {
@@ -117,7 +129,7 @@ form.addEventListener('submit', async (e) => {
 
         // Set site href
         pageObj.site.setAttribute('href', response.resp_site)
-        
+
         // Set tinkoff indicator
         if (response.tinkoff) {
             resp_tinkoff.textContent = 'TinkON'
@@ -166,6 +178,6 @@ form.addEventListener('submit', async (e) => {
 
     } catch (error) {
         erase(' ошибка ')
-        error_message.textContent = 'Ошибка! Введите правильный тикер'
+        error_message.textContent = error.message == 429 ? 'Превышен лимит запросов в минуту!' : 'Ошибка! Введите правильный тикер'
     }
 })
