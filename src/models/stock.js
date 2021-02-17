@@ -22,6 +22,10 @@ const stockSchema = mongoose.Schema({
         type: Number,
         default: null
     },
+    pb: {
+        type: Number,
+        default: null
+    },
     roe: {
         type: Number,
         default: null

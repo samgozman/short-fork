@@ -12,6 +12,7 @@ const getStockData = async (ticker = '') => {
         price: fin.price,
         pe: fin.pe,
         ps: fin.ps,
+        pb: fin.pb,
         roe: fin.roe,
         roa: fin.roa,
         debteq: fin.debtEq,

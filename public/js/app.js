@@ -4,6 +4,7 @@ let pageObj = {
     price: document.querySelector('#resp_price'),
     pe: document.querySelector('#resp_pe'),
     ps: document.querySelector('#resp_ps'),
+    pb: document.querySelector('#resp_pb'),
     roe: document.querySelector('#resp_roe'),
     roa: document.querySelector('#resp_roa'),
     debteq: document.querySelector('#resp_debteq'),
@@ -16,7 +17,6 @@ let pageObj = {
 const form = document.querySelector('form')
 const ticker = document.querySelector('#input_ticker')
 const error_message = document.querySelector('#error-message')
-const examples = document.querySelectorAll('.example')
 
 // Extension block
 const resp_tinkoff = document.querySelector('#resp_tinkoff')
@@ -168,11 +168,4 @@ form.addEventListener('submit', async (e) => {
         erase(' ошибка ')
         error_message.textContent = 'Ошибка! Введите правильный тикер'
     }
-})
-
-// Insert example
-examples.forEach(element => {
-    element.addEventListener('click', () => {
-        ticker.value = element.innerHTML
-    })
 })
