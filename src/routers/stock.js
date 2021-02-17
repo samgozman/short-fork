@@ -26,6 +26,8 @@ router.get('/stocks', async (req, res) => {
         const keepFreshFor = 1200000
         if (stock && stock.price && (new Date() - stock.updatedAt) < keepFreshFor) {
             // ! 3.1 if stock is good - send it!
+            stock._counter++
+            await stock.save()
             return res.status(200).send(stock)
         } else if (stock) {
             // ! 3.2 If old stock is exist - update it and send it back
@@ -34,8 +36,9 @@ router.get('/stocks', async (req, res) => {
 
             const updates = Object.keys(data)
             updates.forEach((update) => stock[update] = data[update])
-            await stock.save()
 
+            stock._counter++
+            await stock.save()
             res.send(stock)
         } else {
             // ! 3.3 If stock is not exist - create it and send it back
@@ -45,6 +48,8 @@ router.get('/stocks', async (req, res) => {
                 ticker,
                 ...data
             })
+
+            stock._counter++
             await stock.save()
             res.send(stock)
         }

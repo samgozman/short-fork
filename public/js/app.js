@@ -148,7 +148,6 @@ form.addEventListener('submit', async (e) => {
         }
 
         // Set analytics recomendation indicator
-        console.log(response.recomendation)
         if (response.recomendation < 3) {
             resp_finviz_recom.textContent = response.recomendation + ' - Buy'
             resp_finviz_recom.classList.add('upside')

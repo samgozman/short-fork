@@ -74,7 +74,10 @@ const stockSchema = mongoose.Schema({
         type: String,
         default: null
     },
-
+    _counter: {
+        type: Number,
+        default: 0
+    },
 }, {
     timestamps: true
 })
