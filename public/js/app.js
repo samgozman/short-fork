@@ -1,16 +1,16 @@
 // DOM object of elements which should be changed during request
 let pageObj = {
-    resp_name: document.querySelector('#resp_name'),
-    resp_price: document.querySelector('#resp_price'),
-    resp_pe: document.querySelector('#resp_pe'),
-    resp_ps: document.querySelector('#resp_ps'),
-    resp_roe: document.querySelector('#resp_roe'),
-    resp_roa: document.querySelector('#resp_roa'),
-    resp_debteq: document.querySelector('#resp_debteq'),
-    resp_naked: document.querySelector('#resp_naked'),
-    resp_squeeze: document.querySelector('#resp_squeeze'),
-    resp_finviz: document.querySelector('#resp_finviz'),
-    resp_site: document.querySelector('#resp_site')
+    name: document.querySelector('#resp_name'),
+    price: document.querySelector('#resp_price'),
+    pe: document.querySelector('#resp_pe'),
+    ps: document.querySelector('#resp_ps'),
+    roe: document.querySelector('#resp_roe'),
+    roa: document.querySelector('#resp_roa'),
+    debteq: document.querySelector('#resp_debteq'),
+    naked_current_short_volume: document.querySelector('#resp_naked'),
+    squeeze_short_flow: document.querySelector('#resp_squeeze'),
+    finviz_short_flow: document.querySelector('#resp_finviz'),
+    site: document.querySelector('#resp_site')
 }
 
 const form = document.querySelector('form')
@@ -51,16 +51,16 @@ const erase = (word = ' пусто ') => {
 
 // Set signs for values
 const setSigns = () => {
-    pageObj.resp_price.textContent = '$' + pageObj.resp_price.textContent
-    pageObj.resp_naked.textContent += '% SV'
-    pageObj.resp_squeeze.textContent += '% SF'
-    pageObj.resp_finviz.textContent += '% SF'
+    pageObj.price.textContent = '$' + pageObj.price.textContent
+    pageObj.naked_current_short_volume.textContent += '% SV'
+    pageObj.squeeze_short_flow.textContent += '% SF'
+    pageObj.finviz_short_flow.textContent += '% SF'
     resp_finviz_target.textContent += '%'
 }
 
 // Get response from server side
 const getResponse = async () => {
-    return (await fetch('/request?ticker=' + ticker.value)).json()
+    return (await fetch('/stocks?ticker=' + ticker.value)).json()
 }
 
 // Set default values
@@ -116,10 +116,10 @@ form.addEventListener('submit', async (e) => {
         }
 
         // Set site href
-        pageObj.resp_site.setAttribute('href', response.resp_site)
+        pageObj.site.setAttribute('href', response.resp_site)
         
         // Set tinkoff indicator
-        if (response.resp_tinkoff) {
+        if (response.tinkoff) {
             resp_tinkoff.textContent = 'TinkON'
             resp_tinkoff.classList.add('active')
         } else {
@@ -128,32 +128,33 @@ form.addEventListener('submit', async (e) => {
         }
 
         // Set target indicator
-        if (response.resp_finviz_target > 0) {
-            resp_finviz_target.textContent = '+' + response.resp_finviz_target
+        const targetUpside = (response.target_price != null && response.price != null) ? ((response.target_price / response.price - 1) * 100).toFixed(1) : null
+        if (response.target_price > 0) {
+            resp_finviz_target.textContent = '+' + targetUpside
             resp_finviz_target.classList.add('upside')
         } else {
-            resp_finviz_target.textContent = response.resp_finviz_target
+            resp_finviz_target.textContent = targetUpside
             resp_finviz_target.classList.add('downside')
         }
 
         // Set RSI indicator
-        resp_finviz_rsi.textContent = response.resp_finviz_rsi
-        if (response.resp_finviz_rsi > 70) {
+        resp_finviz_rsi.textContent = response.rsi
+        if (response.rsi > 70) {
             resp_finviz_rsi.classList.add('downside')
-        } else if (response.resp_finviz_rsi < 70 && response.resp_finviz_rsi > 30) {
+        } else if (response.rsi < 70 && response.rsi > 30) {
             resp_finviz_rsi.classList.add('hold')
-        } else if (response.resp_finviz_rsi < 30) {
+        } else if (response.rsi < 30) {
             resp_finviz_rsi.classList.add('upside')
         }
 
         // Set analytics recomendation indicator
-        if (response.resp_finviz_recom < 3) {
-            resp_finviz_recom.textContent = response.resp_finviz_recom + ' - Buy'
+        if (response.recomendation < 3) {
+            resp_finviz_recom.textContent = response.recomendation + ' - Buy'
             resp_finviz_recom.classList.add('upside')
-        } else if (response.resp_finviz_recom > 3 && response.resp_finviz_recom < 4) {
-            resp_finviz_recom.textContent = response.resp_finviz_recom + ' - Hold'
+        } else if (response.recomendation > 3 && response.recomendation < 4) {
+            resp_finviz_recom.recomendation = response.recomendation + ' - Hold'
             resp_finviz_recom.classList.add('hold')
-        } else if (response.resp_finviz_recom > 4) {
+        } else if (response.recomendation > 4) {
             resp_finviz_recom.textContent = response.resp_finviz_recom + ' - Sell'
             resp_finviz_recom.classList.add('downside')
         }

@@ -24,7 +24,7 @@ router.get('/stocks', async (req, res) => {
 
         // ! 3. Check if ticker is exist in DB and its "freshness"
         // 21600000 - 6h, 14400000 - 4h, 30000 - 30s
-        const keepFreshFor = 30000
+        const keepFreshFor = 14400000
         if (stock && (new Date() - stock.updatedAt) < keepFreshFor) {
             // ! 3.1 if stock is good - send it!
             return res.status(200).send(stock)

@@ -6,7 +6,6 @@ const getStockData = async (ticker = '') => {
     const squeeze = await shortsqueeze(ticker),
         naked = await nakedshort(ticker),
         fin = await finvizor.stock(ticker)
-        //! targetUpside = (fin.targetPrice != null && fin.price != null) ? ((fin.targetPrice / fin.price - 1) * 100).toFixed(1) : null
     return {
         name: fin.name,
         price: fin.price,
