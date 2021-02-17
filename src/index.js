@@ -1,4 +1,3 @@
-require('dotenv').config()
 const app = require('./app')
 
 // Use server-provided port or use dev 3000 if not
