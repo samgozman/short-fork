@@ -128,7 +128,7 @@ form.addEventListener('submit', async (e) => {
         }
 
         // Set site href
-        pageObj.site.setAttribute('href', response.resp_site)
+        pageObj.site.setAttribute('href', response.site)
 
         // Set tinkoff indicator
         if (response.tinkoff) {
