@@ -91,6 +91,8 @@ form {
 .upd-message {
     color: #aaa;
     font-size: 10px;
+    z-index: 2;
+    position: relative;
 }
 
 .upd-message > a{
@@ -189,19 +191,23 @@ form {
 }
 
 /* Tradingview */
-.tradingview,
+.tradingview {
+    height: 400px;
+    padding-top: 0px;
+}
+
 .tradingview #iframe {
     height: 420px;
-    padding: 0px;
+    margin: -30px 0px -15px 0px;
 }
 
 #iframe {
     width: 100%;
 }
 
-.h0,
-.h0>#iframe {
-    height: 0px !important;
+.hide,
+.hide > #iframe {
+    display: none!important;
 }
 
 /* Octocat */
@@ -269,5 +275,9 @@ form {
     .search-form {
         height: 46px;
         font-size: 14px;
+    }
+
+    .upd-message {
+        font-size: 9px;
     }
 }
