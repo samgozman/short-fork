@@ -46,7 +46,7 @@ const erase = (word = ' пусто ') => {
     resp_finviz_rsi.classList.remove(...['upside', 'downside', 'hold'])
     resp_finviz_recom.classList.remove(...['upside', 'downside', 'hold'])
 
-    tradingview.classList.add('h0')
+    tradingview.classList.add('hide')
 }
 
 // Set signs for values
@@ -102,7 +102,7 @@ const widget = (ticker = '') => {
         </div>
         <!-- TradingView Widget END -->
     `
-    tradingview.classList.remove('h0')
+    tradingview.classList.remove('hide')
     iframe.src = 'data:text/html;charset=utf-8,' + encodeURI(html)
 }
 
