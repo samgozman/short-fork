@@ -20,7 +20,7 @@ const getStockData = async (ticker = '') => {
         naked_history_short_volume: naked.historicalShortVol,
         squeeze_short_flow: squeeze.shortPercentOfFloat,
         finviz_short_flow: fin.shortFloat,
-        target_price: fin.targetPrice, //targetUpside
+        target_price: fin.targetPrice,
         rsi: fin.rsi,
         recomendation: fin.recom ? fin.recom.toFixed(1) : null,
         site: fin.site

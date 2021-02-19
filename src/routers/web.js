@@ -7,8 +7,10 @@ const public_dir = path.join(__dirname, '../../public')
 router.use(express.static(public_dir))
 
 // root index page
-router.get('', (req, res) => {
-    res.sendFile(path.join(public_dir, 'index.html'))
+router.get('', (req, res, next) => {
+    res.render('home', {
+        layout: 'main'
+    })
 })
 
 module.exports = router
