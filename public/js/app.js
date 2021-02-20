@@ -37,6 +37,11 @@ const chartVolume = new ApexCharts(document.querySelector("#chartVolume"), {
         type: 'datetime',
         categories: []
     },
+    tooltip: {
+        style: {
+            fontSize: '9px'
+        }
+    },
     noData: {
         text: 'Загрузка...'
     }
@@ -127,6 +132,11 @@ const chartShortPercent = new ApexCharts(document.querySelector("#chartShortPerc
             formatter: function (value) {
                 return value + '%'
             }
+        }
+    },
+    tooltip: {
+        style: {
+            fontSize: '9px'
         }
     },
     noData: {
