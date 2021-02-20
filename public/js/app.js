@@ -302,7 +302,7 @@ form.addEventListener('submit', async (e) => {
 
         // Set target indicator
         const targetUpside = (response.target_price != null && response.price != null) ? ((response.target_price / response.price - 1) * 100).toFixed(1) : null
-        if (response.target_price > 0) {
+        if (targetUpside > 0) {
             resp_finviz_target.textContent = '+' + targetUpside
             resp_finviz_target.classList.add('upside')
         } else {
