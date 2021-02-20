@@ -1,3 +1,7 @@
+html, body {
+    overflow-x: hidden;
+}
+
 html {
     height: -webkit-fill-available;
 }
@@ -208,6 +212,11 @@ form {
 .hide,
 .hide > #iframe {
     display: none!important;
+}
+
+/* Charts */
+#synced-charts {
+    width: 100%;
 }
 
 /* Octocat */

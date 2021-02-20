@@ -5,7 +5,7 @@
  * @param {*} shortVol 
  * @param {*} dateAxis 
  */
-const nakedShortChartOptions = (regVol = [], shortVol = [], dateAxis = []) => {
+const nakedVolumeChartOptions = (regVol = [], shortVol = [], dateAxis = []) => {
     return {
         series: [{
             name: 'Общий объём',
@@ -16,7 +16,10 @@ const nakedShortChartOptions = (regVol = [], shortVol = [], dateAxis = []) => {
         }],
         chart: {
             height: 200,
+            width: '100%',
             type: 'area',
+            group: 'synced-charts',
+            id: 'volumeChart',
             zoom: {
                 enabled: true
             }
@@ -29,6 +32,7 @@ const nakedShortChartOptions = (regVol = [], shortVol = [], dateAxis = []) => {
         },
         yaxis: {
             labels: {
+                minWidth: 0,
                 show: false,
                 formatter: function (value) {
                     return value.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")
@@ -40,18 +44,120 @@ const nakedShortChartOptions = (regVol = [], shortVol = [], dateAxis = []) => {
             type: 'datetime',
             categories: dateAxis
         },
-        tooltip: {
-            x: {
-                format: 'dd/MM/yy HH:mm'
+        noData: {
+            text: 'Загрузка...'
+        }
+    }
+}
+
+const nakedShortPercentChartOptions = (shortVol = [], dateAxis = []) => {
+    return {
+        series: [{
+            name: "% шортовых сделок за день",
+            data: shortVol
+        }],
+        chart: {
+            height: 200,
+            width: '100%',
+            type: 'line',
+            group: 'synced-charts',
+            id: 'shortChart',
+            dropShadow: {
+                enabled: true,
+                color: '#000',
+                top: 18,
+                left: 7,
+                blur: 10,
+                opacity: 0.2
             },
+            toolbar: {
+                show: false
+            }
+        },
+        fill: {
+            type: "gradient",
+            gradient: {
+                type: 'vertical',
+                shadeIntensity: 1,
+                opacityFrom: 0.7,
+                opacityTo: 0.9,
+                colorStops: [{
+                        offset: 0,
+                        color: "#EB656F",
+                        opacity: 1
+                    },
+                    {
+                        offset: 20,
+                        color: "#FAD375",
+                        opacity: 1
+                    },
+                    {
+                        offset: 100,
+                        color: "#95DA74",
+                        opacity: 1
+                    }
+                ]
+            }
+        },
+        
+        dataLabels: {
+            enabled: true,
+            formatter: function (value = 0) {
+                return value.toFixed(0) + '%'
+            },
+            style: {
+                fontSize: '9px',
+                colors: ['#333', '#999']
+            },
+            background: false,
+            offsetY: -5
+        },
+        stroke: {
+            curve: 'smooth'
+        },
+        markers: {
+            size: 1
+        },
+        xaxis: {
+            type: 'datetime',
+            categories: dateAxis,
+            title: {
+                text: 'День'
+            }
+        },
+        yaxis: {
+            min: 0,
+            max: 100,
+            labels: {
+                show: false,
+                minWidth: 0,
+                formatter: function (value) {
+                    return value + '%'
+                }
+            }
         },
         noData: {
             text: 'Загрузка...'
         }
     }
 }
-const chartVolume = new ApexCharts(document.querySelector("#chartVolume"), nakedShortChartOptions())
+
+// Define chart and render it
+const chartVolume = new ApexCharts(document.querySelector("#chartVolume"), nakedVolumeChartOptions())
 chartVolume.render()
+// Define chart and render it
+const chartShortPercent = new ApexCharts(document.querySelector("#chartShortPercent"), nakedShortPercentChartOptions())
+chartShortPercent.render()
+
+// Get percentage of volume shorted
+const getPercentageOfShorted = (volArr = [], shortArr = []) => {
+    const shortVolPercentage = []
+
+    for (let i = 0; i < volArr.length; i++) {
+        shortVolPercentage.push(((shortArr[i] / volArr[i]) * 100).toFixed(2) || 0)
+    }
+    return shortVolPercentage
+}
 
 /**
  * ! Tradingview Widget
@@ -137,10 +243,15 @@ const erase = (word = ' пусто ') => {
 
     // Set S&P500 as placeholder
     widget('SPX')
+
     // Clear volume chart
     chartVolume.updateSeries([{
         data: []
     }, {
+        data: []
+    }])
+
+    chartShortPercent.updateSeries([{
         data: []
     }])
 }
@@ -240,7 +351,7 @@ form.addEventListener('submit', async (e) => {
         // ! APPEND TRADINGVIEW WIDGET
         widget(ticker.value)
 
-        // ! UPDATE CHART
+        // ! UPDATE VOLUME CHART
         chartVolume.updateOptions({
             xaxis: {
                 categories: response.naked_chart[0].xAxisArr
@@ -252,6 +363,18 @@ form.addEventListener('submit', async (e) => {
         }, {
             data: response.naked_chart[0].shortVolArr
         }])
+
+        // ! UPDATE SHORT PERCENT CHART
+        chartShortPercent.updateOptions({
+            xaxis: {
+                categories: response.naked_chart[0].xAxisArr
+            }
+        })
+
+        chartShortPercent.updateSeries([{
+            data: getPercentageOfShorted(response.naked_chart[0].regularVolArr, response.naked_chart[0].shortVolArr)
+        }])
+
 
     } catch (error) {
         erase(' ошибка ')
