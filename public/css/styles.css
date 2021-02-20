@@ -113,8 +113,8 @@ form {
 .fork svg {
     position: absolute;
     top: -50px;
-    left: -150px;
-    height: 296px;
+    left: -149px;
+    height: 300px;
 }
 
 .g-line {
@@ -214,11 +214,6 @@ form {
     display: none!important;
 }
 
-/* Charts */
-#synced-charts {
-    width: 100%;
-}
-
 /* Octocat */
 .octocat {
     border: 0;
@@ -273,7 +268,7 @@ form {
         left: -146px;
         top: -46px;
         height: unset;
-        width: 95vw;
+        width: 94vw;
     }
 
     .button-primary {
