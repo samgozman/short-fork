@@ -1,3 +1,194 @@
+// Define chart and render it
+const chartVolume = new ApexCharts(document.querySelector("#chartVolume"), {
+    series: [{
+        name: 'Общий объём',
+        data: []
+    }, {
+        name: 'Объём в шорт',
+        data: []
+    }],
+    chart: {
+        height: 200,
+        width: '100%',
+        type: 'area',
+        group: 'synced-charts',
+        id: 'volumeChart',
+        zoom: {
+            enabled: true
+        }
+    },
+    dataLabels: {
+        enabled: false
+    },
+    stroke: {
+        curve: 'smooth'
+    },
+    yaxis: {
+        labels: {
+            minWidth: 0,
+            show: false,
+            formatter: function (value) {
+                return Number(value || '').toLocaleString('en-US', {maximumFractionDigits:2})
+            }
+        },
+        type: 'numeric'
+    },
+    xaxis: {
+        type: 'datetime',
+        categories: []
+    },
+    tooltip: {
+        style: {
+            fontSize: '9px'
+        }
+    },
+    noData: {
+        text: 'Загрузка...'
+    }
+})
+chartVolume.render()
+
+// Define chart and render it
+const chartShortPercent = new ApexCharts(document.querySelector("#chartShortPercent"), {
+    series: [{
+        name: "% шортовых сделок за день",
+        data: []
+    }],
+    chart: {
+        height: 200,
+        width: '100%',
+        type: 'line',
+        group: 'synced-charts',
+        id: 'shortChart',
+        dropShadow: {
+            enabled: true,
+            color: '#000',
+            top: 18,
+            left: 7,
+            blur: 10,
+            opacity: 0.2
+        },
+        toolbar: {
+            show: false
+        }
+    },
+    fill: {
+        type: "gradient",
+        gradient: {
+            type: 'vertical',
+            shadeIntensity: 1,
+            opacityFrom: 0.7,
+            opacityTo: 0.9,
+            colorStops: [{
+                    offset: 0,
+                    color: "#EB656F",
+                    opacity: 1
+                },
+                {
+                    offset: 20,
+                    color: "#FAD375",
+                    opacity: 1
+                },
+                {
+                    offset: 100,
+                    color: "#95DA74",
+                    opacity: 1
+                }
+            ]
+        }
+    },
+
+    dataLabels: {
+        enabled: true,
+        formatter: function (value = 0) {
+            return value.toFixed(0) + '%'
+        },
+        style: {
+            fontSize: '9px',
+            colors: ['#333', '#333']
+        },
+        background: false,
+        offsetY: -5
+    },
+    stroke: {
+        curve: 'smooth'
+    },
+    markers: {
+        size: 1
+    },
+    xaxis: {
+        type: 'datetime',
+        categories: [],
+        title: {
+            text: 'День'
+        }
+    },
+    yaxis: {
+        min: 0,
+        max: 100,
+        labels: {
+            show: false,
+            minWidth: 0,
+            formatter: function (value) {
+                return value + '%'
+            }
+        }
+    },
+    tooltip: {
+        style: {
+            fontSize: '9px'
+        }
+    },
+    noData: {
+        text: 'Загрузка...'
+    }
+})
+chartShortPercent.render()
+
+// Get percentage of volume shorted
+const getPercentageOfShorted = (volArr = [], shortArr = []) => {
+    const shortVolPercentage = []
+
+    for (let i = 0; i < volArr.length; i++) {
+        shortVolPercentage.push(((shortArr[i] / volArr[i]) * 100).toFixed(2) || 0)
+    }
+    return shortVolPercentage
+}
+
+/**
+ * ! Tradingview Widget
+ * 
+ * @param {String} ticker 
+ */
+const widget = (ticker = '') => {
+    const quote = ticker.toUpperCase()
+    let html = `
+        <!-- TradingView Widget BEGIN -->
+        <div class="tradingview-widget-container">
+            <div class="tradingview-widget-container__widget"></div>
+            <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/symbols/${quote}/technicals/"
+                    rel="noopener" target="_blank"><span class="blue-text">Technical Analysis for ${quote}</span></a> by
+                TradingView</div>
+            <script type="text/javascript"
+                src="https://s3.tradingview.com/external-embedding/embed-widget-technical-analysis.js" async>
+                {
+                    "interval": "1D",
+                    "width": "100%",
+                    "isTransparent": true,
+                    "height": "100%",
+                    "symbol": "${quote}",
+                    "showIntervalTabs": true,
+                    "locale": "ru",
+                    "colorTheme": "light"
+                }
+            </script>
+        </div>
+        <!-- TradingView Widget END -->
+    `
+    iframe.src = 'data:text/html;charset=utf-8,' + encodeURI(html)
+}
+
+
 // DOM object of elements which should be changed during request
 let pageObj = {
     name: document.querySelector('#resp_name'),
@@ -46,7 +237,19 @@ const erase = (word = ' пусто ') => {
     resp_finviz_rsi.classList.remove(...['upside', 'downside', 'hold'])
     resp_finviz_recom.classList.remove(...['upside', 'downside', 'hold'])
 
-    tradingview.classList.add('hide')
+    // Set S&P500 as placeholder
+    widget('SPX')
+
+    // Clear volume chart
+    chartVolume.updateSeries([{
+        data: []
+    }, {
+        data: []
+    }])
+
+    chartShortPercent.updateSeries([{
+        data: []
+    }])
 }
 
 // Set signs for values
@@ -74,38 +277,6 @@ const getResponse = async () => {
 
 // Set default values
 erase()
-
-
-//  ! Tradingview Widget
-const widget = (ticker = '') => {
-    const quote = ticker.toUpperCase()
-    let html = `
-        <!-- TradingView Widget BEGIN -->
-        <div class="tradingview-widget-container">
-            <div class="tradingview-widget-container__widget"></div>
-            <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/symbols/${quote}/technicals/"
-                    rel="noopener" target="_blank"><span class="blue-text">Technical Analysis for ${quote}</span></a> by
-                TradingView</div>
-            <script type="text/javascript"
-                src="https://s3.tradingview.com/external-embedding/embed-widget-technical-analysis.js" async>
-                {
-                    "interval": "1D",
-                    "width": "100%",
-                    "isTransparent": true,
-                    "height": "100%",
-                    "symbol": "${quote}",
-                    "showIntervalTabs": true,
-                    "locale": "ru",
-                    "colorTheme": "light"
-                }
-            </script>
-        </div>
-        <!-- TradingView Widget END -->
-    `
-    tradingview.classList.remove('hide')
-    iframe.src = 'data:text/html;charset=utf-8,' + encodeURI(html)
-}
-
 
 form.addEventListener('submit', async (e) => {
     // Prevent from refreshing the browser once form submited 
@@ -141,7 +312,7 @@ form.addEventListener('submit', async (e) => {
 
         // Set target indicator
         const targetUpside = (response.target_price != null && response.price != null) ? ((response.target_price / response.price - 1) * 100).toFixed(1) : null
-        if (response.target_price > 0) {
+        if (targetUpside > 0) {
             resp_finviz_target.textContent = '+' + targetUpside
             resp_finviz_target.classList.add('upside')
         } else {
@@ -175,6 +346,31 @@ form.addEventListener('submit', async (e) => {
 
         // ! APPEND TRADINGVIEW WIDGET
         widget(ticker.value)
+
+        // ! UPDATE VOLUME CHART
+        chartVolume.updateOptions({
+            xaxis: {
+                categories: response.naked_chart[0].xAxisArr
+            }
+        })
+
+        chartVolume.updateSeries([{
+            data: response.naked_chart[0].regularVolArr
+        }, {
+            data: response.naked_chart[0].shortVolArr
+        }])
+
+        // ! UPDATE SHORT PERCENT CHART
+        chartShortPercent.updateOptions({
+            xaxis: {
+                categories: response.naked_chart[0].xAxisArr
+            }
+        })
+
+        chartShortPercent.updateSeries([{
+            data: getPercentageOfShorted(response.naked_chart[0].regularVolArr, response.naked_chart[0].shortVolArr)
+        }])
+
 
     } catch (error) {
         erase(' ошибка ')

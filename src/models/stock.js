@@ -42,10 +42,6 @@ const stockSchema = mongoose.Schema({
         type: Number,
         default: null
     },
-    naked_history_short_volume: {
-        type: Array,
-        default: []
-    },
     squeeze_short_flow: {
         type: Number,
         default: null
@@ -74,10 +70,14 @@ const stockSchema = mongoose.Schema({
         type: String,
         default: null
     },
+    naked_chart: {
+        type: Array,
+        default: []
+    },
     _counter: {
         type: Number,
         default: 0
-    },
+    }
 }, {
     timestamps: true
 })
