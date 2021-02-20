@@ -74,10 +74,14 @@ const stockSchema = mongoose.Schema({
         type: String,
         default: null
     },
+    naked_chart: {
+        type: Array,
+        default: []
+    },
     _counter: {
         type: Number,
         default: 0
-    },
+    }
 }, {
     timestamps: true
 })

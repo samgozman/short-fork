@@ -4,8 +4,10 @@ const finvizor = require('finvizor')
 
 const getStockData = async (ticker = '') => {
     const squeeze = await shortsqueeze(ticker),
-        naked = await nakedshort(ticker),
+        naked = await nakedshort.getShortData(ticker),
+        naked_chart = await nakedshort.getChart(ticker),
         fin = await finvizor.stock(ticker)
+
     if (fin.error) return undefined
     return {
         name: fin.name,
@@ -23,7 +25,8 @@ const getStockData = async (ticker = '') => {
         target_price: fin.targetPrice,
         rsi: fin.rsi,
         recomendation: fin.recom ? fin.recom.toFixed(1) : null,
-        site: fin.site
+        site: fin.site,
+        naked_chart
     }
 }
 

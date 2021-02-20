@@ -1,3 +1,92 @@
+/**
+ * Chart settings
+ * 
+ * @param {*} regVol 
+ * @param {*} shortVol 
+ * @param {*} dateAxis 
+ */
+const nakedShortChartOptions = (regVol = [], shortVol = [], dateAxis = []) => {
+    return {
+        series: [{
+            name: 'Общий объём',
+            data: regVol
+        }, {
+            name: 'Объём в шорт',
+            data: shortVol
+        }],
+        chart: {
+            height: 200,
+            type: 'area',
+            zoom: {
+                enabled: true
+            }
+        },
+        dataLabels: {
+            enabled: false
+        },
+        stroke: {
+            curve: 'smooth'
+        },
+        yaxis: {
+            labels: {
+                show: false,
+                formatter: function (value) {
+                    return value.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")
+                }
+            },
+            type: 'numeric'
+        },
+        xaxis: {
+            type: 'datetime',
+            categories: dateAxis
+        },
+        tooltip: {
+            x: {
+                format: 'dd/MM/yy HH:mm'
+            },
+        },
+        noData: {
+            text: 'Загрузка...'
+        }
+    }
+}
+const chartVolume = new ApexCharts(document.querySelector("#chartVolume"), nakedShortChartOptions())
+chartVolume.render()
+
+/**
+ * ! Tradingview Widget
+ * 
+ * @param {String} ticker 
+ */
+const widget = (ticker = '') => {
+    const quote = ticker.toUpperCase()
+    let html = `
+        <!-- TradingView Widget BEGIN -->
+        <div class="tradingview-widget-container">
+            <div class="tradingview-widget-container__widget"></div>
+            <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/symbols/${quote}/technicals/"
+                    rel="noopener" target="_blank"><span class="blue-text">Technical Analysis for ${quote}</span></a> by
+                TradingView</div>
+            <script type="text/javascript"
+                src="https://s3.tradingview.com/external-embedding/embed-widget-technical-analysis.js" async>
+                {
+                    "interval": "1D",
+                    "width": "100%",
+                    "isTransparent": true,
+                    "height": "100%",
+                    "symbol": "${quote}",
+                    "showIntervalTabs": true,
+                    "locale": "ru",
+                    "colorTheme": "light"
+                }
+            </script>
+        </div>
+        <!-- TradingView Widget END -->
+    `
+    iframe.src = 'data:text/html;charset=utf-8,' + encodeURI(html)
+}
+
+
 // DOM object of elements which should be changed during request
 let pageObj = {
     name: document.querySelector('#resp_name'),
@@ -46,7 +135,14 @@ const erase = (word = ' пусто ') => {
     resp_finviz_rsi.classList.remove(...['upside', 'downside', 'hold'])
     resp_finviz_recom.classList.remove(...['upside', 'downside', 'hold'])
 
-    tradingview.classList.add('hide')
+    // Set S&P500 as placeholder
+    widget('SPX')
+    // Clear volume chart
+    chartVolume.updateSeries([{
+        data: []
+    }, {
+        data: []
+    }])
 }
 
 // Set signs for values
@@ -74,38 +170,6 @@ const getResponse = async () => {
 
 // Set default values
 erase()
-
-
-//  ! Tradingview Widget
-const widget = (ticker = '') => {
-    const quote = ticker.toUpperCase()
-    let html = `
-        <!-- TradingView Widget BEGIN -->
-        <div class="tradingview-widget-container">
-            <div class="tradingview-widget-container__widget"></div>
-            <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/symbols/${quote}/technicals/"
-                    rel="noopener" target="_blank"><span class="blue-text">Technical Analysis for ${quote}</span></a> by
-                TradingView</div>
-            <script type="text/javascript"
-                src="https://s3.tradingview.com/external-embedding/embed-widget-technical-analysis.js" async>
-                {
-                    "interval": "1D",
-                    "width": "100%",
-                    "isTransparent": true,
-                    "height": "100%",
-                    "symbol": "${quote}",
-                    "showIntervalTabs": true,
-                    "locale": "ru",
-                    "colorTheme": "light"
-                }
-            </script>
-        </div>
-        <!-- TradingView Widget END -->
-    `
-    tradingview.classList.remove('hide')
-    iframe.src = 'data:text/html;charset=utf-8,' + encodeURI(html)
-}
-
 
 form.addEventListener('submit', async (e) => {
     // Prevent from refreshing the browser once form submited 
@@ -175,6 +239,19 @@ form.addEventListener('submit', async (e) => {
 
         // ! APPEND TRADINGVIEW WIDGET
         widget(ticker.value)
+
+        // ! UPDATE CHART
+        chartVolume.updateOptions({
+            xaxis: {
+                categories: response.naked_chart[0].xAxisArr
+            }
+        })
+
+        chartVolume.updateSeries([{
+            data: response.naked_chart[0].regularVolArr
+        }, {
+            data: response.naked_chart[0].shortVolArr
+        }])
 
     } catch (error) {
         erase(' ошибка ')
