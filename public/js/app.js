@@ -28,7 +28,7 @@ const chartVolume = new ApexCharts(document.querySelector("#chartVolume"), {
             minWidth: 0,
             show: false,
             formatter: function (value) {
-                return (value || '').toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")
+                return Number(value || '').toLocaleString('en-US', {maximumFractionDigits:2})
             }
         },
         type: 'numeric'
