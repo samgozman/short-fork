@@ -9,7 +9,8 @@ router.use(express.static(public_dir))
 // root index page
 router.get('', (req, res, next) => {
     res.render('home', {
-        layout: 'main'
+        layout: 'main',
+        package_version: process.env.npm_package_version
     })
 })
 
