@@ -237,9 +237,6 @@ const erase = (word = ' пусто ') => {
     resp_finviz_rsi.classList.remove(...['upside', 'downside', 'hold'])
     resp_finviz_recom.classList.remove(...['upside', 'downside', 'hold'])
 
-    // Set S&P500 as placeholder
-    widget('SPX')
-
     // Clear volume chart
     chartVolume.updateSeries([{
         data: []
@@ -277,6 +274,9 @@ const getResponse = async () => {
 
 // Set default values
 erase()
+
+// Set S&P500 as placeholder
+widget('SPX')
 
 form.addEventListener('submit', async (e) => {
     // Prevent from refreshing the browser once form submited 
