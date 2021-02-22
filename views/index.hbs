@@ -1,0 +1,209 @@
+<div class="columns">
+    <div class="column is-one-half">
+        <h1 class="title">
+            Short fork
+        </h1>
+        <p class="subtitle">
+            Description
+        </p>
+    </div>
+</div>
+
+<div class="columns is-variable is-1-mobile">
+    <div class="column is-one-third">
+        <!-- Start form -->
+
+        <form class="field has-addons">
+            <div class="control">
+                <button class="button is-primary" id="submit_button" type="submit">⮑</button>
+            </div>
+            <div class="control">
+                <input class="input" id="input_ticker" type="text" placeholder="Тикер">
+            </div>
+        </form>
+
+        <!-- End form -->
+
+        <!-- Start tags -->
+        
+        <div class="content">
+            <p>
+                <strong>Сайт: </strong><a id="resp_site" href="" target="_blank"></a> <br>
+                <strong>Компания: </strong><span id="resp_name"></span>
+            </p>
+        </div>
+        <div class="columns is-variable is-1-mobile is-2-tablet is-3-desktop is-mobile">
+            <div class="column is-half">
+
+                <div class="field is-grouped is-grouped-multiline group-tags-1">
+
+                    <div class="control">
+                        <div class="tags has-addons">
+                            <span class="tag is-dark">Price</span>
+                            <span class="tag is-light" id="resp_price">$1000</span>
+                        </div>
+                    </div>
+
+                    <div class="control">
+                        <div class="tags has-addons">
+                            <span class="tag is-dark">P/E</span>
+                            <span class="tag is-light" id="resp_pe">20.10</span>
+                        </div>
+                    </div>
+
+                    <div class="control">
+                        <div class="tags has-addons">
+                            <span class="tag is-dark">P/S</span>
+                            <span class="tag is-light" id="resp_ps">3.22</span>
+                        </div>
+                    </div>
+
+                    <div class="control">
+                        <div class="tags has-addons">
+                            <span class="tag is-dark">P/B</span>
+                            <span class="tag is-light" id="resp_pb">1.36</span>
+                        </div>
+                    </div>
+
+                    <div class="control">
+                        <div class="tags has-addons">
+                            <span class="tag is-dark">ROE</span>
+                            <span class="tag is-light" id="resp_roe">7.22</span>
+                        </div>
+                    </div>
+
+                    <div class="control">
+                        <div class="tags has-addons">
+                            <span class="tag is-dark">ROA</span>
+                            <span class="tag is-light" id="resp_roa">4.10</span>
+                        </div>
+                    </div>
+
+                    <div class="control">
+                        <div class="tags has-addons">
+                            <span class="tag is-dark">Debt/Eq</span>
+                            <span class="tag is-light" id="resp_debteq">0.47</span>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="column is-half">
+
+                <div class="field is-grouped is-grouped-multiline group-tags-2">
+
+                    <div class="control">
+                        <div class="tags has-addons">
+                            <span class="tag is-dark">Naked SV</span>
+                            <span class="tag is-link" id="resp_naked">54.25%</span>
+                        </div>
+                    </div>
+
+                    <div class="control">
+                        <div class="tags has-addons">
+                            <span class="tag is-dark">Squeeze SF</span>
+                            <span class="tag is-link" id="resp_squeeze">14.25%</span>
+                        </div>
+                    </div>
+
+                    <div class="control">
+                        <div class="tags has-addons">
+                            <span class="tag is-dark">Finviz SF</span>
+                            <span class="tag is-link" id="resp_finviz">14.25%</span>
+                        </div>
+                    </div>
+
+                    <div class="control">
+                        <div class="tags has-addons">
+                            <span class="tag is-dark">Tink</span>
+                            <span class="tag is-success" id="resp_tinkoff">ON</span>
+                        </div>
+                    </div>
+
+                    <div class="control">
+                        <div class="tags has-addons">
+                            <span class="tag is-dark">Target</span>
+                            <span class="tag is-success" id="resp_finviz_target">+10%</span>
+                        </div>
+                    </div>
+
+                    <div class="control">
+                        <div class="tags has-addons">
+                            <span class="tag is-dark">RSI (14)</span>
+                            <span class="tag is-warning" id="resp_finviz_rsi">58</span>
+                        </div>
+                    </div>
+
+                    <div class="control">
+                        <div class="tags has-addons">
+                            <span class="tag is-dark">Recom</span>
+                            <span class="tag is-success" id="resp_finviz_recom">1.6 Buy</span>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+        <div class="column is-full">
+            <p>
+                <strong id="error-message"></strong>
+            </p>
+        </div>
+
+        <!-- End tags -->
+    </div>
+    <div class="column">
+
+        <div class="columns is-variable is-1-mobile">
+            <div class="column">
+                <!-- TRADING VIEW -->
+
+                <div class="box">
+                    {{> stocks/tradingview }}
+                </div>
+
+                <!-- TRADING VIEW -->
+            </div>
+            <div class="column">
+                <!-- Volume graphichs -->
+
+                <div class="box">
+                    {{> stocks/nakedCharts }}
+                </div>
+
+                <!-- Volume graphichs -->
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="columns is-variable is-1-mobile">
+    <div class="column">
+
+        <div class="content">
+            <h2>Labels</h2>
+            <p>Curabitur accumsan turpis pharetra <strong>augue tincidunt</strong> blandit. Quisque
+                condimentum maximus mi, sit amet commodo arcu rutrum id. Proin pretium urna vel cursus
+                venenatis. Suspendisse potenti. Etiam mattis sem rhoncus lacus dapibus facilisis. Donec at
+                dignissim dui. Ut et neque nisl.</p>
+            <ul>
+                <li>In fermentum leo eu lectus mollis, quis dictum mi aliquet.</li>
+                <li>Morbi eu nulla lobortis, lobortis est in, fringilla felis.</li>
+                <li>Aliquam nec felis in sapien venenatis viverra fermentum nec lectus.</li>
+                <li>Ut non enim metus.</li>
+            </ul>
+        </div>
+
+    </div>
+    <div class="column">
+        <!-- Footer, links, sponsors -->
+
+        {{> sponsor }}
+
+        <!-- Footer, links, sponsors -->
+    </div>
+</div>

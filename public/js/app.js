@@ -226,7 +226,7 @@ const erase = (word = ' пусто ') => {
     error_message.textContent = ''
 
     // Reset indicators
-    resp_tinkoff.textContent = 'TinkOFF'
+    resp_tinkoff.textContent = 'OFF'
     resp_tinkoff.classList.remove('active')
 
     resp_finviz_target.textContent = '0'
@@ -252,9 +252,9 @@ const erase = (word = ' пусто ') => {
 // Set signs for values
 const setSigns = () => {
     pageObj.price.textContent = '$' + pageObj.price.textContent
-    pageObj.naked_current_short_volume.textContent += '% SV'
-    pageObj.squeeze_short_flow.textContent += '% SF'
-    pageObj.finviz_short_flow.textContent += '% SF'
+    pageObj.naked_current_short_volume.textContent += '%'
+    pageObj.squeeze_short_flow.textContent += '%'
+    pageObj.finviz_short_flow.textContent += '%'
     resp_finviz_target.textContent += '%'
 }
 
@@ -303,7 +303,7 @@ form.addEventListener('submit', async (e) => {
 
         // Set tinkoff indicator
         if (response.tinkoff) {
-            resp_tinkoff.textContent = 'TinkON'
+            resp_tinkoff.textContent = 'ON'
             resp_tinkoff.classList.add('active')
         } else {
             resp_tinkoff.textContent = 'TinkOFF'

@@ -1,0 +1,92 @@
+/* Global */
+.section {
+    padding: 2.5rem 1rem;
+}
+.box {
+    padding: .75rem;
+}
+.content:not(:last-child) {
+    margin-bottom: 0.75rem;
+}
+
+/* Financial tags */
+.field.is-grouped.is-grouped-multiline>.control {
+    display: inline-block;
+    width: 100%;
+}
+
+.group-tags-1>.control>.tags.has-addons>.tag:first-child,
+.group-tags-2>.control>.tags.has-addons>.tag:first-child {
+    justify-content: left;
+}
+
+.group-tags-1>.control>.tags.has-addons>.tag:first-child {
+    width: 41%;
+}
+.group-tags-1>.control>.tags.has-addons>.tag:nth-child(2) {
+    width: 59%;
+}
+
+.group-tags-2>.control>.tags.has-addons>.tag:first-child {
+    width: 48%
+}
+
+.group-tags-2>.control>.tags.has-addons>.tag:nth-child(2) {
+    width: 52%
+}
+
+
+/* Update messages */
+.upd-message {
+    color: #aaa;
+    font-size: 10px;
+    z-index: 2;
+    position: relative;
+}
+
+.upd-message>a {
+    color: #aaa;
+}
+
+/* Tradingview */
+
+.tradingview #iframe {
+    height: 27rem;
+    margin: -30px 0px -15px 0px;
+    width: 100%;
+    overflow: hidden;
+}
+
+/* Octocat */
+.octocat {
+    border: 0;
+    color: #f4f5f6;
+    fill: #333;
+    height: 4rem;
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: 4rem;
+    z-index: 2;
+}
+
+.octocat .octocat-arm,
+.octocat .octocat-body {
+    fill: #f4f5f6;
+}
+
+/* Mobile fixes */
+
+@media (max-width: 350px) {
+    .section {
+        padding: 2rem 0.35rem;
+    }
+
+    .tag:not(body) {
+        font-size: .65rem;
+    }
+
+    .tags .tag {
+        margin-bottom: .3rem;
+    }
+}
