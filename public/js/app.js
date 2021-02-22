@@ -28,7 +28,9 @@ const chartVolume = new ApexCharts(document.querySelector("#chartVolume"), {
             minWidth: 0,
             show: false,
             formatter: function (value) {
-                return Number(value || '').toLocaleString('en-US', {maximumFractionDigits:2})
+                return Number(value || '').toLocaleString('en-US', {
+                    maximumFractionDigits: 2
+                })
             }
         },
         type: 'numeric'
@@ -227,7 +229,7 @@ const erase = (word = ' пусто ') => {
 
     // Reset indicators
     resp_tinkoff.textContent = 'OFF'
-    resp_tinkoff.classList.remove('is-success')
+    resp_tinkoff.classList.remove(...['is-success', 'is-danger'])
 
     resp_finviz_target.textContent = '0'
     resp_finviz_rsi.textContent = '0'
@@ -256,7 +258,7 @@ const isLoading = (bool = true) => {
     ]
 
     targetIDs.forEach(id => {
-        if(bool) {
+        if (bool) {
             // add class
             document.getElementById(id).classList.add('is-loading')
         } else {
@@ -296,6 +298,9 @@ erase()
 // Set S&P500 as placeholder
 widget('SPX')
 
+// Set starting colors for "stock short" values
+Array('finviz_short_flow', 'naked_current_short_volume', 'squeeze_short_flow').forEach(key => pageObj[key].classList.add('is-link'))
+
 form.addEventListener('submit', async (e) => {
     // Prevent from refreshing the browser once form submited 
     e.preventDefault()
@@ -326,7 +331,7 @@ form.addEventListener('submit', async (e) => {
             resp_tinkoff.classList.add('is-success')
         } else {
             resp_tinkoff.textContent = 'OFF'
-            resp_tinkoff.classList.remove('is-success')
+            resp_tinkoff.classList.add('is-danger')
         }
 
         // Set target indicator
@@ -389,7 +394,7 @@ form.addEventListener('submit', async (e) => {
         chartShortPercent.updateSeries([{
             data: getPercentageOfShorted(response.naked_chart[0].regularVolArr, response.naked_chart[0].shortVolArr)
         }])
-        
+
         isLoading(false)
 
     } catch (error) {

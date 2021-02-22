@@ -8,117 +8,35 @@
 </div>
 <div class="columns is-variable is-1-mobile is-2-tablet is-3-desktop is-mobile">
     <div class="column is-half">
-
         <div class="field is-grouped is-grouped-multiline group-tags-1">
 
-            <div class="control">
-                <div class="tags has-addons">
-                    <span class="tag is-dark">Price</span>
-                    <span class="tag is-light" id="resp_price">$1000</span>
+            {{#each financialTagsLeft}} 
+                <div class="control">
+                    <div class="tags has-addons">
+                        <span class="tag is-dark">{{name}}</span>
+                        <span class="tag is-light" id="{{id}}"></span>
+                    </div>
                 </div>
-            </div>
-
-            <div class="control">
-                <div class="tags has-addons">
-                    <span class="tag is-dark">P/E</span>
-                    <span class="tag is-light" id="resp_pe">20.10</span>
-                </div>
-            </div>
-
-            <div class="control">
-                <div class="tags has-addons">
-                    <span class="tag is-dark">P/S</span>
-                    <span class="tag is-light" id="resp_ps">3.22</span>
-                </div>
-            </div>
-
-            <div class="control">
-                <div class="tags has-addons">
-                    <span class="tag is-dark">P/B</span>
-                    <span class="tag is-light" id="resp_pb">1.36</span>
-                </div>
-            </div>
-
-            <div class="control">
-                <div class="tags has-addons">
-                    <span class="tag is-dark">ROE</span>
-                    <span class="tag is-light" id="resp_roe">7.22</span>
-                </div>
-            </div>
-
-            <div class="control">
-                <div class="tags has-addons">
-                    <span class="tag is-dark">ROA</span>
-                    <span class="tag is-light" id="resp_roa">4.10</span>
-                </div>
-            </div>
-
-            <div class="control">
-                <div class="tags has-addons">
-                    <span class="tag is-dark">Debt/Eq</span>
-                    <span class="tag is-light" id="resp_debteq">0.47</span>
-                </div>
-            </div>
+            {{/each}}
 
         </div>
-
     </div>
-    <div class="column is-half">
 
+    <div class="column is-half">
         <div class="field is-grouped is-grouped-multiline group-tags-2">
 
+            {{#each financialTagsRight}}
             <div class="control">
                 <div class="tags has-addons">
-                    <span class="tag is-dark">Naked SV</span>
-                    <span class="tag is-link" id="resp_naked">54.25%</span>
+                    <span class="tag is-dark">{{name}}</span>
+                    <span class="tag" id="{{id}}"></span>
                 </div>
             </div>
-
-            <div class="control">
-                <div class="tags has-addons">
-                    <span class="tag is-dark">Squeeze SF</span>
-                    <span class="tag is-link" id="resp_squeeze">14.25%</span>
-                </div>
-            </div>
-
-            <div class="control">
-                <div class="tags has-addons">
-                    <span class="tag is-dark">Finviz SF</span>
-                    <span class="tag is-link" id="resp_finviz">14.25%</span>
-                </div>
-            </div>
-
-            <div class="control">
-                <div class="tags has-addons">
-                    <span class="tag is-dark">Tink</span>
-                    <span class="tag" id="resp_tinkoff">ON</span>
-                </div>
-            </div>
-
-            <div class="control">
-                <div class="tags has-addons">
-                    <span class="tag is-dark">Target</span>
-                    <span class="tag" id="resp_finviz_target">+10%</span>
-                </div>
-            </div>
-
-            <div class="control">
-                <div class="tags has-addons">
-                    <span class="tag is-dark">RSI (14)</span>
-                    <span class="tag" id="resp_finviz_rsi">58</span>
-                </div>
-            </div>
-
-            <div class="control">
-                <div class="tags has-addons">
-                    <span class="tag is-dark">Recom</span>
-                    <span class="tag" id="resp_finviz_recom">1.6 Buy</span>
-                </div>
-            </div>
+            {{/each}}
 
         </div>
-
     </div>
+    
 </div>
 
 <div class="column is-full disclaimer">
