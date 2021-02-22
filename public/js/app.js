@@ -227,15 +227,15 @@ const erase = (word = ' пусто ') => {
 
     // Reset indicators
     resp_tinkoff.textContent = 'OFF'
-    resp_tinkoff.classList.remove('active')
+    resp_tinkoff.classList.remove('is-success')
 
     resp_finviz_target.textContent = '0'
     resp_finviz_rsi.textContent = '0'
     resp_finviz_recom.textContent = '0 - Нет'
 
-    resp_finviz_target.classList.remove(...['upside', 'downside', 'hold'])
-    resp_finviz_rsi.classList.remove(...['upside', 'downside', 'hold'])
-    resp_finviz_recom.classList.remove(...['upside', 'downside', 'hold'])
+    resp_finviz_target.classList.remove(...['is-success', 'is-danger', 'is-warning'])
+    resp_finviz_rsi.classList.remove(...['is-success', 'is-danger', 'is-warning'])
+    resp_finviz_recom.classList.remove(...['is-success', 'is-danger', 'is-warning'])
 
     // Clear volume chart
     chartVolume.updateSeries([{
@@ -304,42 +304,42 @@ form.addEventListener('submit', async (e) => {
         // Set tinkoff indicator
         if (response.tinkoff) {
             resp_tinkoff.textContent = 'ON'
-            resp_tinkoff.classList.add('active')
+            resp_tinkoff.classList.add('is-success')
         } else {
-            resp_tinkoff.textContent = 'TinkOFF'
-            resp_tinkoff.classList.remove('active')
+            resp_tinkoff.textContent = 'OFF'
+            resp_tinkoff.classList.remove('is-success')
         }
 
         // Set target indicator
         const targetUpside = (response.target_price != null && response.price != null) ? ((response.target_price / response.price - 1) * 100).toFixed(1) : null
         if (targetUpside > 0) {
             resp_finviz_target.textContent = '+' + targetUpside
-            resp_finviz_target.classList.add('upside')
+            resp_finviz_target.classList.add('is-success')
         } else {
             resp_finviz_target.textContent = targetUpside
-            resp_finviz_target.classList.add('downside')
+            resp_finviz_target.classList.add('is-danger')
         }
 
         // Set RSI indicator
         resp_finviz_rsi.textContent = response.rsi
         if (response.rsi > 70) {
-            resp_finviz_rsi.classList.add('downside')
+            resp_finviz_rsi.classList.add('is-danger')
         } else if (response.rsi < 70 && response.rsi > 30) {
-            resp_finviz_rsi.classList.add('hold')
+            resp_finviz_rsi.classList.add('is-warning')
         } else if (response.rsi < 30) {
-            resp_finviz_rsi.classList.add('upside')
+            resp_finviz_rsi.classList.add('is-success')
         }
 
         // Set analytics recomendation indicator
         if (response.recomendation < 3) {
             resp_finviz_recom.textContent = response.recomendation + ' - Buy'
-            resp_finviz_recom.classList.add('upside')
+            resp_finviz_recom.classList.add('is-success')
         } else if (response.recomendation > 3 && response.recomendation < 4) {
             resp_finviz_recom.textContent = response.recomendation + ' - Hold'
-            resp_finviz_recom.classList.add('hold')
+            resp_finviz_recom.classList.add('is-warning')
         } else if (response.recomendation > 4) {
             resp_finviz_recom.textContent = response.recomendation + ' - Sell'
-            resp_finviz_recom.classList.add('downside')
+            resp_finviz_recom.classList.add('is-danger')
         }
 
         setSigns()

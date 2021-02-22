@@ -49,6 +49,12 @@
     color: #aaa;
 }
 
+.disclaimer {
+    padding-top: 0;
+    padding-bottom: 0;
+    margin-top: -0.75rem;
+}
+
 /* Tradingview */
 
 .tradingview {
@@ -93,5 +99,9 @@
 
     .tags .tag {
         margin-bottom: .3rem;
+    }
+
+    .upd-message {
+        font-size: 7px;
     }
 }
