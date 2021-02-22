@@ -249,6 +249,24 @@ const erase = (word = ' пусто ') => {
     }])
 }
 
+// Is loading - add loading styles
+const isLoading = (bool = true) => {
+    const targetIDs = [
+        'submit_button'
+    ]
+
+    targetIDs.forEach(id => {
+        if(bool) {
+            // add class
+            document.getElementById(id).classList.add('is-loading')
+        } else {
+            // remove
+            document.getElementById(id).classList.remove('is-loading')
+        }
+
+    })
+}
+
 // Set signs for values
 const setSigns = () => {
     pageObj.price.textContent = '$' + pageObj.price.textContent
@@ -286,6 +304,7 @@ form.addEventListener('submit', async (e) => {
             throw new Error()
         }
 
+        isLoading(true)
         erase(' Loading ')
 
         const response = await getResponse()
@@ -370,9 +389,11 @@ form.addEventListener('submit', async (e) => {
         chartShortPercent.updateSeries([{
             data: getPercentageOfShorted(response.naked_chart[0].regularVolArr, response.naked_chart[0].shortVolArr)
         }])
-
+        
+        isLoading(false)
 
     } catch (error) {
+        isLoading(false)
         erase(' ошибка ')
         error_message.textContent = error.message == 429 ? 'Превышен лимит запросов в минуту!' : 'Ошибка! Введите правильный тикер'
     }

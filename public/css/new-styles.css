@@ -2,12 +2,23 @@
 .section {
     padding: 2.5rem 1rem;
 }
+
 .box {
     padding: .75rem;
     height: 100%;
 }
+
 .content:not(:last-child) {
     margin-bottom: 0.75rem;
+}
+
+/* Form */
+.search-form-input {
+    width: 100%;
+}
+
+#input_ticker {
+    text-transform: uppercase;
 }
 
 /* Financial tags */
@@ -24,6 +35,7 @@
 .group-tags-1>.control>.tags.has-addons>.tag:first-child {
     width: 41%;
 }
+
 .group-tags-1>.control>.tags.has-addons>.tag:nth-child(2) {
     width: 59%;
 }
