@@ -4,6 +4,7 @@
 }
 .box {
     padding: .75rem;
+    height: 100%;
 }
 .content:not(:last-child) {
     margin-bottom: 0.75rem;
@@ -50,8 +51,12 @@
 
 /* Tradingview */
 
+.tradingview {
+    height: 430px;
+}
+
 .tradingview #iframe {
-    height: 27rem;
+    height: 100%;
     margin: -30px 0px -15px 0px;
     width: 100%;
     overflow: hidden;

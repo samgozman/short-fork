@@ -11,149 +11,8 @@
 
 <div class="columns is-variable is-1-mobile">
     <div class="column is-one-third">
-        <!-- Start form -->
-
-        <form class="field has-addons">
-            <div class="control">
-                <button class="button is-primary" id="submit_button" type="submit">⮑</button>
-            </div>
-            <div class="control">
-                <input class="input" id="input_ticker" type="text" placeholder="Тикер">
-            </div>
-        </form>
-
-        <!-- End form -->
-
-        <!-- Start tags -->
-        
-        <div class="content">
-            <p>
-                <strong>Сайт: </strong><a id="resp_site" href="" target="_blank"></a> <br>
-                <strong>Компания: </strong><span id="resp_name"></span>
-            </p>
-        </div>
-        <div class="columns is-variable is-1-mobile is-2-tablet is-3-desktop is-mobile">
-            <div class="column is-half">
-
-                <div class="field is-grouped is-grouped-multiline group-tags-1">
-
-                    <div class="control">
-                        <div class="tags has-addons">
-                            <span class="tag is-dark">Price</span>
-                            <span class="tag is-light" id="resp_price">$1000</span>
-                        </div>
-                    </div>
-
-                    <div class="control">
-                        <div class="tags has-addons">
-                            <span class="tag is-dark">P/E</span>
-                            <span class="tag is-light" id="resp_pe">20.10</span>
-                        </div>
-                    </div>
-
-                    <div class="control">
-                        <div class="tags has-addons">
-                            <span class="tag is-dark">P/S</span>
-                            <span class="tag is-light" id="resp_ps">3.22</span>
-                        </div>
-                    </div>
-
-                    <div class="control">
-                        <div class="tags has-addons">
-                            <span class="tag is-dark">P/B</span>
-                            <span class="tag is-light" id="resp_pb">1.36</span>
-                        </div>
-                    </div>
-
-                    <div class="control">
-                        <div class="tags has-addons">
-                            <span class="tag is-dark">ROE</span>
-                            <span class="tag is-light" id="resp_roe">7.22</span>
-                        </div>
-                    </div>
-
-                    <div class="control">
-                        <div class="tags has-addons">
-                            <span class="tag is-dark">ROA</span>
-                            <span class="tag is-light" id="resp_roa">4.10</span>
-                        </div>
-                    </div>
-
-                    <div class="control">
-                        <div class="tags has-addons">
-                            <span class="tag is-dark">Debt/Eq</span>
-                            <span class="tag is-light" id="resp_debteq">0.47</span>
-                        </div>
-                    </div>
-
-                </div>
-
-            </div>
-            <div class="column is-half">
-
-                <div class="field is-grouped is-grouped-multiline group-tags-2">
-
-                    <div class="control">
-                        <div class="tags has-addons">
-                            <span class="tag is-dark">Naked SV</span>
-                            <span class="tag is-link" id="resp_naked">54.25%</span>
-                        </div>
-                    </div>
-
-                    <div class="control">
-                        <div class="tags has-addons">
-                            <span class="tag is-dark">Squeeze SF</span>
-                            <span class="tag is-link" id="resp_squeeze">14.25%</span>
-                        </div>
-                    </div>
-
-                    <div class="control">
-                        <div class="tags has-addons">
-                            <span class="tag is-dark">Finviz SF</span>
-                            <span class="tag is-link" id="resp_finviz">14.25%</span>
-                        </div>
-                    </div>
-
-                    <div class="control">
-                        <div class="tags has-addons">
-                            <span class="tag is-dark">Tink</span>
-                            <span class="tag is-success" id="resp_tinkoff">ON</span>
-                        </div>
-                    </div>
-
-                    <div class="control">
-                        <div class="tags has-addons">
-                            <span class="tag is-dark">Target</span>
-                            <span class="tag is-success" id="resp_finviz_target">+10%</span>
-                        </div>
-                    </div>
-
-                    <div class="control">
-                        <div class="tags has-addons">
-                            <span class="tag is-dark">RSI (14)</span>
-                            <span class="tag is-warning" id="resp_finviz_rsi">58</span>
-                        </div>
-                    </div>
-
-                    <div class="control">
-                        <div class="tags has-addons">
-                            <span class="tag is-dark">Recom</span>
-                            <span class="tag is-success" id="resp_finviz_recom">1.6 Buy</span>
-                        </div>
-                    </div>
-
-                </div>
-
-            </div>
-        </div>
-
-        <div class="column is-full">
-            <p>
-                <strong id="error-message"></strong>
-            </p>
-        </div>
-
-        <!-- End tags -->
+        {{> stocks/searchform }}
+        {{> stocks/financialtags }}
     </div>
     <div class="column">
 
@@ -181,29 +40,33 @@
     </div>
 </div>
 
-<div class="columns is-variable is-1-mobile">
-    <div class="column">
-
+<div class="columns">
+    <div class="column is-one-third">
+        {{> sponsor }}
         <div class="content">
-            <h2>Labels</h2>
-            <p>Curabitur accumsan turpis pharetra <strong>augue tincidunt</strong> blandit. Quisque
-                condimentum maximus mi, sit amet commodo arcu rutrum id. Proin pretium urna vel cursus
-                venenatis. Suspendisse potenti. Etiam mattis sem rhoncus lacus dapibus facilisis. Donec at
-                dignissim dui. Ut et neque nisl.</p>
-            <ul>
-                <li>In fermentum leo eu lectus mollis, quis dictum mi aliquet.</li>
-                <li>Morbi eu nulla lobortis, lobortis est in, fringilla felis.</li>
-                <li>Aliquam nec felis in sapien venenatis viverra fermentum nec lectus.</li>
-                <li>Ut non enim metus.</li>
-            </ul>
+            <br>
+            <p>Создано: <a href="https://github.com/samgozman" target="_blank">samgozman</a></p>
+            <p>Tinkoff Pulse: <a href="https://www.tinkoff.ru/invest/social/profile/aqua_disco/" target="_blank">aqua_disco</a></p>
         </div>
-
     </div>
     <div class="column">
-        <!-- Footer, links, sponsors -->
-
-        {{> sponsor }}
-
-        <!-- Footer, links, sponsors -->
+        <div class="content">
+            <h2>Обозначения:</h2>
+            <ul>
+                <li>SV - % шортовых позиций по сделкам за прошлый день</li>
+                <li>SF - общий % акций в шорте</li>
+                <li>P/E - отношение цены к прибыли</li>
+                <li>P/S - отношение цены к выручке</li>
+                <li>P/B - отношение цены к балансовой стоимости</li>
+                <li>ROE - отдача от капитала</li>
+                <li>ROA - отдача от всех активов</li>
+                <li>Debt/eq - отношение долгов к капиталу</li>
+                <li>Target - разница между текущей стоимостью акции и её средней целевой ценой от аналитиков.</li>
+                <li>RSI - индекс относительной силы на дневных свечах с периодом 14. Если больше 70 - красная зона. Ниже
+                    30 - зелёная.</li>
+                <li>Finviz recom - средняя рекомендация к действию от аналитиков. 1-3 покупать, 3-4 держать, 4-5
+                    продавать.</li>
+            </ul>
+        </div>
     </div>
 </div>
