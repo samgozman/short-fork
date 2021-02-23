@@ -28,7 +28,9 @@ const chartVolume = new ApexCharts(document.querySelector("#chartVolume"), {
             minWidth: 0,
             show: false,
             formatter: function (value) {
-                return Number(value || '').toLocaleString('en-US', {maximumFractionDigits:2})
+                return Number(value || '').toLocaleString('en-US', {
+                    maximumFractionDigits: 2
+                })
             }
         },
         type: 'numeric'
@@ -222,23 +224,21 @@ const tradingview = document.querySelector('.tradingview')
 const erase = (word = ' пусто ') => {
     for (const key in pageObj) {
         pageObj[key].textContent = word
+        pageObj[key].classList.remove(...['is-success', 'is-danger', 'is-warning'])
     }
     error_message.textContent = ''
 
     // Reset indicators
-    resp_tinkoff.textContent = 'TinkOFF'
-    resp_tinkoff.classList.remove('active')
+    resp_tinkoff.textContent = 'OFF'
+    resp_tinkoff.classList.remove(...['is-success', 'is-danger'])
 
     resp_finviz_target.textContent = '0'
     resp_finviz_rsi.textContent = '0'
     resp_finviz_recom.textContent = '0 - Нет'
 
-    resp_finviz_target.classList.remove(...['upside', 'downside', 'hold'])
-    resp_finviz_rsi.classList.remove(...['upside', 'downside', 'hold'])
-    resp_finviz_recom.classList.remove(...['upside', 'downside', 'hold'])
-
-    // Set S&P500 as placeholder
-    widget('SPX')
+    resp_finviz_target.classList.remove(...['is-success', 'is-danger', 'is-warning'])
+    resp_finviz_rsi.classList.remove(...['is-success', 'is-danger', 'is-warning'])
+    resp_finviz_recom.classList.remove(...['is-success', 'is-danger', 'is-warning'])
 
     // Clear volume chart
     chartVolume.updateSeries([{
@@ -252,12 +252,33 @@ const erase = (word = ' пусто ') => {
     }])
 }
 
+// Is loading - add loading styles
+const isLoading = (bool = true) => {
+    const targetIDs = [
+        'submit_button',
+        'input_ticker_control'
+    ]
+
+    targetIDs.forEach(id => {
+        if (bool) {
+            // add class
+            document.getElementById(id).classList.add('is-loading')
+        } else {
+            // remove
+            document.getElementById(id).classList.remove('is-loading')
+        }
+
+    })
+}
+
 // Set signs for values
 const setSigns = () => {
     pageObj.price.textContent = '$' + pageObj.price.textContent
-    pageObj.naked_current_short_volume.textContent += '% SV'
-    pageObj.squeeze_short_flow.textContent += '% SF'
-    pageObj.finviz_short_flow.textContent += '% SF'
+    pageObj.naked_current_short_volume.textContent += '%'
+    pageObj.squeeze_short_flow.textContent += '%'
+    pageObj.finviz_short_flow.textContent += '%'
+    pageObj.roe.textContent += '%'
+    pageObj.roa.textContent += '%'
     resp_finviz_target.textContent += '%'
 }
 
@@ -278,6 +299,12 @@ const getResponse = async () => {
 // Set default values
 erase()
 
+// Set S&P500 as placeholder
+widget('SPX')
+
+// Set starting colors for "stock short" values
+Array('finviz_short_flow', 'naked_current_short_volume', 'squeeze_short_flow').forEach(key => pageObj[key].classList.add('is-link'))
+
 form.addEventListener('submit', async (e) => {
     // Prevent from refreshing the browser once form submited 
     e.preventDefault()
@@ -286,6 +313,7 @@ form.addEventListener('submit', async (e) => {
             throw new Error()
         }
 
+        isLoading(true)
         erase(' Loading ')
 
         const response = await getResponse()
@@ -303,44 +331,57 @@ form.addEventListener('submit', async (e) => {
 
         // Set tinkoff indicator
         if (response.tinkoff) {
-            resp_tinkoff.textContent = 'TinkON'
-            resp_tinkoff.classList.add('active')
+            resp_tinkoff.textContent = 'ON'
+            resp_tinkoff.classList.add('is-success')
         } else {
-            resp_tinkoff.textContent = 'TinkOFF'
-            resp_tinkoff.classList.remove('active')
+            resp_tinkoff.textContent = 'OFF'
+            resp_tinkoff.classList.add('is-danger')
         }
 
         // Set target indicator
         const targetUpside = (response.target_price != null && response.price != null) ? ((response.target_price / response.price - 1) * 100).toFixed(1) : null
         if (targetUpside > 0) {
             resp_finviz_target.textContent = '+' + targetUpside
-            resp_finviz_target.classList.add('upside')
+            resp_finviz_target.classList.add('is-success')
         } else {
             resp_finviz_target.textContent = targetUpside
-            resp_finviz_target.classList.add('downside')
+            resp_finviz_target.classList.add('is-danger')
         }
 
         // Set RSI indicator
         resp_finviz_rsi.textContent = response.rsi
-        if (response.rsi > 70) {
-            resp_finviz_rsi.classList.add('downside')
-        } else if (response.rsi < 70 && response.rsi > 30) {
-            resp_finviz_rsi.classList.add('hold')
-        } else if (response.rsi < 30) {
-            resp_finviz_rsi.classList.add('upside')
-        }
+        resp_finviz_rsi.classList.add(response.rsi < 30 ? 'is-success' : response.rsi < 70 ? 'is-warning' : 'is-danger')
 
         // Set analytics recomendation indicator
         if (response.recomendation < 3) {
             resp_finviz_recom.textContent = response.recomendation + ' - Buy'
-            resp_finviz_recom.classList.add('upside')
+            resp_finviz_recom.classList.add('is-success')
         } else if (response.recomendation > 3 && response.recomendation < 4) {
             resp_finviz_recom.textContent = response.recomendation + ' - Hold'
-            resp_finviz_recom.classList.add('hold')
+            resp_finviz_recom.classList.add('is-warning')
         } else if (response.recomendation > 4) {
             resp_finviz_recom.textContent = response.recomendation + ' - Sell'
-            resp_finviz_recom.classList.add('downside')
+            resp_finviz_recom.classList.add('is-danger')
         }
+
+        // Set debt indicator
+        pageObj.debteq.classList.add(response.debteq < 0.4 ? 'is-success' : response.debteq < 1 ? 'is-warning' : 'is-danger')
+
+        // Set roa indicator
+        pageObj.roa.classList.add(response.roa > 0 ? 'is-success' : 'is-danger')
+
+        // Set roe indicator
+        pageObj.roe.classList.add(response.roe > 0 ? 'is-success' : 'is-danger')
+
+        // Set p/b indicator
+        pageObj.pb.classList.add(response.pb < 1 ? 'is-success' : response.pb < 4 ? 'is-warning' : 'is-danger')
+
+        // Set p/s indicator
+        pageObj.ps.classList.add(response.ps < 1 ? 'is-success' : response.ps < 3 ? 'is-warning' : 'is-danger')
+
+        // Set p/e indicator
+        pageObj.pe.classList.add(response.pe < 15 ? 'is-success' : response.pe < 25 ? 'is-warning' : 'is-danger')
+
 
         setSigns()
 
@@ -371,9 +412,65 @@ form.addEventListener('submit', async (e) => {
             data: getPercentageOfShorted(response.naked_chart[0].regularVolArr, response.naked_chart[0].shortVolArr)
         }])
 
+        isLoading(false)
 
     } catch (error) {
+        isLoading(false)
         erase(' ошибка ')
         error_message.textContent = error.message == 429 ? 'Превышен лимит запросов в минуту!' : 'Ошибка! Введите правильный тикер'
     }
 })
+
+//! SET MODAL EVENT LISTNERS
+//? Source: https://siongui.github.io/2018/02/11/bulma-modal-with-javascript/
+document.addEventListener('DOMContentLoaded', function () {
+
+    // Modals
+
+    const rootEl = document.documentElement
+    const modals = getAll('.modal')
+    const modalButtons = getAll('.modal-button')
+    const modalCloses = getAll('.modal-background, .modal-close, .modal-card-head .delete, .modal-card-foot .button');
+
+    if (modalButtons.length > 0) {
+        modalButtons.forEach(function (el) {
+            el.addEventListener('click', function () {
+                const target = el.dataset.target;
+                const $target = document.getElementById(target);
+                rootEl.classList.add('is-clipped')
+                $target.classList.add('is-active')
+            })
+        })
+    }
+
+    if (modalCloses.length > 0) {
+        modalCloses.forEach(function (el) {
+            el.addEventListener('click', function () {
+                closeModals();
+            })
+        })
+    }
+
+    document.addEventListener('keydown', function (event) {
+        const e = event || window.event;
+        if (e.keyCode === 27) {
+            closeModals()
+        }
+    })
+
+    function closeModals() {
+        rootEl.classList.remove('is-clipped')
+        modals.forEach(function (el) {
+            el.classList.remove('is-active')
+        })
+    }
+
+    // Functions
+
+    function getAll(selector) {
+        return Array.prototype.slice.call(document.querySelectorAll(selector), 0)
+    }
+
+})
+
+//! END MODAL EVENT LISTNERS
