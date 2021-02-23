@@ -224,6 +224,7 @@ const tradingview = document.querySelector('.tradingview')
 const erase = (word = ' пусто ') => {
     for (const key in pageObj) {
         pageObj[key].textContent = word
+        pageObj[key].classList.remove(...['is-success', 'is-danger', 'is-warning'])
     }
     error_message.textContent = ''
 
@@ -276,6 +277,8 @@ const setSigns = () => {
     pageObj.naked_current_short_volume.textContent += '%'
     pageObj.squeeze_short_flow.textContent += '%'
     pageObj.finviz_short_flow.textContent += '%'
+    pageObj.roe.textContent += '%'
+    pageObj.roa.textContent += '%'
     resp_finviz_target.textContent += '%'
 }
 
@@ -347,13 +350,7 @@ form.addEventListener('submit', async (e) => {
 
         // Set RSI indicator
         resp_finviz_rsi.textContent = response.rsi
-        if (response.rsi > 70) {
-            resp_finviz_rsi.classList.add('is-danger')
-        } else if (response.rsi < 70 && response.rsi > 30) {
-            resp_finviz_rsi.classList.add('is-warning')
-        } else if (response.rsi < 30) {
-            resp_finviz_rsi.classList.add('is-success')
-        }
+        resp_finviz_rsi.classList.add(response.rsi < 30 ? 'is-success' : response.rsi < 70 ? 'is-warning' : 'is-danger')
 
         // Set analytics recomendation indicator
         if (response.recomendation < 3) {
@@ -366,6 +363,25 @@ form.addEventListener('submit', async (e) => {
             resp_finviz_recom.textContent = response.recomendation + ' - Sell'
             resp_finviz_recom.classList.add('is-danger')
         }
+
+        // Set debt indicator
+        pageObj.debteq.classList.add(response.debteq < 0.4 ? 'is-success' : response.debteq < 1 ? 'is-warning' : 'is-danger')
+
+        // Set roa indicator
+        pageObj.roa.classList.add(response.roa > 0 ? 'is-success' : 'is-danger')
+
+        // Set roe indicator
+        pageObj.roe.classList.add(response.roe > 0 ? 'is-success' : 'is-danger')
+
+        // Set p/b indicator
+        pageObj.pb.classList.add(response.pb < 1 ? 'is-success' : response.pb < 4 ? 'is-warning' : 'is-danger')
+
+        // Set p/s indicator
+        pageObj.ps.classList.add(response.ps < 1 ? 'is-success' : response.ps < 3 ? 'is-warning' : 'is-danger')
+
+        // Set p/e indicator
+        pageObj.pe.classList.add(response.pe < 15 ? 'is-success' : response.pe < 25 ? 'is-warning' : 'is-danger')
+
 
         setSigns()
 
@@ -409,51 +425,51 @@ form.addEventListener('submit', async (e) => {
 //? Source: https://siongui.github.io/2018/02/11/bulma-modal-with-javascript/
 document.addEventListener('DOMContentLoaded', function () {
 
-  // Modals
+    // Modals
 
-  const rootEl = document.documentElement
-  const modals = getAll('.modal')
-  const modalButtons = getAll('.modal-button')
-  const modalCloses = getAll('.modal-background, .modal-close, .modal-card-head .delete, .modal-card-foot .button');
+    const rootEl = document.documentElement
+    const modals = getAll('.modal')
+    const modalButtons = getAll('.modal-button')
+    const modalCloses = getAll('.modal-background, .modal-close, .modal-card-head .delete, .modal-card-foot .button');
 
-  if (modalButtons.length > 0) {
-    modalButtons.forEach(function (el) {
-      el.addEventListener('click', function () {
-        const target = el.dataset.target;
-        const $target = document.getElementById(target);
-        rootEl.classList.add('is-clipped')
-        $target.classList.add('is-active')
-      })
-    })
-  }
-
-  if (modalCloses.length > 0) {
-    modalCloses.forEach(function (el) {
-      el.addEventListener('click', function () {
-        closeModals();
-      })
-    })
-  }
-
-  document.addEventListener('keydown', function (event) {
-    const e = event || window.event;
-    if (e.keyCode === 27) {
-      closeModals()
+    if (modalButtons.length > 0) {
+        modalButtons.forEach(function (el) {
+            el.addEventListener('click', function () {
+                const target = el.dataset.target;
+                const $target = document.getElementById(target);
+                rootEl.classList.add('is-clipped')
+                $target.classList.add('is-active')
+            })
+        })
     }
-  })
 
-  function closeModals() {
-    rootEl.classList.remove('is-clipped')
-    modals.forEach(function (el) {
-      el.classList.remove('is-active')
+    if (modalCloses.length > 0) {
+        modalCloses.forEach(function (el) {
+            el.addEventListener('click', function () {
+                closeModals();
+            })
+        })
+    }
+
+    document.addEventListener('keydown', function (event) {
+        const e = event || window.event;
+        if (e.keyCode === 27) {
+            closeModals()
+        }
     })
-  }
 
-  // Functions
+    function closeModals() {
+        rootEl.classList.remove('is-clipped')
+        modals.forEach(function (el) {
+            el.classList.remove('is-active')
+        })
+    }
 
-  function getAll(selector) {
-    return Array.prototype.slice.call(document.querySelectorAll(selector), 0)
-  }
+    // Functions
+
+    function getAll(selector) {
+        return Array.prototype.slice.call(document.querySelectorAll(selector), 0)
+    }
 
 })
 
