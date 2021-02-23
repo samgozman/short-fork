@@ -48,6 +48,10 @@
     width: 52%
 }
 
+.tag {
+    text-decoration: none!important;
+}
+
 
 /* Update messages */
 .upd-message {

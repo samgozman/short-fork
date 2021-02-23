@@ -14,30 +14,26 @@
         {{> stocks/searchform }}
         {{> stocks/financialtags }}
     </div>
-    <div class="column">
 
-        <div class="columns is-variable is-1-mobile">
-            <div class="column">
-                <!-- TRADING VIEW -->
+    <div class="column is-one-third">
+        <!-- TRADING VIEW -->
 
-                <div class="box">
-                    {{> stocks/tradingview }}
-                </div>
-
-                <!-- TRADING VIEW -->
-            </div>
-            <div class="column">
-                <!-- Volume graphichs -->
-
-                <div class="box">
-                    {{> stocks/nakedcharts }}
-                </div>
-
-                <!-- Volume graphichs -->
-            </div>
+        <div class="box">
+            {{> stocks/tradingview }}
         </div>
 
+        <!-- TRADING VIEW -->
     </div>
+    <div class="column is-one-third">
+        <!-- Volume graphichs -->
+
+        <div class="box">
+            {{> stocks/nakedcharts }}
+        </div>
+
+        <!-- Volume graphichs -->
+    </div>
+
 </div>
 
 <div class="columns">

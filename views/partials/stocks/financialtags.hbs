@@ -10,13 +10,29 @@
     <div class="column is-half">
         <div class="field is-grouped is-grouped-multiline group-tags-1">
 
-            {{#each financialTagsLeft}} 
-                <div class="control">
-                    <div class="tags has-addons">
-                        <span class="tag is-dark">{{name}}</span>
-                        <span class="tag is-light" id="{{id}}"></span>
-                    </div>
+            {{#each financialTagsLeft}}
+
+            <div id="{{id}}_modal" class="modal">
+                <div class="modal-background"></div>
+                <div class="modal-card">
+                    <header class="modal-card-head">
+                        <p class="modal-card-title">{{fullname}}</p>
+                        <button class="delete" aria-label="close"></button>
+                    </header>
+                    <section class="modal-card-body">
+                        <p>
+                            <strong>{{fullname}}</strong> – {{text}}
+                        </p>
+                    </section>
                 </div>
+            </div>
+
+            <div class="control">
+                <div class="tags has-addons">
+                    <a class="tag is-dark modal-button" data-target="{{id}}_modal">{{name}}</a>
+                    <span class="tag is-light" id="{{id}}"></span>
+                </div>
+            </div>
             {{/each}}
 
         </div>
@@ -26,9 +42,25 @@
         <div class="field is-grouped is-grouped-multiline group-tags-2">
 
             {{#each financialTagsRight}}
+            
+            <div id="{{id}}_modal" class="modal">
+                <div class="modal-background"></div>
+                <div class="modal-card">
+                    <header class="modal-card-head">
+                        <p class="modal-card-title">{{fullname}}</p>
+                        <button class="delete" aria-label="close"></button>
+                    </header>
+                    <section class="modal-card-body">
+                        <p>
+                            <strong>{{fullname}}</strong> – {{text}}
+                        </p>
+                    </section>
+                </div>
+            </div>
+
             <div class="control">
                 <div class="tags has-addons">
-                    <span class="tag is-dark">{{name}}</span>
+                    <a class="tag is-dark modal-button" data-target="{{id}}_modal">{{name}}</a>
                     <span class="tag" id="{{id}}"></span>
                 </div>
             </div>
@@ -36,7 +68,7 @@
 
         </div>
     </div>
-    
+
 </div>
 
 <div class="column is-full disclaimer">
