@@ -1,6 +1,13 @@
 /* Global */
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
 .section {
     padding: 2.5rem 1rem;
+    flex: 1;
 }
 
 .box {
