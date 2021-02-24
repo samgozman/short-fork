@@ -1,3 +1,20 @@
+/* Preloader */
+#preloader>p {
+    display: none;
+}
+
+#preloader_preload {
+    display: block;
+    position: fixed;
+    z-index: 1001;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: hsl(0, 0%, 29%) url(/../img/pulse_rings.svg) center center no-repeat;
+    background-size: 8rem;
+}
+
 /* Global */
 body {
     display: flex;
@@ -28,7 +45,7 @@ body {
     text-transform: uppercase;
 }
 
-#submit_button > ion-icon {
+#submit_button>ion-icon {
     width: 2rem;
     height: 2rem;
 }
@@ -61,7 +78,7 @@ body {
 }
 
 .tag {
-    text-decoration: none!important;
+    text-decoration: none !important;
 }
 
 
