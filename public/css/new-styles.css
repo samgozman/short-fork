@@ -1,3 +1,122 @@
+/* DARK MODE */
+
+/* Need to make a duplicate of colors in order for automatic switching and with button */
+
+/* Scheme for light mode */
+body {
+    --text-color: #4a4a4a;
+    --bkg-color: #fff;
+    --strong-color: #363636;
+    --footer-bkg-color: #fafafa;
+    --modal-bkg: rgba(255, 255, 255, 0.86);
+    --modal-top-bottom-bkg: #f5f5f5;
+    --modal-border: 1px solid #dbdbdb;
+    --box-bkg: #ffffff;
+    --box-shadow: 0 0.5em 1em -0.125em rgb(10 10 10 / 10%),
+        0 0 0 1px rgb(10 10 10 / 2%);
+    --a-color: #3273dc;
+    --a-color-hover: #363636;
+}
+
+body.dark-theme {
+    --text-color: #eee;
+    --bkg-color: #17181c;
+    --strong-color: #dbdbdb;
+    --footer-bkg-color: #121212;
+    --modal-bkg: rgba(10, 10, 10, 0.86);
+    --modal-top-bottom-bkg: #242424;
+    --modal-border: 1px solid #363636;
+    --box-bkg: #1e212c;
+    --box-shadow: 0 0.5em 1em -0.125em rgb(255 255 255 / 10%),
+        0 0 0 1px rgb(255 255 255 / 2%);
+    --a-color: #5ea3e4;
+    --a-color-hover: #dbdbdb;
+}
+
+@media (prefers-color-scheme: dark) {
+
+    /* Scheme for dark mode */
+    body {
+        --text-color: #eee;
+        --bkg-color: #17181c;
+        --strong-color: #dbdbdb;
+        --footer-bkg-color: #121212;
+        --modal-bkg: rgba(10, 10, 10, 0.86);
+        --modal-top-bottom-bkg: #242424;
+        --modal-border: 1px solid #363636;
+        --box-bkg: #1e212c;
+        --box-shadow: 0 0.5em 1em -0.125em rgb(255 255 255 / 10%),
+            0 0 0 1px rgb(255 255 255 / 2%);
+        --a-color: #5ea3e4;
+        --a-color-hover: #dbdbdb;
+    }
+
+    /* Scheme for light mode */
+    body.light-theme {
+        --text-color: #4a4a4a;
+        --bkg-color: #fff;
+        --strong-color: #363636;
+        --footer-bkg-color: #fafafa;
+        --modal-bkg: rgba(255, 255, 255, 0.86);
+        --modal-top-bottom-bkg: #f5f5f5;
+        --modal-border: 1px solid #dbdbdb;
+        --box-bkg: #ffffff;
+        --box-shadow: 0 0.5em 1em -0.125em rgb(10 10 10 / 10%),
+            0 0 0 1px rgb(10 10 10 / 2%);
+        --a-color: #3273dc;
+        --a-color-hover: #363636;
+    }
+}
+
+body,
+.modal-card-body {
+    background: var(--bkg-color);
+}
+
+p,
+.subtitle {
+    color: var(--text-color);
+}
+
+strong,
+.title,
+.modal-card-title {
+    color: var(--strong-color);
+}
+
+.footer {
+    background-color: var(--footer-bkg-color);
+}
+
+.modal-background {
+    background-color: var(--modal-bkg);
+}
+
+.modal-card-head,
+.modal-card-foot {
+    background-color: var(--modal-top-bottom-bkg);
+}
+
+.modal-card-head,
+.modal-card-foot {
+    border-bottom: var(--modal-border);
+}
+
+.box {
+    background-color: var(--box-bkg);
+    box-shadow: var(--box-shadow);
+}
+
+a {
+    color: var(--a-color);
+}
+
+a:hover {
+    color: var(--a-color-hover);
+}
+
+/* !DARK MODE */
+
 /* Preloader */
 #preloader>p {
     display: none;
@@ -104,11 +223,6 @@ body {
 
 .tradingview {
     height: 430px;
-}
-
-.tradingview #iframe {
-    height: 100%;
-    margin: -30px 0px -15px 0px;
     width: 100%;
     overflow: hidden;
 }
