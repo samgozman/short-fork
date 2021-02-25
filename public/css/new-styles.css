@@ -68,9 +68,10 @@ body.dark-theme {
     }
 }
 
+html,
 body,
 .modal-card-body {
-    background: var(--bkg-color);
+    background-color: var(--bkg-color);
 }
 
 p,
@@ -223,8 +224,17 @@ body {
 
 .tradingview {
     height: 430px;
-    width: 100%;
     overflow: hidden;
+}
+
+.tradingview > iframe {
+    height: 120%;
+    width: 120%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    margin-left: -10%;
+    margin-top: -10%;
 }
 
 /* Octocat */

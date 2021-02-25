@@ -183,6 +183,12 @@ const getPercentageOfShorted = (volArr = [], shortArr = []) => {
  */
 const widget = (ticker = '') => {
     const quote = ticker.toUpperCase()
+
+    // Check users theme settings
+    const userPrefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+    const userPrefersLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches
+    const theme = localStorage.getItem("theme") || userPrefersDark ? 'dark' : userPrefersLight ? 'light' : 'light'
+
     let html = `
         <!-- TradingView Widget BEGIN -->
         <div class="tradingview-widget-container">
@@ -195,12 +201,12 @@ const widget = (ticker = '') => {
                 {
                     "interval": "1D",
                     "width": "100%",
-                    "isTransparent": true,
+                    "isTransparent": false,
                     "height": "100%",
                     "symbol": "${quote}",
                     "showIntervalTabs": true,
                     "locale": "ru",
-                    "colorTheme": "light"
+                    "colorTheme": "${theme}"
                 }
             </script>
         </div>
@@ -318,12 +324,10 @@ const getResponse = async () => {
 // Set default values
 erase()
 
-// Set S&P500 as placeholder
-widget('SPX')
-
 // Set starting colors for "stock short" values
 Array('finviz_short_flow', 'naked_current_short_volume', 'squeeze_short_flow').forEach(key => pageObj[key].classList.add('is-link'))
 
+// ! FORM SUBMIT EVENT
 form.addEventListener('submit', async (e) => {
     // Prevent from refreshing the browser once form submited 
     e.preventDefault()
@@ -331,6 +335,9 @@ form.addEventListener('submit', async (e) => {
         if (!ticker.value) {
             throw new Error()
         }
+
+        // Store ticker (for future reuse in dark / light mode switcher for tradingview rerendering)
+        localStorage.setItem("last_ticker", ticker.value)
 
         isLoading(true)
         erase(' Loading ')
@@ -501,11 +508,23 @@ document.addEventListener('DOMContentLoaded', function () {
 const btn = document.querySelector(".btn-toggle")
 const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)")
 
+const currentTicker = localStorage.getItem("last_ticker")
 const currentTheme = localStorage.getItem("theme")
+
+
+// Use theme, that was stored in localStorage
+if (currentTheme) {
+    // Set S&P500 as placeholder
+    widget('SPX')
+}
+
 if (currentTheme == "dark") {
     document.body.classList.toggle("dark-theme")
+
 } else if (currentTheme == "light") {
     document.body.classList.toggle("light-theme")
+} else {
+    widget('SPX')
 }
 
 btn.addEventListener("click", function () {
