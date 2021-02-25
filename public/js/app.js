@@ -407,29 +407,31 @@ form.addEventListener('submit', async (e) => {
         // ! APPEND TRADINGVIEW WIDGET
         widget(ticker.value)
 
-        // ! UPDATE VOLUME CHART
-        chartVolume.updateOptions({
-            xaxis: {
-                categories: response.naked_chart[0].xAxisArr
-            }
-        })
+        if (response.naked_chart && response.naked_chart !== null && response.naked_chart[0].length > 0) {
+            // ! UPDATE VOLUME CHART
+            chartVolume.updateOptions({
+                xaxis: {
+                    categories: response.naked_chart[0].xAxisArr
+                }
+            })
 
-        chartVolume.updateSeries([{
-            data: response.naked_chart[0].regularVolArr
-        }, {
-            data: response.naked_chart[0].shortVolArr
-        }])
+            chartVolume.updateSeries([{
+                data: response.naked_chart[0].regularVolArr
+            }, {
+                data: response.naked_chart[0].shortVolArr
+            }])
 
-        // ! UPDATE SHORT PERCENT CHART
-        chartShortPercent.updateOptions({
-            xaxis: {
-                categories: response.naked_chart[0].xAxisArr
-            }
-        })
+            // ! UPDATE SHORT PERCENT CHART
+            chartShortPercent.updateOptions({
+                xaxis: {
+                    categories: response.naked_chart[0].xAxisArr
+                }
+            })
 
-        chartShortPercent.updateSeries([{
-            data: getPercentageOfShorted(response.naked_chart[0].regularVolArr, response.naked_chart[0].shortVolArr)
-        }])
+            chartShortPercent.updateSeries([{
+                data: getPercentageOfShorted(response.naked_chart[0].regularVolArr, response.naked_chart[0].shortVolArr)
+            }])
+        }
 
         isLoading(false)
 
