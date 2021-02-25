@@ -1,3 +1,22 @@
+// Preloader
+var preloader = document.getElementById("preloader_preload");
+
+function fadeOut(el) {
+    el.style.opacity = 1
+    const preloaderinterval = setInterval(function () {
+        el.style.opacity = el.style.opacity - 0.05
+        if (el.style.opacity <= 0.05) {
+            clearInterval(preloaderinterval)
+            preloader.style.display = "none"
+        }
+    }, 16)
+}
+window.onload = function () {
+    setTimeout(function () {
+        fadeOut(preloader)
+    }, 1000)
+}
+
 // Define chart and render it
 const chartVolume = new ApexCharts(document.querySelector("#chartVolume"), {
     series: [{
@@ -38,6 +57,13 @@ const chartVolume = new ApexCharts(document.querySelector("#chartVolume"), {
     xaxis: {
         type: 'datetime',
         categories: []
+    },
+    grid: {
+        xaxis: {
+            lines: {
+                show: true
+            }
+        }
     },
     tooltip: {
         style: {
@@ -136,6 +162,13 @@ const chartShortPercent = new ApexCharts(document.querySelector("#chartShortPerc
             }
         }
     },
+    grid: {
+        xaxis: {
+            lines: {
+                show: true
+            }
+        }
+    },
     tooltip: {
         style: {
             fontSize: '9px'
@@ -162,8 +195,14 @@ const getPercentageOfShorted = (volArr = [], shortArr = []) => {
  * 
  * @param {String} ticker 
  */
-const widget = (ticker = '') => {
+const techWidget = (ticker = '') => {
     const quote = ticker.toUpperCase()
+
+    // Check users theme settings
+    const userPrefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+    const userPrefersLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches
+    const theme = localStorage.getItem("theme") || (userPrefersDark ? 'dark' : userPrefersLight ? 'light' : 'light')
+
     let html = `
         <!-- TradingView Widget BEGIN -->
         <div class="tradingview-widget-container">
@@ -176,12 +215,12 @@ const widget = (ticker = '') => {
                 {
                     "interval": "1D",
                     "width": "100%",
-                    "isTransparent": true,
+                    "isTransparent": false,
                     "height": "100%",
                     "symbol": "${quote}",
                     "showIntervalTabs": true,
                     "locale": "ru",
-                    "colorTheme": "light"
+                    "colorTheme": "${theme}"
                 }
             </script>
         </div>
@@ -299,12 +338,13 @@ const getResponse = async () => {
 // Set default values
 erase()
 
-// Set S&P500 as placeholder
-widget('SPX')
+// Set S&P500 as default tradingview widget
+techWidget('SPX')
 
 // Set starting colors for "stock short" values
 Array('finviz_short_flow', 'naked_current_short_volume', 'squeeze_short_flow').forEach(key => pageObj[key].classList.add('is-link'))
 
+// ! FORM SUBMIT EVENT
 form.addEventListener('submit', async (e) => {
     // Prevent from refreshing the browser once form submited 
     e.preventDefault()
@@ -371,46 +411,48 @@ form.addEventListener('submit', async (e) => {
         pageObj.roa.classList.add(response.roa > 0 ? 'is-success' : 'is-danger')
 
         // Set roe indicator
-        pageObj.roe.classList.add(response.roe > 0 ? 'is-success' : 'is-danger')
+        pageObj.roe.classList.add(response.roe > 0 && response.roe < 20 ? 'is-warning' : response.roe > 20 && response.roe < 40 ? 'is-success' : 'is-danger')
 
         // Set p/b indicator
-        pageObj.pb.classList.add(response.pb < 1 ? 'is-success' : response.pb < 4 ? 'is-warning' : 'is-danger')
+        pageObj.pb.classList.add(response.pb > 0 && response.pb < 1 ? 'is-success' : response.pb < 4 ? 'is-warning' : 'is-danger')
 
         // Set p/s indicator
-        pageObj.ps.classList.add(response.ps < 1 ? 'is-success' : response.ps < 3 ? 'is-warning' : 'is-danger')
+        pageObj.ps.classList.add(response.ps > 0 && response.ps < 1 ? 'is-success' : response.ps < 3 ? 'is-warning' : 'is-danger')
 
         // Set p/e indicator
-        pageObj.pe.classList.add(response.pe < 15 ? 'is-success' : response.pe < 25 ? 'is-warning' : 'is-danger')
+        pageObj.pe.classList.add(response.ps > 0 && response.pe < 15 ? 'is-success' : response.pe < 25 ? 'is-warning' : 'is-danger')
 
 
         setSigns()
 
         // ! APPEND TRADINGVIEW WIDGET
-        widget(ticker.value)
+        techWidget(ticker.value)
 
-        // ! UPDATE VOLUME CHART
-        chartVolume.updateOptions({
-            xaxis: {
-                categories: response.naked_chart[0].xAxisArr
-            }
-        })
+        if (response.naked_chart && response.naked_chart[0].xAxisArr.length > 0 && response.naked_chart[0].shortVolArr.length > 0) {
+            // ! UPDATE VOLUME CHART
+            chartVolume.updateOptions({
+                xaxis: {
+                    categories: response.naked_chart[0].xAxisArr
+                }
+            })
 
-        chartVolume.updateSeries([{
-            data: response.naked_chart[0].regularVolArr
-        }, {
-            data: response.naked_chart[0].shortVolArr
-        }])
+            chartVolume.updateSeries([{
+                data: response.naked_chart[0].regularVolArr
+            }, {
+                data: response.naked_chart[0].shortVolArr
+            }])
 
-        // ! UPDATE SHORT PERCENT CHART
-        chartShortPercent.updateOptions({
-            xaxis: {
-                categories: response.naked_chart[0].xAxisArr
-            }
-        })
+            // ! UPDATE SHORT PERCENT CHART
+            chartShortPercent.updateOptions({
+                xaxis: {
+                    categories: response.naked_chart[0].xAxisArr
+                }
+            })
 
-        chartShortPercent.updateSeries([{
-            data: getPercentageOfShorted(response.naked_chart[0].regularVolArr, response.naked_chart[0].shortVolArr)
-        }])
+            chartShortPercent.updateSeries([{
+                data: getPercentageOfShorted(response.naked_chart[0].regularVolArr, response.naked_chart[0].shortVolArr)
+            }])
+        }
 
         isLoading(false)
 
@@ -474,3 +516,83 @@ document.addEventListener('DOMContentLoaded', function () {
 })
 
 //! END MODAL EVENT LISTNERS
+
+// DARK MODE
+//? Source: https://css-tricks.com/a-complete-guide-to-dark-mode-on-the-web/
+const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)")
+const prefersLightScheme = window.matchMedia("(prefers-color-scheme: light)")
+const checkbox = document.getElementById('color_mode')
+const currentTheme = localStorage.getItem("theme")
+
+const darkModeChartsSettings = {
+    chart: {
+        foreColor: '#ccc'
+    },
+    tooltip: {
+        theme: 'dark'
+    },
+    grid: {
+        borderColor: "#535A6C"
+    },
+    dataLabels: {
+        style: {
+            colors: ['#ccc', '#ccc']
+        }
+    }
+}
+
+const lightModeChartsSettings = {
+    chart: {
+        foreColor: '#373d3f'
+    },
+    tooltip: {
+        theme: 'light'
+    },
+    grid: {
+        borderColor: "#e0e0e0"
+    },
+    dataLabels: {
+        style: {
+            colors: ['#333', '#333']
+        }
+    }
+}
+
+checkbox.addEventListener('change', (event) => {
+    if (prefersDarkScheme.matches) {
+        document.body.classList.toggle("light-theme")
+        var theme = document.body.classList.contains("light-theme") ?
+            "light" :
+            "dark"
+    } else {
+        document.body.classList.toggle("dark-theme")
+        var theme = document.body.classList.contains("dark-theme") ?
+            "dark" :
+            "light"
+    }
+    localStorage.setItem("theme", theme)
+    techWidget(ticker.value || 'SPX')
+
+    if (event.currentTarget.checked) {
+        chartVolume.updateOptions(darkModeChartsSettings)
+        chartShortPercent.updateOptions(darkModeChartsSettings)
+
+    } else {
+        chartVolume.updateOptions(lightModeChartsSettings)
+        chartShortPercent.updateOptions(lightModeChartsSettings)
+    }
+})
+
+if ((currentTheme == "dark") || (prefersDarkScheme.matches && currentTheme != "light")) {
+    document.body.classList.toggle("dark-theme")
+    checkbox.checked = true
+    chartVolume.updateOptions(darkModeChartsSettings)
+    chartShortPercent.updateOptions(darkModeChartsSettings)
+
+} else if (currentTheme == "light" || prefersLightScheme.matches) {
+    document.body.classList.toggle("light-theme")
+    chartVolume.updateOptions(lightModeChartsSettings)
+    chartShortPercent.updateOptions(lightModeChartsSettings)
+} 
+
+// END OF DARK MODE

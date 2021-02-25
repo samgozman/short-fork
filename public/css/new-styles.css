@@ -1,3 +1,238 @@
+/* DARK MODE */
+
+/* Need to make a duplicate of colors in order for automatic switching and with button */
+
+/* Scheme for light mode */
+body {
+    --text-color: #4a4a4a;
+    --bkg-color: #fff;
+    --strong-color: #363636;
+    --footer-bkg-color: #fafafa;
+    --modal-bkg: rgba(255, 255, 255, 0.86);
+    --modal-top-bottom-bkg: #f5f5f5;
+    --modal-border: 1px solid #dbdbdb;
+    --box-bkg: #ffffff;
+    --box-shadow: 0 0.5em 1em -0.125em rgb(10 10 10 / 10%),
+        0 0 0 1px rgb(10 10 10 / 2%);
+    --a-color: #3273dc;
+    --a-color-hover: #363636;
+}
+
+body.dark-theme {
+    --text-color: #eee;
+    --bkg-color: #17181c;
+    --strong-color: #dbdbdb;
+    --footer-bkg-color: #121212;
+    --modal-bkg: rgba(10, 10, 10, 0.86);
+    --modal-top-bottom-bkg: #242424;
+    --modal-border: 1px solid #363636;
+    --box-bkg: #1e212c;
+    --box-shadow: 0 0.5em 1em -0.125em rgb(255 255 255 / 10%),
+        0 0 0 1px rgb(255 255 255 / 2%);
+    --a-color: #5ea3e4;
+    --a-color-hover: #dbdbdb;
+}
+
+@media (prefers-color-scheme: dark) {
+
+    /* Scheme for dark mode */
+    body {
+        --text-color: #eee;
+        --bkg-color: #17181c;
+        --strong-color: #dbdbdb;
+        --footer-bkg-color: #121212;
+        --modal-bkg: rgba(10, 10, 10, 0.86);
+        --modal-top-bottom-bkg: #242424;
+        --modal-border: 1px solid #363636;
+        --box-bkg: #1e212c;
+        --box-shadow: 0 0.5em 1em -0.125em rgb(255 255 255 / 10%),
+            0 0 0 1px rgb(255 255 255 / 2%);
+        --a-color: #5ea3e4;
+        --a-color-hover: #dbdbdb;
+    }
+
+    /* Scheme for light mode */
+    body.light-theme {
+        --text-color: #4a4a4a;
+        --bkg-color: #fff;
+        --strong-color: #363636;
+        --footer-bkg-color: #fafafa;
+        --modal-bkg: rgba(255, 255, 255, 0.86);
+        --modal-top-bottom-bkg: #f5f5f5;
+        --modal-border: 1px solid #dbdbdb;
+        --box-bkg: #ffffff;
+        --box-shadow: 0 0.5em 1em -0.125em rgb(10 10 10 / 10%),
+            0 0 0 1px rgb(10 10 10 / 2%);
+        --a-color: #3273dc;
+        --a-color-hover: #363636;
+    }
+}
+
+html,
+body,
+.modal-card-body {
+    background-color: var(--bkg-color);
+}
+
+p,
+.subtitle {
+    color: var(--text-color);
+}
+
+strong,
+.title,
+.modal-card-title {
+    color: var(--strong-color);
+}
+
+.footer {
+    background-color: var(--footer-bkg-color);
+}
+
+.modal-background {
+    background-color: var(--modal-bkg);
+}
+
+.modal-card-head,
+.modal-card-foot {
+    background-color: var(--modal-top-bottom-bkg);
+}
+
+.modal-card-head,
+.modal-card-foot {
+    border-bottom: var(--modal-border);
+}
+
+.box {
+    background-color: var(--box-bkg);
+    box-shadow: var(--box-shadow);
+}
+
+a {
+    color: var(--a-color);
+}
+
+a:hover {
+    color: var(--a-color-hover);
+}
+
+/* dark switch */
+.switch,
+.switch>label {
+    font-size: 0.75rem;
+    color: #424242;
+    font-weight: 500;
+}
+
+label.switch,
+label::after,
+label::before {
+    box-sizing: unset;
+}
+
+.btn-color-mode-switch {
+    display: inline-block;
+    margin: 0px;
+    position: relative;
+}
+
+.btn-color-mode-switch>label.btn-color-mode-switch-inner {
+    margin: 0px;
+    width: 8.7rem;
+    height: 2rem;
+    background: #E0E0E0;
+    border-radius: 26px;
+    overflow: hidden;
+    position: relative;
+    transition: all 0.3s ease;
+    display: block;
+    cursor: pointer;
+}
+
+.btn-color-mode-switch>label.btn-color-mode-switch-inner:before {
+    content: attr(data-on);
+    position: absolute;
+    font-size: 12px;
+    font-weight: 500;
+    top: 7px;
+    right: 20px;
+
+}
+
+.btn-color-mode-switch>label.btn-color-mode-switch-inner:after {
+    content: attr(data-off);
+    width: 4.35rem;
+    height: 1.1rem;
+    background: #fff;
+    border-radius: 26px;
+    position: absolute;
+    left: 3px;
+    top: 2px;
+    text-align: center;
+    transition: all 0.3s ease;
+    box-shadow: 0px 0px 6px -2px #111;
+    padding: 5px 0px;
+}
+
+.btn-color-mode-switch>.alert {
+    display: none;
+    background: #FF9800;
+    border: none;
+    color: #fff;
+}
+
+.btn-color-mode-switch input[type="checkbox"] {
+    cursor: pointer;
+    width: 0;
+    height: 0;
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    z-index: -10;
+    margin: 0px;
+    visibility: hidden;
+}
+
+.btn-color-mode-switch input[type="checkbox"]:checked+label.btn-color-mode-switch-inner {
+    background: #151515;
+    color: #fff;
+}
+
+.btn-color-mode-switch input[type="checkbox"]:checked+label.btn-color-mode-switch-inner:after {
+    content: attr(data-on);
+    left: 67px;
+    background: #3c3c3c;
+}
+
+.btn-color-mode-switch input[type="checkbox"]:checked+label.btn-color-mode-switch-inner:before {
+    content: attr(data-off);
+    right: auto;
+    left: 20px;
+}
+
+.btn-color-mode-switch input[type="checkbox"]:checked~.alert {
+    display: block;
+}
+
+/* !DARK MODE */
+
+/* Preloader */
+#preloader>p {
+    display: none;
+}
+
+#preloader_preload {
+    display: block;
+    position: fixed;
+    z-index: 1001;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: hsl(0, 0%, 29%) url(/../img/pulse_rings.svg) center center no-repeat;
+    background-size: 8rem;
+}
+
 /* Global */
 body {
     display: flex;
@@ -6,7 +241,7 @@ body {
 }
 
 .section {
-    padding: 2.5rem 1rem;
+    padding: 3.5rem 1rem 2.5rem 1rem;
     flex: 1;
 }
 
@@ -26,6 +261,11 @@ body {
 
 #input_ticker {
     text-transform: uppercase;
+}
+
+#submit_button>ion-icon {
+    width: 2rem;
+    height: 2rem;
 }
 
 /* Financial tags */
@@ -56,7 +296,7 @@ body {
 }
 
 .tag {
-    text-decoration: none!important;
+    text-decoration: none !important;
 }
 
 
@@ -82,13 +322,17 @@ body {
 
 .tradingview {
     height: 430px;
+    overflow: hidden;
 }
 
-.tradingview #iframe {
-    height: 100%;
-    margin: -30px 0px -15px 0px;
-    width: 100%;
+.tradingview>iframe {
+    height: 120%;
+    width: 120%;
     overflow: hidden;
+    display: flex;
+    justify-content: center;
+    margin-left: -10%;
+    margin-top: -10%;
 }
 
 /* Octocat */
@@ -96,11 +340,11 @@ body {
     border: 0;
     color: #f4f5f6;
     fill: #333;
-    height: 4rem;
+    height: 3rem;
     position: fixed;
     right: 0;
     top: 0;
-    width: 4rem;
+    width: 3rem;
     z-index: 2;
 }
 
@@ -113,7 +357,7 @@ body {
 
 @media (max-width: 350px) {
     .section {
-        padding: 2rem 0.35rem;
+        padding: 3rem 0.35rem 2rem 0.35rem;
     }
 
     .tag:not(body) {
@@ -126,5 +370,16 @@ body {
 
     .upd-message {
         font-size: 7px;
+    }
+
+    .title {
+        font-size: 1.9rem;
+    }
+    .tradingview {
+        height: 340px;
+    }
+
+    .tradingview>iframe {
+        height: 130%;
     }
 }

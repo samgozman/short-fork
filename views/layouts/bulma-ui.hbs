@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="color-scheme" content="dark light">
     <title>Short fork {{package_version}}</title>
 
     <!-- Favicon -->
@@ -39,10 +40,13 @@
         <div><img src="https://mc.yandex.ru/watch/72747058" style="position:absolute; left:-9999px;" alt="" /></div>
     </noscript>
     <!-- /Yandex.Metrika counter -->
+
+    <!-- Ionicons font -->
+    <script type="module" src="https://unpkg.com/ionicons@5.4.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule="" src="https://unpkg.com/ionicons@5.4.0/dist/ionicons/ionicons.js"></script>
 </head>
 
 <body>
-
     <section class="section">
         <div class="container">
 
@@ -66,6 +70,11 @@
     </footer>
 
     {{> octocat }}
+    
+    <!-- Preloader -->
+    <div id="preloader">
+        <div id="preloader_preload" class="is-loading"></div>
+    </div>
 
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>

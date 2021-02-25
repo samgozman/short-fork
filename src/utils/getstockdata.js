@@ -20,13 +20,13 @@ const getStockData = async (ticker = '') => {
         roa: fin.roa,
         debteq: fin.debtEq,
         naked_current_short_volume: naked_current_short_volume.toFixed(2) || null,
-        squeeze_short_flow: squeeze.shortPercentOfFloat,
+        squeeze_short_flow: squeeze.shortPercentOfFloat || null,
         finviz_short_flow: fin.shortFloat,
         target_price: fin.targetPrice,
         rsi: fin.rsi,
         recomendation: fin.recom ? fin.recom.toFixed(1) : null,
         site: fin.site,
-        naked_chart
+        naked_chart: naked_chart || null
     }
 }
 
