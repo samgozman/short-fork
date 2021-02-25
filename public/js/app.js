@@ -407,7 +407,7 @@ form.addEventListener('submit', async (e) => {
         // ! APPEND TRADINGVIEW WIDGET
         widget(ticker.value)
 
-        if (response.naked_chart && response.naked_chart !== null && response.naked_chart[0].length > 0) {
+        if (response.naked_chart && response.naked_chart[0].xAxisArr.length > 0 && response.naked_chart[0].shortVolArr.length > 0) {
             // ! UPDATE VOLUME CHART
             chartVolume.updateOptions({
                 xaxis: {
