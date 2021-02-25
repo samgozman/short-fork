@@ -58,6 +58,13 @@ const chartVolume = new ApexCharts(document.querySelector("#chartVolume"), {
         type: 'datetime',
         categories: []
     },
+    grid: {
+        xaxis: {
+            lines: {
+                show: true
+            }
+        }
+    },
     tooltip: {
         style: {
             fontSize: '9px'
@@ -155,6 +162,13 @@ const chartShortPercent = new ApexCharts(document.querySelector("#chartShortPerc
             }
         }
     },
+    grid: {
+        xaxis: {
+            lines: {
+                show: true
+            }
+        }
+    },
     tooltip: {
         style: {
             fontSize: '9px'
@@ -187,7 +201,7 @@ const widget = (ticker = '') => {
     // Check users theme settings
     const userPrefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
     const userPrefersLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches
-    const theme = localStorage.getItem("theme") || userPrefersDark ? 'dark' : userPrefersLight ? 'light' : 'light'
+    const theme = localStorage.getItem("theme") || (userPrefersDark ? 'dark' : userPrefersLight ? 'light' : 'light')
 
     let html = `
         <!-- TradingView Widget BEGIN -->
@@ -335,9 +349,6 @@ form.addEventListener('submit', async (e) => {
         if (!ticker.value) {
             throw new Error()
         }
-
-        // Store ticker (for future reuse in dark / light mode switcher for tradingview rerendering)
-        localStorage.setItem("last_ticker", ticker.value)
 
         isLoading(true)
         erase(' Loading ')
@@ -508,9 +519,41 @@ document.addEventListener('DOMContentLoaded', function () {
 const btn = document.querySelector(".btn-toggle")
 const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)")
 
-const currentTicker = localStorage.getItem("last_ticker")
 const currentTheme = localStorage.getItem("theme")
 
+const darkModeChartsSettings = {
+    chart: {
+        foreColor: '#ccc'
+    },
+    tooltip: {
+        theme: 'dark'
+    },
+    grid: {
+        borderColor: "#535A6C"
+    },
+    dataLabels: {
+        style: {
+            colors: ['#ccc', '#ccc']
+        }
+    }
+}
+
+const lightModeChartsSettings = {
+    chart: {
+        foreColor: '#373d3f'
+    },
+    tooltip: {
+        theme: 'light'
+    },
+    grid: {
+        borderColor: "#e0e0e0"
+    },
+    dataLabels: {
+        style: {
+            colors: ['#333', '#333']
+        }
+    }
+}
 
 // Use theme, that was stored in localStorage
 if (currentTheme) {
@@ -520,6 +563,9 @@ if (currentTheme) {
 
 if (currentTheme == "dark") {
     document.body.classList.toggle("dark-theme")
+
+    chartVolume.updateOptions(darkModeChartsSettings)
+    chartShortPercent.updateOptions(darkModeChartsSettings)
 
 } else if (currentTheme == "light") {
     document.body.classList.toggle("light-theme")
@@ -540,5 +586,14 @@ btn.addEventListener("click", function () {
             "light"
     }
     localStorage.setItem("theme", theme)
+    widget(ticker.value || 'SPX')
+
+    if (theme === 'dark') {
+        chartVolume.updateOptions(darkModeChartsSettings)
+        chartShortPercent.updateOptions(darkModeChartsSettings)
+    } else if (theme === 'light') {
+        chartVolume.updateOptions(lightModeChartsSettings)
+        chartShortPercent.updateOptions(lightModeChartsSettings)
+    }
 })
 // END OF DARK MODE
