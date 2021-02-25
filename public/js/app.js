@@ -516,9 +516,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
 // DARK MODE
 //? Source: https://css-tricks.com/a-complete-guide-to-dark-mode-on-the-web/
-const btn = document.querySelector(".btn-toggle")
 const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)")
-
+const checkbox = document.getElementById('color_mode')
 const currentTheme = localStorage.getItem("theme")
 
 const darkModeChartsSettings = {
@@ -555,25 +554,8 @@ const lightModeChartsSettings = {
     }
 }
 
-// Use theme, that was stored in localStorage
-if (currentTheme) {
-    // Set S&P500 as placeholder
-    widget('SPX')
-}
+checkbox.addEventListener('change', (event) => {
 
-if (currentTheme == "dark") {
-    document.body.classList.toggle("dark-theme")
-
-    chartVolume.updateOptions(darkModeChartsSettings)
-    chartShortPercent.updateOptions(darkModeChartsSettings)
-
-} else if (currentTheme == "light") {
-    document.body.classList.toggle("light-theme")
-} else {
-    widget('SPX')
-}
-
-btn.addEventListener("click", function () {
     if (prefersDarkScheme.matches) {
         document.body.classList.toggle("light-theme")
         var theme = document.body.classList.contains("light-theme") ?
@@ -588,12 +570,32 @@ btn.addEventListener("click", function () {
     localStorage.setItem("theme", theme)
     widget(ticker.value || 'SPX')
 
-    if (theme === 'dark') {
+    if (event.currentTarget.checked) {
         chartVolume.updateOptions(darkModeChartsSettings)
         chartShortPercent.updateOptions(darkModeChartsSettings)
-    } else if (theme === 'light') {
+
+    } else {
         chartVolume.updateOptions(lightModeChartsSettings)
         chartShortPercent.updateOptions(lightModeChartsSettings)
     }
 })
+
+// Use theme, that was stored in localStorage
+if (currentTheme) {
+    // Set S&P500 as placeholder
+    widget('SPX')
+}
+
+if (currentTheme == "dark") {
+    document.body.classList.toggle("dark-theme")
+    checkbox.checked = true
+    chartVolume.updateOptions(darkModeChartsSettings)
+    chartShortPercent.updateOptions(darkModeChartsSettings)
+
+} else if (currentTheme == "light") {
+    document.body.classList.toggle("light-theme")
+} else {
+    widget('SPX')
+}
+
 // END OF DARK MODE
