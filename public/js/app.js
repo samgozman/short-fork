@@ -1,4 +1,3 @@
-
 // Preloader
 var preloader = document.getElementById("preloader_preload");
 
@@ -391,16 +390,16 @@ form.addEventListener('submit', async (e) => {
         pageObj.roa.classList.add(response.roa > 0 ? 'is-success' : 'is-danger')
 
         // Set roe indicator
-        pageObj.roe.classList.add(response.roe > 0 ? 'is-success' : 'is-danger')
+        pageObj.roe.classList.add(response.roe > 0 && response.roe < 20 ? 'is-warning' : response.roe > 20 && response.roe < 40 ? 'is-success' : 'is-danger')
 
         // Set p/b indicator
-        pageObj.pb.classList.add(response.pb < 1 ? 'is-success' : response.pb < 4 ? 'is-warning' : 'is-danger')
+        pageObj.pb.classList.add(response.pb > 0 && response.pb < 1 ? 'is-success' : response.pb < 4 ? 'is-warning' : 'is-danger')
 
         // Set p/s indicator
-        pageObj.ps.classList.add(response.ps < 1 ? 'is-success' : response.ps < 3 ? 'is-warning' : 'is-danger')
+        pageObj.ps.classList.add(response.ps > 0 && response.ps < 1 ? 'is-success' : response.ps < 3 ? 'is-warning' : 'is-danger')
 
         // Set p/e indicator
-        pageObj.pe.classList.add(response.pe < 15 ? 'is-success' : response.pe < 25 ? 'is-warning' : 'is-danger')
+        pageObj.pe.classList.add(response.ps > 0 && response.pe < 15 ? 'is-success' : response.pe < 25 ? 'is-warning' : 'is-danger')
 
 
         setSigns()
@@ -502,23 +501,23 @@ const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)")
 
 const currentTheme = localStorage.getItem("theme")
 if (currentTheme == "dark") {
-  document.body.classList.toggle("dark-theme")
+    document.body.classList.toggle("dark-theme")
 } else if (currentTheme == "light") {
-  document.body.classList.toggle("light-theme")
+    document.body.classList.toggle("light-theme")
 }
 
 btn.addEventListener("click", function () {
-  if (prefersDarkScheme.matches) {
-    document.body.classList.toggle("light-theme")
-    var theme = document.body.classList.contains("light-theme")
-      ? "light"
-      : "dark"
-  } else {
-    document.body.classList.toggle("dark-theme")
-    var theme = document.body.classList.contains("dark-theme")
-      ? "dark"
-      : "light"
-  }
-  localStorage.setItem("theme", theme)
+    if (prefersDarkScheme.matches) {
+        document.body.classList.toggle("light-theme")
+        var theme = document.body.classList.contains("light-theme") ?
+            "light" :
+            "dark"
+    } else {
+        document.body.classList.toggle("dark-theme")
+        var theme = document.body.classList.contains("dark-theme") ?
+            "dark" :
+            "light"
+    }
+    localStorage.setItem("theme", theme)
 })
 // END OF DARK MODE
