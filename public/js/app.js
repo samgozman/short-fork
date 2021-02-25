@@ -195,7 +195,7 @@ const getPercentageOfShorted = (volArr = [], shortArr = []) => {
  * 
  * @param {String} ticker 
  */
-const widget = (ticker = '') => {
+const techWidget = (ticker = '') => {
     const quote = ticker.toUpperCase()
 
     // Check users theme settings
@@ -338,6 +338,9 @@ const getResponse = async () => {
 // Set default values
 erase()
 
+// Set S&P500 as default tradingview widget
+techWidget('SPX')
+
 // Set starting colors for "stock short" values
 Array('finviz_short_flow', 'naked_current_short_volume', 'squeeze_short_flow').forEach(key => pageObj[key].classList.add('is-link'))
 
@@ -423,7 +426,7 @@ form.addEventListener('submit', async (e) => {
         setSigns()
 
         // ! APPEND TRADINGVIEW WIDGET
-        widget(ticker.value)
+        techWidget(ticker.value)
 
         if (response.naked_chart && response.naked_chart[0].xAxisArr.length > 0 && response.naked_chart[0].shortVolArr.length > 0) {
             // ! UPDATE VOLUME CHART
@@ -517,6 +520,7 @@ document.addEventListener('DOMContentLoaded', function () {
 // DARK MODE
 //? Source: https://css-tricks.com/a-complete-guide-to-dark-mode-on-the-web/
 const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)")
+const prefersLightScheme = window.matchMedia("(prefers-color-scheme: light)")
 const checkbox = document.getElementById('color_mode')
 const currentTheme = localStorage.getItem("theme")
 
@@ -555,7 +559,6 @@ const lightModeChartsSettings = {
 }
 
 checkbox.addEventListener('change', (event) => {
-
     if (prefersDarkScheme.matches) {
         document.body.classList.toggle("light-theme")
         var theme = document.body.classList.contains("light-theme") ?
@@ -568,7 +571,7 @@ checkbox.addEventListener('change', (event) => {
             "light"
     }
     localStorage.setItem("theme", theme)
-    widget(ticker.value || 'SPX')
+    techWidget(ticker.value || 'SPX')
 
     if (event.currentTarget.checked) {
         chartVolume.updateOptions(darkModeChartsSettings)
@@ -580,22 +583,16 @@ checkbox.addEventListener('change', (event) => {
     }
 })
 
-// Use theme, that was stored in localStorage
-if (currentTheme) {
-    // Set S&P500 as placeholder
-    widget('SPX')
-}
-
-if (currentTheme == "dark") {
+if ((currentTheme == "dark") || (prefersDarkScheme.matches && currentTheme != "light")) {
     document.body.classList.toggle("dark-theme")
     checkbox.checked = true
     chartVolume.updateOptions(darkModeChartsSettings)
     chartShortPercent.updateOptions(darkModeChartsSettings)
 
-} else if (currentTheme == "light") {
+} else if (currentTheme == "light" || prefersLightScheme.matches) {
     document.body.classList.toggle("light-theme")
-} else {
-    widget('SPX')
-}
+    chartVolume.updateOptions(lightModeChartsSettings)
+    chartShortPercent.updateOptions(lightModeChartsSettings)
+} 
 
 // END OF DARK MODE
