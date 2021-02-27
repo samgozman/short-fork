@@ -308,10 +308,6 @@ body {
     position: relative;
 }
 
-.upd-message>a {
-    color: #aaa;
-}
-
 .disclaimer {
     padding-top: 0;
     padding-bottom: 0;
@@ -326,13 +322,13 @@ body {
 }
 
 .tradingview>iframe {
-    height: 120%;
-    width: 120%;
+    height: 115%;
+    width: 108%;
     overflow: hidden;
     display: flex;
     justify-content: center;
-    margin-left: -10%;
-    margin-top: -10%;
+    margin-left: -4%;
+    margin-top: -5%;
 }
 
 /* Octocat */
