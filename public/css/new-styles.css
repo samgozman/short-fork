@@ -2,6 +2,8 @@
 
 /* Need to make a duplicate of colors in order for automatic switching and with button */
 
+/* csslint ignore:start */
+
 /* Scheme for light mode */
 body {
     --text-color: #4a4a4a;
@@ -70,7 +72,8 @@ body.dark-theme {
 
 html,
 body,
-.modal-card-body {
+.modal-card-body,
+.section {
     background-color: var(--bkg-color);
 }
 
@@ -115,6 +118,8 @@ a {
 a:hover {
     color: var(--a-color-hover);
 }
+
+/* csslint ignore:end */
 
 /* dark switch */
 .switch,
@@ -248,6 +253,17 @@ body {
 .box {
     padding: .75rem;
     height: 100%;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+}
+
+.main-block {
+    padding-bottom: 1.5rem;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
 }
 
 .content:not(:last-child) {
@@ -304,8 +320,6 @@ body {
 .upd-message {
     color: #aaa;
     font-size: 10px;
-    z-index: 2;
-    position: relative;
 }
 
 .disclaimer {
@@ -329,6 +343,12 @@ body {
     justify-content: center;
     margin-left: -4%;
     margin-top: -5%;
+}
+
+.tradingview-copyright {
+    text-align: center;
+    font-size: 0.9rem;
+    margin: 5px 0px;
 }
 
 /* Octocat */
@@ -371,6 +391,7 @@ body {
     .title {
         font-size: 1.9rem;
     }
+
     .tradingview {
         height: 340px;
     }

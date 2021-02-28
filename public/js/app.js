@@ -205,6 +205,7 @@ const techWidget = (ticker = '') => {
     const userPrefersLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches
     const theme = localStorage.getItem('theme') || (userPrefersDark ? 'dark' : userPrefersLight ? 'light' : 'light')
 
+
     let html = `
         <!-- TradingView Widget BEGIN -->
         <div class='tradingview-widget-container'>
@@ -215,19 +216,19 @@ const techWidget = (ticker = '') => {
             <script type='text/javascript'
                 src='https://s3.tradingview.com/external-embedding/embed-widget-technical-analysis.js' async>
                 {
-                    'interval': '1D',
-                    'width': '100%',
-                    'isTransparent': false,
-                    'height': '100%',
-                    'symbol': '${quote}',
-                    'showIntervalTabs': true,
-                    'locale': 'ru',
-                    'colorTheme': '${theme}'
+                    "interval": "1D",
+                    "width": "100%",
+                    "isTransparent": false,
+                    "height": "100%",
+                    "symbol": "${quote}",
+                    "showIntervalTabs": true,
+                    "locale": "ru",
+                    "colorTheme": "${theme}"
                 }
             </script>
         </div>
         <!-- TradingView Widget END -->
-    `
+    ` // eslint-disable-line quotes
     iframe.src = 'data:text/html;charset=utf-8,' + encodeURI(html)
 }
 
@@ -593,6 +594,6 @@ if ((currentTheme == 'dark') || (prefersDarkScheme.matches && currentTheme != 'l
     document.body.classList.toggle('light-theme')
     chartVolume.updateOptions(lightModeChartsSettings)
     chartShortPercent.updateOptions(lightModeChartsSettings)
-} 
+}
 
 // END OF DARK MODE
