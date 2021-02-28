@@ -2,6 +2,9 @@
 
 /* Need to make a duplicate of colors in order for automatic switching and with button */
 
+/* csslint ignore:start */
+/* stylelint-disable */
+
 /* Scheme for light mode */
 body {
     --text-color: #4a4a4a;
@@ -11,8 +14,9 @@ body {
     --modal-bkg: rgba(255, 255, 255, 0.86);
     --modal-top-bottom-bkg: #f5f5f5;
     --modal-border: 1px solid #dbdbdb;
-    --box-bkg: #ffffff;
-    --box-shadow: 0 0.5em 1em -0.125em rgb(10 10 10 / 10%),
+    --box-bkg: #fff;
+    --box-shadow:
+        0 0.5em 1em -0.125em rgb(10 10 10 / 10%),
         0 0 0 1px rgb(10 10 10 / 2%);
     --a-color: #3273dc;
     --a-color-hover: #363636;
@@ -27,7 +31,8 @@ body.dark-theme {
     --modal-top-bottom-bkg: #242424;
     --modal-border: 1px solid #363636;
     --box-bkg: #1e212c;
-    --box-shadow: 0 0.5em 1em -0.125em rgb(255 255 255 / 10%),
+    --box-shadow:
+        0 0.5em 1em -0.125em rgb(255 255 255 / 10%),
         0 0 0 1px rgb(255 255 255 / 2%);
     --a-color: #5ea3e4;
     --a-color-hover: #dbdbdb;
@@ -45,7 +50,8 @@ body.dark-theme {
         --modal-top-bottom-bkg: #242424;
         --modal-border: 1px solid #363636;
         --box-bkg: #1e212c;
-        --box-shadow: 0 0.5em 1em -0.125em rgb(255 255 255 / 10%),
+        --box-shadow:
+            0 0.5em 1em -0.125em rgb(255 255 255 / 10%),
             0 0 0 1px rgb(255 255 255 / 2%);
         --a-color: #5ea3e4;
         --a-color-hover: #dbdbdb;
@@ -60,8 +66,9 @@ body.dark-theme {
         --modal-bkg: rgba(255, 255, 255, 0.86);
         --modal-top-bottom-bkg: #f5f5f5;
         --modal-border: 1px solid #dbdbdb;
-        --box-bkg: #ffffff;
-        --box-shadow: 0 0.5em 1em -0.125em rgb(10 10 10 / 10%),
+        --box-bkg: #fff;
+        --box-shadow:
+            0 0.5em 1em -0.125em rgb(10 10 10 / 10%),
             0 0 0 1px rgb(10 10 10 / 2%);
         --a-color: #3273dc;
         --a-color-hover: #363636;
@@ -70,7 +77,8 @@ body.dark-theme {
 
 html,
 body,
-.modal-card-body {
+.modal-card-body,
+.section {
     background-color: var(--bkg-color);
 }
 
@@ -96,10 +104,6 @@ strong,
 .modal-card-head,
 .modal-card-foot {
     background-color: var(--modal-top-bottom-bkg);
-}
-
-.modal-card-head,
-.modal-card-foot {
     border-bottom: var(--modal-border);
 }
 
@@ -115,6 +119,9 @@ a {
 a:hover {
     color: var(--a-color-hover);
 }
+
+/* csslint ignore:end */
+/* stylelint-enable */
 
 /* dark switch */
 .switch,
@@ -140,7 +147,7 @@ label::before {
     margin: 0px;
     width: 8.7rem;
     height: 2rem;
-    background: #E0E0E0;
+    background: #e0e0e0;
     border-radius: 26px;
     overflow: hidden;
     position: relative;
@@ -149,17 +156,16 @@ label::before {
     cursor: pointer;
 }
 
-.btn-color-mode-switch>label.btn-color-mode-switch-inner:before {
+.btn-color-mode-switch>label.btn-color-mode-switch-inner::before {
     content: attr(data-on);
     position: absolute;
     font-size: 12px;
     font-weight: 500;
     top: 7px;
     right: 20px;
-
 }
 
-.btn-color-mode-switch>label.btn-color-mode-switch-inner:after {
+.btn-color-mode-switch>label.btn-color-mode-switch-inner::after {
     content: attr(data-off);
     width: 4.35rem;
     height: 1.1rem;
@@ -176,7 +182,7 @@ label::before {
 
 .btn-color-mode-switch>.alert {
     display: none;
-    background: #FF9800;
+    background: #ff9800;
     border: none;
     color: #fff;
 }
@@ -198,13 +204,13 @@ label::before {
     color: #fff;
 }
 
-.btn-color-mode-switch input[type="checkbox"]:checked+label.btn-color-mode-switch-inner:after {
+.btn-color-mode-switch input[type="checkbox"]:checked+label.btn-color-mode-switch-inner::after {
     content: attr(data-on);
     left: 67px;
     background: #3c3c3c;
 }
 
-.btn-color-mode-switch input[type="checkbox"]:checked+label.btn-color-mode-switch-inner:before {
+.btn-color-mode-switch input[type="checkbox"]:checked+label.btn-color-mode-switch-inner::before {
     content: attr(data-off);
     right: auto;
     left: 20px;
@@ -246,8 +252,19 @@ body {
 }
 
 .box {
-    padding: .75rem;
+    padding: 0.75rem;
     height: 100%;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+}
+
+.main-block {
+    padding-bottom: 1.5rem;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
 }
 
 .content:not(:last-child) {
@@ -274,6 +291,10 @@ body {
     width: 100%;
 }
 
+.tag {
+    text-decoration: none !important;
+}
+
 .group-tags-1>.control>.tags.has-addons>.tag:first-child,
 .group-tags-2>.control>.tags.has-addons>.tag:first-child {
     justify-content: left;
@@ -288,24 +309,17 @@ body {
 }
 
 .group-tags-2>.control>.tags.has-addons>.tag:first-child {
-    width: 48%
+    width: 48%;
 }
 
 .group-tags-2>.control>.tags.has-addons>.tag:nth-child(2) {
-    width: 52%
+    width: 52%;
 }
-
-.tag {
-    text-decoration: none !important;
-}
-
 
 /* Update messages */
 .upd-message {
     color: #aaa;
     font-size: 10px;
-    z-index: 2;
-    position: relative;
 }
 
 .disclaimer {
@@ -329,6 +343,12 @@ body {
     justify-content: center;
     margin-left: -4%;
     margin-top: -5%;
+}
+
+.tradingview-copyright {
+    text-align: center;
+    font-size: 0.9rem;
+    margin: 5px 0px;
 }
 
 /* Octocat */
@@ -357,11 +377,11 @@ body {
     }
 
     .tag:not(body) {
-        font-size: .65rem;
+        font-size: 0.65rem;
     }
 
     .tags .tag {
-        margin-bottom: .3rem;
+        margin-bottom: 0.3rem;
     }
 
     .upd-message {
@@ -371,6 +391,7 @@ body {
     .title {
         font-size: 1.9rem;
     }
+
     .tradingview {
         height: 340px;
     }

@@ -6,10 +6,13 @@
     </div>
     <div class="column has-text-right is-half-mobile">
         <!-- DARK MODE SWITCH -->
+
         <label class="switch btn-color-mode-switch">
             <input type="checkbox" name="color_mode" id="color_mode" value="1">
             <label for="color_mode" data-on="Dark" data-off="Light" class="btn-color-mode-switch-inner"></label>
         </label>
+
+        <!-- /DARK MODE SWITCH -->
     </div>
     <div class="column is-full-mobile is-full-tablet is-full-desktop">
         <p class="subtitle is-size-6 has-text-justified">
@@ -20,8 +23,14 @@
 
 <div class="columns is-variable is-1-mobile">
     <div class="column is-one-third">
-        {{> stocks/searchform }}
-        {{> stocks/financialtags }}
+        <!-- TAGS & FORM -->
+
+        <div class="main-block">
+            {{> stocks/searchform }}
+            {{> stocks/financialtags }}
+        </div>
+
+        <!-- /TAGS & FORM -->
     </div>
 
     <div class="column is-one-third">
@@ -31,7 +40,7 @@
             {{> stocks/tradingview }}
         </div>
 
-        <!-- TRADING VIEW -->
+        <!-- /TRADING VIEW -->
     </div>
     <div class="column is-one-third">
         <!-- Volume graphichs -->
@@ -40,7 +49,7 @@
             {{> stocks/nakedchart }}
         </div>
 
-        <!-- Volume graphichs -->
+        <!-- /Volume graphichs -->
     </div>
 
 </div>

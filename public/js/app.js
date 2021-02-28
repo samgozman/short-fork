@@ -1,5 +1,7 @@
+/*global ApexCharts, iframe*/
+
 // Preloader
-var preloader = document.getElementById("preloader_preload");
+var preloader = document.getElementById('preloader_preload');
 
 function fadeOut(el) {
     el.style.opacity = 1
@@ -7,7 +9,7 @@ function fadeOut(el) {
         el.style.opacity = el.style.opacity - 0.05
         if (el.style.opacity <= 0.05) {
             clearInterval(preloaderinterval)
-            preloader.style.display = "none"
+            preloader.style.display = 'none'
         }
     }, 16)
 }
@@ -18,7 +20,7 @@ window.onload = function () {
 }
 
 // Define chart and render it
-const chartVolume = new ApexCharts(document.querySelector("#chartVolume"), {
+const chartVolume = new ApexCharts(document.querySelector('#chartVolume'), {
     series: [{
         name: 'Общий объём',
         data: []
@@ -77,9 +79,9 @@ const chartVolume = new ApexCharts(document.querySelector("#chartVolume"), {
 chartVolume.render()
 
 // Define chart and render it
-const chartShortPercent = new ApexCharts(document.querySelector("#chartShortPercent"), {
+const chartShortPercent = new ApexCharts(document.querySelector('#chartShortPercent'), {
     series: [{
-        name: "% шортовых сделок за день",
+        name: '% шортовых сделок за день',
         data: []
     }],
     chart: {
@@ -101,7 +103,7 @@ const chartShortPercent = new ApexCharts(document.querySelector("#chartShortPerc
         }
     },
     fill: {
-        type: "gradient",
+        type: 'gradient',
         gradient: {
             type: 'vertical',
             shadeIntensity: 1,
@@ -109,17 +111,17 @@ const chartShortPercent = new ApexCharts(document.querySelector("#chartShortPerc
             opacityTo: 0.9,
             colorStops: [{
                     offset: 0,
-                    color: "#EB656F",
+                    color: '#EB656F',
                     opacity: 1
                 },
                 {
                     offset: 20,
-                    color: "#FAD375",
+                    color: '#FAD375',
                     opacity: 1
                 },
                 {
                     offset: 100,
-                    color: "#95DA74",
+                    color: '#95DA74',
                     opacity: 1
                 }
             ]
@@ -201,17 +203,18 @@ const techWidget = (ticker = '') => {
     // Check users theme settings
     const userPrefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
     const userPrefersLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches
-    const theme = localStorage.getItem("theme") || (userPrefersDark ? 'dark' : userPrefersLight ? 'light' : 'light')
+    const theme = localStorage.getItem('theme') || (userPrefersDark ? 'dark' : userPrefersLight ? 'light' : 'light')
+
 
     let html = `
         <!-- TradingView Widget BEGIN -->
-        <div class="tradingview-widget-container">
-            <div class="tradingview-widget-container__widget"></div>
-            <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/symbols/${quote}/technicals/"
-                    rel="noopener" target="_blank"><span class="blue-text">Technical Analysis for ${quote}</span></a> by
+        <div class='tradingview-widget-container'>
+            <div class='tradingview-widget-container__widget'></div>
+            <div class='tradingview-widget-copyright'><a href='https://www.tradingview.com/symbols/${quote}/technicals/'
+                    rel='noopener' target='_blank'><span class='blue-text'>Technical Analysis for ${quote}</span></a> by
                 TradingView</div>
-            <script type="text/javascript"
-                src="https://s3.tradingview.com/external-embedding/embed-widget-technical-analysis.js" async>
+            <script type='text/javascript'
+                src='https://s3.tradingview.com/external-embedding/embed-widget-technical-analysis.js' async>
                 {
                     "interval": "1D",
                     "width": "100%",
@@ -225,7 +228,7 @@ const techWidget = (ticker = '') => {
             </script>
         </div>
         <!-- TradingView Widget END -->
-    `
+    ` // eslint-disable-line quotes
     iframe.src = 'data:text/html;charset=utf-8,' + encodeURI(html)
 }
 
@@ -255,9 +258,6 @@ const resp_tinkoff = document.querySelector('#resp_tinkoff')
 const resp_finviz_target = document.querySelector('#resp_finviz_target')
 const resp_finviz_rsi = document.querySelector('#resp_finviz_rsi')
 const resp_finviz_recom = document.querySelector('#resp_finviz_recom')
-
-// Widget div
-const tradingview = document.querySelector('.tradingview')
 
 // Erase values in DOM
 const erase = (word = ' пусто ') => {
@@ -341,7 +341,7 @@ erase()
 // Set S&P500 as default tradingview widget
 techWidget('SPX')
 
-// Set starting colors for "stock short" values
+// Set starting colors for 'stock short' values
 Array('finviz_short_flow', 'naked_current_short_volume', 'squeeze_short_flow').forEach(key => pageObj[key].classList.add('is-link'))
 
 // ! FORM SUBMIT EVENT
@@ -519,10 +519,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
 // DARK MODE
 //? Source: https://css-tricks.com/a-complete-guide-to-dark-mode-on-the-web/
-const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)")
-const prefersLightScheme = window.matchMedia("(prefers-color-scheme: light)")
+const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)')
+const prefersLightScheme = window.matchMedia('(prefers-color-scheme: light)')
 const checkbox = document.getElementById('color_mode')
-const currentTheme = localStorage.getItem("theme")
+const currentTheme = localStorage.getItem('theme')
 
 const darkModeChartsSettings = {
     chart: {
@@ -532,7 +532,7 @@ const darkModeChartsSettings = {
         theme: 'dark'
     },
     grid: {
-        borderColor: "#535A6C"
+        borderColor: '#535A6C'
     },
     dataLabels: {
         style: {
@@ -549,7 +549,7 @@ const lightModeChartsSettings = {
         theme: 'light'
     },
     grid: {
-        borderColor: "#e0e0e0"
+        borderColor: '#e0e0e0'
     },
     dataLabels: {
         style: {
@@ -559,18 +559,19 @@ const lightModeChartsSettings = {
 }
 
 checkbox.addEventListener('change', (event) => {
+    var theme = ''
     if (prefersDarkScheme.matches) {
-        document.body.classList.toggle("light-theme")
-        var theme = document.body.classList.contains("light-theme") ?
-            "light" :
-            "dark"
+        document.body.classList.toggle('light-theme')
+        theme = document.body.classList.contains('light-theme') ?
+            'light' :
+            'dark'
     } else {
-        document.body.classList.toggle("dark-theme")
-        var theme = document.body.classList.contains("dark-theme") ?
-            "dark" :
-            "light"
+        document.body.classList.toggle('dark-theme')
+        theme = document.body.classList.contains('dark-theme') ?
+            'light' :
+            'dark'
     }
-    localStorage.setItem("theme", theme)
+    localStorage.setItem('theme', theme)
     techWidget(ticker.value || 'SPX')
 
     if (event.currentTarget.checked) {
@@ -583,16 +584,16 @@ checkbox.addEventListener('change', (event) => {
     }
 })
 
-if ((currentTheme == "dark") || (prefersDarkScheme.matches && currentTheme != "light")) {
-    document.body.classList.toggle("dark-theme")
+if ((currentTheme == 'dark') || (prefersDarkScheme.matches && currentTheme != 'light')) {
+    document.body.classList.toggle('dark-theme')
     checkbox.checked = true
     chartVolume.updateOptions(darkModeChartsSettings)
     chartShortPercent.updateOptions(darkModeChartsSettings)
 
-} else if (currentTheme == "light" || prefersLightScheme.matches) {
-    document.body.classList.toggle("light-theme")
+} else if (currentTheme == 'light' || prefersLightScheme.matches) {
+    document.body.classList.toggle('light-theme')
     chartVolume.updateOptions(lightModeChartsSettings)
     chartShortPercent.updateOptions(lightModeChartsSettings)
-} 
+}
 
 // END OF DARK MODE
