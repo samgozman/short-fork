@@ -147,7 +147,7 @@ label::before {
     margin: 0px;
     width: 8.7rem;
     height: 2rem;
-    background: #E0E0E0;
+    background: #e0e0e0;
     border-radius: 26px;
     overflow: hidden;
     position: relative;
@@ -156,17 +156,16 @@ label::before {
     cursor: pointer;
 }
 
-.btn-color-mode-switch>label.btn-color-mode-switch-inner:before {
+.btn-color-mode-switch>label.btn-color-mode-switch-inner::before {
     content: attr(data-on);
     position: absolute;
     font-size: 12px;
     font-weight: 500;
     top: 7px;
     right: 20px;
-
 }
 
-.btn-color-mode-switch>label.btn-color-mode-switch-inner:after {
+.btn-color-mode-switch>label.btn-color-mode-switch-inner::after {
     content: attr(data-off);
     width: 4.35rem;
     height: 1.1rem;
@@ -183,7 +182,7 @@ label::before {
 
 .btn-color-mode-switch>.alert {
     display: none;
-    background: #FF9800;
+    background: #ff9800;
     border: none;
     color: #fff;
 }
@@ -205,13 +204,13 @@ label::before {
     color: #fff;
 }
 
-.btn-color-mode-switch input[type="checkbox"]:checked+label.btn-color-mode-switch-inner:after {
+.btn-color-mode-switch input[type="checkbox"]:checked+label.btn-color-mode-switch-inner::after {
     content: attr(data-on);
     left: 67px;
     background: #3c3c3c;
 }
 
-.btn-color-mode-switch input[type="checkbox"]:checked+label.btn-color-mode-switch-inner:before {
+.btn-color-mode-switch input[type="checkbox"]:checked+label.btn-color-mode-switch-inner::before {
     content: attr(data-off);
     right: auto;
     left: 20px;
@@ -253,7 +252,7 @@ body {
 }
 
 .box {
-    padding: .75rem;
+    padding: 0.75rem;
     height: 100%;
     display: flex;
     justify-content: space-between;
@@ -292,6 +291,10 @@ body {
     width: 100%;
 }
 
+.tag {
+    text-decoration: none !important;
+}
+
 .group-tags-1>.control>.tags.has-addons>.tag:first-child,
 .group-tags-2>.control>.tags.has-addons>.tag:first-child {
     justify-content: left;
@@ -306,17 +309,12 @@ body {
 }
 
 .group-tags-2>.control>.tags.has-addons>.tag:first-child {
-    width: 48%
+    width: 48%;
 }
 
 .group-tags-2>.control>.tags.has-addons>.tag:nth-child(2) {
-    width: 52%
+    width: 52%;
 }
-
-.tag {
-    text-decoration: none !important;
-}
-
 
 /* Update messages */
 .upd-message {
@@ -379,11 +377,11 @@ body {
     }
 
     .tag:not(body) {
-        font-size: .65rem;
+        font-size: 0.65rem;
     }
 
     .tags .tag {
-        margin-bottom: .3rem;
+        margin-bottom: 0.3rem;
     }
 
     .upd-message {
