@@ -3,6 +3,7 @@
 /* Need to make a duplicate of colors in order for automatic switching and with button */
 
 /* csslint ignore:start */
+/* stylelint-disable */
 
 /* Scheme for light mode */
 body {
@@ -13,8 +14,9 @@ body {
     --modal-bkg: rgba(255, 255, 255, 0.86);
     --modal-top-bottom-bkg: #f5f5f5;
     --modal-border: 1px solid #dbdbdb;
-    --box-bkg: #ffffff;
-    --box-shadow: 0 0.5em 1em -0.125em rgb(10 10 10 / 10%),
+    --box-bkg: #fff;
+    --box-shadow:
+        0 0.5em 1em -0.125em rgb(10 10 10 / 10%),
         0 0 0 1px rgb(10 10 10 / 2%);
     --a-color: #3273dc;
     --a-color-hover: #363636;
@@ -29,7 +31,8 @@ body.dark-theme {
     --modal-top-bottom-bkg: #242424;
     --modal-border: 1px solid #363636;
     --box-bkg: #1e212c;
-    --box-shadow: 0 0.5em 1em -0.125em rgb(255 255 255 / 10%),
+    --box-shadow:
+        0 0.5em 1em -0.125em rgb(255 255 255 / 10%),
         0 0 0 1px rgb(255 255 255 / 2%);
     --a-color: #5ea3e4;
     --a-color-hover: #dbdbdb;
@@ -47,7 +50,8 @@ body.dark-theme {
         --modal-top-bottom-bkg: #242424;
         --modal-border: 1px solid #363636;
         --box-bkg: #1e212c;
-        --box-shadow: 0 0.5em 1em -0.125em rgb(255 255 255 / 10%),
+        --box-shadow:
+            0 0.5em 1em -0.125em rgb(255 255 255 / 10%),
             0 0 0 1px rgb(255 255 255 / 2%);
         --a-color: #5ea3e4;
         --a-color-hover: #dbdbdb;
@@ -62,8 +66,9 @@ body.dark-theme {
         --modal-bkg: rgba(255, 255, 255, 0.86);
         --modal-top-bottom-bkg: #f5f5f5;
         --modal-border: 1px solid #dbdbdb;
-        --box-bkg: #ffffff;
-        --box-shadow: 0 0.5em 1em -0.125em rgb(10 10 10 / 10%),
+        --box-bkg: #fff;
+        --box-shadow:
+            0 0.5em 1em -0.125em rgb(10 10 10 / 10%),
             0 0 0 1px rgb(10 10 10 / 2%);
         --a-color: #3273dc;
         --a-color-hover: #363636;
@@ -99,10 +104,6 @@ strong,
 .modal-card-head,
 .modal-card-foot {
     background-color: var(--modal-top-bottom-bkg);
-}
-
-.modal-card-head,
-.modal-card-foot {
     border-bottom: var(--modal-border);
 }
 
@@ -120,6 +121,7 @@ a:hover {
 }
 
 /* csslint ignore:end */
+/* stylelint-enable */
 
 /* dark switch */
 .switch,
