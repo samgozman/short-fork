@@ -46,7 +46,7 @@ const chartVolume = new ApexCharts(document.querySelector('#chartVolume'), {
     },
     yaxis: {
         labels: {
-            minWidth: 0,
+            minWidth: -1,
             show: false,
             formatter: function (value) {
                 return Number(value || '').toLocaleString('en-US', {
@@ -158,7 +158,7 @@ const chartShortPercent = new ApexCharts(document.querySelector('#chartShortPerc
         max: 100,
         labels: {
             show: false,
-            minWidth: 0,
+            minWidth: -1,
             formatter: function (value) {
                 return value + '%'
             }

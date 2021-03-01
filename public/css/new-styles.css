@@ -280,9 +280,10 @@ body {
     text-transform: uppercase;
 }
 
-#submit_button>ion-icon {
-    width: 2rem;
-    height: 2rem;
+#submit_button {
+    background: url(/../img/icon/return-down-forward-outline.svg) no-repeat center;
+    background-color: revert;
+    width: 4rem;
 }
 
 /* Financial tags */
