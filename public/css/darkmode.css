@@ -1,7 +1,5 @@
 /* DARK MODE */
 
-/* Need to make a duplicate of colors in order for automatic switching and with button */
-
 /* csslint ignore:start */
 /* stylelint-disable */
 
@@ -22,6 +20,7 @@ body {
     --a-color-hover: #363636;
 }
 
+/* Scheme for dark mode */
 body.dark-theme {
     --text-color: #eee;
     --bkg-color: #17181c;
@@ -38,6 +37,7 @@ body.dark-theme {
     --a-color-hover: #dbdbdb;
 }
 
+/* Apply theme according to the system settings */
 @media (prefers-color-scheme: dark) {
 
     /* Scheme for dark mode */

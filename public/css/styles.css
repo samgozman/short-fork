@@ -62,6 +62,10 @@ body {
     width: 4rem;
 }
 
+#submit_button.is-loading {
+    background-image: none;
+}
+
 /* Financial tags */
 .field.is-grouped.is-grouped-multiline>.control {
     display: inline-block;
@@ -145,6 +149,16 @@ a.tag:hover {
 .octocat .octocat-arm,
 .octocat .octocat-body {
     fill: #f4f5f6;
+}
+
+/* Sponsor button */
+.button.sponsor {
+    background-image: url(/../img/sponsor.png);
+    background-position: left;
+    background-repeat: no-repeat;
+    background-size: contain;
+    padding-left: calc(4.25em + .25em);
+    margin: 0.5rem 0rem;
 }
 
 /* Mobile fixes */

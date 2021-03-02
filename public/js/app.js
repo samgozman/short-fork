@@ -558,6 +558,22 @@ const lightModeChartsSettings = {
     }
 }
 
+const setThemeForElements = (theme = 'light') => {
+    switch (theme) {
+        case 'light':
+            document.querySelector('.sponsor').classList.remove('is-dark')
+            chartVolume.updateOptions(lightModeChartsSettings)
+            chartShortPercent.updateOptions(lightModeChartsSettings)
+            break
+
+        case 'dark':
+            document.querySelector('.sponsor').classList.toggle('is-dark')
+            chartVolume.updateOptions(darkModeChartsSettings)
+            chartShortPercent.updateOptions(darkModeChartsSettings)
+            break
+    }
+}
+
 checkbox.addEventListener('change', (event) => {
     var theme = ''
     if (prefersDarkScheme.matches) {
@@ -575,25 +591,20 @@ checkbox.addEventListener('change', (event) => {
     techWidget(ticker.value || 'SPX')
 
     if (event.currentTarget.checked) {
-        chartVolume.updateOptions(darkModeChartsSettings)
-        chartShortPercent.updateOptions(darkModeChartsSettings)
-
+        setThemeForElements('dark')
     } else {
-        chartVolume.updateOptions(lightModeChartsSettings)
-        chartShortPercent.updateOptions(lightModeChartsSettings)
+        setThemeForElements('light')
     }
 })
 
 if ((currentTheme == 'dark') || (prefersDarkScheme.matches && currentTheme != 'light')) {
     document.body.classList.toggle('dark-theme')
     checkbox.checked = true
-    chartVolume.updateOptions(darkModeChartsSettings)
-    chartShortPercent.updateOptions(darkModeChartsSettings)
+    setThemeForElements('dark')
 
 } else if (currentTheme == 'light' || prefersLightScheme.matches) {
     document.body.classList.toggle('light-theme')
-    chartVolume.updateOptions(lightModeChartsSettings)
-    chartShortPercent.updateOptions(lightModeChartsSettings)
+    setThemeForElements('light')
 }
 
 // END OF DARK MODE
