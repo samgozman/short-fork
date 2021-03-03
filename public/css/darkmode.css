@@ -1,7 +1,5 @@
 /* DARK MODE */
 
-/* Need to make a duplicate of colors in order for automatic switching and with button */
-
 /* csslint ignore:start */
 /* stylelint-disable */
 
@@ -22,6 +20,7 @@ body {
     --a-color-hover: #363636;
 }
 
+/* Scheme for dark mode */
 body.dark-theme {
     --text-color: #eee;
     --bkg-color: #17181c;
@@ -38,6 +37,7 @@ body.dark-theme {
     --a-color-hover: #dbdbdb;
 }
 
+/* Apply theme according to the system settings */
 @media (prefers-color-scheme: dark) {
 
     /* Scheme for dark mode */
@@ -221,182 +221,3 @@ label::before {
 }
 
 /* !DARK MODE */
-
-/* Preloader */
-#preloader>p {
-    display: none;
-}
-
-#preloader_preload {
-    display: block;
-    position: fixed;
-    z-index: 1001;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: hsl(0, 0%, 29%) url(/../img/pulse_rings.svg) center center no-repeat;
-    background-size: 8rem;
-}
-
-/* Global */
-body {
-    display: flex;
-    min-height: 100vh;
-    flex-direction: column;
-}
-
-.section {
-    padding: 3.5rem 1rem 2.5rem 1rem;
-    flex: 1;
-}
-
-.box {
-    padding: 0.75rem;
-    height: 100%;
-    display: flex;
-    justify-content: space-between;
-    flex-direction: column;
-}
-
-.main-block {
-    padding-bottom: 1.5rem;
-    height: 100%;
-    display: flex;
-    justify-content: space-between;
-    flex-direction: column;
-}
-
-.content:not(:last-child) {
-    margin-bottom: 0.75rem;
-}
-
-/* Form */
-.search-form-input {
-    width: 100%;
-}
-
-#input_ticker {
-    text-transform: uppercase;
-}
-
-#submit_button>ion-icon {
-    width: 2rem;
-    height: 2rem;
-}
-
-/* Financial tags */
-.field.is-grouped.is-grouped-multiline>.control {
-    display: inline-block;
-    width: 100%;
-}
-
-.tag {
-    text-decoration: none !important;
-}
-
-.group-tags-1>.control>.tags.has-addons>.tag:first-child,
-.group-tags-2>.control>.tags.has-addons>.tag:first-child {
-    justify-content: left;
-}
-
-.group-tags-1>.control>.tags.has-addons>.tag:first-child {
-    width: 41%;
-}
-
-.group-tags-1>.control>.tags.has-addons>.tag:nth-child(2) {
-    width: 59%;
-}
-
-.group-tags-2>.control>.tags.has-addons>.tag:first-child {
-    width: 48%;
-}
-
-.group-tags-2>.control>.tags.has-addons>.tag:nth-child(2) {
-    width: 52%;
-}
-
-/* Update messages */
-.upd-message {
-    color: #aaa;
-    font-size: 10px;
-}
-
-.disclaimer {
-    padding-top: 0;
-    padding-bottom: 0;
-    margin-top: -0.75rem;
-}
-
-/* Tradingview */
-
-.tradingview {
-    height: 430px;
-    overflow: hidden;
-}
-
-.tradingview>iframe {
-    height: 115%;
-    width: 108%;
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-    margin-left: -4%;
-    margin-top: -5%;
-}
-
-.tradingview-copyright {
-    text-align: center;
-    font-size: 0.9rem;
-    margin: 5px 0px;
-}
-
-/* Octocat */
-.octocat {
-    border: 0;
-    color: #f4f5f6;
-    fill: #333;
-    height: 3rem;
-    position: fixed;
-    right: 0;
-    top: 0;
-    width: 3rem;
-    z-index: 2;
-}
-
-.octocat .octocat-arm,
-.octocat .octocat-body {
-    fill: #f4f5f6;
-}
-
-/* Mobile fixes */
-
-@media (max-width: 350px) {
-    .section {
-        padding: 3rem 0.35rem 2rem 0.35rem;
-    }
-
-    .tag:not(body) {
-        font-size: 0.65rem;
-    }
-
-    .tags .tag {
-        margin-bottom: 0.3rem;
-    }
-
-    .upd-message {
-        font-size: 7px;
-    }
-
-    .title {
-        font-size: 1.9rem;
-    }
-
-    .tradingview {
-        height: 340px;
-    }
-
-    .tradingview>iframe {
-        height: 130%;
-    }
-}

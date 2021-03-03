@@ -8,27 +8,34 @@
     <title>Short fork {{package_version}}</title>
 
     <!-- Favicon -->
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-    <link rel="manifest" href="/site.webmanifest">
-    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#333333">
+    <link rel="apple-touch-icon" sizes="180x180" href="img/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="img/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="img/favicon/favicon-16x16.png">
+    <link rel="manifest" href="img/favicon/site.webmanifest">
+    <link rel="mask-icon" href="img/favicon/safari-pinned-tab.svg" color="#333333">
+    <link rel="shortcut icon" href="img/favicon/favicon.ico">
     <meta name="apple-mobile-web-app-title" content="Short Fork">
     <meta name="application-name" content="Short Fork">
     <meta name="msapplication-TileColor" content="#ffc40d">
-    <meta name="theme-color" content="#ffffff">
+    <meta name="msapplication-config" content="img/favicon/browserconfig.xml">
+    <meta name="theme-color" content="#363636">
 
     <!-- Styles -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
-    <link rel="stylesheet" href="./css/new-styles.css">
+    <link rel="stylesheet" href="./css/darkmode.css">
+    <link rel="stylesheet" href="./css/styles.css">
 
     <!-- Yandex.Metrika counter -->
     <script type="text/javascript">
         (function (m, e, t, r, i, k, a) {
-            m[i] = m[i] || function () { (m[i].a = m[i].a || []).push(arguments) };
-            m[i].l = 1 * new Date(); k = e.createElement(t), a = e.getElementsByTagName(t)[0], k.async = 1, k.src = r, a.parentNode.insertBefore(k, a)
+            m[i] = m[i] || function () {
+                (m[i].a = m[i].a || []).push(arguments)
+            };
+            m[i].l = 1 * new Date();
+            k = e.createElement(t), a = e.getElementsByTagName(t)[0], k.async = 1, k.src = r, a.parentNode
+                .insertBefore(k, a)
         })
-            (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
 
         ym(72747058, "init", {
             clickmap: true,
@@ -41,9 +48,8 @@
     </noscript>
     <!-- /Yandex.Metrika counter -->
 
-    <!-- Ionicons font -->
-    <script type="module" src="https://unpkg.com/ionicons@5.4.0/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule="" src="https://unpkg.com/ionicons@5.4.0/dist/ionicons/ionicons.js"></script>
+    <!-- Github buttons -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
 </head>
 
 <body>
@@ -56,21 +62,41 @@
     </section>
 
     <footer class="footer">
-        <div class=" has-text-centered">
-            <div class="sponsor">
-                <p><strong>Спонсор проекта: </strong><a href="https://t.me/rezinv" target="_blank">https://t.me/rezinv</a>
-                </p>
+        <div class="columns has-text-centered is-align-items-center">
+            <div class="column">
+                <strong>Информационный спонсор: </strong>
+                <br>
+                <a class="button sponsor is-rounded is-medium" href="https://t.me/rezinv" target="_blank">Rezan
+                    Invest</a>
             </div>
-            <br>
-            <p>Создано: <a href="https://github.com/samgozman" target="_blank">samgozman</a></p>
-            <p>Tinkoff Pulse: <a href="https://www.tinkoff.ru/invest/social/profile/aqua_disco/"
-                    target="_blank">aqua_disco</a>
-        </div>
+            <div class="column">
+                <p>Создано: <a href="https://github.com/samgozman" target="_blank">samgozman</a></p>
+                <p>
+                    Tinkoff Pulse: <a href="https://www.tinkoff.ru/invest/social/profile/aqua_disco/"
+                        target="_blank">aqua_disco</a>
+                </p>
+                <a class="button support is-link is-small" target="_blank"
+                    href="https://www.tinkoff.ru/rm/gozman.semen1/Ol0PS3882">
+                    Поддержать проект
+                </a>
+            </div>
+            <div class="column">
+
+                <a class="github-button" href="https://github.com/samgozman/short-fork"
+                    data-color-scheme="no-preference: dark; light: dark; dark: dark;" data-icon="octicon-star"
+                    data-size="large" data-show-count="true" aria-label="Star samgozman/short-fork on GitHub">Оценить
+                    проект &nbsp;</a>
+                <br>
+                <a class="github-button" href="https://github.com/samgozman/short-fork/issues"
+                    data-color-scheme="no-preference: dark; light: dark; dark: dark;" data-icon="octicon-issue-opened"
+                    data-size="large" data-show-count="true" aria-label="Issue samgozman/short-fork on GitHub">Отчёт об
+                    ошибке</a>
+            </div>
         </div>
     </footer>
 
     {{> octocat }}
-    
+
     <!-- Preloader -->
     <div id="preloader">
         <div id="preloader_preload" class="is-loading"></div>
