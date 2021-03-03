@@ -157,8 +157,12 @@ a.tag:hover {
     background-position: left;
     background-repeat: no-repeat;
     background-size: contain;
-    padding-left: calc(4.25em + .25em);
+    padding-left: calc(4.25em + 0.25em);
     margin: 0.5rem 0rem;
+}
+
+.button.support {
+    margin-top: 0.25rem;
 }
 
 /* Mobile fixes */
