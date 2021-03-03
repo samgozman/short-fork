@@ -57,8 +57,9 @@ body {
 }
 
 #submit_button {
-    background: url(/../img/icon/return-down-forward-outline.svg) no-repeat center;
-    background-color: revert;
+    background: url(/../img/icon/return-down-forward-outline.svg) no-repeat center #363636;
+    border-color: transparent;
+    color: #fff;
     width: 4rem;
 }
 
