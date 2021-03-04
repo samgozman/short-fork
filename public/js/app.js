@@ -428,7 +428,7 @@ form.addEventListener('submit', async (e) => {
         // ! APPEND TRADINGVIEW WIDGET
         techWidget(ticker.value)
 
-        if (response.naked_chart && response.naked_chart[0].xAxisArr.length > 0 && response.naked_chart[0].shortVolArr.length > 0) {
+        if (response.naked_chart && !response.naked_chart[0].error && response.naked_chart[0].xAxisArr.length > 0 && response.naked_chart[0].shortVolArr.length > 0) {
             // ! UPDATE VOLUME CHART
             chartVolume.updateOptions({
                 xaxis: {
@@ -452,6 +452,18 @@ form.addEventListener('submit', async (e) => {
             chartShortPercent.updateSeries([{
                 data: getPercentageOfShorted(response.naked_chart[0].regularVolArr, response.naked_chart[0].shortVolArr)
             }])
+        } else if (response.naked_chart[0].error) {
+            chartVolume.updateOptions({
+                noData: {
+                    text: response.naked_chart[0].error
+                }
+            })
+
+            chartShortPercent.updateOptions({
+                noData: {
+                    text: response.naked_chart[0].error
+                }
+            })
         }
 
         isLoading(false)
