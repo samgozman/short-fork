@@ -33,7 +33,7 @@ router.get('/stocks', stocksLimiter, async (req, res) => {
         } else if (stock) {
             // ! 3.2 If old stock is exist - update it and send it back
             const data = await getStockData(req.query.ticker.trim())
-            if(!data) res.status(404).send()
+            if(!data) return res.status(404).send()
 
             const updates = Object.keys(data)
             updates.forEach((update) => stock[update] = data[update])

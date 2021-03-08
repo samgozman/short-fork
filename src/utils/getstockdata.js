@@ -29,7 +29,10 @@ const getStockData = async (ticker = '') => {
             naked_current_short_volume = (naked_chart.shortVolArr[naked_length - 1] / naked_chart.regularVolArr[naked_length - 1]) * 100
     }
 
-    if (fin.error) return undefined
+    if (fin.error) {
+        console.log(fin.error)
+        return undefined
+    }
 
     return {
         name: fin.name,
