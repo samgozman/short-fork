@@ -40,7 +40,7 @@ router.get('/stocks', stocksLimiter, async (req, res) => {
 
             stock._counter++
             await stock.save()
-            res.send(stock)
+            return res.send(stock)
         } else {
             // ! 3.3 If stock is not exist - create it and send it back
             const data = await getStockData(req.query.ticker.trim())
@@ -52,7 +52,7 @@ router.get('/stocks', stocksLimiter, async (req, res) => {
 
             stock._counter++
             await stock.save()
-            res.send(stock)
+            return res.send(stock)
         }
 
     } catch (err) {
