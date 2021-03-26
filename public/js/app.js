@@ -3,6 +3,12 @@
 // Preloader
 var preloader = document.getElementById('preloader_preload');
 
+/**
+ * Fade out animation for element
+ * 
+ * @param {*} el Element
+ * @returns {void}
+ */
 function fadeOut(el) {
     el.style.opacity = 1
     const preloaderinterval = setInterval(function () {
@@ -13,6 +19,7 @@ function fadeOut(el) {
         }
     }, 16)
 }
+
 window.onload = function () {
     setTimeout(function () {
         fadeOut(preloader)
@@ -195,7 +202,8 @@ const getPercentageOfShorted = (volArr = [], shortArr = []) => {
 /**
  * ! Tradingview Widget
  * 
- * @param {String} ticker 
+ * @param {String} ticker Stock quote
+ * @returns {void}
  */
 const techWidget = (ticker = '') => {
     const quote = ticker.toUpperCase()
@@ -379,7 +387,7 @@ form.addEventListener('submit', async (e) => {
         }
 
         // Set target indicator
-        const targetUpside = (response.target_price != null && response.price != null) ? ((response.target_price / response.price - 1) * 100).toFixed(1) : null
+        const targetUpside = (response.target_price !== null && response.price !== null) ? ((response.target_price / response.price - 1) * 100).toFixed(1) : null
         if (targetUpside > 0) {
             resp_finviz_target.textContent = '+' + targetUpside
             resp_finviz_target.classList.add('is-success')
@@ -471,7 +479,7 @@ form.addEventListener('submit', async (e) => {
     } catch (error) {
         isLoading(false)
         erase(' ошибка ')
-        error_message.textContent = error.message == 429 ? 'Превышен лимит запросов в минуту!' : 'Ошибка! Введите правильный тикер'
+        error_message.textContent = error.message === 429 ? 'Превышен лимит запросов в минуту!' : 'Ошибка! Введите правильный тикер'
     }
 })
 
@@ -512,6 +520,10 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     })
 
+    /**
+     * Hide modals
+     * @returns {void}
+     */
     function closeModals() {
         rootEl.classList.remove('is-clipped')
         modals.forEach(function (el) {
@@ -519,8 +531,11 @@ document.addEventListener('DOMContentLoaded', function () {
         })
     }
 
-    // Functions
-
+    /**
+     * Get all elements with query selector
+     * @param {*} selector Query selector
+     * @returns {Array} Array of selected DOM elements
+     */
     function getAll(selector) {
         return Array.prototype.slice.call(document.querySelectorAll(selector), 0)
     }
@@ -609,12 +624,12 @@ checkbox.addEventListener('change', (event) => {
     }
 })
 
-if ((currentTheme == 'dark') || (prefersDarkScheme.matches && currentTheme != 'light')) {
+if ((currentTheme === 'dark') || (prefersDarkScheme.matches && currentTheme !== 'light')) {
     document.body.classList.toggle('dark-theme')
     checkbox.checked = true
     setThemeForElements('dark')
 
-} else if (currentTheme == 'light' || prefersLightScheme.matches) {
+} else if (currentTheme === 'light' || prefersLightScheme.matches) {
     document.body.classList.toggle('light-theme')
     setThemeForElements('light')
 }
