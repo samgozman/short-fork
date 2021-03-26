@@ -1,4 +1,4 @@
-/*global ApexCharts, iframe*/
+/*global ApexCharts, iframe_tech, iframe_chart*/
 
 // Preloader
 var preloader = document.getElementById('preloader_preload');
@@ -7,7 +7,7 @@ var preloader = document.getElementById('preloader_preload');
  * Fade out animation for element
  * 
  * @param {*} el Element
- * @returns {void}
+ * @return {void}
  */
 function fadeOut(el) {
     el.style.opacity = 1
@@ -199,22 +199,28 @@ const getPercentageOfShorted = (volArr = [], shortArr = []) => {
     return shortVolPercentage
 }
 
+
 /**
- * ! Tradingview Widget
+ * Check for theme settings for tradingview widgets
+ * @return {String} 'light' or 'dark'
+ */
+const checkForThemeSettings = () => {
+    const userPrefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches,
+        userPrefersLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches
+    return localStorage.getItem('theme') || (userPrefersDark ? 'dark' : userPrefersLight ? 'light' : 'light')
+}
+
+/**
+ * ! Tradingview Technical Widget
  * 
  * @param {String} ticker Stock quote
- * @returns {void}
+ * @return {void}
  */
 const techWidget = (ticker = '') => {
     const quote = ticker.toUpperCase()
+    const theme = checkForThemeSettings()
 
-    // Check users theme settings
-    const userPrefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
-    const userPrefersLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches
-    const theme = localStorage.getItem('theme') || (userPrefersDark ? 'dark' : userPrefersLight ? 'light' : 'light')
-
-
-    let html = `
+    const html = `
         <!-- TradingView Widget BEGIN -->
         <div class='tradingview-widget-container'>
             <div class='tradingview-widget-container__widget'></div>
@@ -237,9 +243,21 @@ const techWidget = (ticker = '') => {
         </div>
         <!-- TradingView Widget END -->
     ` // eslint-disable-line quotes
-    iframe.src = 'data:text/html;charset=utf-8,' + encodeURI(html)
+    iframe_tech.src = 'data:text/html;charset=utf-8,' + encodeURI(html)
 }
 
+/**
+ * ! Tradingview Chart Widget
+ * 
+ * @param {String} ticker Stock quote
+ * @return {void}
+ */
+const chartWidget = (ticker = '') => {
+    const quote = ticker.toUpperCase()
+    const theme = checkForThemeSettings()
+
+    iframe_chart.src = 'charts/chart.html?stock=' + quote + '&theme=' + theme
+}
 
 // DOM object of elements which should be changed during request
 let pageObj = {
@@ -347,7 +365,8 @@ const getResponse = async () => {
 erase()
 
 // Set S&P500 as default tradingview widget
-techWidget('SPX')
+techWidget('SPY')
+chartWidget('SPY')
 
 // Set starting colors for 'stock short' values
 Array('finviz_short_flow', 'naked_current_short_volume', 'squeeze_short_flow').forEach(key => pageObj[key].classList.add('is-link'))
@@ -435,6 +454,7 @@ form.addEventListener('submit', async (e) => {
 
         // ! APPEND TRADINGVIEW WIDGET
         techWidget(ticker.value)
+        chartWidget(ticker.value)
 
         if (response.naked_chart && !response.naked_chart[0].error && response.naked_chart[0].xAxisArr.length > 0 && response.naked_chart[0].shortVolArr.length > 0) {
             // ! UPDATE VOLUME CHART
@@ -522,7 +542,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     /**
      * Hide modals
-     * @returns {void}
+     * @return {void}
      */
     function closeModals() {
         rootEl.classList.remove('is-clipped')
@@ -534,7 +554,7 @@ document.addEventListener('DOMContentLoaded', function () {
     /**
      * Get all elements with query selector
      * @param {*} selector Query selector
-     * @returns {Array} Array of selected DOM elements
+     * @return {Array} Array of selected DOM elements
      */
     function getAll(selector) {
         return Array.prototype.slice.call(document.querySelectorAll(selector), 0)
@@ -615,7 +635,8 @@ checkbox.addEventListener('change', (event) => {
             'dark'
     }
     localStorage.setItem('theme', theme)
-    techWidget(ticker.value || 'SPX')
+    techWidget(ticker.value || 'SPY')
+    chartWidget(ticker.value || 'SPY')
 
     if (event.currentTarget.checked) {
         setThemeForElements('dark')

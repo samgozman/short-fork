@@ -113,12 +113,17 @@ a.tag:hover {
 
 /* Tradingview */
 
-.tradingview {
+.tradingview_tech {
     height: 430px;
     overflow: hidden;
 }
 
-.tradingview>iframe {
+.tradingview_chart {
+    height: 70vh;
+    overflow: hidden;
+}
+
+.tradingview_tech>#iframe_tech {
     height: 115%;
     width: 108%;
     overflow: hidden;
@@ -126,6 +131,11 @@ a.tag:hover {
     justify-content: center;
     margin-left: -4%;
     margin-top: -5%;
+}
+
+.tradingview_chart>#iframe_chart {
+    width: 100%;
+    height: inherit;
 }
 
 .tradingview-copyright {
@@ -189,11 +199,11 @@ a.tag:hover {
         font-size: 1.9rem;
     }
 
-    .tradingview {
+    .tradingview_tech {
         height: 340px;
     }
 
-    .tradingview>iframe {
+    .tradingview_tech>#iframe_tech {
         height: 130%;
     }
 }
