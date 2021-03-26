@@ -1,4 +1,4 @@
-/*global ApexCharts, iframe_tech, iframe_chart*/
+/*global ApexCharts, iframe_tech, iframe_chart, getParameterByName*/
 
 // Preloader
 var preloader = document.getElementById('preloader_preload');
@@ -24,6 +24,13 @@ window.onload = function () {
     setTimeout(function () {
         fadeOut(preloader)
     }, 1000)
+
+    // Get url params
+    const queryParam = getParameterByName('stock')
+    if (queryParam) {
+        ticker.value = queryParam
+        document.getElementById('submit_button').click()
+    }
 }
 
 // Define chart and render it
@@ -349,7 +356,6 @@ const setSigns = () => {
 
 // Get response from server side
 const getResponse = async () => {
-
     try {
         const resp = await fetch('/stocks?ticker=' + ticker.value)
         if (resp.status !== 200) {
@@ -386,6 +392,14 @@ form.addEventListener('submit', async (e) => {
         const response = await getResponse()
         if (response.message) {
             throw new Error(response.message)
+        }
+
+        // Setup url search query
+        if ('URLSearchParams' in window) {
+            const searchParams = new URLSearchParams(window.location.search)
+            searchParams.set('stock', ticker.value)
+            const newRelativePathQuery = window.location.pathname + '?' + searchParams.toString()
+            history.pushState(null, '', newRelativePathQuery)
         }
 
         // Set values
