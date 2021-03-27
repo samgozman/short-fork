@@ -22,8 +22,9 @@
     <div class="tradingview-widget-container" style="height: 100%;">
         <div id="tradingview_89c6f"></div>
         <script type="text/javascript">
-            let stock = getParameterByName('stock'),
-                theme = getParameterByName('theme')
+            const stock = getParameterByName('stock'),
+                theme = getParameterByName('theme'),
+                isMobile = window.innerWidth <= 425 || false
             new TradingView.widget({
                 "autosize": true,
                 "symbol": stock,
@@ -34,10 +35,15 @@
                 "toolbar_bg": "#f1f3f6",
                 "enable_publishing": false,
                 "range": "3M",
-                "hide_side_toolbar": window.innerWidth <= 425 ? true : false,
-                "studies": [
+                "hide_side_toolbar": isMobile ? true : false,
+                "studies": isMobile ? [
                     "Volume@tv-basicstudies",
                     "RSI@tv-basicstudies",
+                    "BB@tv-basicstudies",
+                ] : [
+                    "Volume@tv-basicstudies",
+                    "RSI@tv-basicstudies",
+                    "Stochastic@tv-basicstudies",
                     "BB@tv-basicstudies",
                     "AwesomeOscillator@tv-basicstudies"
                 ],
