@@ -1,8 +1,14 @@
-/*global ApexCharts, iframe*/
+/*global ApexCharts, iframe_tech, iframe_chart, getParameterByName*/
 
 // Preloader
 var preloader = document.getElementById('preloader_preload');
 
+/**
+ * Fade out animation for element
+ * 
+ * @param {*} el Element
+ * @return {void}
+ */
 function fadeOut(el) {
     el.style.opacity = 1
     const preloaderinterval = setInterval(function () {
@@ -13,10 +19,18 @@ function fadeOut(el) {
         }
     }, 16)
 }
+
 window.onload = function () {
     setTimeout(function () {
         fadeOut(preloader)
     }, 1000)
+
+    // Get url params
+    const queryParam = getParameterByName('stock')
+    if (queryParam) {
+        ticker.value = queryParam
+        document.getElementById('submit_button').click()
+    }
 }
 
 // Define chart and render it
@@ -192,21 +206,28 @@ const getPercentageOfShorted = (volArr = [], shortArr = []) => {
     return shortVolPercentage
 }
 
+
 /**
- * ! Tradingview Widget
+ * Check for theme settings for tradingview widgets
+ * @return {String} 'light' or 'dark'
+ */
+const checkForThemeSettings = () => {
+    const userPrefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches,
+        userPrefersLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches
+    return localStorage.getItem('theme') || (userPrefersDark ? 'dark' : userPrefersLight ? 'light' : 'light')
+}
+
+/**
+ * ! Tradingview Technical Widget
  * 
- * @param {String} ticker 
+ * @param {String} ticker Stock quote
+ * @return {void}
  */
 const techWidget = (ticker = '') => {
     const quote = ticker.toUpperCase()
+    const theme = checkForThemeSettings()
 
-    // Check users theme settings
-    const userPrefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
-    const userPrefersLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches
-    const theme = localStorage.getItem('theme') || (userPrefersDark ? 'dark' : userPrefersLight ? 'light' : 'light')
-
-
-    let html = `
+    const html = `
         <!-- TradingView Widget BEGIN -->
         <div class='tradingview-widget-container'>
             <div class='tradingview-widget-container__widget'></div>
@@ -229,9 +250,21 @@ const techWidget = (ticker = '') => {
         </div>
         <!-- TradingView Widget END -->
     ` // eslint-disable-line quotes
-    iframe.src = 'data:text/html;charset=utf-8,' + encodeURI(html)
+    iframe_tech.src = 'data:text/html;charset=utf-8,' + encodeURI(html)
 }
 
+/**
+ * ! Tradingview Chart Widget
+ * 
+ * @param {String} ticker Stock quote
+ * @return {void}
+ */
+const chartWidget = (ticker = '') => {
+    const quote = ticker.toUpperCase()
+    const theme = checkForThemeSettings()
+
+    iframe_chart.src = 'charts/chart.html?stock=' + quote + '&theme=' + theme
+}
 
 // DOM object of elements which should be changed during request
 let pageObj = {
@@ -323,7 +356,6 @@ const setSigns = () => {
 
 // Get response from server side
 const getResponse = async () => {
-
     try {
         const resp = await fetch('/stocks?ticker=' + ticker.value)
         if (resp.status !== 200) {
@@ -339,7 +371,8 @@ const getResponse = async () => {
 erase()
 
 // Set S&P500 as default tradingview widget
-techWidget('SPX')
+techWidget('SPY')
+chartWidget('SPY')
 
 // Set starting colors for 'stock short' values
 Array('finviz_short_flow', 'naked_current_short_volume', 'squeeze_short_flow').forEach(key => pageObj[key].classList.add('is-link'))
@@ -361,6 +394,14 @@ form.addEventListener('submit', async (e) => {
             throw new Error(response.message)
         }
 
+        // Setup url search query
+        if ('URLSearchParams' in window) {
+            const searchParams = new URLSearchParams(window.location.search)
+            searchParams.set('stock', ticker.value)
+            const newRelativePathQuery = window.location.pathname + '?' + searchParams.toString()
+            history.pushState(null, '', newRelativePathQuery)
+        }
+
         // Set values
         for (const key in pageObj) {
             pageObj[key].textContent = response[key] || '-'
@@ -379,7 +420,7 @@ form.addEventListener('submit', async (e) => {
         }
 
         // Set target indicator
-        const targetUpside = (response.target_price != null && response.price != null) ? ((response.target_price / response.price - 1) * 100).toFixed(1) : null
+        const targetUpside = (response.target_price !== null && response.price !== null) ? ((response.target_price / response.price - 1) * 100).toFixed(1) : null
         if (targetUpside > 0) {
             resp_finviz_target.textContent = '+' + targetUpside
             resp_finviz_target.classList.add('is-success')
@@ -427,6 +468,7 @@ form.addEventListener('submit', async (e) => {
 
         // ! APPEND TRADINGVIEW WIDGET
         techWidget(ticker.value)
+        chartWidget(ticker.value)
 
         if (response.naked_chart && !response.naked_chart[0].error && response.naked_chart[0].xAxisArr.length > 0 && response.naked_chart[0].shortVolArr.length > 0) {
             // ! UPDATE VOLUME CHART
@@ -471,7 +513,7 @@ form.addEventListener('submit', async (e) => {
     } catch (error) {
         isLoading(false)
         erase(' ошибка ')
-        error_message.textContent = error.message == 429 ? 'Превышен лимит запросов в минуту!' : 'Ошибка! Введите правильный тикер'
+        error_message.textContent = error.message === 429 ? 'Превышен лимит запросов в минуту!' : 'Ошибка! Введите правильный тикер'
     }
 })
 
@@ -512,6 +554,10 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     })
 
+    /**
+     * Hide modals
+     * @return {void}
+     */
     function closeModals() {
         rootEl.classList.remove('is-clipped')
         modals.forEach(function (el) {
@@ -519,8 +565,11 @@ document.addEventListener('DOMContentLoaded', function () {
         })
     }
 
-    // Functions
-
+    /**
+     * Get all elements with query selector
+     * @param {*} selector Query selector
+     * @return {Array} Array of selected DOM elements
+     */
     function getAll(selector) {
         return Array.prototype.slice.call(document.querySelectorAll(selector), 0)
     }
@@ -600,7 +649,8 @@ checkbox.addEventListener('change', (event) => {
             'dark'
     }
     localStorage.setItem('theme', theme)
-    techWidget(ticker.value || 'SPX')
+    techWidget(ticker.value || 'SPY')
+    chartWidget(ticker.value || 'SPY')
 
     if (event.currentTarget.checked) {
         setThemeForElements('dark')
@@ -609,12 +659,12 @@ checkbox.addEventListener('change', (event) => {
     }
 })
 
-if ((currentTheme == 'dark') || (prefersDarkScheme.matches && currentTheme != 'light')) {
+if ((currentTheme === 'dark') || (prefersDarkScheme.matches && currentTheme !== 'light')) {
     document.body.classList.toggle('dark-theme')
     checkbox.checked = true
     setThemeForElements('dark')
 
-} else if (currentTheme == 'light' || prefersLightScheme.matches) {
+} else if (currentTheme === 'light' || prefersLightScheme.matches) {
     document.body.classList.toggle('light-theme')
     setThemeForElements('light')
 }
