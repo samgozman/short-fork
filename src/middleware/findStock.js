@@ -14,10 +14,6 @@ const findStock = async (req, res, next) => {
         let stock = await Stock.findOne({
             ticker: ticker.toUpperCase()
         })
-
-        // stock._counter++
-        // await stock.save()
-        // store stock object
         res.stock = stock
         next()
     } catch (error) {
