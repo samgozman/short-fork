@@ -5,6 +5,7 @@ const shortsqueezeSchema = mongoose.Schema({
     _stock_id: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
+        unique: true,
         ref: 'Stock'
     },
     squeeze_short_flow: {

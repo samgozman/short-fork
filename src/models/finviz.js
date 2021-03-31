@@ -1,10 +1,13 @@
 const mongoose = require('mongoose')
+const timeout = require('../utils/timeout')
+const finvizor = require('finvizor')
 
 // Class schema for Finviz instance
 const finvizSchema = mongoose.Schema({
     _stock_id: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
+        unique: true,
         ref: 'Stock'
     },
     name: {
@@ -60,6 +63,86 @@ const finvizSchema = mongoose.Schema({
 }, {
     timestamps: true
 })
+
+// Get data from finviz.com
+finvizSchema.statics.getDataFromFinviz = async (ticker = '') => {
+    const fin = await timeout(finvizor.stock(ticker))
+
+    if (fin.error) {
+        console.log(fin.error)
+        return undefined
+    }
+
+    return {
+        name: fin.name,
+        price: fin.price,
+        pe: fin.pe,
+        ps: fin.ps,
+        pb: fin.pb,
+        roe: fin.roe,
+        roa: fin.roa,
+        debteq: fin.debtEq,
+        finviz_short_flow: fin.shortFloat,
+        target_price: fin.targetPrice,
+        rsi: fin.rsi,
+        recomendation: fin.recom ? fin.recom.toFixed(1) : null,
+        site: fin.site,
+    }
+}
+
+// Create object in DB. obj is optional - if data was fetched earlier 
+finvizSchema.statics.createRecord = async (ticker = '', _stock_id = '', obj) => {
+
+    let fin = await Finviz.findOne({
+        _stock_id
+    })
+
+    // Overwrite if exist
+    if (fin) {
+        fin.overwrite({
+            _stock_id,
+            ...(await Finviz.getDataFromFinviz(ticker))
+        })
+    } else {
+        // Create if not
+        fin = new Finviz(obj ? {
+            _stock_id,
+            ...obj
+        } : {
+            _stock_id,
+            ...(await Finviz.getDataFromFinviz(ticker))
+        })
+    }
+
+    await fin.save()
+    return fin
+}
+
+// Get obj by _stock_id
+finvizSchema.statics.findByStockId = async (ticker, _stock_id = '') => {
+    try {
+        let fin = await Finviz.findOne({
+            _stock_id
+        })
+
+        if (!fin) {
+            return await Finviz.createRecord(ticker, _stock_id)
+        }
+
+        // ! Check if ticker is exist in DB and its "freshness"
+        // 21600000 - 6h, 14400000 - 4h, 1200000 - 20m, 900000 - 15m, 30000 - 30s
+        const keepFreshFor = 10000
+        if ((new Date() - fin.updatedAt) > keepFreshFor) {
+            return await Finviz.createRecord(ticker, _stock_id)
+        }
+
+        return fin
+    } catch (error) {
+        return {
+            error: error.message
+        }
+    }
+}
 
 const Finviz = mongoose.model('Finviz', finvizSchema)
 

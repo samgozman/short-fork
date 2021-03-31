@@ -1,11 +1,10 @@
 const Stock = require('../models/stock')
-const timeout = require('../utils/timeout')
 const tinkoff = require('is-on-tinkoff-invest')
 
 // Update tinkoff indicator
 const update = async () => {
         try {
-        const tinkoffStocks = timeout(await tinkoff.getTinkoffStocks())
+        const tinkoffStocks = await tinkoff.getTinkoffStocks()
         // Save tinkoff status to DB. If stock is not there - create it.
         for (const item of tinkoffStocks) {
             // Try to find existing
