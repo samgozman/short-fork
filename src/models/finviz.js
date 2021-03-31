@@ -66,28 +66,35 @@ const finvizSchema = mongoose.Schema({
 
 // Get data from finviz.com
 finvizSchema.statics.getDataFromFinviz = async (ticker = '') => {
-    const fin = await timeout(finvizor.stock(ticker.trim()))
+    try {
+        const fin = await timeout(finvizor.stock(ticker.trim()))
 
-    if (fin.error) {
-        console.log(fin.error)
-        return undefined
+        if (fin.error) {
+            console.log(fin.error)
+            return undefined
+        }
+
+        return {
+            name: fin.name,
+            price: fin.price,
+            pe: fin.pe,
+            ps: fin.ps,
+            pb: fin.pb,
+            roe: fin.roe,
+            roa: fin.roa,
+            debteq: fin.debtEq,
+            finviz_short_flow: fin.shortFloat,
+            target_price: fin.targetPrice,
+            rsi: fin.rsi,
+            recomendation: fin.recom ? fin.recom.toFixed(1) : null,
+            site: fin.site,
+        }
+    } catch (error) {
+        return {
+            error: 'Finviz service is unavalible'
+        }
     }
 
-    return {
-        name: fin.name,
-        price: fin.price,
-        pe: fin.pe,
-        ps: fin.ps,
-        pb: fin.pb,
-        roe: fin.roe,
-        roa: fin.roa,
-        debteq: fin.debtEq,
-        finviz_short_flow: fin.shortFloat,
-        target_price: fin.targetPrice,
-        rsi: fin.rsi,
-        recomendation: fin.recom ? fin.recom.toFixed(1) : null,
-        site: fin.site,
-    }
 }
 
 // Create object in DB. obj is optional - if data was fetched earlier 
