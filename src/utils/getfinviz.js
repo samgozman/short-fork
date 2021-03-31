@@ -1,16 +1,5 @@
-const pTimeout = require('p-timeout')
+const timeout = require('../utils/timeout')
 const finvizor = require('finvizor')
-
-// Return error if response timeout
-const timeout = async (func = Promise, time = 5000) => {
-    try {
-        return await pTimeout(func, time)
-    } catch (error) {
-        return {
-            error: 'Finviz не отвечает'
-        }
-    }
-}
 
 const getFinvizData = async (ticker = '') => {
     const fin =  await timeout(finvizor.stock(ticker))

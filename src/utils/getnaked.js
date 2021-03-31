@@ -1,16 +1,5 @@
-const pTimeout = require('p-timeout')
+const timeout = require('../utils/timeout')
 const nakedshort = require('nakedshort')
-
-// Return error if response timeout
-const timeout = async (func = Promise, time = 5000) => {
-    try {
-        return await pTimeout(func, time)
-    } catch (error) {
-        return {
-            error: 'Nakedshort  не отвечает'
-        }
-    }
-}
 
 const getNaked = async (ticker = '') => {
     const naked_chart = await timeout(nakedshort.getChart(ticker))
