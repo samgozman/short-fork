@@ -27,6 +27,18 @@ stockSchema.virtual('finviz', {
     foreignField: '_stock_id'
 })
 
+stockSchema.virtual('nakedshort', {
+    ref: 'Nakedshort',
+    localField: '_id',
+    foreignField: '_stock_id'
+})
+
+stockSchema.virtual('shortsqueeze', {
+    ref: 'Shortsqueeze',
+    localField: '_id',
+    foreignField: '_stock_id'
+})
+
 const Stock = mongoose.model('Stock', stockSchema)
 
 module.exports = Stock

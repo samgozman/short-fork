@@ -66,7 +66,7 @@ const finvizSchema = mongoose.Schema({
 
 // Get data from finviz.com
 finvizSchema.statics.getDataFromFinviz = async (ticker = '') => {
-    const fin = await timeout(finvizor.stock(ticker))
+    const fin = await timeout(finvizor.stock(ticker.trim()))
 
     if (fin.error) {
         console.log(fin.error)
@@ -92,7 +92,6 @@ finvizSchema.statics.getDataFromFinviz = async (ticker = '') => {
 
 // Create object in DB. obj is optional - if data was fetched earlier 
 finvizSchema.statics.createRecord = async (ticker = '', _stock_id = '', obj) => {
-
     let fin = await Finviz.findOne({
         _stock_id
     })
@@ -129,10 +128,8 @@ finvizSchema.statics.findByStockId = async (ticker, _stock_id = '') => {
             return await Finviz.createRecord(ticker, _stock_id)
         }
 
-        // ! Check if ticker is exist in DB and its "freshness"
-        // 21600000 - 6h, 14400000 - 4h, 1200000 - 20m, 900000 - 15m, 30000 - 30s
-        const keepFreshFor = 10000
-        if ((new Date() - fin.updatedAt) > keepFreshFor) {
+        // ! Check if ticker is exist in DB and its "freshness" (1200000 = 20min)
+        if ((new Date() - fin.updatedAt) > 1200000) {
             return await Finviz.createRecord(ticker, _stock_id)
         }
 
