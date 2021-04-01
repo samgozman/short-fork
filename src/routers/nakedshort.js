@@ -1,6 +1,5 @@
 const express = require('express')
 const Naked = require('../models/nakedshort')
-const getNaked = require('../utils/getnaked.js')
 const rateLimiter = require('../middleware/rateLimiter')
 const findStock = require('../middleware/findStock')
 const counter = require('../middleware/counter')
@@ -10,14 +9,8 @@ router.get('/stocks/nakedshort', rateLimiter, findStock, counter, async (req, re
     const ticker = req.query.ticker
 
     try {
-        const data = await getNaked(ticker),
-            naked = new Naked({
-                _stock_id: res.stock._id,
-                ...data
-            })
-
-        await naked.save()
-        return res.send(naked)
+        const data = await Naked.findByStockId(ticker, res.stock._id)
+        return res.send(data)
 
     } catch (err) {
         res.status(500).send(err.message)
