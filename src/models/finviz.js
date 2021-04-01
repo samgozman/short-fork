@@ -95,7 +95,7 @@ finvizSchema.statics.getDataFromFinviz = async (ticker = '') => {
             target_price: fin.targetPrice,
             rsi: fin.rsi,
             recomendation: fin.recom ? fin.recom.toFixed(1) : null,
-            site: fin.site,
+            site: fin.site
         }
     } catch (error) {
         return {
@@ -194,7 +194,6 @@ finvizSchema.pre('find', async function () {
             error: 'finviz pre.find error!'
         }
     }
-
 })
 
 const Finviz = mongoose.model('Finviz', finvizSchema)

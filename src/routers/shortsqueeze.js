@@ -1,6 +1,5 @@
 const express = require('express')
 const Shortsqueeze = require('../models/shortsqueeze')
-const getShortsqueeze = require('../utils/getshortsqueeze')
 const rateLimiter = require('../middleware/rateLimiter')
 const findStock = require('../middleware/findStock')
 const counter = require('../middleware/counter')
@@ -10,14 +9,8 @@ router.get('/stocks/shortsqueeze', rateLimiter, findStock, counter, async (req, 
     const ticker = req.query.ticker
 
     try {
-        const data = await getShortsqueeze(ticker),
-            squeeze = new Shortsqueeze({
-                _stock_id: res.stock._id,
-                ...data
-            })
-
-        await squeeze.save()
-        return res.send(squeeze)
+        const data = await Shortsqueeze.findByStockId(ticker, res.stock._id)
+        return res.send(data)
 
     } catch (err) {
         res.status(500).send(err.message)
