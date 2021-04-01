@@ -1,12 +1,12 @@
 const express = require('express')
 const Shortsqueeze = require('../models/shortsqueeze')
 const getShortsqueeze = require('../utils/getshortsqueeze')
-const stocksLimiter = require('../middleware/rateLimiter')
+const rateLimiter = require('../middleware/rateLimiter')
 const findStock = require('../middleware/findStock')
 const counter = require('../middleware/counter')
 const router = new express.Router()
 
-router.get('/stocks/shortsqueeze', stocksLimiter, findStock, counter, async (req, res) => {
+router.get('/stocks/shortsqueeze', rateLimiter, findStock, counter, async (req, res) => {
     const ticker = req.query.ticker
 
     try {
