@@ -24,19 +24,22 @@ const stockSchema = mongoose.Schema({
 stockSchema.virtual('finviz', {
     ref: 'Finviz',
     localField: '_id',
-    foreignField: '_stock_id'
+    foreignField: '_stock_id',
+    justOne: true
 })
 
 stockSchema.virtual('nakedshort', {
     ref: 'Nakedshort',
     localField: '_id',
-    foreignField: '_stock_id'
+    foreignField: '_stock_id',
+    justOne: true
 })
 
 stockSchema.virtual('shortsqueeze', {
     ref: 'Shortsqueeze',
     localField: '_id',
-    foreignField: '_stock_id'
+    foreignField: '_stock_id',
+    justOne: true
 })
 
 const Stock = mongoose.model('Stock', stockSchema)
