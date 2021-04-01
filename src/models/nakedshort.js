@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const Stock = require('../models/stock')
 const timeout = require('../utils/timeout')
 const nakedshort = require('nakedshort')
 
@@ -140,7 +141,16 @@ nakedshortSchema.pre('find', async function () {
             _stock_id
         })
 
-        await naked.keepFresh()
+        if (!naked) {
+            // Find ticker
+            const ticker = (await Stock.findById(_stock_id)).ticker
+            // Create
+            await Nakedshort.createRecord(ticker, _stock_id)
+        } else {
+            // Update
+            await naked.keepFresh()
+        }
+
     } catch (error) {
         return {
             error: 'nakedshort pre.find error!'

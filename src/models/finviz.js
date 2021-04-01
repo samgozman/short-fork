@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const Stock = require('../models/stock')
 const timeout = require('../utils/timeout')
 const finvizor = require('finvizor')
 
@@ -188,7 +189,16 @@ finvizSchema.pre('find', async function () {
             _stock_id
         })
 
-        await fin.keepFresh()
+        if (!fin) {
+            // Find ticker
+            const ticker = (await Stock.findById(_stock_id)).ticker
+            // Create
+            await Finviz.createRecord(ticker, _stock_id)
+        } else {
+            // Update
+            await fin.keepFresh()
+        }
+
     } catch (error) {
         return {
             error: 'finviz pre.find error!'

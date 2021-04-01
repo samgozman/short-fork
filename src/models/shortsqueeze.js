@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const Stock = require('../models/stock')
 const timeout = require('../utils/timeout')
 const shortsqueeze = require('shortsqueeze')
 
@@ -124,7 +125,15 @@ shortsqueezeSchema.pre('find', async function () {
             _stock_id
         })
 
-        await squeeze.keepFresh()
+        if (!squeeze) {
+            // Find ticker
+            const ticker = (await Stock.findById(_stock_id)).ticker
+            // Create
+            await Shortsqueeze.createRecord(ticker, _stock_id)
+        } else {
+            // Update
+            await squeeze.keepFresh()
+        }
     } catch (error) {
         return {
             error: 'shortsqueeze pre.find error!'
