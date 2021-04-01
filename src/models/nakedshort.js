@@ -46,7 +46,7 @@ nakedshortSchema.statics.getDataFromNaked = async (ticker = '') => {
         return {
             _ticker: ticker,
             naked_current_short_volume: naked_current_short_volume ? naked_current_short_volume.toFixed(2) : null,
-            naked_chart: naked_chart || null
+            naked_chart: naked_chart.error ? null : naked_chart
 
         }
     } catch (error) {
