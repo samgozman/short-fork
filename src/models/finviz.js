@@ -125,7 +125,7 @@ finvizSchema.statics.createRecord = async (ticker = '', _stock_id = '', obj) => 
 }
 
 // Get obj by _stock_id
-finvizSchema.statics.findByStockId = async (ticker, _stock_id = '') => {
+finvizSchema.statics.findByStockId = async (ticker = '', _stock_id = '') => {
     try {
         let fin = await Finviz.findOne({
             _stock_id
@@ -135,15 +135,24 @@ finvizSchema.statics.findByStockId = async (ticker, _stock_id = '') => {
             return await Finviz.createRecord(ticker, _stock_id)
         }
 
-        // ! Check if ticker is exist in DB and its "freshness" (1200000 = 20min)
-        if ((new Date() - fin.updatedAt) > 1200000) {
-            return await Finviz.createRecord(ticker, _stock_id)
-        }
-
-        return fin
+        return await fin.keepFresh(ticker, _stock_id)
     } catch (error) {
         return {
             error: error.message
+        }
+    }
+}
+
+// Method for keeping things fresh
+finvizSchema.methods.keepFresh = async function (ticker = '', _stock_id = '', ttl = 1200000) {
+    try {
+        if ((new Date() - this.updatedAt) > ttl) {
+            return await Finviz.createRecord(ticker, _stock_id)
+        }
+        return this
+    } catch (error) {
+        return {
+            error: 'keepFresh error'
         }
     }
 }
