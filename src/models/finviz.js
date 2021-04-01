@@ -10,6 +10,13 @@ const finvizSchema = mongoose.Schema({
         unique: true,
         ref: 'Stock'
     },
+    _ticker: {
+        type: String,
+        required: true,
+        unique: true,
+        uppercase: true,
+        trim: true
+    },
     name: {
         type: String
     },
@@ -75,6 +82,7 @@ finvizSchema.statics.getDataFromFinviz = async (ticker = '') => {
         }
 
         return {
+            _ticker: fin.ticker,
             name: fin.name,
             price: fin.price,
             pe: fin.pe,
@@ -135,7 +143,7 @@ finvizSchema.statics.findByStockId = async (ticker = '', _stock_id = '') => {
             return await Finviz.createRecord(ticker, _stock_id)
         }
 
-        return await fin.keepFresh(ticker, _stock_id)
+        return await fin.keepFresh()
     } catch (error) {
         return {
             error: error.message
@@ -143,11 +151,26 @@ finvizSchema.statics.findByStockId = async (ticker = '', _stock_id = '') => {
     }
 }
 
+finvizSchema.methods.updateRecord = async function () {
+    try {
+        this.overwrite({
+            _stock_id: this._stock_id,
+            ...(await Finviz.getDataFromFinviz(this._ticker))
+        })
+        await this.save()
+        return this
+    } catch (error) {
+        return {
+            error: 'updateRecord error'
+        }
+    }
+}
+
 // Method for keeping things fresh
-finvizSchema.methods.keepFresh = async function (ticker = '', _stock_id = '', ttl = 1200000) {
+finvizSchema.methods.keepFresh = async function (ttl = 1200000) {
     try {
         if ((new Date() - this.updatedAt) > ttl) {
-            return await Finviz.createRecord(ticker, _stock_id)
+            return await this.updateRecord()
         }
         return this
     } catch (error) {
@@ -156,6 +179,23 @@ finvizSchema.methods.keepFresh = async function (ticker = '', _stock_id = '', tt
         }
     }
 }
+
+// Execute keepFresh check wlhile mongoose populate (populate is using find() method)
+finvizSchema.pre('find', async function () {
+    try {
+        const _stock_id = this.getQuery()._stock_id['$in'][0]
+        const fin = await Finviz.findOne({
+            _stock_id
+        })
+
+        await fin.keepFresh()
+    } catch (error) {
+        return {
+            error: 'finviz pre.find error!'
+        }
+    }
+
+})
 
 const Finviz = mongoose.model('Finviz', finvizSchema)
 
