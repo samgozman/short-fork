@@ -60,6 +60,14 @@ const finvizSchema = mongoose.Schema({
     site: {
         type: String,
         default: null
+    },
+    peg: {
+        type: Number,
+        default: null
+    },
+    dividend_percent: {
+        type: Number,
+        default: null
     }
 }, {
     timestamps: true
@@ -88,7 +96,9 @@ finvizSchema.statics.getDataFromFinviz = async (ticker = '') => {
             target_price: fin.targetPrice,
             rsi: fin.rsi,
             recomendation: fin.recom ? fin.recom.toFixed(1) : null,
-            site: fin.site
+            site: fin.site,
+            peg: fin.peg,
+            dividend_percent: fin.dividendPercent
         }
     } catch (error) {
         return {

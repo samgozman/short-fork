@@ -277,7 +277,9 @@ let pageObj = {
         roa: document.querySelector('#resp_roa'),
         debteq: document.querySelector('#resp_debteq'),
         short_flow: document.querySelector('#resp_finviz'),
-        site: document.querySelector('#resp_site')
+        site: document.querySelector('#resp_site'),
+        peg: document.querySelector('#resp_peg'),
+        dividend_percent: document.querySelector('#resp_dividend_percent')
     },
     nakedshort: {
         current_short_volume: document.querySelector('#resp_naked')
@@ -359,6 +361,7 @@ const setSigns = () => {
     pageObj.finviz.short_flow.textContent += '%'
     pageObj.finviz.roe.textContent += '%'
     pageObj.finviz.roa.textContent += '%'
+    pageObj.finviz.dividend_percent.textContent += '%'
     resp_finviz_target.textContent += '%'
 }
 
@@ -473,7 +476,10 @@ form.addEventListener('submit', async (e) => {
         pageObj.finviz.ps.classList.add(response.finviz.ps > 0 && response.finviz.ps < 1 ? 'is-success' : response.finviz.ps < 3 ? 'is-warning' : 'is-danger')
 
         // Set p/e indicator
-        pageObj.finviz.pe.classList.add(response.finviz.ps > 0 && response.finviz.pe < 15 ? 'is-success' : response.finviz.pe < 25 ? 'is-warning' : 'is-danger')
+        pageObj.finviz.pe.classList.add(response.finviz.pe > 0 && response.finviz.pe < 15 ? 'is-success' : response.finviz.pe < 25 ? 'is-warning' : 'is-danger')
+
+        // Set peg indicator
+        pageObj.finviz.peg.classList.add(response.finviz.peg > 0 && response.finviz.peg < 1 ? 'is-success' : response.finviz.peg < 3 ? 'is-warning' : 'is-danger')
 
 
         setSigns()
