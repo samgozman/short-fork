@@ -11,13 +11,6 @@ const nakedshortSchema = mongoose.Schema({
         unique: true,
         ref: 'Stock'
     },
-    _ticker: {
-        type: String,
-        required: true,
-        unique: true,
-        uppercase: true,
-        trim: true
-    },
     naked_current_short_volume: {
         type: Number,
         default: null
@@ -45,7 +38,6 @@ nakedshortSchema.statics.getDataFromNaked = async (ticker = '') => {
         }
 
         return {
-            _ticker: ticker,
             naked_current_short_volume: naked_current_short_volume ? naked_current_short_volume.toFixed(2) : null,
             naked_chart: naked_chart.error ? null : naked_chart
 
@@ -106,9 +98,10 @@ nakedshortSchema.statics.findByStockId = async (ticker = '', _stock_id = '') => 
 
 nakedshortSchema.methods.updateRecord = async function () {
     try {
+        const ticker = (await Stock.findById(this._stock_id)).ticker
         this.overwrite({
             _stock_id: this._stock_id,
-            ...(await Nakedshort.getDataFromNaked(this._ticker))
+            ...(await Nakedshort.getDataFromNaked(ticker))
         })
         await this.save()
         return this

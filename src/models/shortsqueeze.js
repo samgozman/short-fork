@@ -11,13 +11,6 @@ const shortsqueezeSchema = mongoose.Schema({
         unique: true,
         ref: 'Stock'
     },
-    _ticker: {
-        type: String,
-        required: true,
-        unique: true,
-        uppercase: true,
-        trim: true
-    },
     squeeze_short_flow: {
         type: Number,
         default: null
@@ -32,7 +25,6 @@ shortsqueezeSchema.statics.getDataFromFinviz = async (ticker = '') => {
         const squeeze = await timeout(shortsqueeze(ticker))
 
         return {
-            _ticker: ticker,
             squeeze_short_flow: squeeze ? squeeze.shortPercentOfFloat : null
         }
     } catch (error) {
@@ -90,9 +82,10 @@ shortsqueezeSchema.statics.findByStockId = async (ticker = '', _stock_id = '') =
 
 shortsqueezeSchema.methods.updateRecord = async function () {
     try {
+        const ticker = (await Stock.findById(this._stock_id)).ticker
         this.overwrite({
             _stock_id: this._stock_id,
-            ...(await Shortsqueeze.getDataFromFinviz(this._ticker))
+            ...(await Shortsqueeze.getDataFromFinviz(ticker))
         })
         await this.save()
         return this

@@ -11,13 +11,6 @@ const finvizSchema = mongoose.Schema({
         unique: true,
         ref: 'Stock'
     },
-    _ticker: {
-        type: String,
-        required: true,
-        unique: true,
-        uppercase: true,
-        trim: true
-    },
     name: {
         type: String
     },
@@ -83,7 +76,6 @@ finvizSchema.statics.getDataFromFinviz = async (ticker = '') => {
         }
 
         return {
-            _ticker: fin.ticker,
             name: fin.name,
             price: fin.price,
             pe: fin.pe,
@@ -154,9 +146,10 @@ finvizSchema.statics.findByStockId = async (ticker = '', _stock_id = '') => {
 
 finvizSchema.methods.updateRecord = async function () {
     try {
+        const ticker = (await Stock.findById(this._stock_id)).ticker
         this.overwrite({
             _stock_id: this._stock_id,
-            ...(await Finviz.getDataFromFinviz(this._ticker))
+            ...(await Finviz.getDataFromFinviz(ticker))
         })
         await this.save()
         return this
