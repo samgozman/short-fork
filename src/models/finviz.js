@@ -174,6 +174,23 @@ finvizSchema.methods.keepFresh = async function (ttl = 1200000) {
     }
 }
 
+/**
+ * TWEAK: Hide unnecessary data!
+ * @example https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify#tojson_behavior
+ * @return {Object} object
+ */
+finvizSchema.methods.toJSON = function () {
+    const data = this
+    const dataObj = data.toObject()
+
+    delete dataObj._stock_id
+    delete dataObj._id
+    delete dataObj.__v
+    delete dataObj.createdAt
+
+    return dataObj
+}
+
 // Execute keepFresh check wlhile mongoose populate (populate is using find() method)
 finvizSchema.pre('find', async function () {
     try {
