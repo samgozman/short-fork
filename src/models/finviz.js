@@ -161,7 +161,7 @@ finvizSchema.methods.updateRecord = async function () {
 }
 
 // Method for keeping things fresh
-finvizSchema.methods.keepFresh = async function (ttl = 1200000) {
+finvizSchema.methods.keepFresh = async function (ttl = process.env.TTL_FINVIZ || 1200000) {
     try {
         if ((new Date() - this.updatedAt) > ttl) {
             return await this.updateRecord()

@@ -97,7 +97,7 @@ shortsqueezeSchema.methods.updateRecord = async function () {
 }
 
 // Method for keeping things fresh
-shortsqueezeSchema.methods.keepFresh = async function (ttl = 1200000) {
+shortsqueezeSchema.methods.keepFresh = async function (ttl = process.env.TTL_SHORTSQUEEZE || 1200000) {
     try {
         if ((new Date() - this.updatedAt) > ttl) {
             return await this.updateRecord()
