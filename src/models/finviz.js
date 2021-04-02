@@ -41,7 +41,7 @@ const finvizSchema = mongoose.Schema({
         type: Number,
         default: null
     },
-    finviz_short_flow: {
+    short_flow: {
         type: Number,
         default: null
     },
@@ -84,7 +84,7 @@ finvizSchema.statics.getDataFromFinviz = async (ticker = '') => {
             roe: fin.roe,
             roa: fin.roa,
             debteq: fin.debtEq,
-            finviz_short_flow: fin.shortFloat,
+            short_flow: fin.shortFloat,
             target_price: fin.targetPrice,
             rsi: fin.rsi,
             recomendation: fin.recom ? fin.recom.toFixed(1) : null,

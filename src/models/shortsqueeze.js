@@ -11,7 +11,7 @@ const shortsqueezeSchema = mongoose.Schema({
         unique: true,
         ref: 'Stock'
     },
-    squeeze_short_flow: {
+    short_flow: {
         type: Number,
         default: null
     }
@@ -25,7 +25,7 @@ shortsqueezeSchema.statics.getDataFromFinviz = async (ticker = '') => {
         const squeeze = await timeout(shortsqueeze(ticker))
 
         return {
-            squeeze_short_flow: squeeze ? squeeze.shortPercentOfFloat : null
+            short_flow: squeeze ? squeeze.shortPercentOfFloat : null
         }
     } catch (error) {
         return {

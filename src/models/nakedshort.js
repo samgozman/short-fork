@@ -11,11 +11,11 @@ const nakedshortSchema = mongoose.Schema({
         unique: true,
         ref: 'Stock'
     },
-    naked_current_short_volume: {
+    current_short_volume: {
         type: Number,
         default: null
     },
-    naked_chart: {
+    chart: {
         type: Array,
         default: []
     },
@@ -26,20 +26,20 @@ const nakedshortSchema = mongoose.Schema({
 // Get data from nakedshortreport
 nakedshortSchema.statics.getDataFromNaked = async (ticker = '') => {
     try {
-        const naked_chart = await timeout(nakedshort.getChart(ticker))
+        const chart = await timeout(nakedshort.getChart(ticker))
 
         let
             naked_length = undefined,
-            naked_current_short_volume = undefined
+            current_short_volume = undefined
 
-        if (naked_chart && !naked_chart.error) {
-            naked_length = naked_chart.regularVolArr.length,
-                naked_current_short_volume = (naked_chart.shortVolArr[naked_length - 1] / naked_chart.regularVolArr[naked_length - 1]) * 100
+        if (chart && !chart.error) {
+            naked_length = chart.regularVolArr.length,
+                current_short_volume = (chart.shortVolArr[naked_length - 1] / chart.regularVolArr[naked_length - 1]) * 100
         }
 
         return {
-            naked_current_short_volume: naked_current_short_volume ? naked_current_short_volume.toFixed(2) : null,
-            naked_chart: naked_chart.error ? null : naked_chart
+            current_short_volume: current_short_volume ? current_short_volume.toFixed(2) : null,
+            chart: chart.error ? null : chart
 
         }
     } catch (error) {
