@@ -16,7 +16,10 @@ router.get('', (req, res) => {
         layout: 'bulma-ui',
         package_version: process.env.npm_package_version,
         financialTagsLeft: financialTags.left,
-        financialTagsRight: financialTags.right
+        financialTagsRight: financialTags.right,
+        TTL_NAKEDSHORT: (process.env.TTL_NAKEDSHORT / (1000 * 60)).toFixed(0),
+        TTL_FINVIZ: (process.env.TTL_FINVIZ / (1000 * 60)).toFixed(0),
+        TTL_SHORTSQUEEZE: (process.env.TTL_SHORTSQUEEZE / (1000 * 60)).toFixed(0)
     })
 })
 
