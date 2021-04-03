@@ -21,6 +21,7 @@ router.get('/stocks', rateLimiter, findStock, counter, async (req, res) => {
         delete stock.__v
         delete stock._counter
         delete stock.createdAt
+        delete stock.updatedAt
 
         res.send(stock)
     } catch (err) {

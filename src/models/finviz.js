@@ -197,6 +197,7 @@ finvizSchema.methods.toJSON = function () {
     delete dataObj._id
     delete dataObj.__v
     delete dataObj.createdAt
+    delete dataObj.updatedAt
 
     return dataObj
 }
