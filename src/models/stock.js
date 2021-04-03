@@ -9,71 +9,9 @@ const stockSchema = mongoose.Schema({
         uppercase: true,
         trim: true
     },
-    name: {
-        type: String
-    },
-    price: {
-        type: Number
-    },
-    pe: {
-        type: Number,
-        default: null
-    },
-    ps: {
-        type: Number,
-        default: null
-    },
-    pb: {
-        type: Number,
-        default: null
-    },
-    roe: {
-        type: Number,
-        default: null
-    },
-    roa: {
-        type: Number,
-        default: null
-    },
-    debteq: {
-        type: Number,
-        default: null
-    },
-    naked_current_short_volume: {
-        type: Number,
-        default: null
-    },
-    squeeze_short_flow: {
-        type: Number,
-        default: null
-    },
-    finviz_short_flow: {
-        type: Number,
-        default: null
-    },
     tinkoff: {
         type: Boolean,
         default: false
-    },
-    target_price: {
-        type: Number,
-        default: null
-    },
-    rsi: {
-        type: Number,
-        default: null
-    },
-    recomendation: {
-        type: Number,
-        default: null
-    },
-    site: {
-        type: String,
-        default: null
-    },
-    naked_chart: {
-        type: Array,
-        default: []
     },
     _counter: {
         type: Number,
@@ -82,6 +20,28 @@ const stockSchema = mongoose.Schema({
 }, {
     timestamps: true
 })
+
+stockSchema.virtual('finviz', {
+    ref: 'Finviz',
+    localField: '_id',
+    foreignField: '_stock_id',
+    justOne: true
+})
+
+stockSchema.virtual('nakedshort', {
+    ref: 'Nakedshort',
+    localField: '_id',
+    foreignField: '_stock_id',
+    justOne: true
+})
+
+stockSchema.virtual('shortsqueeze', {
+    ref: 'Shortsqueeze',
+    localField: '_id',
+    foreignField: '_stock_id',
+    justOne: true
+})
+
 const Stock = mongoose.model('Stock', stockSchema)
 
 module.exports = Stock

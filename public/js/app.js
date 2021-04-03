@@ -206,7 +206,6 @@ const getPercentageOfShorted = (volArr = [], shortArr = []) => {
     return shortVolPercentage
 }
 
-
 /**
  * Check for theme settings for tradingview widgets
  * @return {String} 'light' or 'dark'
@@ -268,18 +267,26 @@ const chartWidget = (ticker = '') => {
 
 // DOM object of elements which should be changed during request
 let pageObj = {
-    name: document.querySelector('#resp_name'),
-    price: document.querySelector('#resp_price'),
-    pe: document.querySelector('#resp_pe'),
-    ps: document.querySelector('#resp_ps'),
-    pb: document.querySelector('#resp_pb'),
-    roe: document.querySelector('#resp_roe'),
-    roa: document.querySelector('#resp_roa'),
-    debteq: document.querySelector('#resp_debteq'),
-    naked_current_short_volume: document.querySelector('#resp_naked'),
-    squeeze_short_flow: document.querySelector('#resp_squeeze'),
-    finviz_short_flow: document.querySelector('#resp_finviz'),
-    site: document.querySelector('#resp_site')
+    finviz: {
+        name: document.querySelector('#resp_name'),
+        price: document.querySelector('#resp_price'),
+        pe: document.querySelector('#resp_pe'),
+        ps: document.querySelector('#resp_ps'),
+        pb: document.querySelector('#resp_pb'),
+        roe: document.querySelector('#resp_roe'),
+        roa: document.querySelector('#resp_roa'),
+        debteq: document.querySelector('#resp_debteq'),
+        short_flow: document.querySelector('#resp_finviz'),
+        site: document.querySelector('#resp_site'),
+        peg: document.querySelector('#resp_peg'),
+        dividend_percent: document.querySelector('#resp_dividend_percent')
+    },
+    nakedshort: {
+        current_short_volume: document.querySelector('#resp_naked')
+    },
+    shortsqueeze: {
+        short_flow: document.querySelector('#resp_squeeze')
+    }
 }
 
 const form = document.querySelector('form')
@@ -294,10 +301,13 @@ const resp_finviz_recom = document.querySelector('#resp_finviz_recom')
 
 // Erase values in DOM
 const erase = (word = ' пусто ') => {
-    for (const key in pageObj) {
-        pageObj[key].textContent = word
-        pageObj[key].classList.remove(...['is-success', 'is-danger', 'is-warning'])
+    for (const key in pageObj.finviz) {
+        pageObj.finviz[key].textContent = word
+        pageObj.finviz[key].classList.remove(...['is-success', 'is-danger', 'is-warning'])
     }
+    pageObj.nakedshort.current_short_volume.classList.remove(...['is-success', 'is-danger', 'is-warning'])
+    pageObj.shortsqueeze.short_flow.classList.remove(...['is-success', 'is-danger', 'is-warning'])
+    
     error_message.textContent = ''
 
     // Reset indicators
@@ -345,12 +355,13 @@ const isLoading = (bool = true) => {
 
 // Set signs for values
 const setSigns = () => {
-    pageObj.price.textContent = '$' + pageObj.price.textContent
-    pageObj.naked_current_short_volume.textContent += '%'
-    pageObj.squeeze_short_flow.textContent += '%'
-    pageObj.finviz_short_flow.textContent += '%'
-    pageObj.roe.textContent += '%'
-    pageObj.roa.textContent += '%'
+    pageObj.finviz.price.textContent = '$' + pageObj.finviz.price.textContent
+    pageObj.nakedshort.current_short_volume.textContent += '%'
+    pageObj.shortsqueeze.short_flow.textContent += '%'
+    pageObj.finviz.short_flow.textContent += '%'
+    pageObj.finviz.roe.textContent += '%'
+    pageObj.finviz.roa.textContent += '%'
+    pageObj.finviz.dividend_percent.textContent += '%'
     resp_finviz_target.textContent += '%'
 }
 
@@ -375,7 +386,9 @@ techWidget('SPY')
 chartWidget('SPY')
 
 // Set starting colors for 'stock short' values
-Array('finviz_short_flow', 'naked_current_short_volume', 'squeeze_short_flow').forEach(key => pageObj[key].classList.add('is-link'))
+pageObj.finviz.short_flow.classList.add('is-link')
+pageObj.nakedshort.current_short_volume.classList.add('is-link')
+pageObj.shortsqueeze.short_flow.classList.add('is-link')
 
 // ! FORM SUBMIT EVENT
 form.addEventListener('submit', async (e) => {
@@ -402,13 +415,15 @@ form.addEventListener('submit', async (e) => {
             history.pushState(null, '', newRelativePathQuery)
         }
 
-        // Set values
-        for (const key in pageObj) {
-            pageObj[key].textContent = response[key] || '-'
+        // Set values for finviz
+        for (const key in pageObj.finviz) {
+            pageObj.finviz[key].textContent = response.finviz[key] || '-'
         }
+        pageObj.nakedshort.current_short_volume.textContent = response.nakedshort.current_short_volume || '-'
+        pageObj.shortsqueeze.short_flow.textContent = response.shortsqueeze.short_flow || '-'
 
         // Set site href
-        pageObj.site.setAttribute('href', response.site)
+        pageObj.finviz.site.setAttribute('href', response.finviz.site)
 
         // Set tinkoff indicator
         if (response.tinkoff) {
@@ -420,7 +435,7 @@ form.addEventListener('submit', async (e) => {
         }
 
         // Set target indicator
-        const targetUpside = (response.target_price !== null && response.price !== null) ? ((response.target_price / response.price - 1) * 100).toFixed(1) : null
+        const targetUpside = (response.finviz.target_price !== null && response.finviz.price !== null) ? ((response.finviz.target_price / response.finviz.price - 1) * 100).toFixed(1) : null
         if (targetUpside > 0) {
             resp_finviz_target.textContent = '+' + targetUpside
             resp_finviz_target.classList.add('is-success')
@@ -430,38 +445,41 @@ form.addEventListener('submit', async (e) => {
         }
 
         // Set RSI indicator
-        resp_finviz_rsi.textContent = response.rsi
-        resp_finviz_rsi.classList.add(response.rsi < 30 ? 'is-success' : response.rsi < 70 ? 'is-warning' : 'is-danger')
+        resp_finviz_rsi.textContent = response.finviz.rsi
+        resp_finviz_rsi.classList.add(response.finviz.rsi < 30 ? 'is-success' : response.finviz.rsi < 70 ? 'is-warning' : 'is-danger')
 
         // Set analytics recomendation indicator
-        if (response.recomendation < 3) {
-            resp_finviz_recom.textContent = response.recomendation + ' - Buy'
+        if (response.finviz.recomendation < 3) {
+            resp_finviz_recom.textContent = response.finviz.recomendation + ' - Buy'
             resp_finviz_recom.classList.add('is-success')
-        } else if (response.recomendation > 3 && response.recomendation < 4) {
-            resp_finviz_recom.textContent = response.recomendation + ' - Hold'
+        } else if (response.finviz.recomendation > 3 && response.finviz.recomendation < 4) {
+            resp_finviz_recom.textContent = response.finviz.recomendation + ' - Hold'
             resp_finviz_recom.classList.add('is-warning')
-        } else if (response.recomendation > 4) {
-            resp_finviz_recom.textContent = response.recomendation + ' - Sell'
+        } else if (response.finviz.recomendation > 4) {
+            resp_finviz_recom.textContent = response.finviz.recomendation + ' - Sell'
             resp_finviz_recom.classList.add('is-danger')
         }
 
         // Set debt indicator
-        pageObj.debteq.classList.add(response.debteq < 0.4 ? 'is-success' : response.debteq < 1 ? 'is-warning' : 'is-danger')
+        pageObj.finviz.debteq.classList.add(response.finviz.debteq < 0.4 ? 'is-success' : response.finviz.debteq < 1 ? 'is-warning' : 'is-danger')
 
         // Set roa indicator
-        pageObj.roa.classList.add(response.roa > 0 ? 'is-success' : 'is-danger')
+        pageObj.finviz.roa.classList.add(response.finviz.roa > 0 ? 'is-success' : 'is-danger')
 
         // Set roe indicator
-        pageObj.roe.classList.add(response.roe > 0 && response.roe < 20 ? 'is-warning' : response.roe > 20 && response.roe < 40 ? 'is-success' : 'is-danger')
+        pageObj.finviz.roe.classList.add(response.finviz.roe > 0 && response.finviz.roe < 20 ? 'is-warning' : response.finviz.roe > 20 && response.finviz.roe < 40 ? 'is-success' : 'is-danger')
 
         // Set p/b indicator
-        pageObj.pb.classList.add(response.pb > 0 && response.pb < 1 ? 'is-success' : response.pb < 4 ? 'is-warning' : 'is-danger')
+        pageObj.finviz.pb.classList.add(response.finviz.pb > 0 && response.finviz.pb < 1 ? 'is-success' : response.finviz.pb < 4 ? 'is-warning' : 'is-danger')
 
         // Set p/s indicator
-        pageObj.ps.classList.add(response.ps > 0 && response.ps < 1 ? 'is-success' : response.ps < 3 ? 'is-warning' : 'is-danger')
+        pageObj.finviz.ps.classList.add(response.finviz.ps > 0 && response.finviz.ps < 1 ? 'is-success' : response.finviz.ps < 3 ? 'is-warning' : 'is-danger')
 
         // Set p/e indicator
-        pageObj.pe.classList.add(response.ps > 0 && response.pe < 15 ? 'is-success' : response.pe < 25 ? 'is-warning' : 'is-danger')
+        pageObj.finviz.pe.classList.add(response.finviz.pe > 0 && response.finviz.pe < 15 ? 'is-success' : response.finviz.pe < 25 ? 'is-warning' : 'is-danger')
+
+        // Set peg indicator
+        pageObj.finviz.peg.classList.add(response.finviz.peg > 0 && response.finviz.peg < 1 ? 'is-success' : response.finviz.peg < 3 ? 'is-warning' : 'is-danger')
 
 
         setSigns()
@@ -470,40 +488,40 @@ form.addEventListener('submit', async (e) => {
         techWidget(ticker.value)
         chartWidget(ticker.value)
 
-        if (response.naked_chart && !response.naked_chart[0].error && response.naked_chart[0].xAxisArr.length > 0 && response.naked_chart[0].shortVolArr.length > 0) {
+        if (response.nakedshort.chart && !response.nakedshort.chart[0].error && response.nakedshort.chart[0].xAxisArr.length > 0 && response.nakedshort.chart[0].shortVolArr.length > 0) {
             // ! UPDATE VOLUME CHART
             chartVolume.updateOptions({
                 xaxis: {
-                    categories: response.naked_chart[0].xAxisArr
+                    categories: response.nakedshort.chart[0].xAxisArr
                 }
             })
 
             chartVolume.updateSeries([{
-                data: response.naked_chart[0].regularVolArr
+                data: response.nakedshort.chart[0].regularVolArr
             }, {
-                data: response.naked_chart[0].shortVolArr
+                data: response.nakedshort.chart[0].shortVolArr
             }])
 
             // ! UPDATE SHORT PERCENT CHART
             chartShortPercent.updateOptions({
                 xaxis: {
-                    categories: response.naked_chart[0].xAxisArr
+                    categories: response.nakedshort.chart[0].xAxisArr
                 }
             })
 
             chartShortPercent.updateSeries([{
-                data: getPercentageOfShorted(response.naked_chart[0].regularVolArr, response.naked_chart[0].shortVolArr)
+                data: getPercentageOfShorted(response.nakedshort.chart[0].regularVolArr, response.nakedshort.chart[0].shortVolArr)
             }])
-        } else if (response.naked_chart[0].error) {
+        } else if (response.nakedshort.chart[0].error) {
             chartVolume.updateOptions({
                 noData: {
-                    text: response.naked_chart[0].error
+                    text: response.nakedshort.chart[0].error
                 }
             })
 
             chartShortPercent.updateOptions({
                 noData: {
-                    text: response.naked_chart[0].error
+                    text: response.nakedshort.chart[0].error
                 }
             })
         }

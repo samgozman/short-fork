@@ -1,18 +1,7 @@
-const pTimeout = require('p-timeout')
+const timeout = require('../utils/timeout')
 const shortsqueeze = require('shortsqueeze')
 const nakedshort = require('nakedshort')
 const finvizor = require('finvizor')
-
-// Return error if response timeout
-const timeout = async (func = Promise, time = 5000) => {
-    try {
-        return await pTimeout(func, time)
-    } catch (error) {
-        return {
-            error: 'Провайдер данных не отвечает'
-        }
-    }
-}
 
 const getStockData = async (ticker = '') => {
     const
