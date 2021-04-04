@@ -105,7 +105,6 @@ finvizSchema.statics.getDataFromFinviz = async (ticker = '') => {
             error: 'Finviz service is unavalible'
         }
     }
-
 }
 
 // Create object in DB. obj is optional - if data was fetched earlier 

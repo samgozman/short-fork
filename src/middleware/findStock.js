@@ -35,7 +35,6 @@ const findStock = async (req, res, next) => {
             } else {
                 throw new Error()
             }
-
         }
 
         res.stock = stock
@@ -45,7 +44,6 @@ const findStock = async (req, res, next) => {
             error: 'Stock is not found!'
         })
     }
-
 }
 
 module.exports = findStock

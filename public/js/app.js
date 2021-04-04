@@ -349,7 +349,6 @@ const isLoading = (bool = true) => {
             // remove
             document.getElementById(id).classList.remove('is-loading')
         }
-
     })
 }
 
