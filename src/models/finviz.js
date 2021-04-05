@@ -14,6 +14,9 @@ const finvizSchema = mongoose.Schema({
     name: {
         type: String
     },
+    exchange: {
+        type: String
+    },
     price: {
         type: Number
     },
@@ -85,6 +88,7 @@ finvizSchema.statics.getDataFromFinviz = async (ticker = '') => {
 
         return {
             name: fin.name,
+            exchange: fin.exchange,
             price: fin.price,
             pe: fin.pe,
             ps: fin.ps,
