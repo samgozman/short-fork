@@ -4,6 +4,7 @@
   "version": "1.1.1",
   "main": "index.js",
   "dependencies": {
+    "barchart-dot-com": "^1.0.1",
     "express": "^4.17.1",
     "express-handlebars": "^5.3.0",
     "express-rate-limit": "^5.2.6",

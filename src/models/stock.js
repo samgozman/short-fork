@@ -42,6 +42,13 @@ stockSchema.virtual('shortsqueeze', {
     justOne: true
 })
 
+stockSchema.virtual('barchartOverview', {
+    ref: 'BarchartOverview',
+    localField: '_id',
+    foreignField: '_stock_id',
+    justOne: true
+})
+
 const Stock = mongoose.model('Stock', stockSchema)
 
 module.exports = Stock
