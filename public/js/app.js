@@ -505,6 +505,19 @@ form.addEventListener('submit', async (e) => {
         // Set peg indicator
         pageObj.finviz.peg.classList.add(response.finviz.peg > 0 && response.finviz.peg < 1 ? 'is-success' : response.finviz.peg < 3 ? 'is-warning' : 'is-danger')
 
+        // Set options indicators
+
+        // Set P/C OI
+        pageObj.barchartoptions.putCallOiRatio.classList.add(response.barchartoverview.options.putCallOiRatio < 0.7 ? 'is-success' : response.barchartoverview.options.putCallOiRatio < 1 ? 'is-warning' : 'is-danger')
+
+        // Set PCR
+        pageObj.barchartoptions.putCallVolRatio.classList.add(response.barchartoverview.options.putCallVolRatio < 1 ? 'is-success' : response.barchartoverview.options.putCallVolRatio < 1 ? 'is-warning' : 'is-danger')
+
+        // Set ivRank
+        pageObj.barchartoptions.ivRank.classList.add(response.barchartoverview.options.ivRank < 30 ? 'is-success' : response.barchartoverview.options.ivRank < 70 ? 'is-warning' : 'is-danger')
+        
+        // Set ivPercentile
+        pageObj.barchartoptions.ivPercentile.classList.add(response.barchartoverview.options.ivPercentile < 30 ? 'is-success' : response.barchartoverview.options.ivRank < 70 ? 'is-warning' : 'is-danger')
 
         setSigns()
 
