@@ -42,7 +42,7 @@ stockSchema.virtual('shortsqueeze', {
     justOne: true
 })
 
-stockSchema.virtual('barchartOverview', {
+stockSchema.virtual('barchartoverview', {
     ref: 'BarchartOverview',
     localField: '_id',
     foreignField: '_stock_id',

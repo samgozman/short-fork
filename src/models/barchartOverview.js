@@ -63,6 +63,28 @@ const barchartOverviewSchema = mongoose.Schema({
             type: Number,
             default: null
         }
+    },
+    analytics: {
+        strongBuy: {
+            type: Number,
+            default: null
+        },
+        moderateBuy: {
+            type: Number,
+            default: null
+        },
+        hold: {
+            type: Number,
+            default: null
+        },
+        moderateSell: {
+            type: Number,
+            default: null
+        },
+        strongSell: {
+            type: Number,
+            default: null
+        }
     }
 }, {
     timestamps: true
@@ -94,6 +116,13 @@ barchartOverviewSchema.statics.getDataFromFinviz = async (ticker = '') => {
             technicals: {
                 buy: barchartOverview.technicals.opinion === 'Buy' ? true : false,
                 power: barchartOverview.technicals.power || null
+            },
+            analytics: {
+                strongBuy: barchartOverview.analytics.strongBuy || null,
+                moderateBuy: barchartOverview.analytics.moderateBuy || null,
+                hold: barchartOverview.analytics.hold || null,
+                moderateSell: barchartOverview.analytics.moderateSell || null,
+                strongSell: barchartOverview.analytics.strongSell || null
             }
         }
     } catch (error) {
