@@ -511,7 +511,7 @@ form.addEventListener('submit', async (e) => {
         pageObj.barchartoptions.putCallOiRatio.classList.add(response.barchartoverview.options.putCallOiRatio < 0.7 ? 'is-success' : response.barchartoverview.options.putCallOiRatio < 1 ? 'is-warning' : 'is-danger')
 
         // Set PCR
-        pageObj.barchartoptions.putCallVolRatio.classList.add(response.barchartoverview.options.putCallVolRatio < 1 ? 'is-success' : response.barchartoverview.options.putCallVolRatio < 1 ? 'is-warning' : 'is-danger')
+        pageObj.barchartoptions.putCallVolRatio.classList.add(response.barchartoverview.options.putCallVolRatio < 0.7 ? 'is-success' : response.barchartoverview.options.putCallVolRatio < 1 ? 'is-warning' : 'is-danger')
 
         // Set ivRank
         pageObj.barchartoptions.ivRank.classList.add(response.barchartoverview.options.ivRank < 30 ? 'is-success' : response.barchartoverview.options.ivRank < 70 ? 'is-warning' : 'is-danger')
