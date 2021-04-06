@@ -1,0 +1,80 @@
+<!-- Start option tags -->
+
+<div class="columns is-variable is-1-mobile is-2-tablet is-3-desktop is-mobile">
+    <div class="column is-half">
+        <div class="field is-grouped is-grouped-multiline group-tags-1">
+
+            {{#each optionTagsLeft}}
+
+            <div id="{{id}}_modal" class="modal">
+                <div class="modal-background"></div>
+                <div class="modal-card">
+                    <header class="modal-card-head">
+                        <p class="modal-card-title">{{fullname}}</p>
+                        <button class="delete" aria-label="close"></button>
+                    </header>
+                    <section class="modal-card-body">
+                        <p class="has-text-justified">
+                            <strong>{{fullname}}</strong> – {{text}}
+                        </p>
+                    </section>
+                </div>
+            </div>
+
+            <div class="control">
+                <div class="tags has-addons">
+                    <a class="tag is-dark modal-button" data-target="{{id}}_modal">{{name}}</a>
+                    <span class="tag" id="{{id}}"></span>
+                </div>
+            </div>
+
+            {{/each}}
+
+        </div>
+    </div>
+
+    <div class="column is-half">
+        <div class="field is-grouped is-grouped-multiline group-tags-2">
+
+            {{#each optionTagsRight}}
+
+            <div id="{{id}}_modal" class="modal">
+                <div class="modal-background"></div>
+                <div class="modal-card">
+                    <header class="modal-card-head">
+                        <p class="modal-card-title">{{fullname}}</p>
+                        <button class="delete" aria-label="close"></button>
+                    </header>
+                    <section class="modal-card-body">
+                        <p class="has-text-justified">
+                            <strong>{{fullname}}</strong> – {{text}}
+                        </p>
+                    </section>
+                </div>
+            </div>
+
+            <div class="control">
+                <div class="tags has-addons">
+                    <a class="tag is-dark modal-button" data-target="{{id}}_modal">{{name}}</a>
+                    <span class="tag" id="{{id}}"></span>
+                </div>
+            </div>
+
+            {{/each}}
+
+        </div>
+    </div>
+
+</div>
+
+<div class="column is-full disclaimer">
+    <p class="upd-message">
+        Обновление данных Barchart Options раз в {{TTL_BARCHART_OVERVIEW}} минут<br>
+        Не является индивидуальной инвестиционной рекомендацией!
+    </p>
+    <p>
+        <strong id="error-message"></strong>
+    </p>
+</div>
+
+<!-- End option tags -->

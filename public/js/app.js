@@ -281,6 +281,18 @@ let pageObj = {
         peg: document.querySelector('#resp_peg'),
         dividend_percent: document.querySelector('#resp_dividend_percent')
     },
+    barchartoptions: {
+        impliedVolatility: document.querySelector('#resp_impliedVolatility'),
+        historicalVolatility: document.querySelector('#resp_historicalVolatility'),
+        ivPercentile: document.querySelector('#resp_ivPercentile'),
+        ivRank: document.querySelector('#resp_ivRank'),
+        putCallVolRatio: document.querySelector('#resp_putCallVolRatio'),
+        todaysVolume: document.querySelector('#resp_todaysVolume'),
+        volumeAvg30Day: document.querySelector('#resp_volumeAvg30Day'),
+        putCallOiRatio: document.querySelector('#resp_putCallOiRatio'),
+        todaysOpenInterest: document.querySelector('#resp_todaysOpenInterest'),
+        openInt30Day: document.querySelector('#resp_openInt30Day')
+    },
     nakedshort: {
         current_short_volume: document.querySelector('#resp_naked')
     },
@@ -305,9 +317,13 @@ const erase = (word = ' пусто ') => {
         pageObj.finviz[key].textContent = word
         pageObj.finviz[key].classList.remove(...['is-success', 'is-danger', 'is-warning'])
     }
+    for (const key in pageObj.barchartoptions) {
+        pageObj.barchartoptions[key].textContent = word
+        pageObj.barchartoptions[key].classList.remove(...['is-success', 'is-danger', 'is-warning'])
+    }
     pageObj.nakedshort.current_short_volume.classList.remove(...['is-success', 'is-danger', 'is-warning'])
     pageObj.shortsqueeze.short_flow.classList.remove(...['is-success', 'is-danger', 'is-warning'])
-    
+
     error_message.textContent = ''
 
     // Reset indicators
@@ -361,6 +377,10 @@ const setSigns = () => {
     pageObj.finviz.roe.textContent += '%'
     pageObj.finviz.roa.textContent += '%'
     pageObj.finviz.dividend_percent.textContent += '%'
+    pageObj.barchartoptions.impliedVolatility.textContent += '%'
+    pageObj.barchartoptions.historicalVolatility.textContent += '%'
+    pageObj.barchartoptions.ivPercentile.textContent += '%'
+    pageObj.barchartoptions.ivRank.textContent += '%'
     resp_finviz_target.textContent += '%'
 }
 
@@ -418,6 +438,11 @@ form.addEventListener('submit', async (e) => {
         for (const key in pageObj.finviz) {
             pageObj.finviz[key].textContent = response.finviz[key] || '-'
         }
+        // Set values for barchart options
+        for (const key in pageObj.barchartoptions) {
+            pageObj.barchartoptions[key].textContent = response.barchartoverview.options[key] || '-'
+        }
+        // Set values for naked & squeeze
         pageObj.nakedshort.current_short_volume.textContent = response.nakedshort.current_short_volume || '-'
         pageObj.shortsqueeze.short_flow.textContent = response.shortsqueeze.short_flow || '-'
 
