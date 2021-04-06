@@ -195,7 +195,7 @@ barchartOverviewSchema.methods.updateRecord = async function () {
 }
 
 // Method for keeping things fresh
-barchartOverviewSchema.methods.keepFresh = async function (ttl = process.env.TTL_FINVIZ) {
+barchartOverviewSchema.methods.keepFresh = async function (ttl = process.env.TTL_BARCHART_OVERVIEW) {
     try {
         if ((new Date() - this.updatedAt) > ttl) {
             return await this.updateRecord()
