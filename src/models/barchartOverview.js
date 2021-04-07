@@ -55,15 +55,6 @@ const barchartOverviewSchema = mongoose.Schema({
             default: null
         }
     },
-    technicals: {
-        buy: {
-            type: Boolean
-        },
-        power: {
-            type: Number,
-            default: null
-        }
-    },
     analytics: {
         strongBuy: {
             type: Number,
@@ -112,10 +103,6 @@ barchartOverviewSchema.statics.getDataFromFinviz = async (ticker = '') => {
                 putCallOiRatio: barchartOverview.options.putCallOiRatio,
                 todaysOpenInterest: barchartOverview.options.todaysOpenInterest,
                 openInt30Day: barchartOverview.options.openInt30Day
-            },
-            technicals: {
-                buy: barchartOverview.technicals.opinion === 'Buy' ? true : false,
-                power: barchartOverview.technicals.power || null
             },
             analytics: {
                 strongBuy: barchartOverview.analytics.strongBuy || null,
