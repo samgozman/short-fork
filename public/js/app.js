@@ -311,18 +311,29 @@ const resp_finviz_target = document.querySelector('#resp_finviz_target')
 const resp_finviz_rsi = document.querySelector('#resp_finviz_rsi')
 const resp_finviz_recom = document.querySelector('#resp_finviz_recom')
 
+// Progress bar block
+const progress_finviz = document.querySelector('#progress-finviz')
+const progress_finviz_value = document.querySelector('#progress-finviz-value')
+const progress_barchart = document.querySelector('#progress-barchart')
+const progress_barchart_value = document.querySelector('#progress-barchart-value')
+
 // Erase values in DOM
 const erase = (word = ' пусто ') => {
+    const colorClassArr = ['is-success', 'is-danger', 'is-warning']
+
     for (const key in pageObj.finviz) {
         pageObj.finviz[key].textContent = word
-        pageObj.finviz[key].classList.remove(...['is-success', 'is-danger', 'is-warning'])
+        pageObj.finviz[key].classList.remove(...colorClassArr)
     }
     for (const key in pageObj.barchartoptions) {
         pageObj.barchartoptions[key].textContent = word
-        pageObj.barchartoptions[key].classList.remove(...['is-success', 'is-danger', 'is-warning'])
+        pageObj.barchartoptions[key].classList.remove(...colorClassArr)
     }
-    pageObj.nakedshort.current_short_volume.classList.remove(...['is-success', 'is-danger', 'is-warning'])
-    pageObj.shortsqueeze.short_flow.classList.remove(...['is-success', 'is-danger', 'is-warning'])
+    pageObj.nakedshort.current_short_volume.classList.remove(...colorClassArr)
+    pageObj.shortsqueeze.short_flow.classList.remove(...colorClassArr)
+
+    progress_finviz.classList.remove(...colorClassArr)
+    progress_barchart.classList.remove(...colorClassArr)
 
     error_message.textContent = ''
 
@@ -334,9 +345,15 @@ const erase = (word = ' пусто ') => {
     resp_finviz_rsi.textContent = '0'
     resp_finviz_recom.textContent = '0 - Нет'
 
-    resp_finviz_target.classList.remove(...['is-success', 'is-danger', 'is-warning'])
-    resp_finviz_rsi.classList.remove(...['is-success', 'is-danger', 'is-warning'])
-    resp_finviz_recom.classList.remove(...['is-success', 'is-danger', 'is-warning'])
+    resp_finviz_target.classList.remove(...colorClassArr)
+    resp_finviz_rsi.classList.remove(...colorClassArr)
+    resp_finviz_recom.classList.remove(...colorClassArr)
+
+    // Reset progressbar 
+    progress_barchart.removeAttribute('value')
+    progress_barchart_value.textContent = ''
+    progress_finviz.removeAttribute('value')
+    progress_finviz_value.textContent = ''
 
     // Clear volume chart
     chartVolume.updateSeries([{
@@ -515,7 +532,7 @@ form.addEventListener('submit', async (e) => {
 
         // Set ivRank
         pageObj.barchartoptions.ivRank.classList.add(response.barchartoverview.options.ivRank < 30 ? 'is-success' : response.barchartoverview.options.ivRank < 70 ? 'is-warning' : 'is-danger')
-        
+
         // Set ivPercentile
         pageObj.barchartoptions.ivPercentile.classList.add(response.barchartoverview.options.ivPercentile < 30 ? 'is-success' : response.barchartoverview.options.ivRank < 70 ? 'is-warning' : 'is-danger')
 
@@ -528,6 +545,24 @@ form.addEventListener('submit', async (e) => {
         pageObj.barchartoptions.todaysVolume.classList.add(volTodToAvg < 0.7 ? 'is-danger' : volTodToAvg < 1 ? 'is-warning' : 'is-success')
 
         setSigns()
+
+        // Sum analytics values
+        const barchartRating = (obj = {}) => {
+            const total = Object.values(obj).reduce((a, b) => a + b, 0)
+            const sum = obj.strongBuy * 5 + obj.moderateBuy * 4 + obj.hold * 3 + obj.moderateSell * 2 + obj.strongSell * 1
+            return (sum / total).toFixed(2)
+        }
+        const barchartAnal = barchartRating(response.barchartoverview.analytics)
+
+        // Set barchart progress bar value
+        progress_barchart.value = barchartAnal
+        progress_barchart_value.textContent = barchartAnal
+        progress_barchart.classList.add(barchartAnal <= 2 ? 'is-danger': barchartAnal <= 3.5 ? 'is-warning' : 'is-success')
+
+        // Set finviz progress bar value
+        progress_finviz.value = 5 - response.finviz.recomendation
+        progress_finviz_value.textContent = 5 - response.finviz.recomendation
+        progress_finviz.classList.add(progress_finviz.value <= 2 ? 'is-danger': progress_finviz.value <= 3.5 ? 'is-warning' : 'is-success')
 
         // ! APPEND TRADINGVIEW WIDGET
         techWidget(ticker.value)
