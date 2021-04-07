@@ -519,6 +519,14 @@ form.addEventListener('submit', async (e) => {
         // Set ivPercentile
         pageObj.barchartoptions.ivPercentile.classList.add(response.barchartoverview.options.ivPercentile < 30 ? 'is-success' : response.barchartoverview.options.ivRank < 70 ? 'is-warning' : 'is-danger')
 
+        // Set Tod OI
+        const oiTodToAvg = response.barchartoverview.options.todaysOpenInterest / response.barchartoverview.options.openInt30Day
+        pageObj.barchartoptions.todaysOpenInterest.classList.add(oiTodToAvg < 0.7 ? 'is-danger' : oiTodToAvg < 1 ? 'is-warning' : 'is-success')
+
+        // Set Tod Vol
+        const volTodToAvg = response.barchartoverview.options.todaysVolume / response.barchartoverview.options.volumeAvg30Day
+        pageObj.barchartoptions.todaysVolume.classList.add(volTodToAvg < 0.7 ? 'is-danger' : volTodToAvg < 1 ? 'is-warning' : 'is-success')
+
         setSigns()
 
         // ! APPEND TRADINGVIEW WIDGET
