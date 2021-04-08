@@ -12,7 +12,7 @@
     "is-on-tinkoff-invest": "^1.0.0",
     "mongoose": "^5.12.3",
     "nakedshort": "^1.0.4",
-    "p-timeout": "^4.1.0",
+    "p-timeout": "^5.0.0",
     "shortsqueeze": "^1.0.2"
   },
   "devDependencies": {
