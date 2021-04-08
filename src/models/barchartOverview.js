@@ -58,23 +58,23 @@ const barchartOverviewSchema = mongoose.Schema({
     analytics: {
         strongBuy: {
             type: Number,
-            default: null
+            default: 0
         },
         moderateBuy: {
             type: Number,
-            default: null
+            default: 0
         },
         hold: {
             type: Number,
-            default: null
+            default: 0
         },
         moderateSell: {
             type: Number,
-            default: null
+            default: 0
         },
         strongSell: {
             type: Number,
-            default: null
+            default: 0
         }
     }
 }, {
@@ -105,11 +105,11 @@ barchartOverviewSchema.statics.getDataFromFinviz = async (ticker = '') => {
                 openInt30Day: barchartOverview.options.openInt30Day
             },
             analytics: {
-                strongBuy: barchartOverview.analytics.strongBuy || null,
-                moderateBuy: barchartOverview.analytics.moderateBuy || null,
-                hold: barchartOverview.analytics.hold || null,
-                moderateSell: barchartOverview.analytics.moderateSell || null,
-                strongSell: barchartOverview.analytics.strongSell || null
+                strongBuy: barchartOverview.analytics.strongBuy || 0,
+                moderateBuy: barchartOverview.analytics.moderateBuy || 0,
+                hold: barchartOverview.analytics.hold || 0,
+                moderateSell: barchartOverview.analytics.moderateSell || 0,
+                strongSell: barchartOverview.analytics.strongSell || 0
             }
         }
     } catch (error) {
