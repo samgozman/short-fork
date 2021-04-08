@@ -400,6 +400,163 @@ const setSigns = () => {
     pageObj.barchartoptions.ivRank.textContent += '%'
     resp_finviz_target.textContent += '%'
 }
+// Set tags colors and values
+const setTags = (response = {}) => {
+    // Set values for finviz
+    for (const key in pageObj.finviz) {
+        pageObj.finviz[key].textContent = response.finviz[key] || '-'
+    }
+    // Set values for barchart options
+    for (const key in pageObj.barchartoptions) {
+        pageObj.barchartoptions[key].textContent = response.barchartoverview.options[key] || '-'
+    }
+    // Set values for naked & squeeze
+    pageObj.nakedshort.current_short_volume.textContent = response.nakedshort.current_short_volume || '-'
+    pageObj.shortsqueeze.short_flow.textContent = response.shortsqueeze.short_flow || '-'
+
+    // Set site href
+    pageObj.finviz.site.setAttribute('href', response.finviz.site)
+
+    // Set tinkoff indicator
+    if (response.tinkoff) {
+        resp_tinkoff.textContent = 'ON'
+        resp_tinkoff.classList.add('is-success')
+    } else {
+        resp_tinkoff.textContent = 'OFF'
+        resp_tinkoff.classList.add('is-danger')
+    }
+
+    // Set target indicator
+    const targetUpside = (response.finviz.target_price !== null && response.finviz.price !== null) ? ((response.finviz.target_price / response.finviz.price - 1) * 100).toFixed(1) : null
+    if (targetUpside > 0) {
+        resp_finviz_target.textContent = '+' + targetUpside
+        resp_finviz_target.classList.add('is-success')
+    } else {
+        resp_finviz_target.textContent = targetUpside
+        resp_finviz_target.classList.add('is-danger')
+    }
+
+    // Set RSI indicator
+    resp_finviz_rsi.textContent = response.finviz.rsi
+    resp_finviz_rsi.classList.add(response.finviz.rsi < 30 ? 'is-success' : response.finviz.rsi < 70 ? 'is-warning' : 'is-danger')
+
+    // Set analytics recomendation indicator
+    if (response.finviz.recomendation < 3) {
+        resp_finviz_recom.textContent = response.finviz.recomendation + ' - Buy'
+        resp_finviz_recom.classList.add('is-success')
+    } else if (response.finviz.recomendation > 3 && response.finviz.recomendation < 4) {
+        resp_finviz_recom.textContent = response.finviz.recomendation + ' - Hold'
+        resp_finviz_recom.classList.add('is-warning')
+    } else if (response.finviz.recomendation > 4) {
+        resp_finviz_recom.textContent = response.finviz.recomendation + ' - Sell'
+        resp_finviz_recom.classList.add('is-danger')
+    }
+
+    // Set debt indicator
+    pageObj.finviz.debteq.classList.add(response.finviz.debteq < 0.4 ? 'is-success' : response.finviz.debteq < 1 ? 'is-warning' : 'is-danger')
+
+    // Set roa indicator
+    pageObj.finviz.roa.classList.add(response.finviz.roa > 0 ? 'is-success' : 'is-danger')
+
+    // Set roe indicator
+    pageObj.finviz.roe.classList.add(response.finviz.roe > 0 && response.finviz.roe < 20 ? 'is-warning' : response.finviz.roe > 20 && response.finviz.roe < 40 ? 'is-success' : 'is-danger')
+
+    // Set p/b indicator
+    pageObj.finviz.pb.classList.add(response.finviz.pb > 0 && response.finviz.pb < 1 ? 'is-success' : response.finviz.pb < 4 ? 'is-warning' : 'is-danger')
+
+    // Set p/s indicator
+    pageObj.finviz.ps.classList.add(response.finviz.ps > 0 && response.finviz.ps < 1 ? 'is-success' : response.finviz.ps < 3 ? 'is-warning' : 'is-danger')
+
+    // Set p/e indicator
+    pageObj.finviz.pe.classList.add(response.finviz.pe > 0 && response.finviz.pe < 15 ? 'is-success' : response.finviz.pe < 25 ? 'is-warning' : 'is-danger')
+
+    // Set peg indicator
+    pageObj.finviz.peg.classList.add(response.finviz.peg > 0 && response.finviz.peg < 1 ? 'is-success' : response.finviz.peg < 3 ? 'is-warning' : 'is-danger')
+
+    // Set options indicators
+
+    // Set P/C OI
+    pageObj.barchartoptions.putCallOiRatio.classList.add(response.barchartoverview.options.putCallOiRatio < 0.7 ? 'is-success' : response.barchartoverview.options.putCallOiRatio < 1 ? 'is-warning' : 'is-danger')
+
+    // Set PCR
+    pageObj.barchartoptions.putCallVolRatio.classList.add(response.barchartoverview.options.putCallVolRatio < 0.7 ? 'is-success' : response.barchartoverview.options.putCallVolRatio < 1 ? 'is-warning' : 'is-danger')
+
+    // Set ivRank
+    pageObj.barchartoptions.ivRank.classList.add(response.barchartoverview.options.ivRank < 30 ? 'is-success' : response.barchartoverview.options.ivRank < 70 ? 'is-warning' : 'is-danger')
+
+    // Set ivPercentile
+    pageObj.barchartoptions.ivPercentile.classList.add(response.barchartoverview.options.ivPercentile < 30 ? 'is-success' : response.barchartoverview.options.ivRank < 70 ? 'is-warning' : 'is-danger')
+
+    // Set Tod OI
+    const oiTodToAvg = response.barchartoverview.options.todaysOpenInterest / response.barchartoverview.options.openInt30Day
+    if (oiTodToAvg < 0.7 || oiTodToAvg > 1.3) pageObj.barchartoptions.todaysOpenInterest.classList.add('is-warning')
+
+    // Set Tod Vol
+    const volTodToAvg = response.barchartoverview.options.todaysVolume / response.barchartoverview.options.volumeAvg30Day
+    if (volTodToAvg < 0.7 || volTodToAvg > 1.3) pageObj.barchartoptions.todaysVolume.classList.add('is-warning')
+}
+
+// Set values and colors for progress bar
+const setProgressBar = (response = {}) => {
+    // Sum analytics values
+    const barchartRating = (obj = {}) => {
+        const total = Object.values(obj).reduce((a, b) => a + b, 0)
+        const sum = obj.strongBuy * 5 + obj.moderateBuy * 4 + obj.hold * 3 + obj.moderateSell * 2 + obj.strongSell * 1
+        return (sum / total).toFixed(2)
+    }
+    const barchartAnal = barchartRating(response.barchartoverview.analytics)
+
+    // Set barchart progress bar value
+    progress_barchart.value = barchartAnal
+    progress_barchart_value.textContent = barchartAnal
+    progress_barchart.classList.add(barchartAnal <= 2 ? 'is-danger' : barchartAnal <= 3.5 ? 'is-warning' : 'is-success')
+
+    // Set finviz progress bar value
+    progress_finviz.value = 6 - response.finviz.recomendation
+    progress_finviz_value.textContent = 6 - response.finviz.recomendation
+    progress_finviz.classList.add(progress_finviz.value <= 2 ? 'is-danger' : progress_finviz.value <= 3.5 ? 'is-warning' : 'is-success')
+}
+
+// Update dats set in nakedshort charts
+const setNakedshortChart = (response = {}) => {
+    if (response.nakedshort.chart && !response.nakedshort.chart[0].error && response.nakedshort.chart[0].xAxisArr.length > 0 && response.nakedshort.chart[0].shortVolArr.length > 0) {
+        // ! UPDATE VOLUME CHART
+        chartVolume.updateOptions({
+            xaxis: {
+                categories: response.nakedshort.chart[0].xAxisArr
+            }
+        })
+
+        chartVolume.updateSeries([{
+            data: response.nakedshort.chart[0].regularVolArr
+        }, {
+            data: response.nakedshort.chart[0].shortVolArr
+        }])
+
+        // ! UPDATE SHORT PERCENT CHART
+        chartShortPercent.updateOptions({
+            xaxis: {
+                categories: response.nakedshort.chart[0].xAxisArr
+            }
+        })
+
+        chartShortPercent.updateSeries([{
+            data: getPercentageOfShorted(response.nakedshort.chart[0].regularVolArr, response.nakedshort.chart[0].shortVolArr)
+        }])
+    } else if (response.nakedshort.chart === null || response.nakedshort.chart[0].error) {
+        chartVolume.updateOptions({
+            noData: {
+                text: 'Данные Nakedshort недоступны'
+            }
+        })
+
+        chartShortPercent.updateOptions({
+            noData: {
+                text: 'Данные Nakedshort недоступны'
+            }
+        })
+    }
+}
 
 // Get response from server side
 const getResponse = async () => {
@@ -451,160 +608,15 @@ form.addEventListener('submit', async (e) => {
             history.pushState(null, '', newRelativePathQuery)
         }
 
-        // Set values for finviz
-        for (const key in pageObj.finviz) {
-            pageObj.finviz[key].textContent = response.finviz[key] || '-'
-        }
-        // Set values for barchart options
-        for (const key in pageObj.barchartoptions) {
-            pageObj.barchartoptions[key].textContent = response.barchartoverview.options[key] || '-'
-        }
-        // Set values for naked & squeeze
-        pageObj.nakedshort.current_short_volume.textContent = response.nakedshort.current_short_volume || '-'
-        pageObj.shortsqueeze.short_flow.textContent = response.shortsqueeze.short_flow || '-'
-
-        // Set site href
-        pageObj.finviz.site.setAttribute('href', response.finviz.site)
-
-        // Set tinkoff indicator
-        if (response.tinkoff) {
-            resp_tinkoff.textContent = 'ON'
-            resp_tinkoff.classList.add('is-success')
-        } else {
-            resp_tinkoff.textContent = 'OFF'
-            resp_tinkoff.classList.add('is-danger')
-        }
-
-        // Set target indicator
-        const targetUpside = (response.finviz.target_price !== null && response.finviz.price !== null) ? ((response.finviz.target_price / response.finviz.price - 1) * 100).toFixed(1) : null
-        if (targetUpside > 0) {
-            resp_finviz_target.textContent = '+' + targetUpside
-            resp_finviz_target.classList.add('is-success')
-        } else {
-            resp_finviz_target.textContent = targetUpside
-            resp_finviz_target.classList.add('is-danger')
-        }
-
-        // Set RSI indicator
-        resp_finviz_rsi.textContent = response.finviz.rsi
-        resp_finviz_rsi.classList.add(response.finviz.rsi < 30 ? 'is-success' : response.finviz.rsi < 70 ? 'is-warning' : 'is-danger')
-
-        // Set analytics recomendation indicator
-        if (response.finviz.recomendation < 3) {
-            resp_finviz_recom.textContent = response.finviz.recomendation + ' - Buy'
-            resp_finviz_recom.classList.add('is-success')
-        } else if (response.finviz.recomendation > 3 && response.finviz.recomendation < 4) {
-            resp_finviz_recom.textContent = response.finviz.recomendation + ' - Hold'
-            resp_finviz_recom.classList.add('is-warning')
-        } else if (response.finviz.recomendation > 4) {
-            resp_finviz_recom.textContent = response.finviz.recomendation + ' - Sell'
-            resp_finviz_recom.classList.add('is-danger')
-        }
-
-        // Set debt indicator
-        pageObj.finviz.debteq.classList.add(response.finviz.debteq < 0.4 ? 'is-success' : response.finviz.debteq < 1 ? 'is-warning' : 'is-danger')
-
-        // Set roa indicator
-        pageObj.finviz.roa.classList.add(response.finviz.roa > 0 ? 'is-success' : 'is-danger')
-
-        // Set roe indicator
-        pageObj.finviz.roe.classList.add(response.finviz.roe > 0 && response.finviz.roe < 20 ? 'is-warning' : response.finviz.roe > 20 && response.finviz.roe < 40 ? 'is-success' : 'is-danger')
-
-        // Set p/b indicator
-        pageObj.finviz.pb.classList.add(response.finviz.pb > 0 && response.finviz.pb < 1 ? 'is-success' : response.finviz.pb < 4 ? 'is-warning' : 'is-danger')
-
-        // Set p/s indicator
-        pageObj.finviz.ps.classList.add(response.finviz.ps > 0 && response.finviz.ps < 1 ? 'is-success' : response.finviz.ps < 3 ? 'is-warning' : 'is-danger')
-
-        // Set p/e indicator
-        pageObj.finviz.pe.classList.add(response.finviz.pe > 0 && response.finviz.pe < 15 ? 'is-success' : response.finviz.pe < 25 ? 'is-warning' : 'is-danger')
-
-        // Set peg indicator
-        pageObj.finviz.peg.classList.add(response.finviz.peg > 0 && response.finviz.peg < 1 ? 'is-success' : response.finviz.peg < 3 ? 'is-warning' : 'is-danger')
-
-        // Set options indicators
-
-        // Set P/C OI
-        pageObj.barchartoptions.putCallOiRatio.classList.add(response.barchartoverview.options.putCallOiRatio < 0.7 ? 'is-success' : response.barchartoverview.options.putCallOiRatio < 1 ? 'is-warning' : 'is-danger')
-
-        // Set PCR
-        pageObj.barchartoptions.putCallVolRatio.classList.add(response.barchartoverview.options.putCallVolRatio < 0.7 ? 'is-success' : response.barchartoverview.options.putCallVolRatio < 1 ? 'is-warning' : 'is-danger')
-
-        // Set ivRank
-        pageObj.barchartoptions.ivRank.classList.add(response.barchartoverview.options.ivRank < 30 ? 'is-success' : response.barchartoverview.options.ivRank < 70 ? 'is-warning' : 'is-danger')
-
-        // Set ivPercentile
-        pageObj.barchartoptions.ivPercentile.classList.add(response.barchartoverview.options.ivPercentile < 30 ? 'is-success' : response.barchartoverview.options.ivRank < 70 ? 'is-warning' : 'is-danger')
-
-        // Set Tod OI
-        const oiTodToAvg = response.barchartoverview.options.todaysOpenInterest / response.barchartoverview.options.openInt30Day
-        if (oiTodToAvg < 0.7 || oiTodToAvg > 1.3) pageObj.barchartoptions.todaysOpenInterest.classList.add('is-warning')
-
-        // Set Tod Vol
-        const volTodToAvg = response.barchartoverview.options.todaysVolume / response.barchartoverview.options.volumeAvg30Day
-        if(volTodToAvg < 0.7 || volTodToAvg > 1.3) pageObj.barchartoptions.todaysVolume.classList.add('is-warning')
-
+        setTags(response)
         setSigns()
-
-        // Sum analytics values
-        const barchartRating = (obj = {}) => {
-            const total = Object.values(obj).reduce((a, b) => a + b, 0)
-            const sum = obj.strongBuy * 5 + obj.moderateBuy * 4 + obj.hold * 3 + obj.moderateSell * 2 + obj.strongSell * 1
-            return (sum / total).toFixed(2)
-        }
-        const barchartAnal = barchartRating(response.barchartoverview.analytics)
-
-        // Set barchart progress bar value
-        progress_barchart.value = barchartAnal
-        progress_barchart_value.textContent = barchartAnal
-        progress_barchart.classList.add(barchartAnal <= 2 ? 'is-danger' : barchartAnal <= 3.5 ? 'is-warning' : 'is-success')
-
-        // Set finviz progress bar value
-        progress_finviz.value = 6 - response.finviz.recomendation
-        progress_finviz_value.textContent = 6 - response.finviz.recomendation
-        progress_finviz.classList.add(progress_finviz.value <= 2 ? 'is-danger' : progress_finviz.value <= 3.5 ? 'is-warning' : 'is-success')
+        setProgressBar(response)
 
         // ! APPEND TRADINGVIEW WIDGET
         techWidget(ticker.value)
         chartWidget(ticker.value)
 
-        if (response.nakedshort.chart && !response.nakedshort.chart[0].error && response.nakedshort.chart[0].xAxisArr.length > 0 && response.nakedshort.chart[0].shortVolArr.length > 0) {
-            // ! UPDATE VOLUME CHART
-            chartVolume.updateOptions({
-                xaxis: {
-                    categories: response.nakedshort.chart[0].xAxisArr
-                }
-            })
-
-            chartVolume.updateSeries([{
-                data: response.nakedshort.chart[0].regularVolArr
-            }, {
-                data: response.nakedshort.chart[0].shortVolArr
-            }])
-
-            // ! UPDATE SHORT PERCENT CHART
-            chartShortPercent.updateOptions({
-                xaxis: {
-                    categories: response.nakedshort.chart[0].xAxisArr
-                }
-            })
-
-            chartShortPercent.updateSeries([{
-                data: getPercentageOfShorted(response.nakedshort.chart[0].regularVolArr, response.nakedshort.chart[0].shortVolArr)
-            }])
-        } else if (response.nakedshort.chart === null || response.nakedshort.chart[0].error) {
-            chartVolume.updateOptions({
-                noData: {
-                    text: 'Данные Nakedshort недоступны'
-                }
-            })
-
-            chartShortPercent.updateOptions({
-                noData: {
-                    text: 'Данные Nakedshort недоступны'
-                }
-            })
-        }
+        setNakedshortChart(response)
 
         isLoading(false)
 
