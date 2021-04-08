@@ -33,7 +33,7 @@ window.onload = function () {
     }
 }
 
-// Define chart and render it
+// Define Volume chart and render it
 const chartVolume = new ApexCharts(document.querySelector('#chartVolume'), {
     series: [{
         name: 'Общий объём',
@@ -92,7 +92,7 @@ const chartVolume = new ApexCharts(document.querySelector('#chartVolume'), {
 })
 chartVolume.render()
 
-// Define chart and render it
+// Define ShortPercent chart and render it
 const chartShortPercent = new ApexCharts(document.querySelector('#chartShortPercent'), {
     series: [{
         name: '% шортовых сделок за день',
@@ -195,6 +195,35 @@ const chartShortPercent = new ApexCharts(document.querySelector('#chartShortPerc
     }
 })
 chartShortPercent.render()
+
+// Define analytics chart and render it
+const chartAnalytics = new ApexCharts(document.querySelector('#chartAnalytics'), {
+    series: [44, 55, 41, 17, 15],
+    labels: ['Strong Buy', 'Moderate Buy', 'Hold', 'Moderate Sell', 'Strong Sell'],
+    chart: {
+        width: '100%',
+        type: 'donut',
+    },
+    legend: {
+        position: 'right'
+    },
+    colors: ['#48c774', '#C5D86D', '#ffdd57', '#FD6A6A', '#f14668'],
+    responsive: [{
+        breakpoint: 480,
+        options: {
+            chart: {
+                width: '100%'
+            },
+            legend: {
+                position: 'bottom'
+            }
+        }
+    }],
+    noData: {
+        text: 'Загрузка...'
+    }
+})
+chartAnalytics.render()
 
 // Get percentage of volume shorted
 const getPercentageOfShorted = (volArr = [], shortArr = []) => {
@@ -558,6 +587,15 @@ const setNakedshortChart = (response = {}) => {
     }
 }
 
+const setAnalyticsChart = (response = {}) => {
+    if (response.barchartoverview.analytics && !response.barchartoverview.analytics.error) {
+        const obj = response.barchartoverview.analytics
+        chartAnalytics.updateOptions({
+            series: [obj.strongBuy, obj.moderateBuy, obj.hold, obj.moderateSell, obj.strongSell]
+        })
+    }
+}
+
 // Get response from server side
 const getResponse = async () => {
     try {
@@ -617,7 +655,8 @@ form.addEventListener('submit', async (e) => {
         chartWidget(ticker.value)
 
         setNakedshortChart(response)
-
+        setAnalyticsChart(response)
+        
         isLoading(false)
 
     } catch (error) {
