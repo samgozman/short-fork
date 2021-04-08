@@ -560,8 +560,8 @@ form.addEventListener('submit', async (e) => {
         progress_barchart.classList.add(barchartAnal <= 2 ? 'is-danger': barchartAnal <= 3.5 ? 'is-warning' : 'is-success')
 
         // Set finviz progress bar value
-        progress_finviz.value = 5 - response.finviz.recomendation
-        progress_finviz_value.textContent = 5 - response.finviz.recomendation
+        progress_finviz.value = 6 - response.finviz.recomendation
+        progress_finviz_value.textContent = 6 - response.finviz.recomendation
         progress_finviz.classList.add(progress_finviz.value <= 2 ? 'is-danger': progress_finviz.value <= 3.5 ? 'is-warning' : 'is-success')
 
         // ! APPEND TRADINGVIEW WIDGET
