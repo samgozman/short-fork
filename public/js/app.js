@@ -538,11 +538,11 @@ form.addEventListener('submit', async (e) => {
 
         // Set Tod OI
         const oiTodToAvg = response.barchartoverview.options.todaysOpenInterest / response.barchartoverview.options.openInt30Day
-        pageObj.barchartoptions.todaysOpenInterest.classList.add(oiTodToAvg < 0.7 ? 'is-danger' : oiTodToAvg < 1 ? 'is-warning' : 'is-success')
+        if (oiTodToAvg < 0.7 || oiTodToAvg > 1.3) pageObj.barchartoptions.todaysOpenInterest.classList.add('is-warning')
 
         // Set Tod Vol
         const volTodToAvg = response.barchartoverview.options.todaysVolume / response.barchartoverview.options.volumeAvg30Day
-        pageObj.barchartoptions.todaysVolume.classList.add(volTodToAvg < 0.7 ? 'is-danger' : volTodToAvg < 1 ? 'is-warning' : 'is-success')
+        if(volTodToAvg < 0.7 || volTodToAvg > 1.3) pageObj.barchartoptions.todaysVolume.classList.add('is-warning')
 
         setSigns()
 
@@ -557,12 +557,12 @@ form.addEventListener('submit', async (e) => {
         // Set barchart progress bar value
         progress_barchart.value = barchartAnal
         progress_barchart_value.textContent = barchartAnal
-        progress_barchart.classList.add(barchartAnal <= 2 ? 'is-danger': barchartAnal <= 3.5 ? 'is-warning' : 'is-success')
+        progress_barchart.classList.add(barchartAnal <= 2 ? 'is-danger' : barchartAnal <= 3.5 ? 'is-warning' : 'is-success')
 
         // Set finviz progress bar value
         progress_finviz.value = 6 - response.finviz.recomendation
         progress_finviz_value.textContent = 6 - response.finviz.recomendation
-        progress_finviz.classList.add(progress_finviz.value <= 2 ? 'is-danger': progress_finviz.value <= 3.5 ? 'is-warning' : 'is-success')
+        progress_finviz.classList.add(progress_finviz.value <= 2 ? 'is-danger' : progress_finviz.value <= 3.5 ? 'is-warning' : 'is-success')
 
         // ! APPEND TRADINGVIEW WIDGET
         techWidget(ticker.value)
