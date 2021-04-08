@@ -592,16 +592,16 @@ form.addEventListener('submit', async (e) => {
             chartShortPercent.updateSeries([{
                 data: getPercentageOfShorted(response.nakedshort.chart[0].regularVolArr, response.nakedshort.chart[0].shortVolArr)
             }])
-        } else if (response.nakedshort.chart[0].error) {
+        } else if (response.nakedshort.chart === null || response.nakedshort.chart[0].error) {
             chartVolume.updateOptions({
                 noData: {
-                    text: response.nakedshort.chart[0].error
+                    text: 'Данные Nakedshort недоступны'
                 }
             })
 
             chartShortPercent.updateOptions({
                 noData: {
-                    text: response.nakedshort.chart[0].error
+                    text: 'Данные Nakedshort недоступны'
                 }
             })
         }
@@ -611,6 +611,7 @@ form.addEventListener('submit', async (e) => {
     } catch (error) {
         isLoading(false)
         erase(' ошибка ')
+        console.log(error)
         error_message.textContent = error.message === 429 ? 'Превышен лимит запросов в минуту!' : 'Ошибка! Введите правильный тикер'
     }
 })
