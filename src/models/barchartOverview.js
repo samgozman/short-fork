@@ -5,7 +5,7 @@ const {
     quotes
 } = require('barchart-dot-com')
 
-// Class schema for Finviz instance
+// Class schema for Barchart Overview instance
 const barchartOverviewSchema = mongoose.Schema({
     _stock_id: {
         type: mongoose.Schema.Types.ObjectId,

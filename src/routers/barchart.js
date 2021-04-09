@@ -1,5 +1,6 @@
 const express = require('express')
 const BarchartOverview = require('../models/barchartOverview')
+const BarchartFinancials = require('../models/barchartFinancials')
 const rateLimiter = require('../middleware/rateLimiter')
 const findStock = require('../middleware/findStock')
 const counter = require('../middleware/counter')
@@ -10,6 +11,18 @@ router.get('/stocks/barchart/overview', rateLimiter, findStock, counter, async (
 
     try {
         const data = await BarchartOverview.findByStockId(ticker, res.stock._id)
+        return res.send(data)
+
+    } catch (err) {
+        res.status(500).send(err.message)
+    }
+})
+
+router.get('/stocks/barchart/financials', rateLimiter, findStock, counter, async (req, res) => {
+    const ticker = req.query.ticker
+
+    try {
+        const data = await BarchartFinancials.findByStockId(ticker, res.stock._id)
         return res.send(data)
 
     } catch (err) {

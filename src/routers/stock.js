@@ -8,7 +8,7 @@ const router = new express.Router()
 router.get('/stocks', rateLimiter, findStock, counter, async (req, res) => {
     try {
         // Aggregate virtuals into one object
-        await res.stock.populate(['finviz', 'nakedshort', 'shortsqueeze', 'barchartoverview']).execPopulate()
+        await res.stock.populate(['finviz', 'nakedshort', 'shortsqueeze', 'barchartoverview', 'barchartfinancials']).execPopulate()
         const stock = res.stock.toJSON({
             virtuals: true
         })
