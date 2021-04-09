@@ -225,6 +225,51 @@ const chartAnalytics = new ApexCharts(document.querySelector('#chartAnalytics'),
 })
 chartAnalytics.render()
 
+// Define Debt Equity chart
+const chartDebtEquity = new ApexCharts(document.querySelector('#chartDebtEquity'), {
+    series: [{
+        name: 'Долг',
+        data: []
+    }, {
+        name: 'Капитал',
+        data: []
+    }],
+    chart: {
+        height: 350,
+        type: 'area'
+    },
+    colors: ['#FF4560', '#008FFB'],
+    dataLabels: {
+        enabled: false
+    },
+    stroke: {
+        curve: 'smooth'
+    },
+    xaxis: {
+        type: 'string',
+        categories: [],
+        title: {
+            text: 'День'
+        }
+    },
+    yaxis: {
+        labels: {
+            minWidth: -1,
+            show: false,
+            formatter: function (value) {
+                return Number(value || '').toLocaleString('en-US', {
+                    maximumFractionDigits: 2
+                })
+            }
+        },
+        type: 'numeric'
+    },
+    noData: {
+        text: 'Загрузка...'
+    }
+})
+chartDebtEquity.render()
+
 // Get percentage of volume shorted
 const getPercentageOfShorted = (volArr = [], shortArr = []) => {
     const shortVolPercentage = []
@@ -392,6 +437,18 @@ const erase = (word = ' пусто ') => {
     }])
 
     chartShortPercent.updateSeries([{
+        data: []
+    }])
+
+    // Clear analytics chart
+    chartAnalytics.updateSeries([{
+        data: []
+    }])
+
+    // Clear debt chart
+    chartDebtEquity.updateSeries([{
+        data: []
+    }, {
         data: []
     }])
 }
@@ -587,11 +644,41 @@ const setNakedshortChart = (response = {}) => {
     }
 }
 
+// Update dats set in nakedshort charts
+const setChartDebtEquity = (response = {}) => {
+    if (response.barchartfinancials.longTermDebt && response.barchartfinancials.longTermDebt.length > 0) {
+        // ! UPDATE VOLUME CHART
+        chartDebtEquity.updateOptions({
+            xaxis: {
+                categories: response.barchartfinancials.dates.reverse()
+            }
+        })
+
+        chartDebtEquity.updateSeries([{
+            data: response.barchartfinancials.longTermDebt.reverse()
+        }, {
+            data: response.barchartfinancials.shareholdersEquity.reverse()
+        }])
+    } else {
+        chartDebtEquity.updateOptions({
+            noData: {
+                text: 'Данные Barchart Financials недоступны'
+            }
+        })
+    }
+}
+
 const setAnalyticsChart = (response = {}) => {
     if (response.barchartoverview.analytics && !response.barchartoverview.analytics.error) {
         const obj = response.barchartoverview.analytics
         chartAnalytics.updateOptions({
             series: [obj.strongBuy, obj.moderateBuy, obj.hold, obj.moderateSell, obj.strongSell]
+        })
+    } else {
+         chartAnalytics.updateOptions({
+            noData: {
+                text: 'Данные Barchart недоступны'
+            }
         })
     }
 }
@@ -656,7 +743,8 @@ form.addEventListener('submit', async (e) => {
 
         setNakedshortChart(response)
         setAnalyticsChart(response)
-        
+        setChartDebtEquity(response)
+
         isLoading(false)
 
     } catch (error) {

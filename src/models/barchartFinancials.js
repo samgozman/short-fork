@@ -51,8 +51,9 @@ barchartFinancialsSchema.statics.getDataFromFinviz = async (ticker = '') => {
             dates.push(startsWith[0] + '-' + Number(startsWith[1] - i))
         }
 
+        const liabilities = barchartFinancialsBalance.liabilities
         return {
-            longTermDebt: barchartFinancialsBalance.liabilities.nonCurrentLiabilities.longTermDebt,
+            longTermDebt: liabilities.nonCurrentLiabilities ? liabilities.nonCurrentLiabilities.longTermDebt : liabilities.longTermDebt,
             shareholdersEquity: barchartFinancialsBalance.shareholdersEquity.total,
             netIncome: barchartFinancialsIncome.netIncome,
             revenue: barchartFinancialsIncome.sales,
