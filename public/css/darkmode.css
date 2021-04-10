@@ -89,7 +89,8 @@ p,
 
 strong,
 .title,
-.modal-card-title {
+.modal-card-title,
+.field-label > .label {
     color: var(--strong-color);
 }
 

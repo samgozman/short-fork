@@ -202,6 +202,10 @@ const chartAnalytics = new ApexCharts(document.querySelector('#chartAnalytics'),
         width: '100%',
         type: 'donut',
     },
+    stroke: {
+        show: false,
+        width: 0
+    },
     legend: {
         position: 'right'
     },
