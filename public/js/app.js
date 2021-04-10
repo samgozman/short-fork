@@ -253,7 +253,7 @@ const chartDebtEquity = new ApexCharts(document.querySelector('#chartDebtEquity'
         type: 'string',
         categories: [],
         title: {
-            text: 'День'
+            text: 'Год'
         }
     },
     yaxis: {
@@ -273,6 +273,59 @@ const chartDebtEquity = new ApexCharts(document.querySelector('#chartDebtEquity'
     }
 })
 chartDebtEquity.render()
+
+// Define netIncome chart
+const chartNetIncome = new ApexCharts(document.querySelector('#chartNetIncome'), {
+    series: [{
+            name: 'Выручка',
+            data: []
+        },
+        {
+            name: 'Прибыль',
+            data: []
+        }
+    ],
+    chart: {
+        height: 350,
+        type: 'bar',
+        toolbar: {
+            show: false
+        },
+        zoom: {
+            enabled: false
+        }
+    },
+    colors: ['#008FFB', '#C4BBAF'],
+    dataLabels: {
+        enabled: false
+    },
+    stroke: {
+        curve: 'smooth'
+    },
+    xaxis: {
+        type: 'string',
+        categories: [],
+        title: {
+            text: 'Год'
+        }
+    },
+    yaxis: {
+        labels: {
+            minWidth: -1,
+            show: false,
+            formatter: function (value) {
+                return '$' + Number(value || '').toLocaleString('en-US', {
+                    maximumFractionDigits: 2
+                })
+            }
+        },
+        type: 'numeric'
+    },
+    noData: {
+        text: 'Загрузка...'
+    }
+})
+chartNetIncome.render()
 
 // Get percentage of volume shorted
 const getPercentageOfShorted = (volArr = [], shortArr = []) => {
@@ -451,6 +504,13 @@ const erase = (word = ' пусто ') => {
 
     // Clear debt chart
     chartDebtEquity.updateSeries([{
+        data: []
+    }, {
+        data: []
+    }])
+
+    // Clear NetIncome chart
+    chartNetIncome.updateSeries([{
         data: []
     }, {
         data: []
@@ -656,21 +716,22 @@ const setChartDebtEquity = (response = {}) => {
         }
 
         // Debt equity compare with finviz value
-        const dtey = response.finviz.debteq / (response.barchartfinancials.longTermDebt[0] / response.barchartfinancials.shareholdersEquity[0])
+        const length = response.barchartfinancials.longTermDebt.length - 1
+        const dtey = response.finviz.debteq / (response.barchartfinancials.longTermDebt[length] / response.barchartfinancials.shareholdersEquity[length])
         if (dtey === 0 || dtey < 0.5 || dtey > 1.5) {
             throw new Error()
         }
 
         chartDebtEquity.updateOptions({
             xaxis: {
-                categories: response.barchartfinancials.dates.reverse()
+                categories: response.barchartfinancials.dates
             }
         })
 
         chartDebtEquity.updateSeries([{
-            data: response.barchartfinancials.longTermDebt.reverse()
+            data: response.barchartfinancials.longTermDebt
         }, {
-            data: response.barchartfinancials.shareholdersEquity.reverse()
+            data: response.barchartfinancials.shareholdersEquity
         }])
 
     } catch (error) {
@@ -680,8 +741,6 @@ const setChartDebtEquity = (response = {}) => {
             }
         })
     }
-
-
 }
 
 const setAnalyticsChart = (response = {}) => {
@@ -699,6 +758,30 @@ const setAnalyticsChart = (response = {}) => {
         })
     }
 }
+
+// Update dats set in net income chart
+const setNetIncomeChart = (response = {}) => {
+    if (response.barchartfinancials.netIncome && response.barchartfinancials.netIncome.length > 0) {
+        chartNetIncome.updateOptions({
+            xaxis: {
+                categories: response.barchartfinancials.dates
+            }
+        })
+
+        chartNetIncome.updateSeries([{
+            data: response.barchartfinancials.revenue
+        },{
+            data: response.barchartfinancials.netIncome
+        }])
+    } else {
+        chartNetIncome.updateOptions({
+            noData: {
+                text: 'Данные Barchart Financials недоступны'
+            }
+        })
+    }
+}
+
 
 // Get response from server side
 const getResponse = async () => {
@@ -761,6 +844,7 @@ form.addEventListener('submit', async (e) => {
         setNakedshortChart(response)
         setAnalyticsChart(response)
         setChartDebtEquity(response)
+        setNetIncomeChart(response)
 
         isLoading(false)
 
@@ -874,18 +958,48 @@ const lightModeChartsSettings = {
     }
 }
 
+const darkModePieChartsSettings = {
+    chart: {
+        foreColor: '#ccc'
+    },
+    tooltip: {
+        theme: 'dark'
+    },
+    grid: {
+        borderColor: '#535A6C'
+    }
+}
+
+const lightModePieChartsSettings = {
+    chart: {
+        foreColor: '#373d3f'
+    },
+    tooltip: {
+        theme: 'light'
+    },
+    grid: {
+        borderColor: '#e0e0e0'
+    }
+}
+
 const setThemeForElements = (theme = 'light') => {
     switch (theme) {
         case 'light':
             document.querySelector('.sponsor').classList.remove('is-dark')
             chartVolume.updateOptions(lightModeChartsSettings)
             chartShortPercent.updateOptions(lightModeChartsSettings)
+            chartDebtEquity.updateOptions(lightModeChartsSettings)
+            chartNetIncome.updateOptions(lightModeChartsSettings)
+            chartAnalytics.updateOptions(lightModePieChartsSettings)
             break
 
         case 'dark':
             document.querySelector('.sponsor').classList.toggle('is-dark')
             chartVolume.updateOptions(darkModeChartsSettings)
             chartShortPercent.updateOptions(darkModeChartsSettings)
+            chartDebtEquity.updateOptions(darkModeChartsSettings)
+            chartNetIncome.updateOptions(darkModeChartsSettings)
+            chartAnalytics.updateOptions(darkModePieChartsSettings)
             break
     }
 }

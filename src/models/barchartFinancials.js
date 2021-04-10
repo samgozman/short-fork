@@ -53,12 +53,12 @@ barchartFinancialsSchema.statics.getDataFromFinviz = async (ticker = '') => {
 
         const liabilities = barchartFinancialsBalance.liabilities
         return {
-            longTermDebt: liabilities.nonCurrentLiabilities ? liabilities.nonCurrentLiabilities.longTermDebt : liabilities.longTermDebt,
-            shareholdersEquity: barchartFinancialsBalance.shareholdersEquity.total,
-            netIncome: barchartFinancialsIncome.netIncome,
-            revenue: barchartFinancialsIncome.sales,
-            ebitda: barchartFinancialsIncome.ebitda,
-            dates
+            longTermDebt: liabilities.nonCurrentLiabilities ? liabilities.nonCurrentLiabilities.longTermDebt.reverse() : liabilities.longTermDebt.reverse(),
+            shareholdersEquity: barchartFinancialsBalance.shareholdersEquity.total.reverse(),
+            netIncome: barchartFinancialsIncome.netIncome.reverse(),
+            revenue: barchartFinancialsIncome.sales.reverse(),
+            ebitda: barchartFinancialsIncome.ebitda.reverse(),
+            dates: dates.reverse()
         }
     } catch (error) {
         return {
