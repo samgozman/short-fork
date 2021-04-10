@@ -48,8 +48,11 @@ const chartVolume = new ApexCharts(document.querySelector('#chartVolume'), {
         type: 'area',
         group: 'synced-charts',
         id: 'volumeChart',
+        toolbar: {
+            show: false
+        },
         zoom: {
-            enabled: true
+            enabled: false
         }
     },
     dataLabels: {
@@ -104,16 +107,11 @@ const chartShortPercent = new ApexCharts(document.querySelector('#chartShortPerc
         type: 'line',
         group: 'synced-charts',
         id: 'shortChart',
-        dropShadow: {
-            enabled: true,
-            color: '#000',
-            top: 18,
-            left: 7,
-            blur: 10,
-            opacity: 0.2
-        },
         toolbar: {
             show: false
+        },
+        zoom: {
+            enabled: false
         }
     },
     fill: {
@@ -236,7 +234,13 @@ const chartDebtEquity = new ApexCharts(document.querySelector('#chartDebtEquity'
     }],
     chart: {
         height: 350,
-        type: 'area'
+        type: 'area',
+        toolbar: {
+            show: false
+        },
+        zoom: {
+            enabled: false
+        }
     },
     colors: ['#FF4560', '#008FFB'],
     dataLabels: {
@@ -653,7 +657,7 @@ const setChartDebtEquity = (response = {}) => {
 
         // Debt equity compare with finviz value
         const dtey = response.finviz.debteq / (response.barchartfinancials.longTermDebt[0] / response.barchartfinancials.shareholdersEquity[0])
-        if(dtey === 0 || dtey < 0.5 || dtey > 1.5) {
+        if (dtey === 0 || dtey < 0.5 || dtey > 1.5) {
             throw new Error()
         }
 
@@ -668,7 +672,7 @@ const setChartDebtEquity = (response = {}) => {
         }, {
             data: response.barchartfinancials.shareholdersEquity.reverse()
         }])
-        
+
     } catch (error) {
         chartDebtEquity.updateOptions({
             noData: {
