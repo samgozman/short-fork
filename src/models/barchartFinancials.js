@@ -25,9 +25,6 @@ const barchartFinancialsSchema = mongoose.Schema({
     revenue: {
         type: Array
     },
-    ebitda: {
-        type: Array
-    },
     dates: {
         type: Array
     }
@@ -57,7 +54,6 @@ barchartFinancialsSchema.statics.getDataFromFinviz = async (ticker = '') => {
             shareholdersEquity: barchartFinancialsBalance.shareholdersEquity.total.reverse(),
             netIncome: barchartFinancialsIncome.netIncome.reverse(),
             revenue: barchartFinancialsIncome.sales.reverse(),
-            ebitda: barchartFinancialsIncome.ebitda.reverse(),
             dates: dates.reverse()
         }
     } catch (error) {
@@ -130,7 +126,7 @@ barchartFinancialsSchema.methods.updateRecord = async function () {
 }
 
 // Method for keeping things fresh
-barchartFinancialsSchema.methods.keepFresh = async function (ttl = process.env.TTL_BARCHART_OVERVIEW) {
+barchartFinancialsSchema.methods.keepFresh = async function (ttl = process.env.TTL_BARCHART_FINANCIAL) {
     try {
         if ((new Date() - this.updatedAt) > ttl) {
             return await this.updateRecord()
