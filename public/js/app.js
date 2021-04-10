@@ -257,7 +257,7 @@ const chartDebtEquity = new ApexCharts(document.querySelector('#chartDebtEquity'
             minWidth: -1,
             show: false,
             formatter: function (value) {
-                return Number(value || '').toLocaleString('en-US', {
+                return '$' + Number(value || '').toLocaleString('en-US', {
                     maximumFractionDigits: 2
                 })
             }
@@ -441,9 +441,9 @@ const erase = (word = ' пусто ') => {
     }])
 
     // Clear analytics chart
-    chartAnalytics.updateSeries([{
-        data: []
-    }])
+    chartAnalytics.updateOptions({
+        series: []
+    })
 
     // Clear debt chart
     chartDebtEquity.updateSeries([{
@@ -644,10 +644,19 @@ const setNakedshortChart = (response = {}) => {
     }
 }
 
-// Update dats set in nakedshort charts
+// Update dats set in DebtEquity charts
 const setChartDebtEquity = (response = {}) => {
-    if (response.barchartfinancials.longTermDebt && response.barchartfinancials.longTermDebt.length > 0) {
-        // ! UPDATE VOLUME CHART
+    try {
+        if (!response.barchartfinancials.longTermDebt || response.barchartfinancials.longTermDebt.length < 1) {
+            throw new Error()
+        }
+
+        // Debt equity compare with finviz value
+        const dtey = response.finviz.debteq / (response.barchartfinancials.longTermDebt[0] / response.barchartfinancials.shareholdersEquity[0])
+        if(dtey === 0 || dtey < 0.5 || dtey > 1.5) {
+            throw new Error()
+        }
+
         chartDebtEquity.updateOptions({
             xaxis: {
                 categories: response.barchartfinancials.dates.reverse()
@@ -659,13 +668,16 @@ const setChartDebtEquity = (response = {}) => {
         }, {
             data: response.barchartfinancials.shareholdersEquity.reverse()
         }])
-    } else {
+        
+    } catch (error) {
         chartDebtEquity.updateOptions({
             noData: {
                 text: 'Данные Barchart Financials недоступны'
             }
         })
     }
+
+
 }
 
 const setAnalyticsChart = (response = {}) => {
@@ -675,7 +687,8 @@ const setAnalyticsChart = (response = {}) => {
             series: [obj.strongBuy, obj.moderateBuy, obj.hold, obj.moderateSell, obj.strongSell]
         })
     } else {
-         chartAnalytics.updateOptions({
+        chartAnalytics.updateOptions({
+            series: [],
             noData: {
                 text: 'Данные Barchart недоступны'
             }
