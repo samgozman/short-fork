@@ -22,7 +22,8 @@ router.get('', (req, res) => {
         TTL_NAKEDSHORT: (process.env.TTL_NAKEDSHORT / (1000 * 60)).toFixed(0),
         TTL_FINVIZ: (process.env.TTL_FINVIZ / (1000 * 60)).toFixed(0),
         TTL_SHORTSQUEEZE: (process.env.TTL_SHORTSQUEEZE / (1000 * 60)).toFixed(0),
-        TTL_BARCHART_OVERVIEW: (process.env.TTL_BARCHART_OVERVIEW / (1000 * 60)).toFixed(0)
+        TTL_BARCHART_OVERVIEW: (process.env.TTL_BARCHART_OVERVIEW / (1000 * 60)).toFixed(0),
+        TTL_BARCHART_FINANCIAL: (process.env.TTL_BARCHART_FINANCIAL / (1000 * 60 * 60 * 24)).toFixed(0)
     })
 })
 
