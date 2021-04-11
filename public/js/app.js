@@ -406,6 +406,7 @@ let pageObj = {
         name: document.querySelector('#resp_name'),
         price: document.querySelector('#resp_price'),
         pe: document.querySelector('#resp_pe'),
+        forwardPe: document.querySelector('#resp_forwardPe'),
         ps: document.querySelector('#resp_ps'),
         pb: document.querySelector('#resp_pb'),
         roe: document.querySelector('#resp_roe'),
@@ -444,7 +445,6 @@ const error_message = document.querySelector('#error-message')
 const resp_tinkoff = document.querySelector('#resp_tinkoff')
 const resp_finviz_target = document.querySelector('#resp_finviz_target')
 const resp_finviz_rsi = document.querySelector('#resp_finviz_rsi')
-const resp_finviz_recom = document.querySelector('#resp_finviz_recom')
 
 // Progress bar block
 const progress_finviz = document.querySelector('#progress-finviz')
@@ -478,11 +478,9 @@ const erase = (word = ' пусто ') => {
 
     resp_finviz_target.textContent = '0'
     resp_finviz_rsi.textContent = '0'
-    resp_finviz_recom.textContent = '0 - Нет'
 
     resp_finviz_target.classList.remove(...colorClassArr)
     resp_finviz_rsi.classList.remove(...colorClassArr)
-    resp_finviz_recom.classList.remove(...colorClassArr)
 
     // Reset progressbar 
     progress_barchart.removeAttribute('value')
@@ -594,18 +592,6 @@ const setTags = (response = {}) => {
     resp_finviz_rsi.textContent = response.finviz.rsi
     resp_finviz_rsi.classList.add(response.finviz.rsi < 30 ? 'is-success' : response.finviz.rsi < 70 ? 'is-warning' : 'is-danger')
 
-    // Set analytics recomendation indicator
-    if (response.finviz.recomendation < 3) {
-        resp_finviz_recom.textContent = response.finviz.recomendation + ' - Buy'
-        resp_finviz_recom.classList.add('is-success')
-    } else if (response.finviz.recomendation > 3 && response.finviz.recomendation < 4) {
-        resp_finviz_recom.textContent = response.finviz.recomendation + ' - Hold'
-        resp_finviz_recom.classList.add('is-warning')
-    } else if (response.finviz.recomendation > 4) {
-        resp_finviz_recom.textContent = response.finviz.recomendation + ' - Sell'
-        resp_finviz_recom.classList.add('is-danger')
-    }
-
     // Set debt indicator
     pageObj.finviz.debteq.classList.add(response.finviz.debteq < 0.4 ? 'is-success' : response.finviz.debteq < 1 ? 'is-warning' : 'is-danger')
 
@@ -623,6 +609,9 @@ const setTags = (response = {}) => {
 
     // Set p/e indicator
     pageObj.finviz.pe.classList.add(response.finviz.pe > 0 && response.finviz.pe < 15 ? 'is-success' : response.finviz.pe < 25 ? 'is-warning' : 'is-danger')
+    
+    // Set p/e indicator
+    pageObj.finviz.forwardPe.classList.add(response.finviz.forwardPe > 0 && response.finviz.forwardPe < 15 ? 'is-success' : response.finviz.forwardPe < 25 ? 'is-warning' : 'is-danger')
 
     // Set peg indicator
     pageObj.finviz.peg.classList.add(response.finviz.peg > 0 && response.finviz.peg < 1 ? 'is-success' : response.finviz.peg < 3 ? 'is-warning' : 'is-danger')

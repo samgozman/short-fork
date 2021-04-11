@@ -24,6 +24,10 @@ const finvizSchema = mongoose.Schema({
         type: Number,
         default: null
     },
+    forwardPe: {
+        type: Number,
+        default: null
+    },
     ps: {
         type: Number,
         default: null
@@ -91,6 +95,7 @@ finvizSchema.statics.getDataFromFinviz = async (ticker = '') => {
             exchange: fin.exchange,
             price: fin.price,
             pe: fin.pe,
+            forwardPe: fin.forwardPe,
             ps: fin.ps,
             pb: fin.pb,
             roe: fin.roe,
