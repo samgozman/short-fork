@@ -18,6 +18,10 @@ body {
         0 0 0 1px rgb(10 10 10 / 2%);
     --a-color: #3273dc;
     --a-color-hover: #363636;
+    --is-buy-bkg: #effaf3;
+    --is-buy-color: #257942;
+    --is-sale-bkg: #feecf0;
+    --is-sale-color: #cc0f35;
 }
 
 /* Scheme for dark mode */
@@ -35,6 +39,10 @@ body.dark-theme {
         0 0 0 1px rgb(255 255 255 / 2%);
     --a-color: #5ea3e4;
     --a-color-hover: #dbdbdb;
+    --is-buy-bkg: inherit;
+    --is-buy-color: #48c774;
+    --is-sale-bkg: inherit;
+    --is-sale-color: #f14668;
 }
 
 /* Apply theme according to the system settings */
@@ -55,6 +63,10 @@ body.dark-theme {
             0 0 0 1px rgb(255 255 255 / 2%);
         --a-color: #5ea3e4;
         --a-color-hover: #dbdbdb;
+        --is-buy-bkg: inherit;
+        --is-buy-color: #48c774;
+        --is-sale-bkg: inherit;
+        --is-sale-color: #f14668;
     }
 
     /* Scheme for light mode */
@@ -72,6 +84,10 @@ body.dark-theme {
             0 0 0 1px rgb(10 10 10 / 2%);
         --a-color: #3273dc;
         --a-color-hover: #363636;
+        --is-buy-bkg: #effaf3;
+        --is-buy-color: #257942;
+        --is-sale-bkg: #feecf0;
+        --is-sale-color: #cc0f35;
     }
 }
 
@@ -90,7 +106,9 @@ p,
 strong,
 .title,
 .modal-card-title,
-.field-label > .label {
+.field-label>.label,
+.table thead td,
+.table thead th {
     color: var(--strong-color);
 }
 
@@ -119,6 +137,22 @@ a {
 
 a:hover {
     color: var(--a-color-hover);
+}
+
+/* Table */
+.table {
+    background-color: inherit;
+    color: var(--strong-color);
+}
+
+tr.is-buy {
+    background-color: var(--is-buy-bkg);
+    color: var(--is-buy-color);
+}
+
+tr.is-sale {
+    background-color: var(--is-sale-bkg);
+    color: var(--is-sale-color);
 }
 
 /* csslint ignore:end */

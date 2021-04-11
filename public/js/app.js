@@ -673,7 +673,7 @@ const setInsidersTable = (response = {}) => {
         row.insertCell(3).innerHTML = '$' + element.value
 
         // Set color
-        element.transaction === 'Buy' ? row.classList.add('is-buy') : element.transaction === 'Sale' ? row.classList.add('is-sell') : row.classList.add('is-option')
+        element.transaction === 'Buy' ? row.classList.add('is-buy') : element.transaction === 'Sale' ? row.classList.add('is-sale') : row.classList.add('is-option')
     })
 }
 
