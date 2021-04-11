@@ -75,6 +75,9 @@ const finvizSchema = mongoose.Schema({
     dividend_percent: {
         type: Number,
         default: null
+    },
+    insidersDeals: {
+        type: Array
     }
 }, {
     timestamps: true
@@ -84,6 +87,7 @@ const finvizSchema = mongoose.Schema({
 finvizSchema.statics.getDataFromFinviz = async (ticker = '') => {
     try {
         const fin = await timeout(finvizor.stock(ticker.trim()))
+        const insiders_keys_to_keep = ['insiderTrading', 'relationship', 'date', 'transaction', 'value']
 
         if (fin.error) {
             console.log(fin.error)
@@ -107,7 +111,11 @@ finvizSchema.statics.getDataFromFinviz = async (ticker = '') => {
             recomendation: fin.recom ? fin.recom.toFixed(1) : null,
             site: fin.site,
             peg: fin.peg,
-            dividend_percent: fin.dividendPercent
+            dividend_percent: fin.dividendPercent,
+            insidersDeals: fin.insidersDeals.reduce((r, c) => [...r, Object.entries(c).reduce((b, [k, v]) => insiders_keys_to_keep.includes(k) ? {
+                ...b,
+                [k]: v
+            } : b, {})], [])
         }
     } catch (error) {
         return {

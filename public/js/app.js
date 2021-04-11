@@ -434,7 +434,8 @@ let pageObj = {
     },
     shortsqueeze: {
         short_flow: document.querySelector('#resp_squeeze')
-    }
+    },
+    insidersDeals: document.querySelector('#resp_insidersDeals_tbody')
 }
 
 const form = document.querySelector('form')
@@ -487,6 +488,9 @@ const erase = (word = ' пусто ') => {
     progress_barchart_value.textContent = ''
     progress_finviz.removeAttribute('value')
     progress_finviz_value.textContent = ''
+
+    // Clear insidersDeals table
+    pageObj.insidersDeals.innerHTML = ''
 
     // Clear volume chart
     chartVolume.updateSeries([{
@@ -609,7 +613,7 @@ const setTags = (response = {}) => {
 
     // Set p/e indicator
     pageObj.finviz.pe.classList.add(response.finviz.pe > 0 && response.finviz.pe < 15 ? 'is-success' : response.finviz.pe < 25 ? 'is-warning' : 'is-danger')
-    
+
     // Set p/e indicator
     pageObj.finviz.forwardPe.classList.add(response.finviz.forwardPe > 0 && response.finviz.forwardPe < 15 ? 'is-success' : response.finviz.forwardPe < 25 ? 'is-warning' : 'is-danger')
 
@@ -658,6 +662,19 @@ const setProgressBar = (response = {}) => {
     progress_finviz.value = 6 - response.finviz.recomendation
     progress_finviz_value.textContent = 6 - response.finviz.recomendation
     progress_finviz.classList.add(progress_finviz.value <= 2 ? 'is-danger' : progress_finviz.value <= 3.5 ? 'is-warning' : 'is-success')
+}
+
+const setInsidersTable = (response = {}) => {
+    response.finviz.insidersDeals.forEach((element) => {
+        let row = pageObj.insidersDeals.insertRow()
+        row.insertCell(0).innerHTML = `<b>${element.relationship}</b><br>${element.insiderTrading}`
+        row.insertCell(1).innerHTML = element.date
+        row.insertCell(2).innerHTML = element.transaction === 'Option Exercise' ? 'Option' : element.transaction
+        row.insertCell(3).innerHTML = '$' + element.value
+
+        // Set color
+        element.transaction === 'Buy' ? row.classList.add('is-buy') : element.transaction === 'Sale' ? row.classList.add('is-sell') : row.classList.add('is-option')
+    })
 }
 
 // Update dats set in nakedshort charts
@@ -763,7 +780,7 @@ const setNetIncomeChart = (response = {}) => {
 
         chartNetIncome.updateSeries([{
             data: response.barchartfinancials.revenue
-        },{
+        }, {
             data: response.barchartfinancials.netIncome
         }])
     } else {
@@ -829,6 +846,7 @@ form.addEventListener('submit', async (e) => {
         setTags(response)
         setSigns()
         setProgressBar(response)
+        setInsidersTable(response)
 
         // ! APPEND TRADINGVIEW WIDGET
         techWidget(ticker.value)
