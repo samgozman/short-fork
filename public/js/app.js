@@ -970,6 +970,7 @@ const lightModeChartsSettings = {
 }
 
 const darkModePieChartsSettings = {
+    colors: ['#1ca64c', '#C5D86D', '#ffd324', '#FD6A6A', '#ff0537'],
     chart: {
         foreColor: '#ccc'
     },
@@ -982,6 +983,7 @@ const darkModePieChartsSettings = {
 }
 
 const lightModePieChartsSettings = {
+    colors: ['#48c774', '#C5D86D', '#ffdd57', '#FD6A6A', '#f14668'],
     chart: {
         foreColor: '#373d3f'
     },
