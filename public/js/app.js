@@ -988,7 +988,7 @@ const lightModePieChartsSettings = {
         foreColor: '#373d3f'
     },
     tooltip: {
-        theme: 'light'
+        theme: 'dark'
     },
     grid: {
         borderColor: '#e0e0e0'
