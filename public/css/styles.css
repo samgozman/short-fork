@@ -172,7 +172,7 @@ a.tag:hover {
 
 /* Table */
 .table-container {
-    max-height: 524px;
+    max-height: 410px;
     overflow-y: auto;
 }
 

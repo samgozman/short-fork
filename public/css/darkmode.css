@@ -22,6 +22,10 @@ body {
     --is-buy-color: #257942;
     --is-sale-bkg: #feecf0;
     --is-sale-color: #cc0f35;
+    --is-danger-bkg: #f14668;
+    --is-warning-bkg: #ffdd57;
+    --is-success-bkg: #48c774;
+    --is-link-bkg: #3273dc;
 }
 
 /* Scheme for dark mode */
@@ -43,6 +47,10 @@ body.dark-theme {
     --is-buy-color: #48c774;
     --is-sale-bkg: inherit;
     --is-sale-color: #f14668;
+    --is-danger-bkg: #ff0537;
+    --is-warning-bkg: #ffd324;
+    --is-success-bkg: #1ca64c;
+    --is-link-bkg: #205bbc;
 }
 
 /* Apply theme according to the system settings */
@@ -67,6 +75,10 @@ body.dark-theme {
         --is-buy-color: #48c774;
         --is-sale-bkg: inherit;
         --is-sale-color: #f14668;
+        --is-danger-bkg: #ff0537;
+        --is-warning-bkg: #ffd324;
+        --is-success-bkg: #1ca64c;
+        --is-link-bkg: #205bbc;
     }
 
     /* Scheme for light mode */
@@ -88,6 +100,10 @@ body.dark-theme {
         --is-buy-color: #257942;
         --is-sale-bkg: #feecf0;
         --is-sale-color: #cc0f35;
+        --is-danger-bkg: #f14668;
+        --is-warning-bkg: #ffdd57;
+        --is-success-bkg: #48c774;
+        --is-link-bkg: #3273dc;
     }
 }
 
@@ -153,6 +169,35 @@ tr.is-buy {
 tr.is-sale {
     background-color: var(--is-sale-bkg);
     color: var(--is-sale-color);
+}
+
+/* Tags and progress */
+.tag:not(body).is-danger,
+.progress.is-danger::-webkit-progress-value,
+.progress.is-danger::-moz-progress-bar,
+.progress.is-danger::-ms-fill {
+    background-color: var(--is-danger-bkg);
+}
+
+.tag:not(body).is-warning,
+.progress.is-warning::-webkit-progress-value,
+.progress.is-warning::-moz-progress-bar,
+.progress.is-warning::-ms-fill {
+    background-color: var(--is-warning-bkg);
+}
+
+.tag:not(body).is-success,
+.progress.is-success::-webkit-progress-value,
+.progress.is-success::-moz-progress-bar,
+.progress.is-success::-ms-fill {
+    background-color: var(--is-success-bkg);
+}
+
+.tag:not(body).is-link,
+.progress.is-link::-webkit-progress-value,
+.progress.is-link::-moz-progress-bar,
+.progress.is-link::-ms-fill {
+    background-color: var(--is-link-bkg);
 }
 
 /* csslint ignore:end */
