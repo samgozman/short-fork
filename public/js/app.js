@@ -598,7 +598,7 @@ const setTags = (response = {}) => {
     resp_finviz_rsi.classList.add(response.finviz.rsi < 30 ? 'is-success' : response.finviz.rsi < 70 ? 'is-warning' : 'is-danger')
 
     // Set debt indicator
-    pageObj.finviz.debteq.classList.add(response.finviz.debteq < 0.4 ? 'is-success' : response.finviz.debteq < 1 ? 'is-warning' : 'is-danger')
+    pageObj.finviz.debteq.classList.add(response.finviz.debteq > 0 && response.finviz.debteq < 0.4 ? 'is-success' : response.finviz.debteq < 1 ? 'is-warning' : 'is-danger')
 
     // Set roa indicator
     pageObj.finviz.roa.classList.add(response.finviz.roa > 0 ? 'is-success' : 'is-danger')
