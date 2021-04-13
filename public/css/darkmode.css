@@ -171,29 +171,46 @@ tr.is-sale {
     color: var(--is-sale-color);
 }
 
-/* Tags and progress */
-.tag:not(body).is-danger,
+/* Tags */
+.is-danger,
+.tag:not(body).is-danger {
+    background-color: var(--is-danger-bkg);
+}
+
+.is-warning,
+.tag:not(body).is-warning {
+    background-color: var(--is-warning-bkg);
+}
+
+.is-success,
+.tag:not(body).is-success {
+    background-color: var(--is-success-bkg);
+}
+
+.is-link,
+.tag:not(body).is-link {
+    background-color: var(--is-link-bkg);
+}
+
+/* Progress */
 .progress.is-danger::-webkit-progress-value,
 .progress.is-danger::-moz-progress-bar,
 .progress.is-danger::-ms-fill {
     background-color: var(--is-danger-bkg);
 }
 
-.tag:not(body).is-warning,
 .progress.is-warning::-webkit-progress-value,
 .progress.is-warning::-moz-progress-bar,
 .progress.is-warning::-ms-fill {
     background-color: var(--is-warning-bkg);
 }
 
-.tag:not(body).is-success,
 .progress.is-success::-webkit-progress-value,
 .progress.is-success::-moz-progress-bar,
 .progress.is-success::-ms-fill {
     background-color: var(--is-success-bkg);
 }
 
-.tag:not(body).is-link,
 .progress.is-link::-webkit-progress-value,
 .progress.is-link::-moz-progress-bar,
 .progress.is-link::-ms-fill {
