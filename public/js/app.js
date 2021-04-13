@@ -637,11 +637,11 @@ const setTags = (response = {}) => {
 
     // Set Tod OI
     const oiTodToAvg = response.barchartoverview.options.todaysOpenInterest / response.barchartoverview.options.openInt30Day
-    if (oiTodToAvg < 0.7 || oiTodToAvg > 1.3) pageObj.barchartoptions.todaysOpenInterest.classList.add('is-warning')
+    if (oiTodToAvg < 0.5 || oiTodToAvg > 1.5) pageObj.barchartoptions.todaysOpenInterest.classList.add('is-danger')
 
     // Set Tod Vol
     const volTodToAvg = response.barchartoverview.options.todaysVolume / response.barchartoverview.options.volumeAvg30Day
-    if (volTodToAvg < 0.7 || volTodToAvg > 1.3) pageObj.barchartoptions.todaysVolume.classList.add('is-warning')
+    if (volTodToAvg < 0.5 || volTodToAvg > 1.5) pageObj.barchartoptions.todaysVolume.classList.add('is-danger')
 }
 
 // Set values and colors for progress bar
