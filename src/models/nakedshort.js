@@ -47,7 +47,6 @@ nakedshortSchema.statics.getDataFromNaked = async (ticker = '') => {
             error: 'Nakedshort service is unavalible'
         }
     }
-
 }
 
 // Create object in DB. obj is optional - if data was fetched earlier 

@@ -18,6 +18,14 @@ body {
         0 0 0 1px rgb(10 10 10 / 2%);
     --a-color: #3273dc;
     --a-color-hover: #363636;
+    --is-buy-bkg: #effaf3;
+    --is-buy-color: #257942;
+    --is-sale-bkg: #feecf0;
+    --is-sale-color: #cc0f35;
+    --is-danger-bkg: #f14668;
+    --is-warning-bkg: #ffdd57;
+    --is-success-bkg: #48c774;
+    --is-link-bkg: #3273dc;
 }
 
 /* Scheme for dark mode */
@@ -35,6 +43,14 @@ body.dark-theme {
         0 0 0 1px rgb(255 255 255 / 2%);
     --a-color: #5ea3e4;
     --a-color-hover: #dbdbdb;
+    --is-buy-bkg: inherit;
+    --is-buy-color: #48c774;
+    --is-sale-bkg: inherit;
+    --is-sale-color: #f14668;
+    --is-danger-bkg: #ff0537;
+    --is-warning-bkg: #ffd324;
+    --is-success-bkg: #1ca64c;
+    --is-link-bkg: #205bbc;
 }
 
 /* Apply theme according to the system settings */
@@ -55,6 +71,14 @@ body.dark-theme {
             0 0 0 1px rgb(255 255 255 / 2%);
         --a-color: #5ea3e4;
         --a-color-hover: #dbdbdb;
+        --is-buy-bkg: inherit;
+        --is-buy-color: #48c774;
+        --is-sale-bkg: inherit;
+        --is-sale-color: #f14668;
+        --is-danger-bkg: #ff0537;
+        --is-warning-bkg: #ffd324;
+        --is-success-bkg: #1ca64c;
+        --is-link-bkg: #205bbc;
     }
 
     /* Scheme for light mode */
@@ -72,6 +96,14 @@ body.dark-theme {
             0 0 0 1px rgb(10 10 10 / 2%);
         --a-color: #3273dc;
         --a-color-hover: #363636;
+        --is-buy-bkg: #effaf3;
+        --is-buy-color: #257942;
+        --is-sale-bkg: #feecf0;
+        --is-sale-color: #cc0f35;
+        --is-danger-bkg: #f14668;
+        --is-warning-bkg: #ffdd57;
+        --is-success-bkg: #48c774;
+        --is-link-bkg: #3273dc;
     }
 }
 
@@ -89,7 +121,10 @@ p,
 
 strong,
 .title,
-.modal-card-title {
+.modal-card-title,
+.field-label>.label,
+.table thead td,
+.table thead th {
     color: var(--strong-color);
 }
 
@@ -118,6 +153,68 @@ a {
 
 a:hover {
     color: var(--a-color-hover);
+}
+
+/* Table */
+.table {
+    background-color: inherit;
+    color: var(--strong-color);
+}
+
+tr.is-buy {
+    background-color: var(--is-buy-bkg);
+    color: var(--is-buy-color);
+}
+
+tr.is-sale {
+    background-color: var(--is-sale-bkg);
+    color: var(--is-sale-color);
+}
+
+/* Tags */
+.is-danger,
+.tag:not(body).is-danger {
+    background-color: var(--is-danger-bkg);
+}
+
+.is-warning,
+.tag:not(body).is-warning {
+    background-color: var(--is-warning-bkg);
+}
+
+.is-success,
+.tag:not(body).is-success {
+    background-color: var(--is-success-bkg);
+}
+
+.is-link,
+.tag:not(body).is-link {
+    background-color: var(--is-link-bkg);
+}
+
+/* Progress */
+.progress.is-danger::-webkit-progress-value,
+.progress.is-danger::-moz-progress-bar,
+.progress.is-danger::-ms-fill {
+    background-color: var(--is-danger-bkg);
+}
+
+.progress.is-warning::-webkit-progress-value,
+.progress.is-warning::-moz-progress-bar,
+.progress.is-warning::-ms-fill {
+    background-color: var(--is-warning-bkg);
+}
+
+.progress.is-success::-webkit-progress-value,
+.progress.is-success::-moz-progress-bar,
+.progress.is-success::-ms-fill {
+    background-color: var(--is-success-bkg);
+}
+
+.progress.is-link::-webkit-progress-value,
+.progress.is-link::-moz-progress-bar,
+.progress.is-link::-ms-fill {
+    background-color: var(--is-link-bkg);
 }
 
 /* csslint ignore:end */

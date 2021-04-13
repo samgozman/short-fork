@@ -25,7 +25,7 @@
     <div class="column is-one-third">
         <!-- TAGS & FORM -->
 
-        <div class="main-block">
+        <div class="box">
             {{> stocks/searchform }}
             {{> stocks/financialtags }}
         </div>
@@ -46,12 +46,59 @@
         <!-- Volume graphichs -->
 
         <div class="box">
+            <h5 class="title is-5">Объём шортов</h5>
             {{> stocks/nakedchart }}
         </div>
 
         <!-- /Volume graphichs -->
     </div>
 
+</div>
+
+<div class="columns is-variable is-1-mobile">
+    <div class="column is-one-third">
+        <div class="box">
+            <h5 class="title is-5">Опционы</h5>
+            {{> stocks/options }}
+        </div>
+    </div>
+    <div class="column is-one-third">
+        <div class="box">
+            <h5 class="title is-5">Мнение аналитиков</h5>
+            {{> stocks/analytics }}
+        </div>
+    </div>
+    <div class="column is-one-third">
+        <div class="box">
+            <h5 class="title is-5">Долг к капиталу</h5>
+            <div id="chartDebtEquity"></div>
+            <p class="upd-message">
+                Обновление данных Barchart раз в {{TTL_BARCHART_FINANCIAL}} дней.
+                Не является индивидуальной инвестиционной рекомендацией!
+                <a href="https://www.barchart.com/" rel="nofollow" target="_blank">www.barchart.com</a>. <br>
+            </p>
+        </div>
+    </div>
+</div>
+
+<div class="columns is-variable is-1-mobile">
+    <div class="column is-two-third">
+        <div class="box">
+            <h5 class="title is-5">Сделки инсайдеров</h5>
+            {{> stocks/insiders_table }}
+        </div>
+    </div>
+    <div class="column is-one-third">
+        <div class="box">
+            <h5 class="title is-5">Выручка и прибыль</h5>
+            <div id="chartNetIncome"></div>
+            <p class="upd-message">
+                Обновление данных Barchart раз в {{TTL_BARCHART_FINANCIAL}} дней.
+                Не является индивидуальной инвестиционной рекомендацией!
+                <a href="https://www.barchart.com/" rel="nofollow" target="_blank">www.barchart.com</a>. <br>
+            </p>
+        </div>
+    </div>
 </div>
 
 <div class="columns">

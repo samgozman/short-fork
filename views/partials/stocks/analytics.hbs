@@ -1,0 +1,30 @@
+<div class="field is-horizontal progress-bar-field">
+    <div class="field-label has-text-left">
+        <label class="label">Finviz</label>
+    </div>
+    <div class="field-body">
+        <div class="field progress-wrapper">
+            <progress class="progress is-success" value="" id="progress-finviz" max="5"></progress>
+            <p class="progress-value has-text-dark" id="progress-finviz-value"></p>
+        </div>
+    </div>
+</div>
+<div class="field is-horizontal progress-bar-field">
+    <div class="field-label has-text-left">
+        <label class="label">Barchart</label>
+    </div>
+    <div class="field-body">
+        <div class="field progress-wrapper">
+            <progress class="progress is-success" id="progress-barchart" value="" max="5"></progress>
+            <p class="progress-value has-text-dark" id="progress-barchart-value"></p>
+        </div>
+    </div>
+</div>
+
+<div id="chartAnalytics"></div>
+
+<p class="upd-message">
+    Обновление данных Finviz раз в {{TTL_FINVIZ}} минут, Barchart раз в {{TTL_BARCHART_OVERVIEW}} минут.
+    Не является индивидуальной инвестиционной рекомендацией!
+    <a href="https://github.com/samgozman/short-fork#источники-данных" target="_blank" rel="nofollow">Источники данных</a>. <br>
+</p>

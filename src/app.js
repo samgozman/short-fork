@@ -6,6 +6,7 @@ const stockRouter = require('./routers/stock')
 const finvizRouter = require('./routers/finviz')
 const nakedRouter = require('./routers/nakedshort')
 const squeezeRouter = require('./routers/shortsqueeze')
+const barchartRouter = require('./routers/barchart')
 const webRouter = require('./routers/web')
 
 const app = express()
@@ -28,6 +29,7 @@ app.use(finvizRouter)
 app.use(nakedRouter)
 app.use(squeezeRouter)
 app.use(stockRouter)
+app.use(barchartRouter)
 app.use(webRouter)
 
 module.exports = app
