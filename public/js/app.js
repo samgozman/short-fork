@@ -55,6 +55,7 @@ const chartVolume = new ApexCharts(document.querySelector('#chartVolume'), {
             enabled: false
         }
     },
+    colors: ['#2196f3', '#ef5350'],
     dataLabels: {
         enabled: false
     },
@@ -246,7 +247,7 @@ const chartDebtEquity = new ApexCharts(document.querySelector('#chartDebtEquity'
             enabled: false
         }
     },
-    colors: ['#FF4560', '#008FFB'],
+    colors: ['#ef5350', '#2196f3'],
     dataLabels: {
         enabled: false
     },
@@ -299,7 +300,7 @@ const chartNetIncome = new ApexCharts(document.querySelector('#chartNetIncome'),
             enabled: false
         }
     },
-    colors: ['#008FFB', '#C4BBAF'],
+    colors: ['#2196f3', '#C4BBAF'],
     dataLabels: {
         enabled: false
     },
