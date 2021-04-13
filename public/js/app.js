@@ -729,7 +729,7 @@ const setChartDebtEquity = (response = {}) => {
         // Debt equity compare with finviz value
         const length = response.barchartfinancials.longTermDebt.length - 1
         const dtey = response.finviz.debteq / (response.barchartfinancials.longTermDebt[length] / response.barchartfinancials.shareholdersEquity[length])
-        if (dtey === 0 || dtey < 0.5 || dtey > 1.5) {
+        if (dtey === 0 || dtey < 0.35 || dtey > 1.75) {
             throw new Error()
         }
 
