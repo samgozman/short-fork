@@ -680,7 +680,7 @@ const setInsidersTable = (response = {}) => {
 
 // Update dats set in nakedshort charts
 const setNakedshortChart = (response = {}) => {
-    if (response.nakedshort.chart && !response.nakedshort.chart[0].error && response.nakedshort.chart[0].xAxisArr.length > 0 && response.nakedshort.chart[0].shortVolArr.length > 0) {
+    if (response.nakedshort.chart[0] && !response.nakedshort.chart[0].error && response.nakedshort.chart[0].xAxisArr.length > 0 && response.nakedshort.chart[0].shortVolArr.length > 0) {
         // ! UPDATE VOLUME CHART
         chartVolume.updateOptions({
             xaxis: {
@@ -704,7 +704,7 @@ const setNakedshortChart = (response = {}) => {
         chartShortPercent.updateSeries([{
             data: getPercentageOfShorted(response.nakedshort.chart[0].regularVolArr, response.nakedshort.chart[0].shortVolArr)
         }])
-    } else if (response.nakedshort.chart === null || response.nakedshort.chart[0].error) {
+    } else if (response.nakedshort.chart === null || !response.nakedshort.chart[0] || response.nakedshort.chart[0].error) {
         chartVolume.updateOptions({
             noData: {
                 text: 'Данные Nakedshort недоступны'
