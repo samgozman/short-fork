@@ -2,7 +2,8 @@ import { Router } from 'express'
 import { rateLimiter } from '../middleware/rateLimiter.mjs'
 import { findStock } from '../middleware/findStock.mjs'
 import { counter } from '../middleware/counter.mjs'
-export const router = new Router()
+
+const router = new Router()
 
 // Get stock by quote
 router.get('/stocks', rateLimiter, findStock, counter, async (req, res) => {

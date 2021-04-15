@@ -1,9 +1,8 @@
 import express, { json } from 'express'
 import { fileURLToPath } from 'url'
 import { create } from 'express-handlebars'
-import conn from './db/mongoose.mjs'
-conn
 
+import './db/mongoose.mjs'
 import stockRouter from './routers/stock.mjs'
 import finvizRouter from './routers/finviz.mjs'
 import nakedRouter from './routers/nakedshort.mjs'

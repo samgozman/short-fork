@@ -4,7 +4,7 @@ import { rateLimiter } from '../middleware/rateLimiter.mjs'
 import { findStock } from '../middleware/findStock.mjs'
 import { counter } from '../middleware/counter.mjs'
 
-export const router = new Router()
+const router = new Router()
 
 router.get('/stocks/nakedshort', rateLimiter, findStock, counter, async (req, res) => {
     const ticker = req.query.ticker

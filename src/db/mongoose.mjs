@@ -1,10 +1,10 @@
 import mongoose from 'mongoose'
 
-const conn = mongoose.connect(process.env.MONGODB_CONNECTION_URL, {
+const connection = mongoose.connect(process.env.MONGODB_CONNECTION_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true,
     useFindAndModify: false
 })
 
-export default conn
+export default connection

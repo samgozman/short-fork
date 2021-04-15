@@ -4,7 +4,7 @@ import { fileURLToPath } from 'url'
 import { createRequire } from 'module'
 
 const require = createRequire(import.meta.url)
-export const router = new express.Router()
+const router = new express.Router()
 
 const __dirname = fileURLToPath(new URL('.', import.meta.url))
 const public_dir = join(__dirname, '../../public')
