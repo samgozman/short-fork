@@ -1,9 +1,9 @@
-const mongoose = require('mongoose')
-const Stock = require('../models/stock')
-const timeout = require('../utils/timeout')
-const nakedshort = require('nakedshort')
+import mongoose from 'mongoose'
+import { Stock } from './stock.mjs'
+import timeout from '../utils/timeout.mjs'
+import nakedshort from 'nakedshort'
 
-// Class schema for Nakedshort instance
+// Class mongoose.Schema for Nakedshort instance
 const nakedshortSchema = mongoose.Schema({
     _stock_id: {
         type: mongoose.Schema.Types.ObjectId,
@@ -168,6 +168,4 @@ nakedshortSchema.pre('find', async function () {
     }
 })
 
-const Nakedshort = mongoose.model('Nakedshort', nakedshortSchema)
-
-module.exports = Nakedshort
+export const Nakedshort = mongoose.model('Nakedshort', nakedshortSchema)

@@ -1,9 +1,9 @@
-const mongoose = require('mongoose')
-const Stock = require('../models/stock')
-const timeout = require('../utils/timeout')
-const shortsqueeze = require('shortsqueeze')
+import mongoose from 'mongoose'
+import { Stock } from './stock.mjs'
+import timeout from '../utils/timeout.mjs'
+import shortsqueeze from 'shortsqueeze'
 
-// Class schema for shortsqueeze instance
+// Class mongoose.Schema for shortsqueeze instance
 const shortsqueezeSchema = mongoose.Schema({
     _stock_id: {
         type: mongoose.Schema.Types.ObjectId,
@@ -152,6 +152,4 @@ shortsqueezeSchema.pre('find', async function () {
     }
 })
 
-const Shortsqueeze = mongoose.model('Shortsqueeze', shortsqueezeSchema)
-
-module.exports = Shortsqueeze
+export const Shortsqueeze = mongoose.model('Shortsqueeze', shortsqueezeSchema)

@@ -1,6 +1,6 @@
-const mongoose = require('mongoose')
+import mongoose from 'mongoose'
 
-// Class schema for stock instance
+// Class mongoose.Schema for stock instance
 const stockSchema = mongoose.Schema({
     ticker: {
         type: String,
@@ -56,6 +56,4 @@ stockSchema.virtual('barchartfinancials', {
     justOne: true
 })
 
-const Stock = mongoose.model('Stock', stockSchema)
-
-module.exports = Stock
+export const Stock = mongoose.model('Stock', stockSchema)
