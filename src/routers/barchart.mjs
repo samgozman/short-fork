@@ -1,9 +1,9 @@
 import { Router } from 'express'
 import { BarchartOverview } from '../models/barchartOverview.mjs'
 import { BarchartFinancials } from '../models/barchartFinancials.mjs'
-import { rateLimiter } from '../middleware/rateLimiter.mjs'
-import { findStock } from '../middleware/findStock.mjs'
-import { counter } from '../middleware/counter.mjs'
+import rateLimiter from '../middleware/rateLimiter.mjs'
+import findStock from '../middleware/findStock.mjs'
+import counter from '../middleware/counter.mjs'
 
 const router = new Router()
 

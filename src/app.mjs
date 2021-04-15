@@ -1,4 +1,4 @@
-import express, { json } from 'express'
+import express from 'express'
 import { fileURLToPath } from 'url'
 import { create } from 'express-handlebars'
 
@@ -25,7 +25,7 @@ app.engine('.hbs', hbs.engine)
 app.set('view engine', '.hbs')
 
 // Parse all incoming JSON to an object, so we can access it in the request (before passing routers)
-app.use(json())
+app.use(express.json())
 
 app.use(finvizRouter)
 app.use(nakedRouter)

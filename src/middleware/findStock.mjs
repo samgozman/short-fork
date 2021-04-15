@@ -1,7 +1,7 @@
 import { Stock } from '../models/stock.mjs'
 import  { Finviz } from '../models/finviz.mjs'
 
-export const findStock = async (req, res, next) => {
+const findStock = async (req, res, next) => {
     const ticker = req.query.ticker
 
     // ! 1. Check if ticker is provided
@@ -45,3 +45,5 @@ export const findStock = async (req, res, next) => {
         })
     }
 }
+
+export default findStock

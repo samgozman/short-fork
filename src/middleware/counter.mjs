@@ -1,5 +1,5 @@
 // Increment stock counter
-export const counter = async (req, res, next) => {
+const counter = async (req, res, next) => {
     try {
         res.stock._counter++
         await res.stock.save()
@@ -10,3 +10,5 @@ export const counter = async (req, res, next) => {
         })
     }
 }
+
+export default counter

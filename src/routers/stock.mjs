@@ -1,7 +1,7 @@
 import { Router } from 'express'
-import { rateLimiter } from '../middleware/rateLimiter.mjs'
-import { findStock } from '../middleware/findStock.mjs'
-import { counter } from '../middleware/counter.mjs'
+import rateLimiter from '../middleware/rateLimiter.mjs'
+import findStock from '../middleware/findStock.mjs'
+import counter from '../middleware/counter.mjs'
 
 const router = new Router()
 
