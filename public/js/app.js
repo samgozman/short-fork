@@ -650,7 +650,7 @@ const setProgressBar = (response = {}) => {
     const barchartRating = (obj = {}) => {
         const total = Object.values(obj).reduce((a, b) => a + b, 0)
         const sum = obj.strongBuy * 5 + obj.moderateBuy * 4 + obj.hold * 3 + obj.moderateSell * 2 + obj.strongSell * 1
-        return (sum / total).toFixed(2)
+        return !isNaN(sum) && sum !== 0 ? (sum / total).toFixed(2) : null
     }
     const barchartAnal = barchartRating(response.barchartoverview.analytics)
 
@@ -660,8 +660,8 @@ const setProgressBar = (response = {}) => {
     progress_barchart.classList.add(barchartAnal <= 2 ? 'is-danger' : barchartAnal <= 3.5 ? 'is-warning' : 'is-success')
 
     // Set finviz progress bar value
-    progress_finviz.value = 6 - response.finviz.recomendation
-    progress_finviz_value.textContent = 6 - response.finviz.recomendation
+    progress_finviz.value = response.finviz.recomendation ? 6 - response.finviz.recomendation : null
+    progress_finviz_value.textContent = response.finviz.recomendation ? 6 - response.finviz.recomendation : null
     progress_finviz.classList.add(progress_finviz.value <= 2 ? 'is-danger' : progress_finviz.value <= 3.5 ? 'is-warning' : 'is-success')
 }
 

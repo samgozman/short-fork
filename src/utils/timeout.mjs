@@ -1,4 +1,4 @@
-const pTimeout = require('p-timeout')
+import pTimeout from 'p-timeout'
 
 // Return error if response timeout
 const timeout = async (func = Promise, time = 5000) => {
@@ -11,4 +11,4 @@ const timeout = async (func = Promise, time = 5000) => {
     }
 }
 
-module.exports = timeout
+export default timeout

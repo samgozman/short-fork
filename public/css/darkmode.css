@@ -108,7 +108,6 @@ body.dark-theme {
 }
 
 html,
-body,
 .modal-card-body,
 .section {
     background-color: var(--bkg-color);
@@ -142,8 +141,13 @@ strong,
     border-bottom: var(--modal-border);
 }
 
-.box {
+.box,
+.tradingview_tech,
+#iframe_tech {
     background-color: var(--box-bkg);
+}
+
+.box {
     box-shadow: var(--box-shadow);
 }
 

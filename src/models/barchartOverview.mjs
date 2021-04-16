@@ -1,11 +1,9 @@
-const mongoose = require('mongoose')
-const Stock = require('../models/stock')
-const timeout = require('../utils/timeout')
-const {
-    quotes
-} = require('barchart-dot-com')
+import mongoose from 'mongoose'
+import { Stock } from './stock.mjs'
+import timeout from '../utils/timeout.mjs'
+import { quotes } from 'barchart-dot-com'
 
-// Class schema for Barchart Overview instance
+// Class mongoose.Schema for Barchart Overview instance
 const barchartOverviewSchema = mongoose.Schema({
     _stock_id: {
         type: mongoose.Schema.Types.ObjectId,
@@ -238,6 +236,4 @@ barchartOverviewSchema.pre('find', async function () {
     }
 })
 
-const BarchartOverview = mongoose.model('BarchartOverview', barchartOverviewSchema)
-
-module.exports = BarchartOverview
+export const BarchartOverview = mongoose.model('BarchartOverview', barchartOverviewSchema)

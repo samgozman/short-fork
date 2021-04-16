@@ -1,5 +1,5 @@
-const app = require('./app')
-const gettinkoff = require('./utils/gettinkoff')
+import app from './app.mjs'
+import gettinkoff from './utils/gettinkoff.mjs'
 
 // Use server-provided port or use dev 3000 if not
 const port = process.env.PORT

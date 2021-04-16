@@ -17,6 +17,7 @@
 
 /* Global */
 body {
+    background-color: transparent;
     display: flex;
     min-height: 100vh;
     flex-direction: column;
@@ -115,7 +116,7 @@ a.tag:hover {
     overflow: hidden;
 }
 
-.tradingview_tech>#iframe_tech {
+#iframe_tech {
     height: 115%;
     width: 108%;
     overflow: hidden;
@@ -125,7 +126,7 @@ a.tag:hover {
     margin-top: -5%;
 }
 
-.tradingview_chart>#iframe_chart {
+#iframe_chart {
     width: 100%;
     height: inherit;
 }
@@ -234,8 +235,8 @@ a.tag:hover {
     .tradingview_tech {
         height: 340px;
     }
-
-    .tradingview_tech>#iframe_tech {
+    
+    #iframe_tech {
         height: 130%;
     }
 }

@@ -1,5 +1,5 @@
-const Stock = require('../models/stock')
-const Finviz = require('../models/finviz')
+import { Stock } from '../models/stock.mjs'
+import  { Finviz } from '../models/finviz.mjs'
 
 const findStock = async (req, res, next) => {
     const ticker = req.query.ticker
@@ -46,4 +46,4 @@ const findStock = async (req, res, next) => {
     }
 }
 
-module.exports = findStock
+export default findStock

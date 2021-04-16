@@ -1,8 +1,9 @@
-const express = require('express')
-const rateLimiter = require('../middleware/rateLimiter')
-const findStock = require('../middleware/findStock')
-const counter = require('../middleware/counter')
-const router = new express.Router()
+import { Router } from 'express'
+import rateLimiter from '../middleware/rateLimiter.mjs'
+import findStock from '../middleware/findStock.mjs'
+import counter from '../middleware/counter.mjs'
+
+const router = new Router()
 
 // Get stock by quote
 router.get('/stocks', rateLimiter, findStock, counter, async (req, res) => {
@@ -29,4 +30,4 @@ router.get('/stocks', rateLimiter, findStock, counter, async (req, res) => {
     }
 })
 
-module.exports = router
+export default router

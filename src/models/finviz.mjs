@@ -1,9 +1,9 @@
-const mongoose = require('mongoose')
-const Stock = require('../models/stock')
-const timeout = require('../utils/timeout')
-const finvizor = require('finvizor')
+import mongoose from 'mongoose'
+import { Stock } from './stock.mjs'
+import timeout from '../utils/timeout.mjs'
+import { stock } from 'finvizor'
 
-// Class schema for Finviz instance
+// Class mongoose.Schema for Finviz instance
 const finvizSchema = mongoose.Schema({
     _stock_id: {
         type: mongoose.Schema.Types.ObjectId,
@@ -86,7 +86,7 @@ const finvizSchema = mongoose.Schema({
 // Get data from finviz.com
 finvizSchema.statics.getDataFromFinviz = async (ticker = '') => {
     try {
-        const fin = await timeout(finvizor.stock(ticker.trim()))
+        const fin = await timeout(stock(ticker.trim()))
         const insiders_keys_to_keep = ['insiderTrading', 'relationship', 'date', 'transaction', 'value']
 
         if (fin.error) {
@@ -243,6 +243,4 @@ finvizSchema.pre('find', async function () {
     }
 })
 
-const Finviz = mongoose.model('Finviz', finvizSchema)
-
-module.exports = Finviz
+export const Finviz = mongoose.model('Finviz', finvizSchema)

@@ -11,4 +11,4 @@ const counter = async (req, res, next) => {
     }
 }
 
-module.exports = counter
+export default counter

@@ -1,9 +1,10 @@
-const express = require('express')
-const Shortsqueeze = require('../models/shortsqueeze')
-const rateLimiter = require('../middleware/rateLimiter')
-const findStock = require('../middleware/findStock')
-const counter = require('../middleware/counter')
-const router = new express.Router()
+import { Router } from 'express'
+import { Shortsqueeze } from '../models/shortsqueeze.mjs'
+import rateLimiter from '../middleware/rateLimiter.mjs'
+import findStock from '../middleware/findStock.mjs'
+import counter from '../middleware/counter.mjs'
+
+const router = new Router()
 
 router.get('/stocks/shortsqueeze', rateLimiter, findStock, counter, async (req, res) => {
     const ticker = req.query.ticker
@@ -17,4 +18,4 @@ router.get('/stocks/shortsqueeze', rateLimiter, findStock, counter, async (req, 
     }
 })
 
-module.exports = router
+export default router

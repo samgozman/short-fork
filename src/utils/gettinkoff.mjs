@@ -1,10 +1,10 @@
-const Stock = require('../models/stock')
-const tinkoff = require('is-on-tinkoff-invest')
+import { Stock } from '../models/stock.mjs'
+import { getTinkoffStocks } from 'is-on-tinkoff-invest'
 
 // Update tinkoff indicator
 const update = async () => {
         try {
-        const tinkoffStocks = await tinkoff.getTinkoffStocks()
+        const tinkoffStocks = await getTinkoffStocks()
         // Save tinkoff status to DB. If stock is not there - create it.
         for (const item of tinkoffStocks) {
             // Try to find existing
@@ -28,4 +28,4 @@ const update = async () => {
     }
 }
 
-module.exports = update
+export default update

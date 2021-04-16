@@ -1,16 +1,18 @@
-const express = require('express')
-const exphbs = require('express-handlebars')
-require('./db/mongoose')
+import express from 'express'
+import { fileURLToPath } from 'url'
+import { create } from 'express-handlebars'
 
-const stockRouter = require('./routers/stock')
-const finvizRouter = require('./routers/finviz')
-const nakedRouter = require('./routers/nakedshort')
-const squeezeRouter = require('./routers/shortsqueeze')
-const barchartRouter = require('./routers/barchart')
-const webRouter = require('./routers/web')
+import './db/mongoose.mjs'
+import stockRouter from './routers/stock.mjs'
+import finvizRouter from './routers/finviz.mjs'
+import nakedRouter from './routers/nakedshort.mjs'
+import squeezeRouter from './routers/shortsqueeze.mjs'
+import barchartRouter from './routers/barchart.mjs'
+import webRouter from './routers/web.mjs'
 
+const __dirname = fileURLToPath(new URL('.', import.meta.url))
 const app = express()
-const hbs = exphbs.create({
+const hbs = create({
     extname: 'hbs',
     partialsDir: __dirname + '/../views/partials'
 })
@@ -32,4 +34,4 @@ app.use(stockRouter)
 app.use(barchartRouter)
 app.use(webRouter)
 
-module.exports = app
+export default app
