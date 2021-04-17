@@ -26,7 +26,7 @@
     "start": "node src/index.mjs",
     "dev": "nodemon -r dotenv/config src/index.mjs -e js,mjs,hbs,css dotenv_config_path=config/dev.env",
     "check-heroku": "heroku logs --app short-fork  --tail",
-    "dev-run-mongodb": "/Users/samgozman/mongodb/bin/mongod --dbpath=/Users/samgozman/mongodb-data"
+    "dev-mongodb": "brew services start mongodb-community "
   },
   "repository": {
     "type": "git",
