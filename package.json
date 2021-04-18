@@ -1,7 +1,7 @@
 {
   "name": "short-fork",
   "description": "Stock market helper: display a Short Float & Volume percentage indicator from three different data sources in one place.",
-  "version": "1.1.4",
+  "version": "1.1.5",
   "type": "module",
   "main": "index.mjs",
   "exports": "./index.mjs",
@@ -12,7 +12,7 @@
     "express-rate-limit": "^5.2.6",
     "finvizor": "^1.0.5",
     "is-on-tinkoff-invest": "^1.0.0",
-    "mongoose": "^5.12.3",
+    "mongoose": "^5.12.4",
     "nakedshort": "^1.0.4",
     "p-timeout": "^5.0.0",
     "shortsqueeze": "^1.0.3"
@@ -26,7 +26,7 @@
     "start": "node src/index.mjs",
     "dev": "nodemon -r dotenv/config src/index.mjs -e js,mjs,hbs,css dotenv_config_path=config/dev.env",
     "check-heroku": "heroku logs --app short-fork  --tail",
-    "dev-run-mongodb": "/Users/samgozman/mongodb/bin/mongod --dbpath=/Users/samgozman/mongodb-data"
+    "dev-mongodb": "brew services start mongodb-community "
   },
   "repository": {
     "type": "git",

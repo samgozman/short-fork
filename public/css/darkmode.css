@@ -26,6 +26,7 @@ body {
     --is-warning-bkg: #ffdd57;
     --is-success-bkg: #48c774;
     --is-link-bkg: #3273dc;
+    --is-link-button-color: #3273dc;
 }
 
 /* Scheme for dark mode */
@@ -51,6 +52,7 @@ body.dark-theme {
     --is-warning-bkg: #ffd324;
     --is-success-bkg: #1ca64c;
     --is-link-bkg: #205bbc;
+    --is-link-button-color: white;
 }
 
 /* Apply theme according to the system settings */
@@ -79,6 +81,7 @@ body.dark-theme {
         --is-warning-bkg: #ffd324;
         --is-success-bkg: #1ca64c;
         --is-link-bkg: #205bbc;
+        --is-link-button-color: white;
     }
 
     /* Scheme for light mode */
@@ -104,6 +107,7 @@ body.dark-theme {
         --is-warning-bkg: #ffdd57;
         --is-success-bkg: #48c774;
         --is-link-bkg: #3273dc;
+        --is-link-button-color: #3273dc;
     }
 }
 
@@ -194,6 +198,10 @@ tr.is-sale {
 .is-link,
 .tag:not(body).is-link {
     background-color: var(--is-link-bkg);
+}
+.button.is-link.is-outlined {
+    border-color: var(--is-link-bkg);
+    color: var(--is-link-button-color);
 }
 
 /* Progress */

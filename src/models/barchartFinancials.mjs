@@ -47,8 +47,11 @@ barchartFinancialsSchema.statics.getDataFromFinviz = async (ticker = '') => {
         }
 
         const liabilities = barchartFinancialsBalance.liabilities
+        const longDebt = liabilities.nonCurrentLiabilities.longTermDebt ? liabilities.nonCurrentLiabilities.longTermDebt.reverse() : liabilities.longTermDebt ? liabilities.longTermDebt.reverse() : null
+        const shortDebt = liabilities.currentLiabilities.total ? liabilities.currentLiabilities.total.reverse() : null
+        
         return {
-            longTermDebt: liabilities.nonCurrentLiabilities ? liabilities.nonCurrentLiabilities.longTermDebt.reverse() : liabilities.longTermDebt.reverse(),
+            longTermDebt: longDebt ? longDebt : shortDebt,
             shareholdersEquity: barchartFinancialsBalance.shareholdersEquity.total.reverse(),
             netIncome: barchartFinancialsIncome.netIncome.reverse(),
             revenue: barchartFinancialsIncome.sales.reverse(),
