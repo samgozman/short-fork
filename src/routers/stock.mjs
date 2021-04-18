@@ -24,6 +24,9 @@ router.get('/stocks', rateLimiter, findStock, counter, async (req, res) => {
         delete stock.createdAt
         delete stock.updatedAt
 
+        // Add Short-Fork version number
+        stock.version = process.env.npm_package_version
+        
         res.send(stock)
     } catch (err) {
         res.status(500).send(err.message)

@@ -849,11 +849,12 @@ form.addEventListener('submit', async (e) => {
     // Prevent from refreshing the browser once form submited 
     e.preventDefault()
     try {
-        const quote = ticker.value
+        let quote = ticker.value
         if (!quote) {
             throw new Error()
         }
-
+        quote = quote.toUpperCase()
+        
         isLoading(true)
         erase(' Loading ')
 
@@ -884,6 +885,9 @@ form.addEventListener('submit', async (e) => {
         setChartDebtEquity(response)
         setNetIncomeChart(response)
         setLinks(response.finviz.exchange, quote)
+
+        // Set page title
+        document.title = `Short fork ${response.version}: ${quote}`
 
         isLoading(false)
 
