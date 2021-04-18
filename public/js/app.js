@@ -34,7 +34,7 @@ window.onload = function () {
 }
 
 // Define Volume chart and render it
-const chartVolume = new ApexCharts(document.querySelector('#chartVolume'), {
+const chartVolume = new ApexCharts(document.getElementById('chartVolume'), {
     series: [{
         name: 'Общий объём',
         data: []
@@ -97,7 +97,7 @@ const chartVolume = new ApexCharts(document.querySelector('#chartVolume'), {
 chartVolume.render()
 
 // Define ShortPercent chart and render it
-const chartShortPercent = new ApexCharts(document.querySelector('#chartShortPercent'), {
+const chartShortPercent = new ApexCharts(document.getElementById('chartShortPercent'), {
     series: [{
         name: '% шортовых сделок за день',
         data: []
@@ -196,7 +196,7 @@ const chartShortPercent = new ApexCharts(document.querySelector('#chartShortPerc
 chartShortPercent.render()
 
 // Define analytics chart and render it
-const chartAnalytics = new ApexCharts(document.querySelector('#chartAnalytics'), {
+const chartAnalytics = new ApexCharts(document.getElementById('chartAnalytics'), {
     series: [44, 55, 41, 17, 15],
     labels: ['Strong Buy', 'Moderate Buy', 'Hold', 'Moderate Sell', 'Strong Sell'],
     chart: {
@@ -229,7 +229,7 @@ const chartAnalytics = new ApexCharts(document.querySelector('#chartAnalytics'),
 chartAnalytics.render()
 
 // Define Debt Equity chart
-const chartDebtEquity = new ApexCharts(document.querySelector('#chartDebtEquity'), {
+const chartDebtEquity = new ApexCharts(document.getElementById('chartDebtEquity'), {
     series: [{
         name: 'Долг',
         data: []
@@ -280,7 +280,7 @@ const chartDebtEquity = new ApexCharts(document.querySelector('#chartDebtEquity'
 chartDebtEquity.render()
 
 // Define netIncome chart
-const chartNetIncome = new ApexCharts(document.querySelector('#chartNetIncome'), {
+const chartNetIncome = new ApexCharts(document.getElementById('chartNetIncome'), {
     series: [{
             name: 'Выручка',
             data: []
@@ -404,55 +404,56 @@ const chartWidget = (ticker = '') => {
 // DOM object of elements which should be changed during request
 let pageObj = {
     finviz: {
-        name: document.querySelector('#resp_name'),
-        price: document.querySelector('#resp_price'),
-        pe: document.querySelector('#resp_pe'),
-        forwardPe: document.querySelector('#resp_forwardPe'),
-        ps: document.querySelector('#resp_ps'),
-        pb: document.querySelector('#resp_pb'),
-        roe: document.querySelector('#resp_roe'),
-        roa: document.querySelector('#resp_roa'),
-        debteq: document.querySelector('#resp_debteq'),
-        short_flow: document.querySelector('#resp_finviz'),
-        site: document.querySelector('#resp_site'),
-        peg: document.querySelector('#resp_peg'),
-        dividend_percent: document.querySelector('#resp_dividend_percent')
+        name: document.getElementById('resp_name'),
+        price: document.getElementById('resp_price'),
+        pe: document.getElementById('resp_pe'),
+        forwardPe: document.getElementById('resp_forwardPe'),
+        ps: document.getElementById('resp_ps'),
+        pb: document.getElementById('resp_pb'),
+        roe: document.getElementById('resp_roe'),
+        roa: document.getElementById('resp_roa'),
+        debteq: document.getElementById('resp_debteq'),
+        short_flow: document.getElementById('resp_finviz'),
+        site: document.getElementById('resp_site'),
+        peg: document.getElementById('resp_peg'),
+        dividend_percent: document.getElementById('resp_dividend_percent')
     },
     barchartoptions: {
-        impliedVolatility: document.querySelector('#resp_impliedVolatility'),
-        historicalVolatility: document.querySelector('#resp_historicalVolatility'),
-        ivPercentile: document.querySelector('#resp_ivPercentile'),
-        ivRank: document.querySelector('#resp_ivRank'),
-        putCallVolRatio: document.querySelector('#resp_putCallVolRatio'),
-        todaysVolume: document.querySelector('#resp_todaysVolume'),
-        volumeAvg30Day: document.querySelector('#resp_volumeAvg30Day'),
-        putCallOiRatio: document.querySelector('#resp_putCallOiRatio'),
-        todaysOpenInterest: document.querySelector('#resp_todaysOpenInterest'),
-        openInt30Day: document.querySelector('#resp_openInt30Day')
+        impliedVolatility: document.getElementById('resp_impliedVolatility'),
+        historicalVolatility: document.getElementById('resp_historicalVolatility'),
+        ivPercentile: document.getElementById('resp_ivPercentile'),
+        ivRank: document.getElementById('resp_ivRank'),
+        putCallVolRatio: document.getElementById('resp_putCallVolRatio'),
+        todaysVolume: document.getElementById('resp_todaysVolume'),
+        volumeAvg30Day: document.getElementById('resp_volumeAvg30Day'),
+        putCallOiRatio: document.getElementById('resp_putCallOiRatio'),
+        todaysOpenInterest: document.getElementById('resp_todaysOpenInterest'),
+        openInt30Day: document.getElementById('resp_openInt30Day')
     },
     nakedshort: {
-        current_short_volume: document.querySelector('#resp_naked')
+        current_short_volume: document.getElementById('resp_naked')
     },
     shortsqueeze: {
-        short_flow: document.querySelector('#resp_squeeze')
+        short_flow: document.getElementById('resp_squeeze')
     },
-    insidersDeals: document.querySelector('#resp_insidersDeals_tbody')
+    insidersDeals: document.getElementById('resp_insidersDeals_tbody')
 }
 
 const form = document.querySelector('form')
-const ticker = document.querySelector('#input_ticker')
-const error_message = document.querySelector('#error-message')
+const ticker = document.getElementById('input_ticker')
+const error_message = document.getElementById('error-message')
+const links_list = document.getElementById('links_list')
 
 // Extension block
-const resp_tinkoff = document.querySelector('#resp_tinkoff')
-const resp_finviz_target = document.querySelector('#resp_finviz_target')
-const resp_finviz_rsi = document.querySelector('#resp_finviz_rsi')
+const resp_tinkoff = document.getElementById('resp_tinkoff')
+const resp_finviz_target = document.getElementById('resp_finviz_target')
+const resp_finviz_rsi = document.getElementById('resp_finviz_rsi')
 
 // Progress bar block
-const progress_finviz = document.querySelector('#progress-finviz')
-const progress_finviz_value = document.querySelector('#progress-finviz-value')
-const progress_barchart = document.querySelector('#progress-barchart')
-const progress_barchart_value = document.querySelector('#progress-barchart-value')
+const progress_finviz = document.getElementById('progress-finviz')
+const progress_finviz_value = document.getElementById('progress-finviz-value')
+const progress_barchart = document.getElementById('progress-barchart')
+const progress_barchart_value = document.getElementById('progress-barchart-value')
 
 // Erase values in DOM
 const erase = (word = ' пусто ') => {
@@ -522,6 +523,9 @@ const erase = (word = ' пусто ') => {
     }, {
         data: []
     }])
+
+    // Clear links list
+    links_list.innerHTML = ''
 }
 
 // Is loading - add loading styles
@@ -557,6 +561,7 @@ const setSigns = () => {
     pageObj.barchartoptions.ivRank.textContent += '%'
     resp_finviz_target.textContent += '%'
 }
+
 // Set tags colors and values
 const setTags = (response = {}) => {
     // Set values for finviz
@@ -793,6 +798,25 @@ const setNetIncomeChart = (response = {}) => {
     }
 }
 
+// Set links
+const setLinks = (exchange = '', quote = '') => {
+    const setChild = (name, link) => {
+        const a = document.createElement('a')
+        a.textContent = name
+        a.href = link
+        a.target = '_blank'
+        a.rel = 'nofollow'
+        return a
+    }
+
+    const full_exchange = exchange === 'NASD'? 'NASDAQ': exchange
+
+    links_list.appendChild(setChild('График TradingView', `https://ru.tradingview.com/chart?symbol=${full_exchange}%3A${quote}`))
+    links_list.appendChild(setChild('Finviz', `https://finviz.com/quote.ashx?t=${quote}`))
+    links_list.appendChild(setChild('Yahoo! finance', `https://finance.yahoo.com/quote/${quote}`))
+    links_list.appendChild(setChild('guruFocus', `https://www.gurufocus.com/stock/${quote}/summary`))
+    links_list.appendChild(setChild('Barchart', `https://www.barchart.com/stocks/quotes/${quote}/overview`))
+}
 
 // Get response from server side
 const getResponse = async () => {
@@ -824,7 +848,8 @@ form.addEventListener('submit', async (e) => {
     // Prevent from refreshing the browser once form submited 
     e.preventDefault()
     try {
-        if (!ticker.value) {
+        const quote = ticker.value
+        if (!quote) {
             throw new Error()
         }
 
@@ -839,7 +864,7 @@ form.addEventListener('submit', async (e) => {
         // Setup url search query
         if ('URLSearchParams' in window) {
             const searchParams = new URLSearchParams(window.location.search)
-            searchParams.set('stock', ticker.value)
+            searchParams.set('stock', quote)
             const newRelativePathQuery = window.location.pathname + '?' + searchParams.toString()
             history.pushState(null, '', newRelativePathQuery)
         }
@@ -850,13 +875,14 @@ form.addEventListener('submit', async (e) => {
         setInsidersTable(response)
 
         // ! APPEND TRADINGVIEW WIDGET
-        techWidget(ticker.value)
-        chartWidget(ticker.value)
+        techWidget(quote)
+        chartWidget(quote)
 
         setNakedshortChart(response)
         setAnalyticsChart(response)
         setChartDebtEquity(response)
         setNetIncomeChart(response)
+        setLinks(response.finviz.exchange, quote)
 
         isLoading(false)
 
