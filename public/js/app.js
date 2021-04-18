@@ -812,11 +812,11 @@ const setLinks = (exchange = '', quote = '') => {
 
     const full_exchange = exchange === 'NASD'? 'NASDAQ': exchange
 
-    links_list.appendChild(setChild('График TradingView', `https://ru.tradingview.com/chart?symbol=${full_exchange}%3A${quote}`))
-    links_list.appendChild(setChild('Finviz', `https://finviz.com/quote.ashx?t=${quote}`))
-    links_list.appendChild(setChild('Yahoo! finance', `https://finance.yahoo.com/quote/${quote}`))
-    links_list.appendChild(setChild('guruFocus', `https://www.gurufocus.com/stock/${quote}/summary`))
-    links_list.appendChild(setChild('Barchart', `https://www.barchart.com/stocks/quotes/${quote}/overview`))
+    links_list.appendChild(setChild(`График ${quote} TradingView`, `https://ru.tradingview.com/chart?symbol=${full_exchange}%3A${quote}`))
+    links_list.appendChild(setChild(`Finviz: ${quote}`, `https://finviz.com/quote.ashx?t=${quote}`))
+    links_list.appendChild(setChild(`Yahoo! finance: ${quote}`, `https://finance.yahoo.com/quote/${quote}`))
+    links_list.appendChild(setChild(`guruFocus: ${quote}`, `https://www.gurufocus.com/stock/${quote}/summary`))
+    links_list.appendChild(setChild(`Seeking Alpha: ${quote}`, `https://seekingalpha.com/symbol/${quote}`))
 }
 
 // Get response from server side
