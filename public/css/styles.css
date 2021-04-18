@@ -209,13 +209,28 @@ a.tag:hover {
     margin-top: 0.25rem;
 }
 
+/* Links to the services */
+#links_list {
+    min-height: 185px;
+}
+
+#links_list:last-child {
+    margin-bottom: 0;
+}
+
+#links_list > a {
+    display: inline-block;
+    width: 100%;
+    margin: 0.15rem 0.75rem;
+}
+
+#links_list > a::before {
+    content: '→ ';
+}
+
 /* Helpers */
 .h100 {
     height: 100%;
-}
-
-.mb--5 {
-    margin-bottom: -1.5rem;
 }
 
 /* Mobile fixes */
