@@ -91,7 +91,7 @@ const finvizSchema = mongoose.Schema({
  */
 finvizSchema.statics.getFromSource = async (ticker) => {
     try {
-        const fin = await timeout(stock(ticker.trim()))
+        const fin = await timeout(stock(ticker))
         const insiders_keys_to_keep = ['insiderTrading', 'relationship', 'date', 'transaction', 'value']
 
         if (fin.error) {
@@ -177,6 +177,7 @@ finvizSchema.statics.findByStockId = async (ticker, _stock_id) => {
         })
 
         if (!fin) {
+            ticker = ticker.toUpperCase().trim()
             return await Finviz.createRecord(ticker, _stock_id)
         }
 

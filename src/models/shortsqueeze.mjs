@@ -87,6 +87,7 @@ shortsqueezeSchema.statics.findByStockId = async (ticker, _stock_id) => {
         })
 
         if (!squeeze) {
+            ticker = ticker.toUpperCase().trim()
             return await Shortsqueeze.createRecord(ticker, _stock_id)
         }
 

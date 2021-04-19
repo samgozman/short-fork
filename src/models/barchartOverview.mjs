@@ -87,7 +87,7 @@ const barchartOverviewSchema = mongoose.Schema({
  */
 barchartOverviewSchema.statics.getFromSource = async (ticker) => {
     try {
-        const barchartOverview = await timeout(await quotes.overview(ticker.trim()))
+        const barchartOverview = await timeout(quotes.overview(ticker))
 
         if (barchartOverview.error) {
             console.log(barchartOverview.error)
@@ -170,6 +170,7 @@ barchartOverviewSchema.statics.findByStockId = async (ticker, _stock_id) => {
         })
 
         if (!barchartoverview) {
+            ticker = ticker.toUpperCase().trim()
             return await BarchartOverview.createRecord(ticker, _stock_id)
         }
 

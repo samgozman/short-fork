@@ -38,8 +38,8 @@ const barchartFinancialsSchema = mongoose.Schema({
  */
 barchartFinancialsSchema.statics.getFromSource = async (ticker) => {
     try {
-        const barchartFinancialsBalance = await timeout(await financials.balanceSheet().annual(ticker.trim()))
-        const barchartFinancialsIncome = await timeout(await financials.income().annual(ticker.trim()))
+        const barchartFinancialsBalance = await timeout(financials.balanceSheet().annual(ticker))
+        const barchartFinancialsIncome = await timeout(financials.income().annual(ticker))
 
         if (barchartFinancialsBalance.error || barchartFinancialsIncome.error) {
             return undefined
@@ -117,6 +117,7 @@ barchartFinancialsSchema.statics.findByStockId = async (ticker, _stock_id) => {
         })
 
         if (!barchartFinancials) {
+            ticker = ticker.toUpperCase().trim()
             return await BarchartFinancials.createRecord(ticker, _stock_id)
         }
 

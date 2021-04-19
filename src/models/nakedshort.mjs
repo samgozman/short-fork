@@ -102,6 +102,7 @@ nakedshortSchema.statics.findByStockId = async (ticker, _stock_id) => {
         })
 
         if (!naked) {
+            ticker = ticker.toUpperCase().trim()
             return await Nakedshort.createRecord(ticker, _stock_id)
         }
 
