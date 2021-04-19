@@ -599,47 +599,64 @@ const setTags = (response = {}) => {
         resp_finviz_target.classList.add('is-danger')
     }
 
+    /**
+     * Returns CSS class name for value in range [best, danger]
+     * @param {Number} value Current value
+     * @param {Number} best Best before
+     * @param {Number} danger Danger after
+     * @return {String} Highlight class 'is-warning', 'is-success', 'is-danger'
+     */
+    const highlightStyle = (value, best, danger) => {
+        const isNone = value === null ? 'is-warning' : undefined,
+            isBest = !isNone && value > 0 && value < best ? 'is-success' : undefined,
+            isNormal = !isNone && value > best && value < danger ? 'is-warning' : undefined,
+            isDanger = !isNone && value > danger ? 'is-danger' : undefined,
+            isNegative = value < 0 ? 'is-danger' : undefined
+           
+        return isNone || isNegative || isBest || isNormal || isDanger
+    }
+
     // Set RSI indicator
     resp_finviz_rsi.textContent = response.finviz.rsi
-    resp_finviz_rsi.classList.add(response.finviz.rsi < 30 ? 'is-success' : response.finviz.rsi < 70 ? 'is-warning' : 'is-danger')
+    resp_finviz_rsi.classList.add(highlightStyle(response.finviz.rsi, 30, 70))
 
     // Set debt indicator
-    pageObj.finviz.debteq.classList.add(response.finviz.debteq > 0 && response.finviz.debteq < 0.4 ? 'is-success' : response.finviz.debteq < 1 ? 'is-warning' : 'is-danger')
-
+    pageObj.finviz.debteq.classList.add(highlightStyle(response.finviz.debteq, 0.4, 1))
+    
     // Set roa indicator
-    pageObj.finviz.roa.classList.add(response.finviz.roa > 0 ? 'is-success' : 'is-danger')
+    pageObj.finviz.roa.classList.add(highlightStyle(response.finviz.roa, 100, -100))
 
     // Set roe indicator
-    pageObj.finviz.roe.classList.add(response.finviz.roe > 0 && response.finviz.roe < 20 ? 'is-warning' : response.finviz.roe > 20 && response.finviz.roe < 40 ? 'is-success' : 'is-danger')
+    pageObj.finviz.roe.classList.add(highlightStyle(response.finviz.roe, 40, 40))
 
     // Set p/b indicator
-    pageObj.finviz.pb.classList.add(response.finviz.pb > 0 && response.finviz.pb < 1 ? 'is-success' : response.finviz.pb < 4 ? 'is-warning' : 'is-danger')
+    pageObj.finviz.pb.classList.add(highlightStyle(response.finviz.pb, 1, 4))
 
     // Set p/s indicator
-    pageObj.finviz.ps.classList.add(response.finviz.ps > 0 && response.finviz.ps < 1 ? 'is-success' : response.finviz.ps < 3 ? 'is-warning' : 'is-danger')
+    pageObj.finviz.ps.classList.add(highlightStyle(response.finviz.ps, 1, 3))
 
     // Set p/e indicator
-    pageObj.finviz.pe.classList.add(response.finviz.pe > 0 && response.finviz.pe < 15 ? 'is-success' : response.finviz.pe < 25 ? 'is-warning' : 'is-danger')
+    pageObj.finviz.pe.classList.add(highlightStyle(response.finviz.pe , 15, 25))
 
-    // Set p/e indicator
-    pageObj.finviz.forwardPe.classList.add(response.finviz.forwardPe > 0 && response.finviz.forwardPe < 15 ? 'is-success' : response.finviz.forwardPe < 25 ? 'is-warning' : 'is-danger')
+    // Set forward p/e indicator
+    pageObj.finviz.forwardPe.classList.add(highlightStyle(response.finviz.forwardPe, 15, 25))
 
     // Set peg indicator
-    pageObj.finviz.peg.classList.add(response.finviz.peg > 0 && response.finviz.peg < 1 ? 'is-success' : response.finviz.peg < 3 ? 'is-warning' : 'is-danger')
-
+    pageObj.finviz.peg.classList.add(highlightStyle(response.finviz.peg, 1, 3))
+    
     // Set options indicators
 
     // Set P/C OI
-    pageObj.barchartoptions.putCallOiRatio.classList.add(response.barchartoverview.options.putCallOiRatio < 0.7 ? 'is-success' : response.barchartoverview.options.putCallOiRatio < 1 ? 'is-warning' : 'is-danger')
+    pageObj.barchartoptions.putCallOiRatio.classList.add(highlightStyle(response.barchartoverview.options.putCallOiRatio, 0.7, 1))
 
     // Set PCR
-    pageObj.barchartoptions.putCallVolRatio.classList.add(response.barchartoverview.options.putCallVolRatio < 0.7 ? 'is-success' : response.barchartoverview.options.putCallVolRatio < 1 ? 'is-warning' : 'is-danger')
+    pageObj.barchartoptions.putCallVolRatio.classList.add(highlightStyle(response.barchartoverview.options.putCallVolRatio, 0.7, 1))
 
     // Set ivRank
-    pageObj.barchartoptions.ivRank.classList.add(response.barchartoverview.options.ivRank < 30 ? 'is-success' : response.barchartoverview.options.ivRank < 70 ? 'is-warning' : 'is-danger')
+    pageObj.barchartoptions.ivRank.classList.add(highlightStyle(response.barchartoverview.options.ivRank, 30, 70))
 
     // Set ivPercentile
-    pageObj.barchartoptions.ivPercentile.classList.add(response.barchartoverview.options.ivPercentile < 30 ? 'is-success' : response.barchartoverview.options.ivRank < 70 ? 'is-warning' : 'is-danger')
+    pageObj.barchartoptions.ivPercentile.classList.add(highlightStyle(response.barchartoverview.options.ivPercentile, 30, 70))
 
     // Set Tod OI
     const oiTodToAvg = response.barchartoverview.options.todaysOpenInterest / response.barchartoverview.options.openInt30Day
