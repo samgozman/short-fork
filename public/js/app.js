@@ -347,9 +347,10 @@ const getPercentageOfShorted = (volArr = [], shortArr = []) => {
  * @return {String} 'light' or 'dark'
  */
 const checkForThemeSettings = () => {
-    const userPrefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches,
-        userPrefersLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches
-    return localStorage.getItem('theme') || (userPrefersDark ? 'dark' : userPrefersLight ? 'light' : 'light')
+    const userPrefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : undefined,
+        userPrefersLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : undefined
+
+    return localStorage.getItem('theme') || userPrefersDark || userPrefersLight || 'light'
 }
 
 /**
