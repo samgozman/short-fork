@@ -1,6 +1,7 @@
 # Short Fork
 
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/54b51710fc20496a8157929c3cd9f800)](https://www.codacy.com/gh/samgozman/short-fork/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=samgozman/short-fork&amp;utm_campaign=Badge_Grade)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=samgozman_short-fork&metric=alert_status)](https://sonarcloud.io/dashboard?id=samgozman_short-fork)
 ![GitHub](https://img.shields.io/github/license/samgozman/short-fork)
 
 Данный проект нацелен на агрегирование основных финансовых индикаторов американских акций, торгующихся на фондовой бирже. Основной упор приложение делает на данные о количестве шортовых позиций (Short Float и Short Volume).
