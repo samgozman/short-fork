@@ -19,8 +19,13 @@ const shortsqueezeSchema = mongoose.Schema({
     timestamps: true
 })
 
-// Get data from shortsqueeze.com
-shortsqueezeSchema.statics.getDataFromFinviz = async (ticker = '') => {
+/**
+ * Get financial data from shortsqueeze.com
+ * @async
+ * @param {String} ticker Stocks ticker
+ * @return {Object} debt, equity, revenue etc..
+ */
+shortsqueezeSchema.statics.getFromSource = async (ticker) => {
     try {
         const squeeze = await timeout(shortsqueeze(ticker))
 
@@ -34,8 +39,15 @@ shortsqueezeSchema.statics.getDataFromFinviz = async (ticker = '') => {
     }
 }
 
-// Create object in DB. obj is optional - if data was fetched earlier 
-shortsqueezeSchema.statics.createRecord = async (ticker = '', _stock_id = '', obj) => {
+/**
+ * Create object in DB. obj is optional - if data was fetched earlier 
+ * @async
+ * @param {String} ticker Stocks ticker
+ * @param {String} _stock_id ID of the parent stock to which this data belongs
+ * @param {Object} [obj] (optional) An object with pre-prepared data in case it was fetched earlier
+ * @return {Object} MongoDB shortsqueeze saved object
+ */
+shortsqueezeSchema.statics.createRecord = async (ticker, _stock_id, obj) => {
     let squeeze = await Shortsqueeze.findOne({
         _stock_id
     })
@@ -44,7 +56,7 @@ shortsqueezeSchema.statics.createRecord = async (ticker = '', _stock_id = '', ob
     if (squeeze) {
         squeeze.overwrite({
             _stock_id,
-            ...(await Shortsqueeze.getDataFromFinviz(ticker))
+            ...(await Shortsqueeze.getFromSource(ticker))
         })
     } else {
         // Create if not
@@ -53,7 +65,7 @@ shortsqueezeSchema.statics.createRecord = async (ticker = '', _stock_id = '', ob
             ...obj
         } : {
             _stock_id,
-            ...(await Shortsqueeze.getDataFromFinviz(ticker))
+            ...(await Shortsqueeze.getFromSource(ticker))
         })
     }
 
@@ -61,14 +73,21 @@ shortsqueezeSchema.statics.createRecord = async (ticker = '', _stock_id = '', ob
     return squeeze
 }
 
-// Get obj by _stock_id
-shortsqueezeSchema.statics.findByStockId = async (ticker = '', _stock_id = '') => {
+/**
+ * Get obj by _stock_id
+ * @async
+ * @param {String} ticker Stocks ticker
+ * @param {String} _stock_id ID of the parent stock to which this data belongs
+ * @return {Object} MongoDB shortsqueeze object
+ */
+shortsqueezeSchema.statics.findByStockId = async (ticker, _stock_id) => {
     try {
         let squeeze = await Shortsqueeze.findOne({
             _stock_id
         })
 
         if (!squeeze) {
+            ticker = ticker.toUpperCase().trim()
             return await Shortsqueeze.createRecord(ticker, _stock_id)
         }
 
@@ -80,12 +99,17 @@ shortsqueezeSchema.statics.findByStockId = async (ticker = '', _stock_id = '') =
     }
 }
 
+/**
+ * Update existing data
+ * @async
+ * @return {Object} Updated MongoDB shortsqueeze object
+ */
 shortsqueezeSchema.methods.updateRecord = async function () {
     try {
         const ticker = (await Stock.findById(this._stock_id)).ticker
         this.overwrite({
             _stock_id: this._stock_id,
-            ...(await Shortsqueeze.getDataFromFinviz(ticker))
+            ...(await Shortsqueeze.getFromSource(ticker))
         })
         await this.save()
         return this
@@ -96,7 +120,12 @@ shortsqueezeSchema.methods.updateRecord = async function () {
     }
 }
 
-// Method for keeping things fresh
+/**
+ * Method for keeping things fresh
+ * @async
+ * @param {Number} [ttl] Time to Live param which limits the lifespan of data  
+ * @return {Object} Refreshed MongoDB shortsqueeze
+ */
 shortsqueezeSchema.methods.keepFresh = async function (ttl = process.env.TTL_SHORTSQUEEZE) {
     try {
         if ((new Date() - this.updatedAt) > ttl) {

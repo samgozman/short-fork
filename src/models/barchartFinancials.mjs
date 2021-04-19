@@ -30,11 +30,16 @@ const barchartFinancialsSchema = mongoose.Schema({
     timestamps: true
 })
 
-// Get data from finviz.com
-barchartFinancialsSchema.statics.getDataFromFinviz = async (ticker = '') => {
+/**
+ * Get financial data from Barchart Financials
+ * @async
+ * @param {String} ticker Stocks ticker
+ * @return {Object} debt, equity, revenue etc..
+ */
+barchartFinancialsSchema.statics.getFromSource = async (ticker) => {
     try {
-        const barchartFinancialsBalance = await timeout(await financials.balanceSheet().annual(ticker.trim()))
-        const barchartFinancialsIncome = await timeout(await financials.income().annual(ticker.trim()))
+        const barchartFinancialsBalance = await timeout(financials.balanceSheet().annual(ticker))
+        const barchartFinancialsIncome = await timeout(financials.income().annual(ticker))
 
         if (barchartFinancialsBalance.error || barchartFinancialsIncome.error) {
             return undefined
@@ -47,15 +52,15 @@ barchartFinancialsSchema.statics.getDataFromFinviz = async (ticker = '') => {
         }
 
         const liabilities = barchartFinancialsBalance.liabilities
-        const longDebt = liabilities.nonCurrentLiabilities.longTermDebt ? liabilities.nonCurrentLiabilities.longTermDebt.reverse() : liabilities.longTermDebt ? liabilities.longTermDebt.reverse() : null
-        const shortDebt = liabilities.currentLiabilities.total ? liabilities.currentLiabilities.total.reverse() : null
+        const longDebt = liabilities.nonCurrentLiabilities.longTermDebt ? liabilities.nonCurrentLiabilities.longTermDebt: liabilities.longTermDebt ? liabilities.longTermDebt : null
+        const shortDebt = liabilities.currentLiabilities.total ? liabilities.currentLiabilities.total : null
         
         return {
-            longTermDebt: longDebt ? longDebt : shortDebt,
-            shareholdersEquity: barchartFinancialsBalance.shareholdersEquity.total.reverse(),
-            netIncome: barchartFinancialsIncome.netIncome.reverse(),
-            revenue: barchartFinancialsIncome.sales.reverse(),
-            dates: dates.reverse()
+            longTermDebt: longDebt ? [...longDebt].reverse() : [...shortDebt].reverse(),
+            shareholdersEquity: [...barchartFinancialsBalance.shareholdersEquity.total].reverse(),
+            netIncome: [...barchartFinancialsIncome.netIncome].reverse(),
+            revenue: [...barchartFinancialsIncome.sales].reverse(),
+            dates: [...dates].reverse()
         }
     } catch (error) {
         return {
@@ -64,8 +69,15 @@ barchartFinancialsSchema.statics.getDataFromFinviz = async (ticker = '') => {
     }
 }
 
-// Create object in DB. obj is optional - if data was fetched earlier 
-barchartFinancialsSchema.statics.createRecord = async (ticker = '', _stock_id = '', obj) => {
+/**
+ * Create object in DB. obj is optional - if data was fetched earlier 
+ * @async
+ * @param {String} ticker Stocks ticker
+ * @param {String} _stock_id ID of the parent stock to which this data belongs
+ * @param {Object} [obj] (optional) An object with pre-prepared data in case it was fetched earlier
+ * @return {Object} MongoDB barchartFinancials saved object
+ */
+barchartFinancialsSchema.statics.createRecord = async (ticker, _stock_id, obj) => {
     let barchartFinancials = await BarchartFinancials.findOne({
         _stock_id
     })
@@ -74,7 +86,7 @@ barchartFinancialsSchema.statics.createRecord = async (ticker = '', _stock_id = 
     if (barchartFinancials) {
         barchartFinancials.overwrite({
             _stock_id,
-            ...(await BarchartFinancials.getDataFromFinviz(ticker))
+            ...(await BarchartFinancials.getFromSource(ticker))
         })
     } else {
         // Create if not
@@ -83,7 +95,7 @@ barchartFinancialsSchema.statics.createRecord = async (ticker = '', _stock_id = 
             ...obj
         } : {
             _stock_id,
-            ...(await BarchartFinancials.getDataFromFinviz(ticker))
+            ...(await BarchartFinancials.getFromSource(ticker))
         })
     }
 
@@ -91,14 +103,21 @@ barchartFinancialsSchema.statics.createRecord = async (ticker = '', _stock_id = 
     return barchartFinancials
 }
 
-// Get obj by _stock_id
-barchartFinancialsSchema.statics.findByStockId = async (ticker = '', _stock_id = '') => {
+/**
+ * Get obj by _stock_id
+ * @async
+ * @param {String} ticker Stocks ticker
+ * @param {String} _stock_id ID of the parent stock to which this data belongs
+ * @return {Object} MongoDB barchartFinancials object
+ */
+barchartFinancialsSchema.statics.findByStockId = async (ticker, _stock_id) => {
     try {
         let barchartFinancials = await BarchartFinancials.findOne({
             _stock_id
         })
 
         if (!barchartFinancials) {
+            ticker = ticker.toUpperCase().trim()
             return await BarchartFinancials.createRecord(ticker, _stock_id)
         }
 
@@ -110,12 +129,17 @@ barchartFinancialsSchema.statics.findByStockId = async (ticker = '', _stock_id =
     }
 }
 
+/**
+ * Update existing data
+ * @async
+ * @return {Object} Updated MongoDB barchartFinancials object
+ */
 barchartFinancialsSchema.methods.updateRecord = async function () {
     try {
         const ticker = (await Stock.findById(this._stock_id)).ticker
         this.overwrite({
             _stock_id: this._stock_id,
-            ...(await BarchartFinancials.getDataFromFinviz(ticker))
+            ...(await BarchartFinancials.getFromSource(ticker))
         })
         await this.save()
         return this
@@ -126,7 +150,13 @@ barchartFinancialsSchema.methods.updateRecord = async function () {
     }
 }
 
-// Method for keeping things fresh
+
+/**
+ * Method for keeping things fresh
+ * @async
+ * @param {Number} [ttl] Time to Live param which limits the lifespan of data  
+ * @return {Object} Refreshed MongoDB barchartFinancials
+ */
 barchartFinancialsSchema.methods.keepFresh = async function (ttl = process.env.TTL_BARCHART_FINANCIAL) {
     try {
         if ((new Date() - this.updatedAt) > ttl) {
