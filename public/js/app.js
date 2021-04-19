@@ -262,6 +262,7 @@ const chartDebtEquity = new ApexCharts(document.getElementById('chartDebtEquity'
         }
     },
     yaxis: {
+        min: function(min) { return min / 2 },
         labels: {
             minWidth: -1,
             show: false,
