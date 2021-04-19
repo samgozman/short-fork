@@ -28,7 +28,7 @@ window.onload = function () {
     // Get url params
     const queryParam = getParameterByName('stock')
     if (queryParam) {
-        ticker.value = queryParam
+        input_ticker.value = queryParam
         document.getElementById('submit_button').click()
     }
 }
@@ -440,7 +440,7 @@ let pageObj = {
 }
 
 const form = document.querySelector('form')
-const ticker = document.getElementById('input_ticker')
+const input_ticker = document.getElementById('input_ticker')
 const error_message = document.getElementById('error-message')
 const links_list = document.getElementById('links_list')
 
@@ -822,7 +822,7 @@ const setLinks = (exchange = '', quote = '') => {
 // Get response from server side
 const getResponse = async () => {
     try {
-        const resp = await fetch('/stocks?ticker=' + ticker.value)
+        const resp = await fetch('/stocks?ticker=' + input_ticker.value)
         if (resp.status !== 200) {
             throw new Error(resp.status)
         }
@@ -849,7 +849,7 @@ form.addEventListener('submit', async (e) => {
     // Prevent from refreshing the browser once form submited 
     e.preventDefault()
     try {
-        let quote = ticker.value
+        let quote = input_ticker.value
         if (!quote) {
             throw new Error()
         }
@@ -1063,8 +1063,8 @@ checkbox.addEventListener('change', (event) => {
             'dark'
     }
     localStorage.setItem('theme', theme)
-    techWidget(ticker.value || 'SPY')
-    chartWidget(ticker.value || 'SPY')
+    techWidget(input_ticker.value || 'SPY')
+    chartWidget(input_ticker.value || 'SPY')
 
     if (event.currentTarget.checked) {
         setThemeForElements('dark')

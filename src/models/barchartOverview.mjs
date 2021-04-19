@@ -79,8 +79,13 @@ const barchartOverviewSchema = mongoose.Schema({
     timestamps: true
 })
 
-// Get data from finviz.com
-barchartOverviewSchema.statics.getDataFromFinviz = async (ticker = '') => {
+/**
+ * Get financial data from Barchart Overview
+ * @async
+ * @param {String} ticker Stocks ticker
+ * @return {Object} debt, equity, revenue etc..
+ */
+barchartOverviewSchema.statics.getFromSource = async (ticker) => {
     try {
         const barchartOverview = await timeout(await quotes.overview(ticker.trim()))
 
@@ -117,8 +122,15 @@ barchartOverviewSchema.statics.getDataFromFinviz = async (ticker = '') => {
     }
 }
 
-// Create object in DB. obj is optional - if data was fetched earlier 
-barchartOverviewSchema.statics.createRecord = async (ticker = '', _stock_id = '', obj) => {
+/**
+ * Create object in DB. obj is optional - if data was fetched earlier 
+ * @async
+ * @param {String} ticker Stocks ticker
+ * @param {String} _stock_id ID of the parent stock to which this data belongs
+ * @param {Object} [obj] (optional) An object with pre-prepared data in case it was fetched earlier
+ * @return {Object} MongoDB barchartOverview saved object
+ */
+barchartOverviewSchema.statics.createRecord = async (ticker, _stock_id, obj) => {
     let barchartoverview = await BarchartOverview.findOne({
         _stock_id
     })
@@ -127,7 +139,7 @@ barchartOverviewSchema.statics.createRecord = async (ticker = '', _stock_id = ''
     if (barchartoverview) {
         barchartoverview.overwrite({
             _stock_id,
-            ...(await BarchartOverview.getDataFromFinviz(ticker))
+            ...(await BarchartOverview.getFromSource(ticker))
         })
     } else {
         // Create if not
@@ -136,7 +148,7 @@ barchartOverviewSchema.statics.createRecord = async (ticker = '', _stock_id = ''
             ...obj
         } : {
             _stock_id,
-            ...(await BarchartOverview.getDataFromFinviz(ticker))
+            ...(await BarchartOverview.getFromSource(ticker))
         })
     }
 
@@ -144,8 +156,14 @@ barchartOverviewSchema.statics.createRecord = async (ticker = '', _stock_id = ''
     return barchartoverview
 }
 
-// Get obj by _stock_id
-barchartOverviewSchema.statics.findByStockId = async (ticker = '', _stock_id = '') => {
+/**
+ * Get obj by _stock_id
+ * @async
+ * @param {String} ticker Stocks ticker
+ * @param {String} _stock_id ID of the parent stock to which this data belongs
+ * @return {Object} MongoDB barchartOverview object
+ */
+barchartOverviewSchema.statics.findByStockId = async (ticker, _stock_id) => {
     try {
         let barchartoverview = await BarchartOverview.findOne({
             _stock_id
@@ -163,12 +181,17 @@ barchartOverviewSchema.statics.findByStockId = async (ticker = '', _stock_id = '
     }
 }
 
+/**
+ * Update existing data
+ * @async
+ * @return {Object} Updated MongoDB barchartOverview object
+ */
 barchartOverviewSchema.methods.updateRecord = async function () {
     try {
         const ticker = (await Stock.findById(this._stock_id)).ticker
         this.overwrite({
             _stock_id: this._stock_id,
-            ...(await BarchartOverview.getDataFromFinviz(ticker))
+            ...(await BarchartOverview.getFromSource(ticker))
         })
         await this.save()
         return this
@@ -179,7 +202,12 @@ barchartOverviewSchema.methods.updateRecord = async function () {
     }
 }
 
-// Method for keeping things fresh
+/**
+ * Method for keeping things fresh
+ * @async
+ * @param {Number} [ttl] Time to Live param which limits the lifespan of data  
+ * @return {Object} Refreshed MongoDB barchartOverview
+ */
 barchartOverviewSchema.methods.keepFresh = async function (ttl = process.env.TTL_BARCHART_OVERVIEW) {
     try {
         if ((new Date() - this.updatedAt) > ttl) {

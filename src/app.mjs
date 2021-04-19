@@ -2,7 +2,7 @@ import express from 'express'
 import { fileURLToPath } from 'url'
 import { create } from 'express-handlebars'
 
-import './db/mongoose.mjs'
+import './db/connection.mjs'
 import stockRouter from './routers/stock.mjs'
 import finvizRouter from './routers/finviz.mjs'
 import nakedRouter from './routers/nakedshort.mjs'

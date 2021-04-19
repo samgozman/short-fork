@@ -83,8 +83,13 @@ const finvizSchema = mongoose.Schema({
     timestamps: true
 })
 
-// Get data from finviz.com
-finvizSchema.statics.getDataFromFinviz = async (ticker = '') => {
+/**
+ * Get financial data from Finviz
+ * @async
+ * @param {String} ticker Stocks ticker
+ * @return {Object} debt, equity, revenue etc..
+ */
+finvizSchema.statics.getFromSource = async (ticker) => {
     try {
         const fin = await timeout(stock(ticker.trim()))
         const insiders_keys_to_keep = ['insiderTrading', 'relationship', 'date', 'transaction', 'value']
@@ -124,8 +129,15 @@ finvizSchema.statics.getDataFromFinviz = async (ticker = '') => {
     }
 }
 
-// Create object in DB. obj is optional - if data was fetched earlier 
-finvizSchema.statics.createRecord = async (ticker = '', _stock_id = '', obj) => {
+/**
+ * Create object in DB. obj is optional - if data was fetched earlier 
+ * @async
+ * @param {String} ticker Stocks ticker
+ * @param {String} _stock_id ID of the parent stock to which this data belongs
+ * @param {Object} [obj] (optional) An object with pre-prepared data in case it was fetched earlier
+ * @return {Object} MongoDB finviz saved object
+ */
+finvizSchema.statics.createRecord = async (ticker, _stock_id, obj) => {
     let fin = await Finviz.findOne({
         _stock_id
     })
@@ -134,7 +146,7 @@ finvizSchema.statics.createRecord = async (ticker = '', _stock_id = '', obj) => 
     if (fin) {
         fin.overwrite({
             _stock_id,
-            ...(await Finviz.getDataFromFinviz(ticker))
+            ...(await Finviz.getFromSource(ticker))
         })
     } else {
         // Create if not
@@ -143,7 +155,7 @@ finvizSchema.statics.createRecord = async (ticker = '', _stock_id = '', obj) => 
             ...obj
         } : {
             _stock_id,
-            ...(await Finviz.getDataFromFinviz(ticker))
+            ...(await Finviz.getFromSource(ticker))
         })
     }
 
@@ -151,8 +163,14 @@ finvizSchema.statics.createRecord = async (ticker = '', _stock_id = '', obj) => 
     return fin
 }
 
-// Get obj by _stock_id
-finvizSchema.statics.findByStockId = async (ticker = '', _stock_id = '') => {
+/**
+ * Get obj by _stock_id
+ * @async
+ * @param {String} ticker Stocks ticker
+ * @param {String} _stock_id ID of the parent stock to which this data belongs
+ * @return {Object} MongoDB finviz object
+ */
+finvizSchema.statics.findByStockId = async (ticker, _stock_id) => {
     try {
         let fin = await Finviz.findOne({
             _stock_id
@@ -170,12 +188,17 @@ finvizSchema.statics.findByStockId = async (ticker = '', _stock_id = '') => {
     }
 }
 
+/**
+ * Update existing data
+ * @async
+ * @return {Object} Updated MongoDB finviz object
+ */
 finvizSchema.methods.updateRecord = async function () {
     try {
         const ticker = (await Stock.findById(this._stock_id)).ticker
         this.overwrite({
             _stock_id: this._stock_id,
-            ...(await Finviz.getDataFromFinviz(ticker))
+            ...(await Finviz.getFromSource(ticker))
         })
         await this.save()
         return this
@@ -186,7 +209,12 @@ finvizSchema.methods.updateRecord = async function () {
     }
 }
 
-// Method for keeping things fresh
+/**
+ * Method for keeping things fresh
+ * @async
+ * @param {Number} [ttl] Time to Live param which limits the lifespan of data  
+ * @return {Object} Refreshed MongoDB finviz
+ */
 finvizSchema.methods.keepFresh = async function (ttl = process.env.TTL_FINVIZ) {
     try {
         if ((new Date() - this.updatedAt) > ttl) {

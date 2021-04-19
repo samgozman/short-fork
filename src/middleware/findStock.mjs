@@ -18,7 +18,7 @@ const findStock = async (req, res, next) => {
 
         // ! 3. If stock is not found - search in Finviz and create
         if (!stock) {
-            const finviz = await Finviz.getDataFromFinviz(ticker)
+            const finviz = await Finviz.getFromSource(ticker)
 
             // If finviz is not erorr - create stock record and finviz
             if (finviz && !finviz.error) {

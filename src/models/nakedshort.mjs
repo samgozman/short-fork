@@ -23,8 +23,13 @@ const nakedshortSchema = mongoose.Schema({
     timestamps: true
 })
 
-// Get data from nakedshortreport
-nakedshortSchema.statics.getDataFromNaked = async (ticker = '') => {
+/**
+ * Get financial data from nakedshortreport
+ * @async
+ * @param {String} ticker Stocks ticker
+ * @return {Object} debt, equity, revenue etc..
+ */
+nakedshortSchema.statics.getFromSource = async (ticker) => {
     try {
         const chart = await timeout(nakedshort.getChart(ticker))
 
@@ -49,8 +54,15 @@ nakedshortSchema.statics.getDataFromNaked = async (ticker = '') => {
     }
 }
 
-// Create object in DB. obj is optional - if data was fetched earlier 
-nakedshortSchema.statics.createRecord = async (ticker = '', _stock_id = '', obj) => {
+/**
+ * Create object in DB. obj is optional - if data was fetched earlier 
+ * @async
+ * @param {String} ticker Stocks ticker
+ * @param {String} _stock_id ID of the parent stock to which this data belongs
+ * @param {Object} [obj] (optional) An object with pre-prepared data in case it was fetched earlier
+ * @return {Object} MongoDB nakedshort saved object
+ */
+nakedshortSchema.statics.createRecord = async (ticker, _stock_id, obj) => {
     let naked = await Nakedshort.findOne({
         _stock_id
     })
@@ -59,7 +71,7 @@ nakedshortSchema.statics.createRecord = async (ticker = '', _stock_id = '', obj)
     if (naked) {
         naked.overwrite({
             _stock_id,
-            ...(await Nakedshort.getDataFromNaked(ticker))
+            ...(await Nakedshort.getFromSource(ticker))
         })
     } else {
         // Create if not
@@ -68,7 +80,7 @@ nakedshortSchema.statics.createRecord = async (ticker = '', _stock_id = '', obj)
             ...obj
         } : {
             _stock_id,
-            ...(await Nakedshort.getDataFromNaked(ticker))
+            ...(await Nakedshort.getFromSource(ticker))
         })
     }
 
@@ -76,8 +88,14 @@ nakedshortSchema.statics.createRecord = async (ticker = '', _stock_id = '', obj)
     return naked
 }
 
-// Get obj by _stock_id
-nakedshortSchema.statics.findByStockId = async (ticker = '', _stock_id = '') => {
+/**
+ * Get obj by _stock_id
+ * @async
+ * @param {String} ticker Stocks ticker
+ * @param {String} _stock_id ID of the parent stock to which this data belongs
+ * @return {Object} MongoDB nakedshort object
+ */
+nakedshortSchema.statics.findByStockId = async (ticker, _stock_id) => {
     try {
         let naked = await Nakedshort.findOne({
             _stock_id
@@ -95,12 +113,17 @@ nakedshortSchema.statics.findByStockId = async (ticker = '', _stock_id = '') => 
     }
 }
 
+/**
+ * Update existing data
+ * @async
+ * @return {Object} Updated MongoDB nakedshort object
+ */
 nakedshortSchema.methods.updateRecord = async function () {
     try {
         const ticker = (await Stock.findById(this._stock_id)).ticker
         this.overwrite({
             _stock_id: this._stock_id,
-            ...(await Nakedshort.getDataFromNaked(ticker))
+            ...(await Nakedshort.getFromSource(ticker))
         })
         await this.save()
         return this
@@ -111,7 +134,12 @@ nakedshortSchema.methods.updateRecord = async function () {
     }
 }
 
-// Method for keeping things fresh
+/**
+ * Method for keeping things fresh
+ * @async
+ * @param {Number} [ttl] Time to Live param which limits the lifespan of data  
+ * @return {Object} Refreshed MongoDB nakedshort
+ */
 nakedshortSchema.methods.keepFresh = async function (ttl = process.env.TTL_NAKEDSHORT) {
     try {
         if ((new Date() - this.updatedAt) > ttl) {
