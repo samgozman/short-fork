@@ -28,7 +28,7 @@ const shortsqueezeSchema = mongoose.Schema({
  * @param {String} ticker Stocks ticker
  * @return {Object} debt, equity, revenue etc..
  */
-shortsqueezeSchema.statics.getFromSource = async (ticker) => {
+shortsqueezeSchema.statics.getFromSource = async function (ticker) {
     try {
         const squeeze = await timeout(shortsqueeze(ticker))
 

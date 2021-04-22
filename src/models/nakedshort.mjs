@@ -32,7 +32,7 @@ const nakedshortSchema = mongoose.Schema({
  * @param {String} ticker Stocks ticker
  * @return {Object} debt, equity, revenue etc..
  */
-nakedshortSchema.statics.getFromSource = async (ticker) => {
+nakedshortSchema.statics.getFromSource = async function (ticker) {
     try {
         const chart = await timeout(nakedshort.getChart(ticker))
 

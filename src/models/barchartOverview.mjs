@@ -90,7 +90,7 @@ const barchartOverviewSchema = mongoose.Schema({
  * @param {String} ticker Stocks ticker
  * @return {Object} debt, equity, revenue etc..
  */
-barchartOverviewSchema.statics.getFromSource = async (ticker) => {
+barchartOverviewSchema.statics.getFromSource = async function (ticker) {
     try {
         const barchartOverview = await timeout(quotes.overview(ticker))
 

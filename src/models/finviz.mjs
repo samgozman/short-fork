@@ -94,7 +94,7 @@ const finvizSchema = mongoose.Schema({
  * @param {String} ticker Stocks ticker
  * @return {Object} debt, equity, revenue etc..
  */
-finvizSchema.statics.getFromSource = async (ticker) => {
+finvizSchema.statics.getFromSource = async function (ticker) {
     try {
         const fin = await timeout(stock(ticker))
         const insiders_keys_to_keep = ['insiderTrading', 'relationship', 'date', 'transaction', 'value']
