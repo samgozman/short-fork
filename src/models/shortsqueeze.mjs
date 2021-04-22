@@ -1,7 +1,4 @@
 import mongoose from 'mongoose'
-import {
-    Stock
-} from './stock.mjs'
 import StockModule from '../db/StockModule.mjs'
 import timeout from '../utils/timeout.mjs'
 import shortsqueeze from 'shortsqueeze'
@@ -42,32 +39,7 @@ shortsqueezeSchema.statics.getFromSource = async function (ticker) {
     }
 }
 
-// Execute keepFresh check wlhile mongoose populate (populate is using find() method)
-shortsqueezeSchema.pre('find', async function () {
-    try {
-        const Model = mongoose.model(this.model.modelName)
-        const _stock_id = this.getQuery()._stock_id['$in'][0]
-
-        const instance = await Model.findOne({
-            _stock_id
-        })
-
-        if (!instance) {
-            // Find ticker
-            const ticker = (await Stock.findById(_stock_id)).ticker
-            // Create
-            await Model.createRecord(ticker, _stock_id)
-        } else {
-            // Update
-            await Model.keepFresh()
-        }
-    } catch (error) {
-        return {
-            error: 'shortsqueeze pre.find error!'
-        }
-    }
-})
-
 shortsqueezeSchema.loadClass(StockModule)
+shortsqueezeSchema.pre('find', shortsqueezeSchema.methods.preFind)
 
 export const Shortsqueeze = mongoose.model('Shortsqueeze', shortsqueezeSchema)

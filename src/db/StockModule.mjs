@@ -111,6 +111,33 @@ class StockModule {
         }
     }
 
+    // Execute keepFresh check wlhile mongoose populate (populate is using find() method)
+    async preFind() {
+        try {
+            const Model = mongoose.model(this.model.modelName)
+            const _stock_id = this.getQuery()._stock_id['$in'][0]
+
+            const instance = await Model.findOne({
+                _stock_id
+            })
+
+            if (!instance) {
+                // Find ticker
+                const ticker = (await Stock.findById(_stock_id)).ticker
+                // Create
+                await Model.createRecord(ticker, _stock_id)
+            } else {
+                // Update
+                await Model.keepFresh()
+            }
+
+        } catch (error) {
+            return {
+                error: 'BarchartFinancials pre.find error!'
+            }
+        }
+    }
+
     /**
      * TWEAK: Hide unnecessary data!
      * @example https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify#tojson_behavior
