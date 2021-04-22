@@ -1,7 +1,11 @@
 import mongoose from 'mongoose'
-import { Stock } from './stock.mjs'
+import {
+    Stock
+} from './stock.mjs'
 import timeout from '../utils/timeout.mjs'
-import { financials } from 'barchart-dot-com'
+import {
+    financials
+} from 'barchart-dot-com'
 
 // Class mongoose.Schema for Barchart Financials instance
 const barchartFinancialsSchema = mongoose.Schema({
@@ -36,7 +40,7 @@ const barchartFinancialsSchema = mongoose.Schema({
  * @param {String} ticker Stocks ticker
  * @return {Object} debt, equity, revenue etc..
  */
-barchartFinancialsSchema.statics.getFromSource = async (ticker) => {
+barchartFinancialsSchema.statics.getFromSource = async function (ticker) {
     try {
         const barchartFinancialsBalance = await timeout(financials.balanceSheet().annual(ticker))
         const barchartFinancialsIncome = await timeout(financials.income().annual(ticker))
@@ -52,9 +56,9 @@ barchartFinancialsSchema.statics.getFromSource = async (ticker) => {
         }
 
         const liabilities = barchartFinancialsBalance.liabilities
-        const longDebt = liabilities.nonCurrentLiabilities.longTermDebt ? liabilities.nonCurrentLiabilities.longTermDebt: liabilities.longTermDebt ? liabilities.longTermDebt : null
+        const longDebt = liabilities.nonCurrentLiabilities.longTermDebt ? liabilities.nonCurrentLiabilities.longTermDebt : liabilities.longTermDebt ? liabilities.longTermDebt : null
         const shortDebt = liabilities.currentLiabilities.total ? liabilities.currentLiabilities.total : null
-        
+
         return {
             longTermDebt: longDebt ? [...longDebt].reverse() : [...shortDebt].reverse(),
             shareholdersEquity: [...barchartFinancialsBalance.shareholdersEquity.total].reverse(),
@@ -77,30 +81,37 @@ barchartFinancialsSchema.statics.getFromSource = async (ticker) => {
  * @param {Object} [obj] (optional) An object with pre-prepared data in case it was fetched earlier
  * @return {Object} MongoDB barchartFinancials saved object
  */
-barchartFinancialsSchema.statics.createRecord = async (ticker, _stock_id, obj) => {
-    let barchartFinancials = await BarchartFinancials.findOne({
-        _stock_id
-    })
+barchartFinancialsSchema.statics.createRecord = async function (ticker, _stock_id, obj) {
+    try {
+        let barchartFinancials = await this.findOne({
+            _stock_id
+        })
 
-    // Overwrite if exist
-    if (barchartFinancials) {
-        barchartFinancials.overwrite({
-            _stock_id,
-            ...(await BarchartFinancials.getFromSource(ticker))
-        })
-    } else {
-        // Create if not
-        barchartFinancials = new BarchartFinancials(obj ? {
-            _stock_id,
-            ...obj
-        } : {
-            _stock_id,
-            ...(await BarchartFinancials.getFromSource(ticker))
-        })
+        // Overwrite if exist
+        if (barchartFinancials) {
+            barchartFinancials.overwrite({
+                _stock_id,
+                ...(await this.getFromSource(ticker))
+            })
+        } else {
+            // Create if not
+            barchartFinancials = new this(obj ? {
+                _stock_id,
+                ...obj
+            } : {
+                _stock_id,
+                ...(await this.getFromSource(ticker))
+            })
+        }
+
+        await barchartFinancials.save()
+        return barchartFinancials
+    } catch (error) {
+        return {
+            error: 'Error in statics.createRecord'
+        }
     }
 
-    await barchartFinancials.save()
-    return barchartFinancials
 }
 
 /**
@@ -110,15 +121,15 @@ barchartFinancialsSchema.statics.createRecord = async (ticker, _stock_id, obj) =
  * @param {String} _stock_id ID of the parent stock to which this data belongs
  * @return {Object} MongoDB barchartFinancials object
  */
-barchartFinancialsSchema.statics.findByStockId = async (ticker, _stock_id) => {
+barchartFinancialsSchema.statics.findByStockId = async function (ticker, _stock_id) {
     try {
-        let barchartFinancials = await BarchartFinancials.findOne({
+        let barchartFinancials = await this.findOne({
             _stock_id
         })
 
         if (!barchartFinancials) {
             ticker = ticker.toUpperCase().trim()
-            return await BarchartFinancials.createRecord(ticker, _stock_id)
+            return await this.createRecord(ticker, _stock_id)
         }
 
         return await barchartFinancials.keepFresh()
@@ -136,10 +147,11 @@ barchartFinancialsSchema.statics.findByStockId = async (ticker, _stock_id) => {
  */
 barchartFinancialsSchema.methods.updateRecord = async function () {
     try {
+        const model = mongoose.model(this.constructor.modelName)
         const ticker = (await Stock.findById(this._stock_id)).ticker
         this.overwrite({
             _stock_id: this._stock_id,
-            ...(await BarchartFinancials.getFromSource(ticker))
+            ...(await model.getFromSource(ticker))
         })
         await this.save()
         return this
@@ -191,8 +203,10 @@ barchartFinancialsSchema.methods.toJSON = function () {
 // Execute keepFresh check wlhile mongoose populate (populate is using find() method)
 barchartFinancialsSchema.pre('find', async function () {
     try {
+        const model = mongoose.model(this.model.modelName)
         const _stock_id = this.getQuery()._stock_id['$in'][0]
-        const barchartFinancials = await BarchartFinancials.findOne({
+
+        const barchartFinancials = await model.findOne({
             _stock_id
         })
 
@@ -200,10 +214,10 @@ barchartFinancialsSchema.pre('find', async function () {
             // Find ticker
             const ticker = (await Stock.findById(_stock_id)).ticker
             // Create
-            await BarchartFinancials.createRecord(ticker, _stock_id)
+            await model.createRecord(ticker, _stock_id)
         } else {
             // Update
-            await barchartFinancials.keepFresh()
+            await model.keepFresh()
         }
 
     } catch (error) {
