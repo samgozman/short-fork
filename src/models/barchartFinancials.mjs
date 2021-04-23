@@ -54,7 +54,10 @@ barchartFinancialsSchema.statics.getFromSource = async function (ticker) {
         }
 
         const liabilities = barchartFinancialsBalance.liabilities
-        const longDebt = liabilities.nonCurrentLiabilities.longTermDebt ? liabilities.nonCurrentLiabilities.longTermDebt : liabilities.longTermDebt ? liabilities.longTermDebt : null
+        const liabLongTermDebt = liabilities.nonCurrentLiabilities.longTermDebt ? liabilities.nonCurrentLiabilities.longTermDebt : null
+        const basicLongTermDebt = liabilities.longTermDebt ? liabilities.longTermDebt : null
+        
+        const longDebt = liabLongTermDebt ? basicLongTermDebt : null
         const shortDebt = liabilities.currentLiabilities.total ? liabilities.currentLiabilities.total : null
 
         return {

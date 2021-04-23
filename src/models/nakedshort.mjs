@@ -38,8 +38,8 @@ nakedshortSchema.statics.getFromSource = async function (ticker) {
             current_short_volume = undefined
 
         if (chart && !chart.error) {
-            naked_length = chart.regularVolArr.length,
-                current_short_volume = (chart.shortVolArr[naked_length - 1] / chart.regularVolArr[naked_length - 1]) * 100
+            naked_length = chart.regularVolArr.length
+            current_short_volume = (chart.shortVolArr[naked_length - 1] / chart.regularVolArr[naked_length - 1]) * 100
         }
 
         return {
