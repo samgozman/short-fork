@@ -116,11 +116,9 @@ class StockModule {
         try {
             const Model = mongoose.model(this.model.modelName)
             const _stock_id = this.getQuery()._stock_id['$in'][0]
-
             const instance = await Model.findOne({
                 _stock_id
             })
-
             if (!instance) {
                 // Find ticker
                 const ticker = (await Stock.findById(_stock_id)).ticker
@@ -128,7 +126,7 @@ class StockModule {
                 await Model.createRecord(ticker, _stock_id)
             } else {
                 // Update
-                await Model.keepFresh()
+                await instance.keepFresh()
             }
 
         } catch (error) {
