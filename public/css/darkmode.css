@@ -199,6 +199,7 @@ tr.is-sale {
 .tag:not(body).is-link {
     background-color: var(--is-link-bkg);
 }
+
 .button.is-link.is-outlined {
     border-color: var(--is-link-bkg);
     color: var(--is-link-button-color);

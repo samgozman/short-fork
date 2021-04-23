@@ -49,6 +49,14 @@ body {
     text-transform: uppercase;
 }
 
+input:-webkit-autofill,
+textarea:-webkit-autofill,
+select:-webkit-autofill {
+    box-shadow: 0 0 0 1000px white inset !important;
+    -webkit-box-shadow: 0 0 0 1000px white inset !important;
+    -webkit-text-fill-color: #363636 !important;
+}
+
 #submit_button {
     background: url(/../img/icon/return-down-forward-outline.svg) no-repeat center #363636;
     border-color: transparent;
