@@ -11,6 +11,11 @@ const nakedshortSchema = mongoose.Schema({
         unique: true,
         ref: 'Stock'
     },
+    _ttl: {
+        type: Number,
+        default: 1200000,
+        required: true
+    },
     current_short_volume: {
         type: Number,
         default: null
@@ -44,7 +49,8 @@ nakedshortSchema.statics.getFromSource = async function (ticker) {
 
         return {
             current_short_volume: current_short_volume ? current_short_volume.toFixed(2) : null,
-            chart: chart.error ? null : chart
+            chart: chart.error ? null : chart,
+            _ttl: process.env.TTL_NAKEDSHORT
 
         }
     } catch (error) {

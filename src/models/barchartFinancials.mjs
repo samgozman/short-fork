@@ -13,6 +13,11 @@ const barchartFinancialsSchema = mongoose.Schema({
         unique: true,
         ref: 'Stock'
     },
+    _ttl: {
+        type: Number,
+        default: 1200000,
+        required: true
+    },
     longTermDebt: {
         type: Array
     },
@@ -65,7 +70,8 @@ barchartFinancialsSchema.statics.getFromSource = async function (ticker) {
             shareholdersEquity: [...barchartFinancialsBalance.shareholdersEquity.total].reverse(),
             netIncome: [...barchartFinancialsIncome.netIncome].reverse(),
             revenue: [...barchartFinancialsIncome.sales].reverse(),
-            dates: [...dates].reverse()
+            dates: [...dates].reverse(),
+            _ttl: process.env.TTL_BARCHART_FINANCIAL
         }
     } catch (error) {
         return {

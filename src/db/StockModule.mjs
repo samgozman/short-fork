@@ -53,16 +53,16 @@ class StockModule {
      */
     static async findByStockId(ticker, _stock_id) {
         try {
-            let model = await this.findOne({
+            let instance = await this.findOne({
                 _stock_id
             })
 
-            if (!model) {
+            if (!instance) {
                 ticker = ticker.toUpperCase().trim()
                 return await this.createRecord(ticker, _stock_id)
             }
 
-            return await model.keepFresh()
+            return await instance.keepFresh(instance._ttl)
         } catch (error) {
             return {
                 error: 'Error in static findByStockId()'
@@ -98,7 +98,7 @@ class StockModule {
      * @param {Number} [ttl] Time to Live param which limits the lifespan of data  
      * @return {Object} Refreshed MongoDB barchartFinancials
      */
-    async keepFresh(ttl = process.env.TTL_BARCHART_FINANCIAL) {
+    async keepFresh(ttl = process.env.TTL_FINVIZ) {
         try {
             if ((new Date() - this.updatedAt) > ttl) {
                 return await this.updateRecord()
@@ -126,7 +126,7 @@ class StockModule {
                 await Model.createRecord(ticker, _stock_id)
             } else {
                 // Update
-                await instance.keepFresh()
+                await instance.keepFresh(instance._ttl)
             }
 
         } catch (error) {
@@ -147,6 +147,7 @@ class StockModule {
 
         delete dataObj._stock_id
         delete dataObj._id
+        delete dataObj._ttl
         delete dataObj.__v
         delete dataObj.createdAt
         delete dataObj.updatedAt

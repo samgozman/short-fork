@@ -11,6 +11,11 @@ const shortsqueezeSchema = mongoose.Schema({
         unique: true,
         ref: 'Stock'
     },
+    _ttl: {
+        type: Number,
+        default: 1200000,
+        required: true
+    },
     short_flow: {
         type: Number,
         default: null
@@ -30,7 +35,8 @@ shortsqueezeSchema.statics.getFromSource = async function (ticker) {
         const squeeze = await timeout(shortsqueeze(ticker))
 
         return {
-            short_flow: squeeze ? squeeze.shortPercentOfFloat : null
+            short_flow: squeeze ? squeeze.shortPercentOfFloat : null,
+            _ttl: process.env.TTL_SHORTSQUEEZE
         }
     } catch (error) {
         return {

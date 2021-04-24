@@ -13,6 +13,11 @@ const finvizSchema = mongoose.Schema({
         unique: true,
         ref: 'Stock'
     },
+    _ttl: {
+        type: Number,
+        default: 1200000,
+        required: true
+    },
     name: {
         type: String
     },
@@ -122,7 +127,8 @@ finvizSchema.statics.getFromSource = async function (ticker) {
             insidersDeals: fin.insidersDeals.reduce((r, c) => [...r, Object.entries(c).reduce((b, [k, v]) => insiders_keys_to_keep.includes(k) ? {
                 ...b,
                 [k]: v
-            } : b, {})], [])
+            } : b, {})], []),
+            _ttl: process.env.TTL_FINVIZ
         }
     } catch (error) {
         return {
