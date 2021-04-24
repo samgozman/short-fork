@@ -16,6 +16,9 @@ body {
     --box-shadow:
         0 0.5em 1em -0.125em rgb(10 10 10 / 10%),
         0 0 0 1px rgb(10 10 10 / 2%);
+    --box-shadow-hover:
+        0 0.5em 1em 0.2em rgb(10 10 10 / 10%),
+        0 0 0 1px rgb(10 10 10 / 2%);
     --a-color: #3273dc;
     --a-color-hover: #363636;
     --is-buy-bkg: #effaf3;
@@ -42,6 +45,9 @@ body.dark-theme {
     --box-shadow:
         0 0.5em 1em -0.125em rgb(255 255 255 / 10%),
         0 0 0 1px rgb(255 255 255 / 2%);
+    --box-shadow-hover:
+        0 0.5em 1em 0.2em rgb(255 255 255 / 10%),
+        0 0 0 2px rgb(255 255 255 / 2%);
     --a-color: #5ea3e4;
     --a-color-hover: #dbdbdb;
     --is-buy-bkg: inherit;
@@ -71,6 +77,9 @@ body.dark-theme {
         --box-shadow:
             0 0.5em 1em -0.125em rgb(255 255 255 / 10%),
             0 0 0 1px rgb(255 255 255 / 2%);
+        --box-shadow-hover:
+            0 0.5em 1em 0.2em rgb(255 255 255 / 10%),
+            0 0 0 2px rgb(255 255 255 / 2%);
         --a-color: #5ea3e4;
         --a-color-hover: #dbdbdb;
         --is-buy-bkg: inherit;
@@ -96,6 +105,9 @@ body.dark-theme {
         --box-bkg: #fff;
         --box-shadow:
             0 0.5em 1em -0.125em rgb(10 10 10 / 10%),
+            0 0 0 1px rgb(10 10 10 / 2%);
+        --box-shadow-hover:
+            0 0.5em 1em 0.2em rgb(10 10 10 / 10%),
             0 0 0 1px rgb(10 10 10 / 2%);
         --a-color: #3273dc;
         --a-color-hover: #363636;
@@ -155,6 +167,11 @@ strong,
     box-shadow: var(--box-shadow);
 }
 
+.box:hover {
+    box-shadow: var(--box-shadow-hover);
+}
+
+
 a {
     color: var(--a-color);
 }
@@ -199,6 +216,7 @@ tr.is-sale {
 .tag:not(body).is-link {
     background-color: var(--is-link-bkg);
 }
+
 .button.is-link.is-outlined {
     border-color: var(--is-link-bkg);
     color: var(--is-link-button-color);

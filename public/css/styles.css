@@ -29,6 +29,7 @@ body {
 }
 
 .box {
+    transition: box-shadow 0.3s;
     padding: 0.75rem;
     height: 100%;
     display: flex;
@@ -47,6 +48,14 @@ body {
 
 #input_ticker {
     text-transform: uppercase;
+}
+
+input:-webkit-autofill,
+textarea:-webkit-autofill,
+select:-webkit-autofill {
+    box-shadow: 0 0 0 1000px white inset !important;
+    -webkit-box-shadow: 0 0 0 1000px white inset !important;
+    -webkit-text-fill-color: #363636 !important;
 }
 
 #submit_button {

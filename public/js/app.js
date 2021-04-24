@@ -906,7 +906,7 @@ form.addEventListener('submit', async (e) => {
         setLinks(response.finviz.exchange, quote)
 
         // Set page title
-        document.title = `Short fork ${response.version}: ${quote}`
+        document.title = `Short fork: ${quote}`
 
         isLoading(false)
 

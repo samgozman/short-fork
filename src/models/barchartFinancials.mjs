@@ -13,6 +13,11 @@ const barchartFinancialsSchema = mongoose.Schema({
         unique: true,
         ref: 'Stock'
     },
+    _ttl: {
+        type: Number,
+        default: 1200000,
+        required: true
+    },
     longTermDebt: {
         type: Array
     },
@@ -40,8 +45,8 @@ const barchartFinancialsSchema = mongoose.Schema({
  */
 barchartFinancialsSchema.statics.getFromSource = async function (ticker) {
     try {
-        const barchartFinancialsBalance = await timeout(financials.balanceSheet().annual(ticker))
-        const barchartFinancialsIncome = await timeout(financials.income().annual(ticker))
+        const barchartFinancialsBalance = await timeout(financials.balanceSheet(ticker).annual())
+        const barchartFinancialsIncome = await timeout(financials.income(ticker).annual())
 
         if (barchartFinancialsBalance.error || barchartFinancialsIncome.error) {
             return undefined
@@ -54,7 +59,10 @@ barchartFinancialsSchema.statics.getFromSource = async function (ticker) {
         }
 
         const liabilities = barchartFinancialsBalance.liabilities
-        const longDebt = liabilities.nonCurrentLiabilities.longTermDebt ? liabilities.nonCurrentLiabilities.longTermDebt : liabilities.longTermDebt ? liabilities.longTermDebt : null
+        const liabLongTermDebt = liabilities.nonCurrentLiabilities.longTermDebt ? liabilities.nonCurrentLiabilities.longTermDebt : null
+        const basicLongTermDebt = liabilities.longTermDebt ? liabilities.longTermDebt : null
+        
+        const longDebt = liabLongTermDebt ? basicLongTermDebt : null
         const shortDebt = liabilities.currentLiabilities.total ? liabilities.currentLiabilities.total : null
 
         return {
@@ -62,7 +70,8 @@ barchartFinancialsSchema.statics.getFromSource = async function (ticker) {
             shareholdersEquity: [...barchartFinancialsBalance.shareholdersEquity.total].reverse(),
             netIncome: [...barchartFinancialsIncome.netIncome].reverse(),
             revenue: [...barchartFinancialsIncome.sales].reverse(),
-            dates: [...dates].reverse()
+            dates: [...dates].reverse(),
+            _ttl: process.env.TTL_BARCHART_FINANCIAL
         }
     } catch (error) {
         return {

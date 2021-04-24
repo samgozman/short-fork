@@ -11,6 +11,11 @@ const nakedshortSchema = mongoose.Schema({
         unique: true,
         ref: 'Stock'
     },
+    _ttl: {
+        type: Number,
+        default: 1200000,
+        required: true
+    },
     current_short_volume: {
         type: Number,
         default: null
@@ -38,13 +43,14 @@ nakedshortSchema.statics.getFromSource = async function (ticker) {
             current_short_volume = undefined
 
         if (chart && !chart.error) {
-            naked_length = chart.regularVolArr.length,
-                current_short_volume = (chart.shortVolArr[naked_length - 1] / chart.regularVolArr[naked_length - 1]) * 100
+            naked_length = chart.regularVolArr.length
+            current_short_volume = (chart.shortVolArr[naked_length - 1] / chart.regularVolArr[naked_length - 1]) * 100
         }
 
         return {
             current_short_volume: current_short_volume ? current_short_volume.toFixed(2) : null,
-            chart: chart.error ? null : chart
+            chart: chart.error ? null : chart,
+            _ttl: process.env.TTL_NAKEDSHORT
 
         }
     } catch (error) {

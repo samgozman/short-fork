@@ -13,6 +13,11 @@ const barchartOverviewSchema = mongoose.Schema({
         unique: true,
         ref: 'Stock'
     },
+    _ttl: {
+        type: Number,
+        default: 1200000,
+        required: true
+    },
     options: {
         impliedVolatility: {
             type: Number,
@@ -115,7 +120,8 @@ barchartOverviewSchema.statics.getFromSource = async function (ticker) {
                 hold: barchartOverview.analytics.hold || 0,
                 moderateSell: barchartOverview.analytics.moderateSell || 0,
                 strongSell: barchartOverview.analytics.strongSell || 0
-            }
+            },
+            _ttl: process.env.TTL_BARCHART_OVERVIEW
         }
     } catch (error) {
         return {
