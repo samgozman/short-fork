@@ -40,8 +40,8 @@ const barchartFinancialsSchema = mongoose.Schema({
  */
 barchartFinancialsSchema.statics.getFromSource = async function (ticker) {
     try {
-        const barchartFinancialsBalance = await timeout(financials.balanceSheet().annual(ticker))
-        const barchartFinancialsIncome = await timeout(financials.income().annual(ticker))
+        const barchartFinancialsBalance = await timeout(financials.balanceSheet(ticker).annual())
+        const barchartFinancialsIncome = await timeout(financials.income(ticker).annual())
 
         if (barchartFinancialsBalance.error || barchartFinancialsIncome.error) {
             return undefined
