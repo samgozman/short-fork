@@ -105,13 +105,13 @@ let pageObj = {
             forwardPe: new Tag('resp_forwardPe', 0, { best: [0, 15], danger: [25, Infinity]}),
             ps: new Tag('resp_ps', 0, { best: [0, 1], danger: [3, Infinity]}),
             pb: new Tag('resp_pb', 0, { best: [0, 1], danger: [4, Infinity]}),
-            roe: new Tag('resp_roe', 0, { sign: '%', best: [0, 100], danger: [-Infinity, 0]}),
+            roe: new Tag('resp_roe', 0, { sign: '%', best: [0, 40], normal: [40, 100], danger: [-Infinity, 0]}),
             roa: new Tag('resp_roa', 0, { sign: '%', best: [0, 100], danger: [-Infinity, 0]}),
             debteq: new Tag('resp_debteq', 0, { best: [0, 0.4], danger: [1, Infinity]}),
             short_flow: new Tag('resp_finviz', 0, { sign: '%', isShort: true}),
             peg: new Tag('resp_peg', 0, { best: [0, 1], danger: [3, Infinity]}),
             dividend_percent: new Tag('resp_dividend_percent', 0, { sign: '%', isInfo: true}),
-            target: new Tag('resp_finviz_target', 0, { sign: '%', best: [0, Infinity], danger: [Infinity, 0]}),
+            target: new Tag('resp_finviz_target', 0, { sign: '%', best: [0, Infinity], danger: [-Infinity, 0]}),
             rsi: new Tag('resp_finviz_rsi', 0, { best: [0, 30], danger: [70, Infinity] })
         }
     },
@@ -240,6 +240,30 @@ const setTags = (response = {}) => {
 
     // Set tinkoff indicator
     pageObj.extension.resp_tinkoff.bool = response.tinkoff
+
+    // Set site and name
+    pageObj.finviz.site.textContent = response.finviz.site
+    pageObj.finviz.site.setAttribute('href', response.finviz.site)
+    pageObj.finviz.name.textContent = response.finviz.name
+}
+
+const clearTags = () => {
+    for (const key in pageObj.finviz.tags) {
+        pageObj.finviz.tags[key].clear()
+    }
+        
+    // Set values for barchart options
+    for (const key in pageObj.barchartoptions.tags) {
+        pageObj.barchartoptions.tags[key].clear()
+    }
+
+    pageObj.nakedshort.current_short_volume.clear()
+    pageObj.shortsqueeze.short_flow.clear()
+    pageObj.extension.resp_tinkoff.clear()
+
+    pageObj.finviz.site.textContent = ''
+    pageObj.finviz.site.setAttribute('href', '#')
+    pageObj.finviz.name.textContent = ''
 }
 
 // Set links
@@ -299,6 +323,7 @@ form.addEventListener('submit', async (e) => {
 
         const response = await getResponse()
         if (response.message) {
+            clearTags()
             throw new Error(response.message)
         }
 

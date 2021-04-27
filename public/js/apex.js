@@ -1,4 +1,5 @@
 /*global ApexCharts*/
+/*eslint no-unused-vars: "off"*/
 // Define Volume chart and render it
 const chartVolume = new ApexCharts(document.getElementById('chartVolume'), {
     series: [{
@@ -534,14 +535,4 @@ const apexDarkMode = () => {
     chartDebtEquity.updateOptions(darkModeChartsSettings)
     chartNetIncome.updateOptions(darkModeChartsSettings)
     chartAnalytics.updateOptions(darkModePieChartsSettings)
-}
-
-module.exports = {
-    apexDarkMode,
-    apexLightMode,
-    setNetIncomeChart,
-    setAnalyticsChart,
-    clearCharts,
-    setNakedshortChart,
-    setChartDebtEquity
 }

@@ -1,3 +1,4 @@
+/*eslint no-unused-vars: "off"*/
 class Tag {
     constructor(id, value, {
         sign,
@@ -77,8 +78,7 @@ class Tag {
         if (this._value > this.best[0] && this._value <= this.best[1]) return 'is-success'
         if (this._value > this.normal[0] && this._value <= this.normal[1]) return 'is-warning'
         if (this._value > this.danger[0] && this._value <= this.danger[1]) return 'is-danger'
+        if (this._value > this.normal[1] && this.normal[1] > this.danger[0]) return 'is-danger'
         return 'is-light'
     }
 }
-
-module.exports = Tag
