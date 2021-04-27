@@ -244,6 +244,12 @@ a.tag:hover {
 
 /* Mobile fixes */
 
+@media (max-width: 410px) {
+    .title {
+        font-size: 1.7rem;
+    }
+}
+
 @media (max-width: 350px) {
     .section {
         padding: 3rem 0.35rem 2rem 0.35rem;
@@ -262,7 +268,7 @@ a.tag:hover {
     }
 
     .title {
-        font-size: 1.9rem;
+        font-size: 1.5rem;
     }
 
     .tradingview_tech {
