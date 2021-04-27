@@ -62,11 +62,10 @@ barchartFinancialsSchema.statics.getFromSource = async function (ticker) {
         const liabLongTermDebt = liabilities.nonCurrentLiabilities.longTermDebt ? liabilities.nonCurrentLiabilities.longTermDebt : null
         const basicLongTermDebt = liabilities.longTermDebt ? liabilities.longTermDebt : null
         
-        const longDebt = liabLongTermDebt ? basicLongTermDebt : null
-        const shortDebt = liabilities.currentLiabilities.total ? liabilities.currentLiabilities.total : null
+        const longDebt = liabLongTermDebt ? liabLongTermDebt : basicLongTermDebt
 
         return {
-            longTermDebt: longDebt ? [...longDebt].reverse() : [...shortDebt].reverse(),
+            longTermDebt: longDebt ? [...longDebt].reverse() : null,
             shareholdersEquity: [...barchartFinancialsBalance.shareholdersEquity.total].reverse(),
             netIncome: [...barchartFinancialsIncome.netIncome].reverse(),
             revenue: [...barchartFinancialsIncome.sales].reverse(),
