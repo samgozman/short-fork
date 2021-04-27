@@ -223,16 +223,16 @@ const setInsidersTable = (response = {}) => {
 
 const setTags = (response = {}) => {
     for (const key in pageObj.finviz.tags) {
-        pageObj.finviz.tags[key].value = response.finviz[key] || '-'
+        pageObj.finviz.tags[key].value = response.finviz[key]
     }
         
     // Set values for barchart options
     for (const key in pageObj.barchartoptions.tags) {
-        pageObj.barchartoptions.tags[key].value = response.barchartoverview.options[key] || '-'
+        pageObj.barchartoptions.tags[key].value = response.barchartoverview.options[key]
     }
 
-    pageObj.nakedshort.current_short_volume.value = response.nakedshort.current_short_volume || '-'
-    pageObj.shortsqueeze.short_flow.value = response.shortsqueeze.short_flow || '-'
+    pageObj.nakedshort.current_short_volume.value = response.nakedshort.current_short_volume
+    pageObj.shortsqueeze.short_flow.value = response.shortsqueeze.short_flow
 
     // Set target indicator
     const targetUpside = (response.finviz.target_price !== null && response.finviz.price !== null) ? ((response.finviz.target_price / response.finviz.price - 1) * 100).toFixed(1) : null
@@ -310,7 +310,7 @@ form.addEventListener('submit', async (e) => {
             history.pushState(null, '', newRelativePathQuery)
         }
 
-       setTags(response)
+        setTags(response)
 
         setProgressBar(response)
         setInsidersTable(response)

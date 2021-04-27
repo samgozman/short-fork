@@ -21,7 +21,7 @@ class Tag {
     }
 
     set value(val) {
-        this._value = val
+        this._value = val || '-'
 
         if (this.bool !== true) {
             this.clear()
@@ -73,6 +73,7 @@ class Tag {
         if (this.isShort) return 'is-link'
         if (this.bool) return 'is-success'
         if (this.bool === false) return 'is-danger'
+        if (this.value === '-') return 'is-warning'
         if (this._value > this.best[0] && this._value <= this.best[1]) return 'is-success'
         if (this._value > this.normal[0] && this._value <= this.normal[1]) return 'is-warning'
         if (this._value > this.danger[0] && this._value <= this.danger[1]) return 'is-danger'
