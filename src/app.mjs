@@ -1,6 +1,7 @@
 import express from 'express'
 import { fileURLToPath } from 'url'
 import { create } from 'express-handlebars'
+import compression from 'compression'
 
 import './db/connection.mjs'
 import stockRouter from './routers/stock.mjs'
@@ -23,6 +24,9 @@ app.set('trust proxy', 1)
 // Register `hbs.engine` with the Express app.
 app.engine('.hbs', hbs.engine)
 app.set('view engine', '.hbs')
+
+// gZip compression
+app.use(compression())
 
 // Parse all incoming JSON to an object, so we can access it in the request (before passing routers)
 app.use(express.json())
