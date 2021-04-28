@@ -13,7 +13,7 @@
     "express-rate-limit": "^5.2.6",
     "finvizor": "^1.0.5",
     "is-on-tinkoff-invest": "^1.0.0",
-    "mongoose": "^5.12.5",
+    "mongoose": "^5.12.6",
     "nakedshort": "^1.0.4",
     "p-timeout": "^5.0.0",
     "shortsqueeze": "^1.0.3"
