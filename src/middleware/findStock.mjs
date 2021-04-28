@@ -11,7 +11,10 @@ const findStock = async (req, res, next) => {
         })
     }
     try {
-        ticker = ticker.toUpperCase().trim()
+        ticker = ticker.toUpperCase()
+
+        // Replace every non-word except dot
+        ticker = ticker.replace(/[^\w.]/g,'')
 
         // ! 2. Find ticker in data base
         let stock = await Stock.findOne({

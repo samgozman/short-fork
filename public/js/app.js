@@ -52,15 +52,14 @@ const checkForThemeSettings = () => {
  * @return {void}
  */
 const techWidget = (ticker = '') => {
-    const quote = ticker.toUpperCase()
     const theme = checkForThemeSettings()
 
     const html = `
         <!-- TradingView Widget BEGIN -->
         <div class='tradingview-widget-container'>
             <div class='tradingview-widget-container__widget'></div>
-            <div class='tradingview-widget-copyright'><a href='https://www.tradingview.com/symbols/${quote}/technicals/'
-                    rel='noopener' target='_blank'><span class='blue-text'>Technical Analysis for ${quote}</span></a> by
+            <div class='tradingview-widget-copyright'><a href='https://www.tradingview.com/symbols/${ticker}/technicals/'
+                    rel='noopener' target='_blank'><span class='blue-text'>Technical Analysis for ${ticker}</span></a> by
                 TradingView</div>
             <script type='text/javascript'
                 src='https://s3.tradingview.com/external-embedding/embed-widget-technical-analysis.js' async>
@@ -69,7 +68,7 @@ const techWidget = (ticker = '') => {
                     "width": "100%",
                     "isTransparent": false,
                     "height": "100%",
-                    "symbol": "${quote}",
+                    "symbol": "${ticker}",
                     "showIntervalTabs": true,
                     "locale": "ru",
                     "colorTheme": "${theme}"
@@ -88,10 +87,9 @@ const techWidget = (ticker = '') => {
  * @return {void}
  */
 const chartWidget = (ticker = '') => {
-    const quote = ticker.toUpperCase()
     const theme = checkForThemeSettings()
 
-    iframe_chart.src = 'charts/chart.html?stock=' + quote + '&theme=' + theme
+    iframe_chart.src = 'charts/chart.html?stock=' + ticker + '&theme=' + theme
 }
 
 // DOM object of elements which should be changed during request
