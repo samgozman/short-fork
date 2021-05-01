@@ -10,7 +10,7 @@ const chartVolume = new ApexCharts(document.getElementById('chartVolume'), {
         data: []
     }],
     chart: {
-        height: 200,
+        height: 210,
         width: '100%',
         type: 'area',
         group: 'synced-charts',
@@ -70,7 +70,7 @@ const chartShortPercent = new ApexCharts(document.getElementById('chartShortPerc
         data: []
     }],
     chart: {
-        height: 200,
+        height: 210,
         width: '100%',
         type: 'line',
         group: 'synced-charts',
@@ -205,7 +205,7 @@ const chartDebtEquity = new ApexCharts(document.getElementById('chartDebtEquity'
         data: []
     }],
     chart: {
-        height: 350,
+        height: 460,
         type: 'area',
         toolbar: {
             show: false
@@ -261,7 +261,7 @@ const chartNetIncome = new ApexCharts(document.getElementById('chartNetIncome'),
         }
     ],
     chart: {
-        height: 350,
+        height: 400,
         type: 'bar',
         toolbar: {
             show: false

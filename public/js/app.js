@@ -283,6 +283,7 @@ const setLinks = (exchange = '', quote = '') => {
     links_list.appendChild(setChild(`Yahoo! finance: ${quote}`, `https://finance.yahoo.com/quote/${quote}`))
     links_list.appendChild(setChild(`guruFocus: ${quote}`, `https://www.gurufocus.com/stock/${quote}/summary`))
     links_list.appendChild(setChild(`Seeking Alpha: ${quote}`, `https://seekingalpha.com/symbol/${quote}`))
+    links_list.appendChild(setChild(`Zaсks Research: ${quote}`, `https://www.zacks.com/stock/quote/${quote}`))
 }
 
 // Get response from server side
