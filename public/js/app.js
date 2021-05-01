@@ -164,6 +164,9 @@ const erase = () => {
     // Clear links list
     links_list.innerHTML = ''
 
+    // Clear error message
+    error_message.textContent = ''
+
     clearCharts()
 }
 
