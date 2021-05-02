@@ -190,23 +190,38 @@ const isLoading = (bool = true) => {
 
 // Set values and colors for progress bar
 const setProgressBar = (response = {}) => {
+    // Clear classes
+    const classes = ['is-danger', 'is-warning', 'is-success']
+    progress_barchart.classList.remove(...classes)
+    progress_finviz.classList.remove(...classes)
+
     // Sum analytics values
     const barchartRating = (obj = {}) => {
         const total = Object.values(obj).reduce((a, b) => a + b, 0)
         const sum = obj.strongBuy * 5 + obj.moderateBuy * 4 + obj.hold * 3 + obj.moderateSell * 2 + obj.strongSell * 1
         return !isNaN(sum) && sum !== 0 ? (sum / total).toFixed(2) : null
     }
+
+    // Define class for progress bar
+    const setClass = (value)  => {
+        console.log(value)
+        if (value <= 2) return 'is-danger'
+        if (value <= 3.5) return 'is-warning'
+        if (value > 3.5) return 'is-success'
+    }
+
     const barchartAnal = barchartRating(response.barchartoverview.analytics)
 
     // Set barchart progress bar value
     progress_barchart.value = barchartAnal
     progress_barchart_value.textContent = barchartAnal
-    progress_barchart.classList.add(barchartAnal <= 2 ? 'is-danger' : barchartAnal <= 3.5 ? 'is-warning' : 'is-success')
+    progress_barchart.classList.add(setClass(barchartAnal))
 
     // Set finviz progress bar value
-    progress_finviz.value = response.finviz.recomendation ? 6 - response.finviz.recomendation : null
-    progress_finviz_value.textContent = response.finviz.recomendation ? 6 - response.finviz.recomendation : null
-    progress_finviz.classList.add(progress_finviz.value <= 2 ? 'is-danger' : progress_finviz.value <= 3.5 ? 'is-warning' : 'is-success')
+    const finvizValue = response.finviz.recomendation ? 6 - response.finviz.recomendation : null
+    progress_finviz.value = finvizValue
+    progress_finviz_value.textContent = finvizValue
+    progress_finviz.classList.add(setClass(finvizValue))
 }
 
 const setInsidersTable = (response = {}) => {
@@ -217,8 +232,16 @@ const setInsidersTable = (response = {}) => {
         row.insertCell(2).innerHTML = element.transaction === 'Option Exercise' ? 'Option' : element.transaction
         row.insertCell(3).innerHTML = '$' + element.value
 
+        const setClass = (value) => {
+            switch (value) {
+                case 'Buy': return 'is-buy'
+                case 'Sale': return 'is-sale'
+                case 'Option': return 'is-option'
+            }
+        }
+
         // Set color
-        element.transaction === 'Buy' ? row.classList.add('is-buy') : element.transaction === 'Sale' ? row.classList.add('is-sale') : row.classList.add('is-option')
+        row.classList.add(setClass(element.transaction))
     })
 }
 
