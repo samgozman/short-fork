@@ -4,20 +4,20 @@ import { fileURLToPath } from 'url'
 import { createRequire } from 'module'
 
 const require = createRequire(import.meta.url)
-const router = new express.Router()
+const webRouter = new express.Router()
 
 const __dirname = fileURLToPath(new URL('.', import.meta.url))
 const public_dir = join(__dirname, '../../public')
 
 // Setup static directory to serve
-router.use(express.static(public_dir))
+webRouter.use(express.static(public_dir))
 
 // Array of object of main financial tags for Handlebars.
 // Divided into 2 parts for 2 separated columns
 const { financial, option } = require('./web-tags.json')
 
 // root index page
-router.get('', (req, res) => {
+webRouter.get('', (req, res) => {
     res.render('index', {
         layout: 'bulma-ui',
         package_version: process.env.npm_package_version,
@@ -33,4 +33,4 @@ router.get('', (req, res) => {
     })
 })
 
-export default router
+export default webRouter

@@ -4,9 +4,9 @@ import rateLimiter from '../middleware/rateLimiter.mjs'
 import findStock from '../middleware/findStock.mjs'
 import counter from '../middleware/counter.mjs'
 
-const router = new Router()
+const squeezeRouter = new Router()
 
-router.get('/stocks/shortsqueeze', rateLimiter, findStock, counter, async (req, res) => {
+squeezeRouter.get('/stocks/shortsqueeze', rateLimiter, findStock, counter, async (req, res) => {
     const ticker = req.query.ticker
 
     try {
@@ -18,4 +18,4 @@ router.get('/stocks/shortsqueeze', rateLimiter, findStock, counter, async (req, 
     }
 })
 
-export default router
+export default squeezeRouter

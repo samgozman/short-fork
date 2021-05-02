@@ -5,9 +5,9 @@ import rateLimiter from '../middleware/rateLimiter.mjs'
 import findStock from '../middleware/findStock.mjs'
 import counter from '../middleware/counter.mjs'
 
-const router = new Router()
+const barchartRouter = new Router()
 
-router.get('/stocks/barchart/overview', rateLimiter, findStock, counter, async (req, res) => {
+barchartRouter.get('/stocks/barchart/overview', rateLimiter, findStock, counter, async (req, res) => {
     const ticker = req.query.ticker
 
     try {
@@ -19,7 +19,7 @@ router.get('/stocks/barchart/overview', rateLimiter, findStock, counter, async (
     }
 })
 
-router.get('/stocks/barchart/financials', rateLimiter, findStock, counter, async (req, res) => {
+barchartRouter.get('/stocks/barchart/financials', rateLimiter, findStock, counter, async (req, res) => {
     const ticker = req.query.ticker
 
     try {
@@ -31,4 +31,4 @@ router.get('/stocks/barchart/financials', rateLimiter, findStock, counter, async
     }
 })
 
-export default router
+export default barchartRouter

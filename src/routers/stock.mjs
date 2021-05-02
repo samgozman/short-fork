@@ -3,10 +3,10 @@ import rateLimiter from '../middleware/rateLimiter.mjs'
 import findStock from '../middleware/findStock.mjs'
 import counter from '../middleware/counter.mjs'
 
-const router = new Router()
+const stockRouter = new Router()
 
 // Get stock by quote
-router.get('/stocks', rateLimiter, findStock, counter, async (req, res) => {
+stockRouter.get('/stocks', rateLimiter, findStock, counter, async (req, res) => {
     try {
         // Aggregate virtuals into one object
         await res.stock.populate(['finviz', 'nakedshort', 'shortsqueeze', 'barchartoverview', 'barchartfinancials']).execPopulate()
@@ -33,4 +33,4 @@ router.get('/stocks', rateLimiter, findStock, counter, async (req, res) => {
     }
 })
 
-export default router
+export default stockRouter
