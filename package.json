@@ -23,6 +23,9 @@
     "eslint": "^7.23.0",
     "nodemon": "^2.0.7"
   },
+  "engines": {
+    "node": ">=16.0.0"
+  },
   "scripts": {
     "start": "node src/index.mjs",
     "dev": "nodemon -r dotenv/config src/index.mjs -e js,mjs,hbs,css dotenv_config_path=config/dev.env",
