@@ -204,7 +204,6 @@ const setProgressBar = (response = {}) => {
 
     // Define class for progress bar
     const setClass = (value)  => {
-        console.log(value)
         if (value <= 2) return 'is-danger'
         if (value <= 3.5) return 'is-warning'
         if (value > 3.5) return 'is-success'

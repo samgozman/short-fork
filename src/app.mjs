@@ -1,4 +1,5 @@
 import express from 'express'
+import helmet from 'helmet'
 import { fileURLToPath } from 'url'
 import { create } from 'express-handlebars'
 import compression from 'compression'
@@ -24,6 +25,11 @@ app.set('trust proxy', 1)
 // Register `hbs.engine` with the Express app.
 app.engine('.hbs', hbs.engine)
 app.set('view engine', '.hbs')
+
+// Add Helmet middleware protection
+app.use(helmet({
+    contentSecurityPolicy: false
+}))
 
 // gZip compression
 app.use(compression())
