@@ -1,7 +1,7 @@
 {
   "name": "short-fork",
   "description": "Stock market helper: display a Short Float & Volume percentage indicator from three different data sources in one place.",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "type": "module",
   "main": "index.mjs",
   "exports": "./index.mjs",
