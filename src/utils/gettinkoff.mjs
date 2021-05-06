@@ -2,7 +2,7 @@ import { Stock } from '../models/stock.mjs'
 import { getTinkoffStocks } from 'is-on-tinkoff-invest'
 
 // Update tinkoff indicator
-const update = async () => {
+const gettinkoff = async () => {
         try {
         const tinkoffStocks = await getTinkoffStocks()
         // Save tinkoff status to DB. If stock is not there - create it.
@@ -28,4 +28,4 @@ const update = async () => {
     }
 }
 
-export default update
+export default gettinkoff
