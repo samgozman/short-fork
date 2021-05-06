@@ -297,6 +297,7 @@ const setLinks = (exchange = '', quote = '') => {
         a.href = link
         a.target = '_blank'
         a.rel = 'nofollow'
+        a.rel = 'noreferrer'
         a.classList.add('button', 'is-small', 'is-link', 'is-outlined')
         return a
     }
