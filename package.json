@@ -20,7 +20,7 @@
     "shortsqueeze": "^1.0.4"
   },
   "devDependencies": {
-    "dotenv": "^9.0.1",
+    "dotenv": "^9.0.2",
     "eslint": "^7.26.0",
     "nodemon": "^2.0.7"
   },
