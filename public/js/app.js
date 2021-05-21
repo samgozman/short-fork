@@ -98,44 +98,123 @@ let pageObj = {
         name: document.getElementById('resp_name'),
         site: document.getElementById('resp_site'),
         tags: {
-            price: new Tag('resp_price', 0, { sign: '$', isInfo: true}),
-            pe: new Tag('resp_pe', 0, { best: [0, 15], danger: [25, Infinity]}),
-            forwardPe: new Tag('resp_forwardPe', 0, { best: [0, 15], danger: [25, Infinity]}),
-            ps: new Tag('resp_ps', 0, { best: [0, 1], danger: [3, Infinity]}),
-            pb: new Tag('resp_pb', 0, { best: [0, 1], danger: [4, Infinity]}),
-            roe: new Tag('resp_roe', 0, { sign: '%', best: [0, 40], normal: [40, 100], danger: [-Infinity, 0]}),
-            roa: new Tag('resp_roa', 0, { sign: '%', best: [0, 100], danger: [-Infinity, 0]}),
-            debteq: new Tag('resp_debteq', 0, { best: [0, 0.4], danger: [1, Infinity]}),
-            short_flow: new Tag('resp_finviz', 0, { sign: '%', isShort: true}),
-            peg: new Tag('resp_peg', 0, { best: [0, 1], danger: [3, Infinity]}),
-            dividend_percent: new Tag('resp_dividend_percent', 0, { sign: '%', isInfo: true}),
-            target: new Tag('resp_finviz_target', 0, { sign: '%', best: [0, Infinity], danger: [-Infinity, 0]}),
-            rsi: new Tag('resp_finviz_rsi', 0, { best: [0, 30], danger: [70, Infinity] })
+            price: new Tag('resp_price', 0, {
+                sign: '$',
+                isInfo: true
+            }),
+            pe: new Tag('resp_pe', 0, {
+                best: [0, 15],
+                danger: [25, Infinity]
+            }),
+            forwardPe: new Tag('resp_forwardPe', 0, {
+                best: [0, 15],
+                danger: [25, Infinity]
+            }),
+            ps: new Tag('resp_ps', 0, {
+                best: [0, 1],
+                danger: [3, Infinity]
+            }),
+            pb: new Tag('resp_pb', 0, {
+                best: [0, 1],
+                danger: [4, Infinity]
+            }),
+            roe: new Tag('resp_roe', 0, {
+                sign: '%',
+                best: [0, 40],
+                normal: [40, 100],
+                danger: [-Infinity, 0]
+            }),
+            roa: new Tag('resp_roa', 0, {
+                sign: '%',
+                best: [0, 100],
+                danger: [-Infinity, 0]
+            }),
+            debteq: new Tag('resp_debteq', 0, {
+                best: [0, 0.4],
+                danger: [1, Infinity]
+            }),
+            short_flow: new Tag('resp_finviz', 0, {
+                sign: '%',
+                isShort: true
+            }),
+            peg: new Tag('resp_peg', 0, {
+                best: [0, 1],
+                danger: [3, Infinity]
+            }),
+            dividend_percent: new Tag('resp_dividend_percent', 0, {
+                sign: '%',
+                isInfo: true
+            }),
+            target: new Tag('resp_finviz_target', 0, {
+                sign: '%',
+                best: [0, Infinity],
+                danger: [-Infinity, 0]
+            }),
+            rsi: new Tag('resp_finviz_rsi', 0, {
+                best: [0, 30],
+                danger: [70, Infinity]
+            })
         }
     },
     barchartoptions: {
         tags: {
-            impliedVolatility: new Tag('resp_impliedVolatility', 0, { sign: '%', isInfo: true}),
-            historicalVolatility: new Tag('resp_historicalVolatility', 0, { sign: '%', isInfo: true}),
-            ivPercentile: new Tag('resp_ivPercentile', 0, { sign: '%', best: [0, 30], danger: [70, Infinity]}),
-            ivRank: new Tag('resp_ivRank', 0, { sign: '%', best: [0, 30], danger: [70, Infinity] }),
-            putCallVolRatio: new Tag('resp_putCallVolRatio', 0, { best: [0, 0.7], danger: [1, Infinity]}),
-            todaysVolume: new Tag('resp_todaysVolume', 0, { isInfo: true}),
-            volumeAvg30Day: new Tag('resp_volumeAvg30Day', 0, { isInfo: true}),
-            putCallOiRatio: new Tag('resp_putCallOiRatio', 0, { best: [0, 0.7], danger: [1, Infinity] }),
-            todaysOpenInterest: new Tag('resp_todaysOpenInterest', 0, { isInfo: true}),
-            openInt30Day: new Tag('resp_openInt30Day', 0, { isInfo: true})
+            impliedVolatility: new Tag('resp_impliedVolatility', 0, {
+                sign: '%',
+                isInfo: true
+            }),
+            historicalVolatility: new Tag('resp_historicalVolatility', 0, {
+                sign: '%',
+                isInfo: true
+            }),
+            ivPercentile: new Tag('resp_ivPercentile', 0, {
+                sign: '%',
+                best: [0, 30],
+                danger: [70, Infinity]
+            }),
+            ivRank: new Tag('resp_ivRank', 0, {
+                sign: '%',
+                best: [0, 30],
+                danger: [70, Infinity]
+            }),
+            putCallVolRatio: new Tag('resp_putCallVolRatio', 0, {
+                best: [0, 0.7],
+                danger: [1, Infinity]
+            }),
+            todaysVolume: new Tag('resp_todaysVolume', 0, {
+                isInfo: true
+            }),
+            volumeAvg30Day: new Tag('resp_volumeAvg30Day', 0, {
+                isInfo: true
+            }),
+            putCallOiRatio: new Tag('resp_putCallOiRatio', 0, {
+                best: [0, 0.7],
+                danger: [1, Infinity]
+            }),
+            todaysOpenInterest: new Tag('resp_todaysOpenInterest', 0, {
+                isInfo: true
+            }),
+            openInt30Day: new Tag('resp_openInt30Day', 0, {
+                isInfo: true
+            })
         }
     },
     nakedshort: {
-        current_short_volume: new Tag('resp_naked', 0, { sign: '%', isShort: true})
+        current_short_volume: new Tag('resp_naked', 0, {
+            sign: '%',
+            isShort: true
+        })
     },
     shortsqueeze: {
-        short_flow: new Tag('resp_squeeze', 0, { sign: '%', isShort: true})
+        short_flow: new Tag('resp_squeeze', 0, {
+            sign: '%',
+            isShort: true
+        })
     },
     insidersDeals: document.getElementById('resp_insidersDeals_tbody'),
     extension: {
-        resp_tinkoff: new Tag('resp_tinkoff', 0, { bool: false })
+        resp_tinkoff: new Tag('resp_tinkoff', 0, {
+            bool: false
+        })
     }
 }
 
@@ -203,7 +282,7 @@ const setProgressBar = (response = {}) => {
     }
 
     // Define class for progress bar
-    const setClass = (value)  => {
+    const setClass = (value) => {
         if (value <= 2) return 'is-danger'
         if (value <= 3.5) return 'is-warning'
         if (value > 3.5) return 'is-success'
@@ -233,9 +312,12 @@ const setInsidersTable = (response = {}) => {
 
         const setClass = (value) => {
             switch (value) {
-                case 'Buy': return 'is-buy'
-                case 'Sale': return 'is-sale'
-                case 'Option': return 'is-option'
+                case 'Buy':
+                    return 'is-buy'
+                case 'Sale':
+                    return 'is-sale'
+                case 'Option':
+                    return 'is-option'
             }
         }
 
@@ -248,7 +330,7 @@ const setTags = (response = {}) => {
     for (const key in pageObj.finviz.tags) {
         pageObj.finviz.tags[key].value = response.finviz[key]
     }
-        
+
     // Set values for barchart options
     for (const key in pageObj.barchartoptions.tags) {
         pageObj.barchartoptions.tags[key].value = response.barchartoverview.options[key]
@@ -274,7 +356,7 @@ const clearTags = () => {
     for (const key in pageObj.finviz.tags) {
         pageObj.finviz.tags[key].clear()
     }
-        
+
     // Set values for barchart options
     for (const key in pageObj.barchartoptions.tags) {
         pageObj.barchartoptions.tags[key].clear()
@@ -453,6 +535,7 @@ document.addEventListener('DOMContentLoaded', function () {
 const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)')
 const prefersLightScheme = window.matchMedia('(prefers-color-scheme: light)')
 const checkbox = document.getElementById('color_mode')
+const colorMobileButton = document.getElementById('color_mode_mobile')
 const currentTheme = localStorage.getItem('theme')
 
 const setThemeForElements = (theme = 'light') => {
@@ -468,6 +551,10 @@ const setThemeForElements = (theme = 'light') => {
             break
     }
 }
+
+colorMobileButton.addEventListener('click', () => {
+    checkbox.click()
+})
 
 checkbox.addEventListener('change', (event) => {
     var theme = ''
@@ -504,3 +591,29 @@ if ((currentTheme === 'dark') || (prefersDarkScheme.matches && currentTheme !== 
 }
 
 // END OF DARK MODE
+
+// Navbar
+document.addEventListener('DOMContentLoaded', () => {
+
+    // Get all "navbar-burger" elements
+    const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0)
+
+    // Check if there are any navbar burgers
+    if ($navbarBurgers.length > 0) {
+
+        // Add a click event on each of them
+        $navbarBurgers.forEach(el => {
+            el.addEventListener('click', () => {
+
+                // Get the target from the "data-target" attribute
+                const target = el.dataset.target
+                const $target = document.getElementById(target)
+
+                // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+                el.classList.toggle('is-active')
+                $target.classList.toggle('is-active')
+
+            })
+        })
+    }
+})

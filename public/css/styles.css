@@ -17,8 +17,7 @@
 
 /* Global */
 body {
-    background-color: transparent;
-    display: flex;
+    /* display: flex; */
     min-height: 100vh;
     flex-direction: column;
 }
@@ -39,6 +38,11 @@ body {
 
 .content:not(:last-child) {
     margin-bottom: 0.75rem;
+}
+
+/* Navbar */
+.navbar-item>ion-icon {
+    margin-right: 4px;
 }
 
 /* Form */
