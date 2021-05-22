@@ -67,10 +67,14 @@ select:-webkit-autofill {
 }
 
 #submit_button {
-    background: url(./../img/icon/return-down-forward-outline.svg) no-repeat center #363636;
+    background: #363636;
     border-color: transparent;
     color: #fff;
     width: 4rem;
+}
+
+#submit_button > ion-icon {
+    font-size: 4rem;
 }
 
 #submit_button.is-loading {
