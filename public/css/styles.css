@@ -45,6 +45,10 @@ body {
     margin-right: 4px;
 }
 
+.navbar-brand {
+    margin: -0.75rem;
+}
+
 /* Form */
 .search-form-input {
     width: 100%;
@@ -247,6 +251,12 @@ a.tag:hover {
 }
 
 /* Mobile fixes */
+
+@media (max-width: 1023px) {
+    .navbar-brand {
+        margin: unset;
+    }
+}
 
 @media (max-width: 410px) {
     .title {
