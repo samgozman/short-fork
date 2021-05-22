@@ -46,7 +46,7 @@ body {
 }
 
 .navbar-brand {
-    margin: -0.75rem;
+    margin-left: -0.75rem;
 }
 
 /* Form */
@@ -263,7 +263,7 @@ a.tag:hover {
 
 @media (max-width: 1023px) {
     .navbar-brand {
-        margin: unset;
+        margin-left: unset;
     }
 }
 
