@@ -127,7 +127,8 @@ html,
 .modal-card-body,
 .section,
 .navbar,
-body {
+body,
+.navbar-menu.is-active {
     background-color: var(--bkg-color);
 }
 
