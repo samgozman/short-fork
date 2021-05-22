@@ -1,7 +1,7 @@
 {
   "name": "short-fork",
   "description": "Stock market helper: display a Short Float & Volume percentage indicator from three different data sources in one place.",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "type": "module",
   "main": "index.mjs",
   "exports": "./index.mjs",
@@ -9,19 +9,19 @@
     "barchart-dot-com": "^1.0.4",
     "compression": "^1.7.4",
     "express": "^4.17.1",
-    "express-handlebars": "^5.3.1",
+    "express-handlebars": "^5.3.2",
     "express-rate-limit": "^5.2.6",
     "finvizor": "^1.0.7",
     "helmet": "^4.6.0",
-    "is-on-tinkoff-invest": "^1.0.0",
-    "mongoose": "^5.12.7",
+    "is-on-tinkoff-invest": "^1.0.1",
+    "mongoose": "^5.12.10",
     "nakedshort": "^1.0.5",
     "p-timeout": "^5.0.0",
     "shortsqueeze": "^1.0.4"
   },
   "devDependencies": {
-    "dotenv": "^9.0.0",
-    "eslint": "^7.23.0",
+    "dotenv": "^9.0.2",
+    "eslint": "^7.26.0",
     "nodemon": "^2.0.7"
   },
   "engines": {

@@ -125,13 +125,39 @@ body.dark-theme {
 
 html,
 .modal-card-body,
-.section {
+.section,
+.navbar,
+body,
+.navbar-menu.is-active {
     background-color: var(--bkg-color);
 }
 
 p,
-.subtitle {
+.subtitle,
+.navbar-item,
+.navbar-link {
     color: var(--text-color);
+}
+
+.navbar-link.is-active,
+.navbar-link:focus,
+.navbar-link:focus-within,
+.navbar-link:hover,
+a.navbar-item.is-active,
+a.navbar-item:focus,
+a.navbar-item:focus-within,
+a.navbar-item:hover,
+.navbar-item.has-dropdown:hover .navbar-link {
+    background-color: var(--footer-bkg-color);
+}
+
+a.navbar-item.is-active,
+a.navbar-item.is-active:not(:focus):not(:hover) {
+    color: var(--a-color);
+}
+
+.navbar-dropdown {
+    background-color: var(--footer-bkg-color);
 }
 
 strong,

@@ -17,8 +17,7 @@
 
 /* Global */
 body {
-    background-color: transparent;
-    display: flex;
+    /* display: flex; */
     min-height: 100vh;
     flex-direction: column;
 }
@@ -41,6 +40,15 @@ body {
     margin-bottom: 0.75rem;
 }
 
+/* Navbar */
+.navbar-item>ion-icon {
+    margin-right: 4px;
+}
+
+.navbar-brand {
+    margin-left: -0.75rem;
+}
+
 /* Form */
 .search-form-input {
     width: 100%;
@@ -59,10 +67,14 @@ select:-webkit-autofill {
 }
 
 #submit_button {
-    background: url(./../img/icon/return-down-forward-outline.svg) no-repeat center #363636;
+    background: #363636;
     border-color: transparent;
     color: #fff;
     width: 4rem;
+}
+
+#submit_button > ion-icon {
+    font-size: 4rem;
 }
 
 #submit_button.is-loading {
@@ -194,7 +206,7 @@ a.tag:hover {
     height: 3rem;
     position: fixed;
     right: 0;
-    top: 0;
+    bottom: 0;
     width: 3rem;
     z-index: 2;
 }
@@ -214,8 +226,13 @@ a.tag:hover {
     margin: 0.5rem 0rem;
 }
 
-.button.support {
-    margin-top: 0.25rem;
+#support {
+    padding-top: 0.75rem;
+    padding-bottom: 0.5rem;
+}
+
+.support-block ion-icon {
+    margin-right: 4px;
 }
 
 /* Links to the services */
@@ -243,6 +260,12 @@ a.tag:hover {
 }
 
 /* Mobile fixes */
+
+@media (max-width: 1023px) {
+    .navbar-brand {
+        margin-left: unset;
+    }
+}
 
 @media (max-width: 410px) {
     .title {

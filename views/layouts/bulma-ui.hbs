@@ -26,6 +26,10 @@
     <link rel="stylesheet" href="./css/darkmode.css">
     <link rel="stylesheet" href="./css/styles.css">
 
+    <!-- Fonts -->
+    <script type="module" src="https://unpkg.com/ionicons@5.5.1/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule="" src="https://unpkg.com/ionicons@5.5.1/dist/ionicons/ionicons.js"></script>
+
     <!-- Yandex.Metrika counter -->
     <script type="text/javascript">
         (function (m, e, t, r, i, k, a) {
@@ -54,6 +58,7 @@
 </head>
 
 <body>
+    {{> menu }}
     <section class="section">
         <div class="container">
 
@@ -76,10 +81,22 @@
                     Tinkoff Pulse: <a href="https://www.tinkoff.ru/invest/social/profile/aqua_disco/"
                         target="_blank">aqua_disco</a>
                 </p>
-                <a class="button support is-link is-small" target="_blank"
-                    href="https://www.tinkoff.ru/rm/gozman.semen1/Ol0PS3882">
-                    Поддержать проект
-                </a>
+                <p id="support">
+                    Поддержать Short Fork <ion-icon name="cash-outline"></ion-icon>
+                </p>
+                <p class="support-block">
+                    <a href="https://paypal.me/samgozman" target="_blank" rel="nofollow" rel="noreferrer">
+                        <button class="button is-link is-outlined">
+                            <ion-icon name="logo-paypal"></ion-icon> PayPal
+                        </button>
+                    </a>
+                    <a href="https://www.tinkoff.ru/rm/gozman.semen1/Ol0PS3882" target="_blank" rel="nofollow"
+                        rel="noreferrer">
+                        <button class="button is-warning">
+                            <ion-icon name="card-outline"></ion-icon> Tinkoff
+                        </button>
+                    </a>
+                </p>
             </div>
             <div class="column">
 
