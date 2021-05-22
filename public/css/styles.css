@@ -222,8 +222,13 @@ a.tag:hover {
     margin: 0.5rem 0rem;
 }
 
-.button.support {
-    margin-top: 0.25rem;
+#support {
+    padding-top: 0.75rem;
+    padding-bottom: 0.5rem;
+}
+
+.support-block ion-icon {
+    margin-right: 4px;
 }
 
 /* Links to the services */
