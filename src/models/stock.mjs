@@ -28,8 +28,8 @@ stockSchema.virtual('finviz', {
     justOne: true
 })
 
-stockSchema.virtual('nakedshort', {
-    ref: 'Nakedshort',
+stockSchema.virtual('tightshorts', {
+    ref: 'Tightshorts',
     localField: '_id',
     foreignField: '_stock_id',
     justOne: true

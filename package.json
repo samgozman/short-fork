@@ -6,6 +6,7 @@
   "main": "index.mjs",
   "exports": "./index.mjs",
   "dependencies": {
+    "axios": "^0.21.1",
     "barchart-dot-com": "^1.0.4",
     "compression": "^1.7.4",
     "express": "^4.17.1",
@@ -15,7 +16,6 @@
     "helmet": "^4.6.0",
     "is-on-tinkoff-invest": "^1.0.1",
     "mongoose": "^5.12.10",
-    "nakedshort": "^1.0.5",
     "p-timeout": "^5.0.0",
     "shortsqueeze": "^1.0.4"
   },

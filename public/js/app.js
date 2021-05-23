@@ -1,4 +1,4 @@
-/*global iframe_tech, iframe_chart, getParameterByName, Tag, setNakedshortChart, setAnalyticsChart, 
+/*global iframe_tech, iframe_chart, getParameterByName, Tag, setTightshortsChart, setAnalyticsChart, 
 setChartDebtEquity, setNetIncomeChart, apexLightMode, apexDarkMode, clearCharts*/
 
 // Preloader
@@ -198,7 +198,7 @@ let pageObj = {
             })
         }
     },
-    nakedshort: {
+    tightshorts: {
         current_short_volume: new Tag('resp_naked', 0, {
             sign: '%',
             isShort: true
@@ -336,7 +336,7 @@ const setTags = (response = {}) => {
         pageObj.barchartoptions.tags[key].value = response.barchartoverview.options[key]
     }
 
-    pageObj.nakedshort.current_short_volume.value = response.nakedshort.current_short_volume
+    pageObj.tightshorts.current_short_volume.value = response.tightshorts.current_short_volume
     pageObj.shortsqueeze.short_flow.value = response.shortsqueeze.short_flow
 
     // Set target indicator
@@ -362,7 +362,7 @@ const clearTags = () => {
         pageObj.barchartoptions.tags[key].clear()
     }
 
-    pageObj.nakedshort.current_short_volume.clear()
+    pageObj.tightshorts.current_short_volume.clear()
     pageObj.shortsqueeze.short_flow.clear()
     pageObj.extension.resp_tinkoff.clear()
 
@@ -451,7 +451,7 @@ form.addEventListener('submit', async (e) => {
         techWidget(quote)
         chartWidget(quote)
 
-        setNakedshortChart(response)
+        setTightshortsChart(response)
         setAnalyticsChart(response)
         setChartDebtEquity(response)
         setNetIncomeChart(response)
