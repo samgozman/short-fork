@@ -95,22 +95,12 @@ a.tag:hover {
 .group-tags-1>.control>.tags.has-addons>.tag:first-child,
 .group-tags-2>.control>.tags.has-addons>.tag:first-child {
     justify-content: left;
+    width: 56%;
 }
 
-.group-tags-1>.control>.tags.has-addons>.tag:first-child {
-    width: 52%;
-}
-
-.group-tags-1>.control>.tags.has-addons>.tag:nth-child(2) {
-    width: 48%;
-}
-
-.group-tags-2>.control>.tags.has-addons>.tag:first-child {
-    width: 48%;
-}
-
-.group-tags-2>.control>.tags.has-addons>.tag:nth-child(2) {
-    width: 52%;
+.group-tags-1>.control>.tags.has-addons>.tag:nth-child(2),
+.group-tags-2>.control>.tags.has-addons>.tag:nth-child(2)  {
+    width: 44%;
 }
 
 /* Update messages */

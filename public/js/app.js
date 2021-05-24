@@ -199,7 +199,7 @@ let pageObj = {
         }
     },
     tightshorts: {
-        current_short_volume: new Tag('resp_naked', 0, {
+        current_short_volume: new Tag('resp_tight', 0, {
             sign: '%',
             isShort: true
         })
