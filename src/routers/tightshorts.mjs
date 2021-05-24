@@ -1,16 +1,16 @@
 import { Router } from 'express'
-import { Nakedshort } from '../models/nakedshort.mjs'
+import { Tightshorts } from '../models/tightshorts.mjs'
 import rateLimiter from '../middleware/rateLimiter.mjs'
 import findStock from '../middleware/findStock.mjs'
 import counter from '../middleware/counter.mjs'
 
-const nakedRouter = new Router()
+const tightshortsRouter = new Router()
 
-nakedRouter.get('/stocks/nakedshort', rateLimiter, findStock, counter, async (req, res) => {
+tightshortsRouter.get('/stocks/tightshorts', rateLimiter, findStock, counter, async (req, res) => {
     const ticker = req.query.ticker
 
     try {
-        const data = await Nakedshort.findByStockId(ticker, res.stock._id)
+        const data = await Tightshorts.findByStockId(ticker, res.stock._id)
         return res.send(data)
 
     } catch (err) {
@@ -18,4 +18,4 @@ nakedRouter.get('/stocks/nakedshort', rateLimiter, findStock, counter, async (re
     }
 })
 
-export default nakedRouter
+export default tightshortsRouter

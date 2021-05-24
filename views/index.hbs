@@ -32,7 +32,7 @@
 
         <div class="box">
             <span class="title is-5">Объём шортов</span>
-            {{> stocks/nakedchart }}
+            {{> stocks/tightshorts }}
         </div>
 
         <!-- /Volume graphichs -->
@@ -65,8 +65,8 @@
     </div>
     <div class="column is-one-third">
         <div class="box">
-            <span class="title is-5">Долг к капиталу</span>
-            <div id="chartDebtEquity"></div>
+            <span class="title is-5">Выручка и прибыль</span>
+            <div id="chartNetIncome"></div>
             <p class="upd-message">
                 Обновление данных Barchart раз в {{TTL_BARCHART_FINANCIAL}} дней.
                 Не является индивидуальной инвестиционной рекомендацией!
@@ -85,8 +85,8 @@
     </div>
     <div class="column is-one-third">
         <div class="box">
-            <span class="title is-5">Выручка и прибыль</span>
-            <div id="chartNetIncome"></div>
+            <span class="title is-5">Долг к капиталу</span>
+            <div id="chartDebtEquity"></div>
             <p class="upd-message">
                 Обновление данных Barchart раз в {{TTL_BARCHART_FINANCIAL}} дней.
                 Не является индивидуальной инвестиционной рекомендацией!

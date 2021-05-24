@@ -344,42 +344,42 @@ const clearCharts = () => {
     }])
 }
 
-// Update data set in nakedshort charts
-const setNakedshortChart = (response = {}) => {
-    if (response.nakedshort.chart[0] && !response.nakedshort.chart[0].error && response.nakedshort.chart[0].xAxisArr.length > 0 && response.nakedshort.chart[0].shortVolArr.length > 0) {
+// Update data set in tightshorts charts
+const setTightshortsChart = (response = {}) => {
+    if (response.tightshorts.chart[0] && !response.tightshorts.chart[0].error && response.tightshorts.chart[0].xAxisArr.length > 0 && response.tightshorts.chart[0].shortVolArr.length > 0) {
         // ! UPDATE VOLUME CHART
         chartVolume.updateOptions({
             xaxis: {
-                categories: response.nakedshort.chart[0].xAxisArr
+                categories: response.tightshorts.chart[0].xAxisArr
             }
         })
 
         chartVolume.updateSeries([{
-            data: response.nakedshort.chart[0].regularVolArr
+            data: response.tightshorts.chart[0].regularVolArr
         }, {
-            data: response.nakedshort.chart[0].shortVolArr
+            data: response.tightshorts.chart[0].shortVolArr
         }])
 
         // ! UPDATE SHORT PERCENT CHART
         chartShortPercent.updateOptions({
             xaxis: {
-                categories: response.nakedshort.chart[0].xAxisArr
+                categories: response.tightshorts.chart[0].xAxisArr
             }
         })
 
         chartShortPercent.updateSeries([{
-            data: getPercentageOfShorted(response.nakedshort.chart[0].regularVolArr, response.nakedshort.chart[0].shortVolArr)
+            data: getPercentageOfShorted(response.tightshorts.chart[0].regularVolArr, response.tightshorts.chart[0].shortVolArr)
         }])
-    } else if (response.nakedshort.chart === null || !response.nakedshort.chart[0] || response.nakedshort.chart[0].error) {
+    } else if (response.tightshorts.chart === null || !response.tightshorts.chart[0] || response.tightshorts.chart[0].error) {
         chartVolume.updateOptions({
             noData: {
-                text: 'Данные Nakedshort недоступны'
+                text: 'Данные TightShorts.ru недоступны'
             }
         })
 
         chartShortPercent.updateOptions({
             noData: {
-                text: 'Данные Nakedshort недоступны'
+                text: 'Данные TightShorts.ru недоступны'
             }
         })
     }

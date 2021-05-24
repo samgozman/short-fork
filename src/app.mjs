@@ -7,7 +7,7 @@ import compression from 'compression'
 import './db/connection.mjs'
 import stockRouter from './routers/stock.mjs'
 import finvizRouter from './routers/finviz.mjs'
-import nakedRouter from './routers/nakedshort.mjs'
+import tightshortsRouter from './routers/tightshorts.mjs'
 import squeezeRouter from './routers/shortsqueeze.mjs'
 import barchartRouter from './routers/barchart.mjs'
 import webRouter from './routers/web.mjs'
@@ -38,7 +38,7 @@ app.use(compression())
 app.use(express.json())
 
 app.use(finvizRouter)
-app.use(nakedRouter)
+app.use(tightshortsRouter)
 app.use(squeezeRouter)
 app.use(stockRouter)
 app.use(barchartRouter)
