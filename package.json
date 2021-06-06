@@ -14,10 +14,10 @@
     "express-rate-limit": "^5.2.6",
     "finvizor": "^1.0.7",
     "helmet": "^4.6.0",
-    "is-on-tinkoff-invest": "^1.0.1",
     "mongoose": "^5.12.12",
     "p-timeout": "^5.0.0",
-    "shortsqueeze": "^1.0.4"
+    "shortsqueeze": "^1.0.4",
+    "tinkoff-api-securities": "^1.0.1"
   },
   "devDependencies": {
     "dotenv": "^10.0.0",

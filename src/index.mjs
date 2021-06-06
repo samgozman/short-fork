@@ -7,7 +7,7 @@ const port = process.env.PORT
 app.listen(port, async () => {
     const tinkError = await gettinkoff()
     if(tinkError) {
-        console.log('Error while updating Tinkoff indicator')
+        console.log('Error while updating Tinkoff indicator:', tinkError)
     }
     console.log('Server is up on port ' + port)
 })
