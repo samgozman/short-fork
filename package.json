@@ -1,7 +1,7 @@
 {
   "name": "short-fork",
   "description": "Stock market helper: display a Short Float & Volume percentage indicator from three different data sources in one place.",
-  "version": "1.2.6",
+  "version": "1.2.7",
   "type": "module",
   "main": "index.mjs",
   "exports": "./index.mjs",
@@ -14,10 +14,11 @@
     "express-rate-limit": "^5.2.6",
     "finvizor": "^1.0.7",
     "helmet": "^4.6.0",
-    "is-on-tinkoff-invest": "^1.0.1",
-    "mongoose": "^5.12.10",
+    "mongoose": "^5.12.12",
+    "node-schedule": "^2.0.0",
     "p-timeout": "^5.0.0",
-    "shortsqueeze": "^1.0.4"
+    "shortsqueeze": "^1.0.4",
+    "tinkoff-api-securities": "^1.0.1"
   },
   "devDependencies": {
     "dotenv": "^10.0.0",

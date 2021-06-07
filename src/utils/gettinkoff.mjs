@@ -1,22 +1,23 @@
 import { Stock } from '../models/stock.mjs'
-import { getTinkoffStocks } from 'is-on-tinkoff-invest'
+import { Tinkoff } from 'tinkoff-api-securities'
 
 // Update tinkoff indicator
 const gettinkoff = async () => {
         try {
-        const tinkoffStocks = await getTinkoffStocks()
+        const API = new Tinkoff(process.env.SANDBOX_TOKEN)
+        const tinkoffStocks = await API.stocks('USD')
         // Save tinkoff status to DB. If stock is not there - create it.
         for (const item of tinkoffStocks) {
             // Try to find existing
             let stock = await Stock.findOne({
-                ticker: item.quote
+                ticker: item.ticker
             })
 
             if(stock) {
                 stock.tinkoff = true
             } else {
                 stock = new Stock({
-                    ticker: item.quote,
+                    ticker: item.ticker,
                     name: item.name,
                     tinkoff: true
                 })
