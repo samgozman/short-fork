@@ -54,9 +54,9 @@ class Tag {
         this.clear()
         this.element.classList.add(this.style())
         if (this.bool) {
-            this.element.textContent = 'ON'
+            this.element.textContent = 'Есть'
         } else if (this.bool === false) {
-            this.element.textContent = 'OFF'
+            this.element.textContent = 'Нет'
         }
     }
 
