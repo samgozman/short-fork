@@ -387,6 +387,7 @@ const setLinks = (exchange = '', quote = '') => {
     const full_exchange = exchange === 'NASD' ? 'NASDAQ' : exchange
 
     links_list.appendChild(setChild(`График ${quote} TradingView`, `https://ru.tradingview.com/chart?symbol=${full_exchange}%3A${quote}`))
+    links_list.appendChild(setChild(`TightShorts: ${quote}`, `https://tightshorts.ru/quote/${quote}`))
     links_list.appendChild(setChild(`Finviz: ${quote}`, `https://finviz.com/quote.ashx?t=${quote}`))
     links_list.appendChild(setChild(`Yahoo! finance: ${quote}`, `https://finance.yahoo.com/quote/${quote}`))
     links_list.appendChild(setChild(`guruFocus: ${quote}`, `https://www.gurufocus.com/stock/${quote}/summary`))
@@ -459,6 +460,10 @@ form.addEventListener('submit', async (e) => {
 
         // Set page title
         document.title = `Short fork: ${quote}`
+
+        // Set tightshorts links
+        document.getElementById('menu_tightshorts').setAttribute('href', `https://tightshorts.ru/quote/${quote}`)
+        document.getElementById('chart_link_tightshorts').setAttribute('href', `https://tightshorts.ru/quote/${quote}`)
 
         isLoading(false)
 
