@@ -18,27 +18,27 @@
 
             {{#each financialTagsLeft}}
 
-                <div id="{{id}}_modal" class="modal">
-                    <div class="modal-background"></div>
-                    <div class="modal-card">
-                        <header class="modal-card-head">
-                            <p class="modal-card-title">{{fullname}}</p>
-                            <button class="delete" aria-label="close"></button>
-                        </header>
-                        <section class="modal-card-body">
-                            <p class="has-text-justified">
-                                <strong>{{fullname}}</strong> – {{text}}
-                            </p>
-                        </section>
-                    </div>
+            <div id="{{id}}_modal" class="modal">
+                <div class="modal-background"></div>
+                <div class="modal-card">
+                    <header class="modal-card-head">
+                        <p class="modal-card-title">{{fullname}}</p>
+                        <button class="delete" aria-label="close"></button>
+                    </header>
+                    <section class="modal-card-body">
+                        <p class="has-text-justified">
+                            <strong>{{fullname}}</strong> – {{text}}
+                        </p>
+                    </section>
                 </div>
+            </div>
 
-                <div class="control">
-                    <div class="tags has-addons">
-                        <a class="tag is-dark modal-button" data-target="{{id}}_modal">{{name}}</a>
-                        <span class="tag" id="{{id}}"></span>
-                    </div>
+            <div class="control">
+                <div class="tags has-addons">
+                    <a class="tag is-dark modal-button" data-target="{{id}}_modal">{{name}}</a>
+                    <span class="tag" id="{{id}}"></span>
                 </div>
+            </div>
 
             {{/each}}
 
@@ -49,28 +49,28 @@
         <div class="field is-grouped is-grouped-multiline group-tags-2">
 
             {{#each financialTagsRight}}
-            
-                <div id="{{id}}_modal" class="modal">
-                    <div class="modal-background"></div>
-                    <div class="modal-card">
-                        <header class="modal-card-head">
-                            <p class="modal-card-title">{{fullname}}</p>
-                            <button class="delete" aria-label="close"></button>
-                        </header>
-                        <section class="modal-card-body">
-                            <p class="has-text-justified">
-                                <strong>{{fullname}}</strong> – {{text}}
-                            </p>
-                        </section>
-                    </div>
-                </div>
 
-                <div class="control">
-                    <div class="tags has-addons">
-                        <a class="tag is-dark modal-button" data-target="{{id}}_modal">{{name}}</a>
-                        <span class="tag" id="{{id}}"></span>
-                    </div>
+            <div id="{{id}}_modal" class="modal">
+                <div class="modal-background"></div>
+                <div class="modal-card">
+                    <header class="modal-card-head">
+                        <p class="modal-card-title">{{fullname}}</p>
+                        <button class="delete" aria-label="close"></button>
+                    </header>
+                    <section class="modal-card-body">
+                        <p class="has-text-justified">
+                            <strong>{{fullname}}</strong> – {{text}}
+                        </p>
+                    </section>
                 </div>
+            </div>
+
+            <div class="control">
+                <div class="tags has-addons">
+                    <a class="tag is-dark modal-button" data-target="{{id}}_modal">{{name}}</a>
+                    <span class="tag" id="{{id}}"></span>
+                </div>
+            </div>
 
             {{/each}}
 
@@ -84,10 +84,8 @@
         Обновление данных Finviz раз в {{TTL_FINVIZ}} минут, Squeeze раз в {{TTL_SHORTSQUEEZE}} минут. <br>
         Не является индивидуальной инвестиционной рекомендацией!
         <br>
-        <a href="https://github.com/samgozman/short-fork#источники-данных" target="_blank" rel="nofollow" rel="noreferrer">Источники данных</a>.
-    </p>
-    <p>
-        <strong id="error-message"></strong>
+        <a href="https://github.com/samgozman/short-fork#источники-данных" target="_blank" rel="nofollow"
+            rel="noreferrer">Источники данных</a>.
     </p>
 </div>
 
