@@ -222,23 +222,27 @@ tr.is-sale {
     color: var(--is-sale-color);
 }
 
-/* Tags */
+/* Tags and notifications */
 .is-danger,
+.notification.is-danger,
 .tag:not(body).is-danger {
     background-color: var(--is-danger-bkg);
 }
 
 .is-warning,
+.notification.is-warning,
 .tag:not(body).is-warning {
     background-color: var(--is-warning-bkg);
 }
 
 .is-success,
+.notification.is-success,
 .tag:not(body).is-success {
     background-color: var(--is-success-bkg);
 }
 
 .is-link,
+.notification.is-link,
 .tag:not(body).is-link {
     background-color: var(--is-link-bkg);
 }

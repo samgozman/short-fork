@@ -103,6 +103,11 @@ a.tag:hover {
     width: 44%;
 }
 
+/* Notification */
+.notification {
+    padding: 1rem 0.75rem;
+}
+
 /* Update messages */
 .upd-message {
     color: #aaa;

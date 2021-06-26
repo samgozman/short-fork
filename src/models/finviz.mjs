@@ -85,6 +85,10 @@ const finvizSchema = mongoose.Schema({
     },
     insidersDeals: {
         type: Array
+    },
+    earnings: {
+        date: Date,
+        marketTime: String
     }
 }, {
     timestamps: true
@@ -128,6 +132,7 @@ finvizSchema.statics.getFromSource = async function (ticker) {
                 ...b,
                 [k]: v
             } : b, {})], []),
+            earnings: fin.earnings,
             _ttl: process.env.TTL_FINVIZ
         }
     } catch (error) {
