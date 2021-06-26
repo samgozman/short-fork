@@ -465,6 +465,18 @@ form.addEventListener('submit', async (e) => {
         document.getElementById('menu_tightshorts').setAttribute('href', `https://tightshorts.ru/quote/${quote}`)
         document.getElementById('chart_link_tightshorts').setAttribute('href', `https://tightshorts.ru/quote/${quote}`)
 
+        // Set earnings date 
+        const earnings = new Date(response.finviz.earnings.date)
+        const earningsTimeFrame = earnings - new Date()
+        const marketTime = response.finviz.earnings.marketTime
+        if (earningsTimeFrame < 63072000000 && earningsTimeFrame > 0) {
+            document.getElementById('earnings').classList.remove('is-hidden')
+            document.getElementById('earnings-date').textContent =
+                `${earnings.toLocaleDateString()} ${marketTime === 'BMO'? 'до открытия рынка': ''}${marketTime === 'AMC'? 'после закрытия рынка': ''}`
+        } else {
+            document.getElementById('earnings').classList.add('is-hidden')
+        }
+
         isLoading(false)
 
     } catch (error) {
