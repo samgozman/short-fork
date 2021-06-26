@@ -244,7 +244,11 @@ const erase = () => {
     links_list.innerHTML = ''
 
     // Clear error message
+    error_message.classList.add('is-hidden')
     error_message.textContent = ''
+
+    // Hide earnings message
+    document.getElementById('earnings').classList.add('is-hidden')
 
     clearCharts()
 }
@@ -473,8 +477,6 @@ form.addEventListener('submit', async (e) => {
             document.getElementById('earnings').classList.remove('is-hidden')
             document.getElementById('earnings-date').textContent =
                 `${earnings.toLocaleDateString()} ${marketTime === 'BMO'? 'до открытия рынка': ''}${marketTime === 'AMC'? 'после закрытия рынка': ''}`
-        } else {
-            document.getElementById('earnings').classList.add('is-hidden')
         }
 
         isLoading(false)
@@ -482,6 +484,7 @@ form.addEventListener('submit', async (e) => {
     } catch (error) {
         isLoading(false)
         console.log(error)
+        error_message.classList.remove('is-hidden')
         error_message.textContent = error.message === 429 ? 'Превышен лимит запросов в минуту!' : 'Ошибка! Введите правильный тикер'
     }
 })
