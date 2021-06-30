@@ -12,7 +12,7 @@
     "express": "^4.17.1",
     "express-handlebars": "^5.3.2",
     "express-rate-limit": "^5.2.6",
-    "finvizor": "^1.0.7",
+    "finvizor": "^1.0.8",
     "helmet": "^4.6.0",
     "mongoose": "^5.13.0",
     "node-schedule": "^2.0.0",
