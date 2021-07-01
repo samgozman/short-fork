@@ -1,0 +1,4 @@
+This is a Brave Rewards publisher verification file.
+
+Domain: short-fork.herokuapp.com
+Token: f10b65a50921f15248c52f8425b9d7353a54e57cced68fa218bbda985122b00f
