@@ -38,6 +38,6 @@
 
 * [finviz.com](https://finviz.com/) - Название компании, сайт, цена, P/E, P/S, ROE, ROA, Debt/Eq, Short Float %, RSI, recom.
 * [shortsqueeze.com](https://shortsqueeze.com/) - Short Float %. По данному параметру сразу два источника для информативности.
-* [nakedshortreport.com](https://nakedshortreport.com/) - Short Volume %
+* [tightshorts.ru](https://tightshorts.ru/) - Short Volume %
 * [tradingview.com](https://ru.tradingview.com/gopro/?share_your_love=eragonovich) - Виджет технического анализа и график цены
 * [www.barchart.com](https://www.barchart.com/) - Долг к капиталу, Выручка и прибыль, Опционы, Мнение аналитиков
