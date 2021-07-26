@@ -18,7 +18,7 @@
     "node-schedule": "^2.0.0",
     "p-timeout": "^5.0.0",
     "shortsqueeze": "^1.0.5",
-    "tinkoff-api-securities": "^1.0.1"
+    "tinkoff-api-securities": "^1.0.3"
   },
   "devDependencies": {
     "dotenv": "^10.0.0",
