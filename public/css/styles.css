@@ -73,7 +73,7 @@ select:-webkit-autofill {
     width: 4rem;
 }
 
-#submit_button > ion-icon {
+#submit_button>ion-icon {
     font-size: 4rem;
 }
 
@@ -99,7 +99,7 @@ a.tag:hover {
 }
 
 .group-tags-1>.control>.tags.has-addons>.tag:nth-child(2),
-.group-tags-2>.control>.tags.has-addons>.tag:nth-child(2)  {
+.group-tags-2>.control>.tags.has-addons>.tag:nth-child(2) {
     width: 44%;
 }
 
@@ -217,7 +217,7 @@ a.tag:hover {
     background-position: left;
     background-repeat: no-repeat;
     background-size: contain;
-    padding-left: calc(4.25em + 0.25em);
+    padding-left: calc(3.25em + 0.25em);
     margin: 0.5rem 0rem;
 }
 
@@ -260,6 +260,10 @@ a.tag:hover {
     .navbar-brand {
         margin-left: unset;
     }
+
+    .button.sponsor {
+        font-size: 1rem;
+    }
 }
 
 @media (max-width: 410px) {
@@ -295,5 +299,9 @@ a.tag:hover {
 
     #iframe_tech {
         height: 130%;
+    }
+
+    .button.sponsor {
+        font-size: 0.8rem;
     }
 }
