@@ -40,7 +40,7 @@ tightshortsSchema.statics.getFromSource = async function (ticker) {
             method: 'get',
             url: `${process.env.SHORT_API_URL}/stock?ticker=${ticker}&limit=21&sort=desc`,
             headers: {
-                'Authorization': `Bearer ${process.env.SHORT_API_KEY}`,
+                'token': process.env.SHORT_API_KEY,
                 'Content-Type': 'application/json'
             }
         }
