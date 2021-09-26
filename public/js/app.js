@@ -375,7 +375,7 @@ const clearTags = () => {
     pageObj.finviz.name.textContent = ''
 }
 
-// Set links
+// Set links and SEC filings
 const setLinks = (exchange = '', quote = '') => {
     const setChild = (name, link) => {
         const a = document.createElement('a')
@@ -388,15 +388,24 @@ const setLinks = (exchange = '', quote = '') => {
         return a
     }
 
+    // Quote with '-' instead of dot
+    const quote_alt = quote.replace('.', '-')
+
     const full_exchange = exchange === 'NASD' ? 'NASDAQ' : exchange
 
     links_list.appendChild(setChild(`График ${quote} TradingView`, `https://ru.tradingview.com/chart?symbol=${full_exchange}%3A${quote}`))
     links_list.appendChild(setChild(`TightShorts: ${quote}`, `https://tightshorts.ru/quote/${quote}`))
-    links_list.appendChild(setChild(`Finviz: ${quote}`, `https://finviz.com/quote.ashx?t=${quote}`))
-    links_list.appendChild(setChild(`Yahoo! finance: ${quote}`, `https://finance.yahoo.com/quote/${quote}`))
+    links_list.appendChild(setChild(`Finviz: ${quote}`, `https://finviz.com/quote.ashx?t=${quote_alt}`))
+    links_list.appendChild(setChild(`Yahoo! finance: ${quote}`, `https://finance.yahoo.com/quote/${quote_alt}`))
     links_list.appendChild(setChild(`guruFocus: ${quote}`, `https://www.gurufocus.com/stock/${quote}/summary`))
     links_list.appendChild(setChild(`Seeking Alpha: ${quote}`, `https://seekingalpha.com/symbol/${quote}`))
     links_list.appendChild(setChild(`Zaсks Research: ${quote}`, `https://www.zacks.com/stock/quote/${quote}`))
+
+    // Setup SEC filings
+    const filings = Array.from(document.getElementById('sec_filings').children)
+    filings[0].setAttribute('href', `https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=${quote_alt}&type=10-K&dateb=&owner=exclude&count=40`)
+    filings[1].setAttribute('href', `https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=${quote_alt}&type=10-Q&dateb=&owner=exclude&count=40`)
+    filings[2].setAttribute('href', `https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=${quote_alt}&type=8-K&dateb=&owner=exclude&count=40`)
 }
 
 // Get response from server side
