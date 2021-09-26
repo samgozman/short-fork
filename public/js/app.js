@@ -404,6 +404,9 @@ const setLinks = (exchange = '', quote = '') => {
     filings[0].setAttribute('href', `https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=${quote_alt}&type=10-K&dateb=&owner=exclude&count=40`)
     filings[1].setAttribute('href', `https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=${quote_alt}&type=10-Q&dateb=&owner=exclude&count=40`)
     filings[2].setAttribute('href', `https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=${quote_alt}&type=8-K&dateb=&owner=exclude&count=40`)
+
+    // Set equity research
+    document.getElementById('equity_research').setAttribute('href', `https://www.google.com/search?q=${quote}+equity+research+filetype%3Apdf`)
 }
 
 // Get response from server side
