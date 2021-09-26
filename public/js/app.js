@@ -49,16 +49,16 @@ const checkForThemeSettings = () => {
  * ! Tradingview Technical Widget
  * 
  * @param {String} ticker Stock quote
+ * @param {String} exchange Stock exchange
  * @return {void}
  */
-const techWidget = (ticker = '') => {
+const techWidget = (ticker = '',  exchange = '') => {
     const theme = checkForThemeSettings()
-
     const html = `
         <!-- TradingView Widget BEGIN -->
         <div class='tradingview-widget-container'>
             <div class='tradingview-widget-container__widget'></div>
-            <div class='tradingview-widget-copyright'><a href='https://www.tradingview.com/symbols/${ticker}/technicals/'
+            <div class='tradingview-widget-copyright'><a href='https://www.tradingview.com/symbols/${exchange}-${ticker}/technicals/'
                     rel='noopener' target='_blank'><span class='blue-text'>Technical Analysis for ${ticker}</span></a> by
                 TradingView</div>
             <script type='text/javascript'
@@ -68,7 +68,7 @@ const techWidget = (ticker = '') => {
                     "width": "100%",
                     "isTransparent": false,
                     "height": "100%",
-                    "symbol": "${ticker}",
+                    "symbol": "${exchange}:${ticker}",
                     "showIntervalTabs": true,
                     "locale": "ru",
                     "colorTheme": "${theme}"
@@ -84,12 +84,12 @@ const techWidget = (ticker = '') => {
  * ! Tradingview Chart Widget
  * 
  * @param {String} ticker Stock quote
+ * @param {String} exchange Stock exchange
  * @return {void}
  */
-const chartWidget = (ticker = '') => {
+const chartWidget = (ticker = '', exchange = '') => {
     const theme = checkForThemeSettings()
-
-    iframe_chart.src = 'charts/chart.html?stock=' + ticker + '&theme=' + theme
+    iframe_chart.src = 'charts/chart.html?stock=' + ticker + '&theme=' + theme + '&exchange=' + exchange
 }
 
 // DOM object of elements which should be changed during request
@@ -375,7 +375,7 @@ const clearTags = () => {
     pageObj.finviz.name.textContent = ''
 }
 
-// Set links
+// Set links and SEC filings
 const setLinks = (exchange = '', quote = '') => {
     const setChild = (name, link) => {
         const a = document.createElement('a')
@@ -388,15 +388,25 @@ const setLinks = (exchange = '', quote = '') => {
         return a
     }
 
-    const full_exchange = exchange === 'NASD' ? 'NASDAQ' : exchange
+    // Quote with '-' instead of dot
+    const quote_alt = quote.replace('.', '-')
 
-    links_list.appendChild(setChild(`График ${quote} TradingView`, `https://ru.tradingview.com/chart?symbol=${full_exchange}%3A${quote}`))
+    links_list.appendChild(setChild(`График ${quote} TradingView`, `https://ru.tradingview.com/chart?symbol=${exchange}%3A${quote}`))
     links_list.appendChild(setChild(`TightShorts: ${quote}`, `https://tightshorts.ru/quote/${quote}`))
-    links_list.appendChild(setChild(`Finviz: ${quote}`, `https://finviz.com/quote.ashx?t=${quote}`))
-    links_list.appendChild(setChild(`Yahoo! finance: ${quote}`, `https://finance.yahoo.com/quote/${quote}`))
+    links_list.appendChild(setChild(`Finviz: ${quote}`, `https://finviz.com/quote.ashx?t=${quote_alt}`))
+    links_list.appendChild(setChild(`Yahoo! finance: ${quote}`, `https://finance.yahoo.com/quote/${quote_alt}`))
     links_list.appendChild(setChild(`guruFocus: ${quote}`, `https://www.gurufocus.com/stock/${quote}/summary`))
     links_list.appendChild(setChild(`Seeking Alpha: ${quote}`, `https://seekingalpha.com/symbol/${quote}`))
     links_list.appendChild(setChild(`Zaсks Research: ${quote}`, `https://www.zacks.com/stock/quote/${quote}`))
+
+    // Setup SEC filings
+    const filings = Array.from(document.getElementById('sec_filings').children)
+    filings[0].setAttribute('href', `https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=${quote_alt}&type=10-K&dateb=&owner=exclude&count=40`)
+    filings[1].setAttribute('href', `https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=${quote_alt}&type=10-Q&dateb=&owner=exclude&count=40`)
+    filings[2].setAttribute('href', `https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=${quote_alt}&type=8-K&dateb=&owner=exclude&count=40`)
+
+    // Set equity research
+    document.getElementById('equity_research').setAttribute('href', `https://www.google.com/search?q=${quote}+equity+research+filetype%3Apdf`)
 }
 
 // Get response from server side
@@ -439,6 +449,8 @@ form.addEventListener('submit', async (e) => {
             throw new Error(response.message)
         }
 
+        const exchange = response.finviz.exchange === 'NASD' ? 'NASDAQ' : response.finviz.exchange
+
         // Setup url search query
         if ('URLSearchParams' in window) {
             const searchParams = new URLSearchParams(window.location.search)
@@ -453,14 +465,14 @@ form.addEventListener('submit', async (e) => {
         setInsidersTable(response)
 
         // ! APPEND TRADINGVIEW WIDGET
-        techWidget(quote)
-        chartWidget(quote)
+        techWidget(quote, exchange)
+        chartWidget(quote, exchange)
 
         setTightshortsChart(response)
         setAnalyticsChart(response)
         setChartDebtEquity(response)
         setNetIncomeChart(response)
-        setLinks(response.finviz.exchange, quote)
+        setLinks(exchange, quote)
 
         // Set page title
         document.title = `Short fork: ${quote}`
