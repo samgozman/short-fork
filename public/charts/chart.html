@@ -24,10 +24,11 @@
         <script type="text/javascript">
             const stock = getParameterByName('stock'),
                 theme = getParameterByName('theme'),
+                exchange = getParameterByName('exchange'),
                 isMobile = window.innerWidth <= 425 || false
             new TradingView.widget({
                 "autosize": true,
-                "symbol": stock,
+                "symbol": `${exchange}:${stock}`,
                 "timezone": "Etc/UTC",
                 "theme": theme,
                 "style": "1",
