@@ -52,7 +52,7 @@ const checkForThemeSettings = () => {
  * @param {String} exchange Stock exchange
  * @return {void}
  */
-const techWidget = (ticker = '',  exchange = '') => {
+const techWidget = (ticker = '', exchange = '') => {
     const theme = checkForThemeSettings()
     const html = `
         <!-- TradingView Widget BEGIN -->
@@ -249,6 +249,8 @@ const erase = () => {
 
     // Hide earnings message
     document.getElementById('earnings').classList.add('is-hidden')
+
+    document.getElementById('next_report').textContent = ''
 
     clearCharts()
 }
@@ -488,7 +490,13 @@ form.addEventListener('submit', async (e) => {
         if (earningsTimeFrame < 63072000000 && earningsTimeFrame > 0) {
             document.getElementById('earnings').classList.remove('is-hidden')
             document.getElementById('earnings-date').textContent =
-                `${earnings.toLocaleDateString()} ${marketTime === 'BMO'? 'до открытия рынка': ''}${marketTime === 'AMC'? 'после закрытия рынка': ''}`
+                `${earnings.toLocaleDateString('ru-RU')} ${marketTime === 'BMO'? 'до открытия рынка': ''}${marketTime === 'AMC'? 'после закрытия рынка': ''}`
+        }
+
+        if (earnings > new Date()) {
+            document.getElementById('next_report').textContent = earnings.toLocaleDateString('ru-RU')
+        } else {
+            document.getElementById('next_report').textContent =  '-'
         }
 
         isLoading(false)
