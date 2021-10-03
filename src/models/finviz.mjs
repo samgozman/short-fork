@@ -24,6 +24,9 @@ const finvizSchema = mongoose.Schema({
     exchange: {
         type: String
     },
+    country: {
+        type: String
+    },
     price: {
         type: Number
     },
@@ -113,6 +116,7 @@ finvizSchema.statics.getFromSource = async function (ticker) {
         return {
             name: fin.name,
             exchange: fin.exchange,
+            country: fin.country,
             price: fin.price,
             pe: fin.pe,
             forwardPe: fin.forwardPe,

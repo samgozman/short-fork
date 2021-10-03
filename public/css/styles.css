@@ -254,6 +254,10 @@ a.tag:hover {
     height: 100%;
 }
 
+.is-crossed-out{
+    text-decoration: line-through;
+}
+
 /* Mobile fixes */
 
 @media (max-width: 1023px) {
