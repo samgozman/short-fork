@@ -135,7 +135,9 @@ body,
 p,
 .subtitle,
 .navbar-item,
-.navbar-link {
+.navbar-link,
+.navbar-name,
+.navbar-version {
     color: var(--text-color);
 }
 

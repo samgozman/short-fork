@@ -52,7 +52,7 @@ const checkForThemeSettings = () => {
  * @param {String} exchange Stock exchange
  * @return {void}
  */
-const techWidget = (ticker = '',  exchange = '') => {
+const techWidget = (ticker = '', exchange = '') => {
     const theme = checkForThemeSettings()
     const html = `
         <!-- TradingView Widget BEGIN -->
@@ -96,6 +96,7 @@ const chartWidget = (ticker = '', exchange = '') => {
 let pageObj = {
     finviz: {
         name: document.getElementById('resp_name'),
+        country: document.getElementById('resp_country'),
         site: document.getElementById('resp_site'),
         tags: {
             price: new Tag('resp_price', 0, {
@@ -250,6 +251,8 @@ const erase = () => {
     // Hide earnings message
     document.getElementById('earnings').classList.add('is-hidden')
 
+    document.getElementById('resp_report').textContent = ''
+
     clearCharts()
 }
 
@@ -354,6 +357,7 @@ const setTags = (response = {}) => {
     pageObj.finviz.site.textContent = response.finviz.site
     pageObj.finviz.site.setAttribute('href', response.finviz.site)
     pageObj.finviz.name.textContent = response.finviz.name
+    pageObj.finviz.country.textContent = response.finviz.country
 }
 
 const clearTags = () => {
@@ -376,7 +380,7 @@ const clearTags = () => {
 }
 
 // Set links and SEC filings
-const setLinks = (exchange = '', quote = '') => {
+const setLinks = ( quote = '', exchange = '', country = '') => {
     const setChild = (name, link) => {
         const a = document.createElement('a')
         a.textContent = name
@@ -387,6 +391,10 @@ const setLinks = (exchange = '', quote = '') => {
         a.classList.add('button', 'is-small', 'is-link', 'is-outlined')
         return a
     }
+
+    // Set tightshorts links
+    document.getElementById('menu_tightshorts').setAttribute('href', `https://tightshorts.ru/quote/${quote}`)
+    document.getElementById('chart_link_tightshorts').setAttribute('href', `https://tightshorts.ru/quote/${quote}`)
 
     // Quote with '-' instead of dot
     const quote_alt = quote.replace('.', '-')
@@ -400,10 +408,18 @@ const setLinks = (exchange = '', quote = '') => {
     links_list.appendChild(setChild(`Zaсks Research: ${quote}`, `https://www.zacks.com/stock/quote/${quote}`))
 
     // Setup SEC filings
-    const filings = Array.from(document.getElementById('sec_filings').children)
-    filings[0].setAttribute('href', `https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=${quote_alt}&type=10-K&dateb=&owner=exclude&count=40`)
-    filings[1].setAttribute('href', `https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=${quote_alt}&type=10-Q&dateb=&owner=exclude&count=40`)
-    filings[2].setAttribute('href', `https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=${quote_alt}&type=8-K&dateb=&owner=exclude&count=40`)
+    const filingsWrapper = document.getElementById('sec_filings')
+    const filings = Array.from(filingsWrapper.children)
+
+    if(country.toLowerCase() === 'usa') {
+        filingsWrapper.classList.remove('is-crossed-out')
+        filings[0].setAttribute('href', `https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=${quote_alt}&type=10-K&dateb=&owner=exclude&count=40`)
+        filings[1].setAttribute('href', `https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=${quote_alt}&type=10-Q&dateb=&owner=exclude&count=40`)
+        filings[2].setAttribute('href', `https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=${quote_alt}&type=8-K&dateb=&owner=exclude&count=40`)
+    } else {
+        filingsWrapper.classList.add('is-crossed-out')
+    }
+
 
     // Set equity research
     document.getElementById('equity_research').setAttribute('href', `https://www.google.com/search?q=${quote}+equity+research+filetype%3Apdf`)
@@ -472,14 +488,10 @@ form.addEventListener('submit', async (e) => {
         setAnalyticsChart(response)
         setChartDebtEquity(response)
         setNetIncomeChart(response)
-        setLinks(exchange, quote)
+        setLinks(quote, exchange, response.finviz.country)
 
         // Set page title
         document.title = `Short fork: ${quote}`
-
-        // Set tightshorts links
-        document.getElementById('menu_tightshorts').setAttribute('href', `https://tightshorts.ru/quote/${quote}`)
-        document.getElementById('chart_link_tightshorts').setAttribute('href', `https://tightshorts.ru/quote/${quote}`)
 
         // Set earnings date 
         const earnings = new Date(response.finviz.earnings.date)
@@ -488,7 +500,14 @@ form.addEventListener('submit', async (e) => {
         if (earningsTimeFrame < 63072000000 && earningsTimeFrame > 0) {
             document.getElementById('earnings').classList.remove('is-hidden')
             document.getElementById('earnings-date').textContent =
-                `${earnings.toLocaleDateString()} ${marketTime === 'BMO'? 'до открытия рынка': ''}${marketTime === 'AMC'? 'после закрытия рынка': ''}`
+                `${earnings.toLocaleDateString('ru-RU')} ${marketTime === 'BMO'? 'до открытия рынка': ''}${marketTime === 'AMC'? 'после закрытия рынка': ''}`
+        }
+
+        // Set next  earnings report
+        if (earnings > new Date()) {
+            document.getElementById('resp_report').textContent = earnings.toLocaleDateString('ru-RU')
+        } else {
+            document.getElementById('resp_report').textContent =  '-'
         }
 
         isLoading(false)

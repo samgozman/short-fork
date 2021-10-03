@@ -49,6 +49,10 @@ body {
     margin-left: -0.75rem;
 }
 
+.navbar-version:hover {
+    text-decoration: underline;
+}
+
 /* Form */
 .search-form-input {
     width: 100%;
@@ -252,6 +256,10 @@ a.tag:hover {
 /* Helpers */
 .h100 {
     height: 100%;
+}
+
+.is-crossed-out {
+    text-decoration: line-through;
 }
 
 /* Mobile fixes */
