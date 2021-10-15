@@ -14,7 +14,7 @@
     "express-rate-limit": "^5.5.0",
     "finvizor": "^1.0.8",
     "helmet": "^4.6.0",
-    "mongoose": "^5.13.9",
+    "mongoose": "^6.0.11",
     "node-schedule": "^2.0.0",
     "p-timeout": "^5.0.0",
     "shortsqueeze": "^1.0.5",
