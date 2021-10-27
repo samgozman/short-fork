@@ -17,7 +17,7 @@
     "mongoose": "^5.13.9",
     "node-schedule": "^2.0.0",
     "p-timeout": "^5.0.2",
-    "shortsqueeze": "^1.0.5",
+    "shortsqueeze": "^1.0.6",
     "tinkoff-api-securities": "^1.0.4"
   },
   "devDependencies": {
