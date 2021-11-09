@@ -136,7 +136,8 @@ let pageObj = {
             }),
             short_flow: new Tag('resp_finviz', 0, {
                 sign: '%',
-                isShort: true
+                best: [0, 3],
+                danger: [20, Infinity]
             }),
             peg: new Tag('resp_peg', 0, {
                 best: [0, 1],
@@ -218,13 +219,15 @@ let pageObj = {
     tightshorts: {
         current_short_volume: new Tag('resp_tight', 0, {
             sign: '%',
-            isShort: true
+            best: [0, 30],
+            danger: [70, 100]
         })
     },
     shortsqueeze: {
         short_flow: new Tag('resp_squeeze', 0, {
             sign: '%',
-            isShort: true
+            best: [0, 3],
+            danger: [20, Infinity]
         })
     },
     insidersDeals: document.getElementById('resp_insidersDeals_tbody'),
