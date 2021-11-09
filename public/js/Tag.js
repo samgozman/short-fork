@@ -43,7 +43,7 @@ class Tag {
                 break
 
             default:
-                format = this._value
+                format = `${this._value}${this.sign ? ' ' + this.sign : ''}`
                 break
         }
         return format

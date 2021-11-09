@@ -154,6 +154,22 @@ let pageObj = {
             rsi: new Tag('resp_finviz_rsi', 0, {
                 best: [0, 30],
                 danger: [70, Infinity]
+            }),
+            instOwn: new Tag('resp_instown', 0, {
+                sign: '%',
+                isInfo: true
+            }),
+            insiderOwn: new Tag('resp_insiderown', 0, {
+                sign: '%',
+                isInfo: true
+            }),
+            beta: new Tag('resp_beta', 0, {
+                isInfo: true
+            }),
+            shortRatio: new Tag('resp_shortratio', 0, {
+                sign: 'дн.',
+                best: [0, 4],
+                danger: [10, Infinity]
             })
         }
     },
@@ -380,7 +396,7 @@ const clearTags = () => {
 }
 
 // Set links and SEC filings
-const setLinks = ( quote = '', exchange = '', country = '') => {
+const setLinks = (quote = '', exchange = '', country = '') => {
     const setChild = (name, link) => {
         const a = document.createElement('a')
         a.textContent = name
@@ -411,7 +427,7 @@ const setLinks = ( quote = '', exchange = '', country = '') => {
     const filingsWrapper = document.getElementById('sec_filings')
     const filings = Array.from(filingsWrapper.children)
 
-    if(country.toLowerCase() === 'usa') {
+    if (country.toLowerCase() === 'usa') {
         filingsWrapper.classList.remove('is-crossed-out')
         filings[0].setAttribute('href', `https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=${quote_alt}&type=10-K&dateb=&owner=exclude&count=40`)
         filings[1].setAttribute('href', `https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=${quote_alt}&type=10-Q&dateb=&owner=exclude&count=40`)
@@ -494,21 +510,24 @@ form.addEventListener('submit', async (e) => {
         document.title = `Short fork: ${quote}`
 
         // Set earnings date 
-        const earnings = new Date(response.finviz.earnings.date)
-        const earningsTimeFrame = earnings - new Date()
-        const marketTime = response.finviz.earnings.marketTime
-        if (earningsTimeFrame < 63072000000 && earningsTimeFrame > 0) {
-            document.getElementById('earnings').classList.remove('is-hidden')
-            document.getElementById('earnings-date').textContent =
-                `${earnings.toLocaleDateString('ru-RU')} ${marketTime === 'BMO'? 'до открытия рынка': ''}${marketTime === 'AMC'? 'после закрытия рынка': ''}`
+        if (response.finviz.earnings) {
+            const earnings = new Date(response.finviz.earnings.date)
+            const earningsTimeFrame = earnings - new Date()
+            const marketTime = response.finviz.earnings.marketTime
+            if (earningsTimeFrame < 63072000000 && earningsTimeFrame > 0) {
+                document.getElementById('earnings').classList.remove('is-hidden')
+                document.getElementById('earnings-date').textContent =
+                    `${earnings.toLocaleDateString('ru-RU')} ${marketTime === 'BMO'? 'до открытия рынка': ''}${marketTime === 'AMC'? 'после закрытия рынка': ''}`
+            }
+
+            // Set next  earnings report
+            if (earnings > new Date()) {
+                document.getElementById('resp_report').textContent = earnings.toLocaleDateString('ru-RU')
+            } else {
+                document.getElementById('resp_report').textContent = '-'
+            }
         }
 
-        // Set next  earnings report
-        if (earnings > new Date()) {
-            document.getElementById('resp_report').textContent = earnings.toLocaleDateString('ru-RU')
-        } else {
-            document.getElementById('resp_report').textContent =  '-'
-        }
 
         isLoading(false)
 
