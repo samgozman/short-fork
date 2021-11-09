@@ -10,7 +10,7 @@ const chartVolume = new ApexCharts(document.getElementById('chartVolume'), {
         data: []
     }],
     chart: {
-        height: 210,
+        height: 285,
         width: '100%',
         type: 'area',
         group: 'synced-charts',
@@ -70,7 +70,7 @@ const chartShortPercent = new ApexCharts(document.getElementById('chartShortPerc
         data: []
     }],
     chart: {
-        height: 210,
+        height: 285,
         width: '100%',
         type: 'line',
         group: 'synced-charts',

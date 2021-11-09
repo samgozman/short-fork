@@ -86,6 +86,22 @@ const finvizSchema = mongoose.Schema({
         type: Number,
         default: null
     },
+    instOwn: {
+        type: Number,
+        default: null
+    },
+    insiderOwn: {
+        type: Number,
+        default: null
+    },
+    beta: {
+        type: Number,
+        default: null
+    },
+    shortRatio: {
+        type: Number,
+        default: null
+    },
     insidersDeals: {
         type: Array
     },
@@ -137,6 +153,10 @@ finvizSchema.statics.getFromSource = async function (ticker) {
                 [k]: v
             } : b, {})], []),
             earnings: fin.earnings,
+            instOwn: fin.instOwn,
+            insiderOwn: fin.insiderOwn,
+            beta: fin.beta,
+            shortRatio: fin.shortRatio,
             _ttl: process.env.TTL_FINVIZ
         }
     } catch (error) {
