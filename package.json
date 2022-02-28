@@ -22,7 +22,7 @@
   },
   "devDependencies": {
     "dotenv": "^11.0.0",
-    "eslint": "^8.4.1",
+    "eslint": "^8.10.0",
     "nodemon": "^2.0.14"
   },
   "engines": {
