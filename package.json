@@ -11,7 +11,7 @@
     "compression": "^1.7.4",
     "express": "^4.17.2",
     "express-handlebars": "^6.0.2",
-    "express-rate-limit": "^6.1.0",
+    "express-rate-limit": "^6.4.0",
     "finvizor": "^1.0.9",
     "helmet": "^5.0.2",
     "mongoose": "^5.13.9",
