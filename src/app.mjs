@@ -28,7 +28,8 @@ app.set('view engine', '.hbs')
 
 // Add Helmet middleware protection
 app.use(helmet({
-    contentSecurityPolicy: false
+    contentSecurityPolicy: false,
+    crossOriginEmbedderPolicy: false,
 }))
 
 // gZip compression
