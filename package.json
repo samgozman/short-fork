@@ -10,7 +10,7 @@
     "barchart-dot-com": "^1.0.5",
     "compression": "^1.7.4",
     "express": "^4.18.1",
-    "express-handlebars": "^6.0.2",
+    "express-handlebars": "^6.0.6",
     "express-rate-limit": "^6.4.0",
     "finvizor": "^1.1.0",
     "helmet": "^5.0.2",
@@ -23,7 +23,7 @@
   "devDependencies": {
     "dotenv": "^11.0.0",
     "eslint": "^8.15.0",
-    "nodemon": "^2.0.14"
+    "nodemon": "^2.0.16"
   },
   "engines": {
     "node": ">=16.0.0"
