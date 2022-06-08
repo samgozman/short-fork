@@ -13,7 +13,7 @@
     "express-handlebars": "^6.0.6",
     "express-rate-limit": "^6.4.0",
     "finvizor": "^1.1.0",
-    "helmet": "^5.0.2",
+    "helmet": "^5.1.0",
     "mongoose": "^5.13.9",
     "node-schedule": "^2.1.0",
     "p-timeout": "^5.0.2",
@@ -23,7 +23,7 @@
   "devDependencies": {
     "dotenv": "^11.0.0",
     "eslint": "^8.15.0",
-    "nodemon": "^2.0.14"
+    "nodemon": "^2.0.16"
   },
   "engines": {
     "node": ">=16.0.0"
