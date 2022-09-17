@@ -1,5 +1,7 @@
 # Short Fork
 
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/C0C1DI4VL)
+
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/54b51710fc20496a8157929c3cd9f800)](https://www.codacy.com/gh/samgozman/short-fork/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=samgozman/short-fork&amp;utm_campaign=Badge_Grade)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=samgozman_short-fork&metric=alert_status)](https://sonarcloud.io/dashboard?id=samgozman_short-fork)
 ![GitHub](https://img.shields.io/github/license/samgozman/short-fork)
