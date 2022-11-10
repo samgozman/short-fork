@@ -64,7 +64,7 @@ tightshortsSchema.statics.getFromSource = async function (ticker) {
         return {
             current_short_volume,
             chart,
-            _ttl: process.env.TTL_NAKEDSHORT
+            _ttl: process.env.TTL_TIGHTSHORTS
 
         }
     } catch (error) {
