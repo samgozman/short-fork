@@ -1,10 +1,13 @@
 {
-  "name": "backend",
+  "name": "short-fork-backend",
   "version": "0.0.1",
-  "description": "",
-  "author": "",
-  "private": true,
-  "license": "UNLICENSED",
+  "description": "Stock market helper: display a Short Float & Volume percentage indicator from three different data sources in one place.",
+  "author": "Sam Gozman <sam@gozman.space>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/samgozman/short-fork/issues"
+  },
+  "homepage": "https://github.com/samgozman/short-fork#readme",
   "scripts": {
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
