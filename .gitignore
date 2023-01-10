@@ -1,0 +1,2 @@
+# Ignore db-data folder that used as a volume for the database
+/db-data/
