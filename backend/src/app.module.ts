@@ -24,11 +24,6 @@ import Joi from 'joi';
       isGlobal: true,
       imports: [ConfigModule],
       useFactory: async (config: ConfigService) => {
-        console.log(
-          process.env.NODE_ENV,
-          config.get('REDIS_PORT'),
-          config.get('REDIS_PASSWORD'),
-        );
         const store = await redisStore({
           socket: {
             host: config.get('REDIS_HOST'),
