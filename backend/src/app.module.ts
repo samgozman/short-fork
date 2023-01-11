@@ -1,12 +1,16 @@
+import Joi from 'joi';
+import { StockModule } from './models/stock/stock.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { redisStore } from 'cache-manager-redis-store';
 import { CacheModule, Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import Joi from 'joi';
+import { StockService } from './models/stock/stock.service';
+import { StockRepository } from './models/stock/stock.repository';
 
 @Module({
   imports: [
+    StockModule,
     ConfigModule.forRoot({
       isGlobal: true,
       envFilePath: `config/${process.env.NODE_ENV}.env`,
@@ -20,6 +24,7 @@ import Joi from 'joi';
         REDIS_PASSWORD: Joi.string().default(''),
       }),
     }),
+    // TODO: Replace it with actual Redis DB
     CacheModule.registerAsync<any>({
       isGlobal: true,
       imports: [ConfigModule],
@@ -41,6 +46,6 @@ import Joi from 'joi';
     }),
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, StockRepository, StockService],
 })
 export class AppModule {}
