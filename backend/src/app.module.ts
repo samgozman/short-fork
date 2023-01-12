@@ -7,6 +7,8 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { StockService } from './models/stock/stock.service';
 import { StockRepository } from './models/stock/stock.repository';
+import { FinvizService } from './models/finviz/finviz.service';
+import { FinvizRepository } from './models/finviz/finviz.repository';
 
 @Module({
   imports: [
@@ -22,6 +24,11 @@ import { StockRepository } from './models/stock/stock.repository';
         REDIS_HOST: Joi.string().default('localhost'),
         REDIS_PORT: Joi.number().default(6379),
         REDIS_PASSWORD: Joi.string().default(''),
+        TTL_SHORTSQUEEZE: Joi.number().default(43200000),
+        TTL_FINVIZ: Joi.number().default(1200000),
+        TTL_TIGHTSHORTS: Joi.number().default(14400000),
+        TTL_BARCHART_OVERVIEW: Joi.number().default(1200000),
+        TTL_BARCHART_FINANCIAL: Joi.number().default(2592000000),
       }),
     }),
     // TODO: Replace it with actual Redis DB
@@ -46,6 +53,12 @@ import { StockRepository } from './models/stock/stock.repository';
     }),
   ],
   controllers: [AppController],
-  providers: [AppService, StockRepository, StockService],
+  providers: [
+    AppService,
+    StockRepository,
+    StockService,
+    FinvizRepository,
+    FinvizService,
+  ],
 })
 export class AppModule {}
