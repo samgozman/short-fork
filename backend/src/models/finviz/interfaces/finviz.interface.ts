@@ -1,3 +1,6 @@
+import { IEarnings } from './earnings.interface';
+import { IInsider } from './insider.interface';
+
 export interface IFinviz {
   name: string;
   exchange: string;
@@ -21,10 +24,6 @@ export interface IFinviz {
   insiderOwn: number | null;
   beta: number | null;
   shortRatio: number | null;
-  insidersDeals: any[]; // TODO: create interface
-  // TODO: Move to separate interface
-  earnings: {
-    date: Date;
-    marketTime: string;
-  };
+  insidersDeals: IInsider[];
+  earnings: IEarnings;
 }
