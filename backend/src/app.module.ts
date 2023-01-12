@@ -1,5 +1,4 @@
 import Joi from 'joi';
-import { StockModule } from './models/stock/stock.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { redisStore } from 'cache-manager-redis-store';
 import { CacheModule, Module } from '@nestjs/common';
@@ -12,7 +11,6 @@ import { FinvizRepository } from './models/finviz/finviz.repository';
 
 @Module({
   imports: [
-    StockModule,
     ConfigModule.forRoot({
       isGlobal: true,
       envFilePath: `config/${process.env.NODE_ENV}.env`,
@@ -40,8 +38,9 @@ import { FinvizRepository } from './models/finviz/finviz.repository';
           socket: {
             host: config.get('REDIS_HOST'),
             port: config.get('REDIS_PORT'),
-            passphrase: config.get('REDIS_PASSWORD'),
           },
+          username: 'default',
+          password: config.get('REDIS_PASSWORD'),
           database: 0,
           ttl: 60,
         });
