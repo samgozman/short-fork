@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { stock } from 'finvizor';
 import { FinvizRepository } from './finviz.repository';
 import type { IFinviz } from './interfaces/finviz.interface';
 
@@ -6,11 +7,58 @@ import type { IFinviz } from './interfaces/finviz.interface';
 export class FinvizService {
   constructor(private readonly stockRepository: FinvizRepository) {}
 
-  async get(stock: string): Promise<IFinviz> {
-    return this.stockRepository.get(stock);
+  async get(stockTicker: string): Promise<IFinviz> {
+    return this.stockRepository.get(stockTicker);
   }
 
-  async set(stock: string, data: IFinviz): Promise<void> {
-    return this.stockRepository.set(stock, data);
+  async set(stockTicker: string, data: IFinviz): Promise<void> {
+    return this.stockRepository.set(stockTicker, data);
+  }
+
+  /**
+   * Fetches data from finviz.com
+   * @param stockTicker - stock ticker
+   * @returns IFinviz object
+   */
+  async fetch(stockTicker: string): Promise<IFinviz> {
+    const response = await stock(stockTicker);
+    const data: IFinviz = {
+      name: response.name,
+      exchange: response.exchange,
+      country: response.country,
+      price: response.price,
+      pe: response.pe,
+      forwardPe: response.forwardPe,
+      ps: response.ps,
+      pb: response.pb,
+      roe: response.roe,
+      roa: response.roa,
+      debtEq: response.debtEq,
+      shortFloat: response.shortFloat,
+      targetPrice: response.targetPrice,
+      rsi: response.rsi,
+      recommendation: response.recom,
+      site: response.site,
+      peg: response.peg,
+      dividendPercent: response.dividendPercent,
+      instOwn: response.instOwn,
+      insiderOwn: response.insiderOwn,
+      beta: response.beta,
+      shortRatio: response.shortRatio,
+      insidersDeals: response.insidersDeals.map((s) => {
+        return {
+          insiderTrading: s.insiderTrading,
+          relationship: s.relationship,
+          date: s.date,
+          transaction: s.transaction,
+          value: s.value,
+        };
+      }),
+      earnings: {
+        date: response.earnings.date,
+        marketTime: response.earnings.marketTime,
+      },
+    };
+    return data;
   }
 }
