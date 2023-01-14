@@ -13,7 +13,7 @@ export interface IFinviz {
   roe: number | null;
   roa: number | null;
   debtEq: number | null;
-  shortFlow: number | null;
+  shortFloat: number | null;
   targetPrice: number | null;
   rsi: number | null;
   recommendation: number | null;
