@@ -8,6 +8,8 @@ import { StockService } from './models/stock/stock.service';
 import { StockRepository } from './models/stock/stock.repository';
 import { FinvizService } from './models/finviz/finviz.service';
 import { FinvizRepository } from './models/finviz/finviz.repository';
+import { BarchartRepository } from './models/barchart/barchart.repository';
+import { BarchartService } from './models/barchart/barchart.service';
 
 @Module({
   imports: [
@@ -59,6 +61,8 @@ import { FinvizRepository } from './models/finviz/finviz.repository';
     StockService,
     FinvizRepository,
     FinvizService,
+    BarchartRepository,
+    BarchartService,
   ],
 })
 export class AppModule {}
