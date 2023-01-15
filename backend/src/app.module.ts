@@ -10,6 +10,8 @@ import { FinvizService } from './models/finviz/finviz.service';
 import { FinvizRepository } from './models/finviz/finviz.repository';
 import { BarchartRepository } from './models/barchart/barchart.repository';
 import { BarchartService } from './models/barchart/barchart.service';
+import { ShortsqueezeRepository } from './models/shortsqueeze/shortsqueeze.repository';
+import { ShortsqueezeService } from './models/shortsqueeze/shortsqueeze.service';
 
 @Module({
   imports: [
@@ -63,6 +65,8 @@ import { BarchartService } from './models/barchart/barchart.service';
     FinvizService,
     BarchartRepository,
     BarchartService,
+    ShortsqueezeRepository,
+    ShortsqueezeService,
   ],
 })
 export class AppModule {}

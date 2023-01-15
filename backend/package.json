@@ -33,7 +33,8 @@
     "finvizor": "^1.1.1",
     "joi": "^17.7.0",
     "reflect-metadata": "^0.1.13",
-    "rxjs": "^7.8.0"
+    "rxjs": "^7.8.0",
+    "shortsqueeze": "^1.0.7"
   },
   "devDependencies": {
     "@nestjs/cli": "^9.1.8",
