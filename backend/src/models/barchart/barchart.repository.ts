@@ -19,6 +19,14 @@ export class BarchartRepository {
     );
   }
 
+  async getOverview(stock: string): Promise<IBarchartOverview> {
+    return this.cacheManager.get(
+      `stock:${stock}:barchart:overview`,
+      undefined,
+      undefined,
+    );
+  }
+
   async setFinancial(stock: string, data: IBarchartFinancial): Promise<void> {
     return this.cacheManager.set(
       `stock:${stock}:barchart:financial`,

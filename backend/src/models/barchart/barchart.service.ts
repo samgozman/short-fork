@@ -12,6 +12,10 @@ export class BarchartService {
     return this.barchartRepository.getFinancial(stockTicker);
   }
 
+  async getOverview(stockTicker: string): Promise<IBarchartOverview> {
+    return this.barchartRepository.getOverview(stockTicker);
+  }
+
   async setFinancial(
     stockTicker: string,
     data: IBarchartFinancial,
