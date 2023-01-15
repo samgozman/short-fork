@@ -5,11 +5,11 @@ import { StockRepository } from './stock.repository';
 export class StockService {
   constructor(private readonly stockRepository: StockRepository) {}
 
-  async addStock(stock: string): Promise<void> {
-    return this.stockRepository.addStock(stock);
+  async set(stock: string): Promise<void> {
+    return this.stockRepository.set(stock);
   }
 
-  async getStock(stock: string): Promise<string> {
-    return this.stockRepository.getStock(stock);
+  async get(stock: string): Promise<string> {
+    return this.stockRepository.get(stock);
   }
 }
