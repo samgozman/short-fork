@@ -5,14 +5,14 @@ import type { IFinviz } from './interfaces/finviz.interface';
 
 @Injectable()
 export class FinvizService {
-  constructor(private readonly stockRepository: FinvizRepository) {}
+  constructor(private readonly finvizRepository: FinvizRepository) {}
 
   async get(stockTicker: string): Promise<IFinviz> {
-    return this.stockRepository.get(stockTicker);
+    return this.finvizRepository.get(stockTicker);
   }
 
   async set(stockTicker: string, data: IFinviz): Promise<void> {
-    return this.stockRepository.set(stockTicker, data);
+    return this.finvizRepository.set(stockTicker, data);
   }
 
   /**
