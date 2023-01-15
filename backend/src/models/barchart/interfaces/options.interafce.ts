@@ -1,12 +1,12 @@
 export interface IBarchartOptions {
-  impliedVolatility: number | null;
-  historicalVolatility: number | null;
-  ivPercentile: number | null;
-  ivRank: number | null;
-  putCallVolRatio: number | null;
-  todaysVolume: number | null;
-  volumeAvg30Day: number | null;
-  putCallOiRatio: number | null;
-  todaysOpenInterest: number | null;
-  openInt30Day: number | null;
+  impliedVolatility: number;
+  historicalVolatility: number;
+  ivPercentile: number;
+  ivRank: number;
+  putCallVolRatio: number;
+  todaysVolume: number;
+  volumeAvg30Day: number;
+  putCallOiRatio: number;
+  todaysOpenInterest: number;
+  openInt30Day: number;
 }
