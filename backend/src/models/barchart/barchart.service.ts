@@ -1,7 +1,8 @@
 import { Injectable } from '@nestjs/common';
-import { financials } from 'barchart-dot-com';
+import { financials, quotes } from 'barchart-dot-com';
 import { BarchartRepository } from './barchart.repository';
 import type { IBarchartFinancial } from './interfaces/financial.interface';
+import type { IBarchartOverview } from './interfaces/overview.interface';
 
 @Injectable()
 export class BarchartService {
@@ -16,6 +17,13 @@ export class BarchartService {
     data: IBarchartFinancial,
   ): Promise<void> {
     return this.barchartRepository.setFinancial(stockTicker, data);
+  }
+
+  async setOverview(
+    stockTicker: string,
+    data: IBarchartOverview,
+  ): Promise<void> {
+    return this.barchartRepository.setOverview(stockTicker, data);
   }
 
   async fetchFinancial(stockTicker: string): Promise<IBarchartFinancial> {
@@ -54,6 +62,38 @@ export class BarchartService {
       netIncome: [...barchartFinancialsIncome.netIncome].reverse(),
       revenue: [...barchartFinancialsIncome.sales].reverse(),
       dates: [...dates].reverse(),
+    };
+  }
+
+  async fetchOverview(stockTicker: string): Promise<IBarchartOverview> {
+    const barchartOverview = await quotes.overview(stockTicker);
+
+    // TODO: Add Sentry error logging
+    // if (barchartOverview.error) {
+    //   console.log(barchartOverview.error);
+    //   return undefined;
+    // }
+
+    return {
+      options: {
+        impliedVolatility: barchartOverview.options.impliedVolatility,
+        historicalVolatility: barchartOverview.options.historicalVolatility,
+        ivPercentile: barchartOverview.options.ivPercentile,
+        ivRank: barchartOverview.options.ivRank,
+        putCallVolRatio: barchartOverview.options.putCallVolRatio,
+        todaysVolume: barchartOverview.options.todaysVolume,
+        volumeAvg30Day: barchartOverview.options.volumeAvg30Day,
+        putCallOiRatio: barchartOverview.options.putCallOiRatio,
+        todaysOpenInterest: barchartOverview.options.todaysOpenInterest,
+        openInt30Day: barchartOverview.options.openInt30Day,
+      },
+      analytics: {
+        strongBuy: barchartOverview.analytics.strongBuy || 0,
+        moderateBuy: barchartOverview.analytics.moderateBuy || 0,
+        hold: barchartOverview.analytics.hold || 0,
+        moderateSell: barchartOverview.analytics.moderateSell || 0,
+        strongSell: barchartOverview.analytics.strongSell || 0,
+      },
     };
   }
 }
