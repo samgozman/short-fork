@@ -12,6 +12,8 @@ import { BarchartRepository } from './models/barchart/barchart.repository';
 import { BarchartService } from './models/barchart/barchart.service';
 import { ShortsqueezeRepository } from './models/shortsqueeze/shortsqueeze.repository';
 import { ShortsqueezeService } from './models/shortsqueeze/shortsqueeze.service';
+import { TightshortsRepository } from './models/tightshorts/tightshorts.repository';
+import { TightshortsService } from './models/tightshorts/tightshorts.service';
 
 @Module({
   imports: [
@@ -32,6 +34,8 @@ import { ShortsqueezeService } from './models/shortsqueeze/shortsqueeze.service'
         TTL_TIGHTSHORTS: Joi.number().default(14400),
         TTL_BARCHART_OVERVIEW: Joi.number().default(1200),
         TTL_BARCHART_FINANCIAL: Joi.number().default(2592000),
+        SHORT_API_KEY: Joi.string().required(),
+        SHORT_API_URL: Joi.string().required(),
       }),
     }),
     // TODO: Replace it with actual Redis DB
@@ -67,6 +71,8 @@ import { ShortsqueezeService } from './models/shortsqueeze/shortsqueeze.service'
     BarchartService,
     ShortsqueezeRepository,
     ShortsqueezeService,
+    TightshortsRepository,
+    TightshortsService,
   ],
 })
 export class AppModule {}
