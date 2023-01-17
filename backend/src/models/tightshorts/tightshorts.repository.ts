@@ -1,14 +1,10 @@
 import { Injectable, Inject, CACHE_MANAGER } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
 import { RedisStore } from 'cache-manager-redis-store';
 import type { ITightshorts } from './interfaces/tightshorts.interface';
 
 @Injectable()
 export class TightshortsRepository {
-  constructor(
-    @Inject(CACHE_MANAGER) private cacheManager: RedisStore,
-    @Inject(ConfigService) private configService: ConfigService,
-  ) {}
+  constructor(@Inject(CACHE_MANAGER) private cacheManager: RedisStore) {}
 
   async get(stock: string): Promise<ITightshorts> {
     return this.cacheManager.get(
