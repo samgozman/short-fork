@@ -31,7 +31,6 @@ import { TightshortsService } from './models/tightshorts/tightshorts.service';
         REDIS_USER: Joi.string().default('default'),
         TTL_SHORTSQUEEZE: Joi.number().default(43200),
         TTL_FINVIZ: Joi.number().default(1200),
-        TTL_TIGHTSHORTS: Joi.number().default(14400),
         TTL_BARCHART_OVERVIEW: Joi.number().default(1200),
         TTL_BARCHART_FINANCIAL: Joi.number().default(2592000),
         SHORT_API_KEY: Joi.string().required(),
