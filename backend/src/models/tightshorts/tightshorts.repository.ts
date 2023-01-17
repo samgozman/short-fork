@@ -19,11 +19,14 @@ export class TightshortsRepository {
   }
 
   async set(stock: string, data: ITightshorts): Promise<void> {
+    // Note: assuming server in UTC 0 timezone. Don't want to use extra library
+    const endOfDay = new Date().setHours(23, 59, 59, 999);
+
     return this.cacheManager.set(
       `stock:${stock}:tightshorts`,
       data,
-      // TODO: Set TTL as end of day (or 1 hour before market close)
-      { ttl: this.configService.get('TTL_SHORTSQUEEZE') },
+      // Note: valid until end of day (seconds, integer)
+      { ttl: ~~((endOfDay - Date.now()) / 1000) },
       undefined,
     );
   }
