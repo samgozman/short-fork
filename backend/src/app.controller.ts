@@ -12,7 +12,6 @@ import { HttpExceptionFilter } from './exceptions/http-exception.filter';
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
-  // TODO: Cache this endpoint to prevent unnecessary requests
   @Get('finviz/:ticker')
   @UseFilters(new HttpExceptionFilter())
   async getFinviz(@Param('ticker') ticker: string) {
