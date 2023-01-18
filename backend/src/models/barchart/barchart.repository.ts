@@ -11,7 +11,7 @@ export class BarchartRepository {
     @Inject(ConfigService) private configService: ConfigService,
   ) {}
 
-  async getFinancial(stock: string): Promise<IBarchartFinancial> {
+  async getFinancial(stock: string): Promise<IBarchartFinancial | null> {
     return this.cacheManager.get(
       `stock:${stock}:barchart:financial`,
       undefined,
@@ -19,7 +19,7 @@ export class BarchartRepository {
     );
   }
 
-  async getOverview(stock: string): Promise<IBarchartOverview> {
+  async getOverview(stock: string): Promise<IBarchartOverview | null> {
     return this.cacheManager.get(
       `stock:${stock}:barchart:overview`,
       undefined,

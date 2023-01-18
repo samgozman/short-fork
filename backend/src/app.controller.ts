@@ -21,4 +21,24 @@ export class AppController {
     }
     return data;
   }
+
+  @Get('barchart/financial/:ticker')
+  @UseFilters(new HttpExceptionFilter())
+  async getBarchartFinancial(@Param('ticker') ticker: string) {
+    const data = await this.appService.getBarchartFinancial(ticker);
+    if (!data) {
+      throw new NotFoundException();
+    }
+    return data;
+  }
+
+  @Get('barchart/overview/:ticker')
+  @UseFilters(new HttpExceptionFilter())
+  async getBarchartOverview(@Param('ticker') ticker: string) {
+    const data = await this.appService.getBarchartOverview(ticker);
+    if (!data) {
+      throw new NotFoundException();
+    }
+    return data;
+  }
 }

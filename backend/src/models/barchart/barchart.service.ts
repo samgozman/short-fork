@@ -8,11 +8,11 @@ import type { IBarchartOverview } from './interfaces/overview.interface';
 export class BarchartService {
   constructor(private readonly barchartRepository: BarchartRepository) {}
 
-  async getFinancial(stockTicker: string): Promise<IBarchartFinancial> {
+  async getFinancial(stockTicker: string): Promise<IBarchartFinancial | null> {
     return this.barchartRepository.getFinancial(stockTicker);
   }
 
-  async getOverview(stockTicker: string): Promise<IBarchartOverview> {
+  async getOverview(stockTicker: string): Promise<IBarchartOverview | null> {
     return this.barchartRepository.getOverview(stockTicker);
   }
 
@@ -30,16 +30,22 @@ export class BarchartService {
     return this.barchartRepository.setOverview(stockTicker, data);
   }
 
-  async fetchFinancial(stockTicker: string): Promise<IBarchartFinancial> {
-    const barchartFinancialsBalance = await financials
-      .balanceSheet(stockTicker)
-      .annual();
-    const barchartFinancialsIncome = await financials
-      .income(stockTicker)
-      .annual();
+  async fetchFinancial(
+    stockTicker: string,
+  ): Promise<IBarchartFinancial | null> {
+    let barchartFinancialsBalance: any, barchartFinancialsIncome: any;
+    try {
+      barchartFinancialsBalance = await financials
+        .balanceSheet(stockTicker)
+        .annual();
+      barchartFinancialsIncome = await financials.income(stockTicker).annual();
+    } catch (error) {
+      console.error(error);
+      return null;
+    }
 
     if (barchartFinancialsBalance.error || barchartFinancialsIncome.error) {
-      return undefined;
+      return null;
     }
 
     const startsWith = barchartFinancialsIncome.startsWith.split('-');
@@ -69,14 +75,19 @@ export class BarchartService {
     };
   }
 
-  async fetchOverview(stockTicker: string): Promise<IBarchartOverview> {
-    const barchartOverview = await quotes.overview(stockTicker);
+  async fetchOverview(stockTicker: string): Promise<IBarchartOverview | null> {
+    let barchartOverview: any;
+    try {
+      barchartOverview = await quotes.overview(stockTicker);
+    } catch (error) {
+      console.error(error);
+      return null;
+    }
 
-    // TODO: Add Sentry error logging
-    // if (barchartOverview.error) {
-    //   console.log(barchartOverview.error);
-    //   return undefined;
-    // }
+    if (barchartOverview.error) {
+      // TODO: Add Sentry error logging
+      return null;
+    }
 
     return {
       options: {
