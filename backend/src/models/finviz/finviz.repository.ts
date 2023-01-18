@@ -10,7 +10,7 @@ export class FinvizRepository {
     @Inject(ConfigService) private configService: ConfigService,
   ) {}
 
-  async get(stock: string): Promise<IFinviz> {
+  async get(stock: string): Promise<IFinviz | null> {
     return this.cacheManager.get(`stock:${stock}:finviz`, undefined, undefined);
   }
 
