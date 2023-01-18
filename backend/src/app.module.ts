@@ -1,3 +1,5 @@
+import { APP_FILTER } from '@nestjs/core';
+import { HttpExceptionFilter } from './exceptions/http-exception.filter';
 import Joi from 'joi';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { redisStore } from 'cache-manager-redis-store';
@@ -61,6 +63,10 @@ import { TightshortsService } from './models/tightshorts/tightshorts.service';
   ],
   controllers: [AppController],
   providers: [
+    {
+      provide: APP_FILTER,
+      useClass: HttpExceptionFilter,
+    },
     AppService,
     StockRepository,
     StockService,
