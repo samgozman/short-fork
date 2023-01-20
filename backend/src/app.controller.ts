@@ -8,11 +8,13 @@ import {
 import { AppService } from './app.service';
 import { HttpExceptionFilter } from './exceptions/http-exception.filter';
 
-@Controller()
+@Controller({
+  path: 'stock/:ticker',
+})
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
-  @Get('finviz/:ticker')
+  @Get('finviz')
   @UseFilters(new HttpExceptionFilter())
   async getFinviz(@Param('ticker') ticker: string) {
     const data = await this.appService.getFinviz(ticker);
@@ -22,7 +24,7 @@ export class AppController {
     return data;
   }
 
-  @Get('barchart/financial/:ticker')
+  @Get('barchart/financial')
   @UseFilters(new HttpExceptionFilter())
   async getBarchartFinancial(@Param('ticker') ticker: string) {
     const data = await this.appService.getBarchartFinancial(ticker);
@@ -32,7 +34,7 @@ export class AppController {
     return data;
   }
 
-  @Get('barchart/overview/:ticker')
+  @Get('barchart/overview')
   @UseFilters(new HttpExceptionFilter())
   async getBarchartOverview(@Param('ticker') ticker: string) {
     const data = await this.appService.getBarchartOverview(ticker);
