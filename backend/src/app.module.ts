@@ -6,8 +6,6 @@ import { redisStore } from 'cache-manager-redis-store';
 import { CacheModule, Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { StockService } from './models/stock/stock.service';
-import { StockRepository } from './models/stock/stock.repository';
 import { FinvizService } from './models/finviz/finviz.service';
 import { FinvizRepository } from './models/finviz/finviz.repository';
 import { BarchartRepository } from './models/barchart/barchart.repository';
@@ -68,8 +66,6 @@ import { TightshortsService } from './models/tightshorts/tightshorts.service';
       useClass: HttpExceptionFilter,
     },
     AppService,
-    StockRepository,
-    StockService,
     FinvizRepository,
     FinvizService,
     BarchartRepository,

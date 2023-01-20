@@ -5,13 +5,11 @@ import { IBarchartOverview } from './models/barchart/interfaces/overview.interfa
 import { FinvizService } from './models/finviz/finviz.service';
 import { IFinviz } from './models/finviz/interfaces/finviz.interface';
 import { ShortsqueezeService } from './models/shortsqueeze/shortsqueeze.service';
-import { StockService } from './models/stock/stock.service';
 import { TightshortsService } from './models/tightshorts/tightshorts.service';
 
 @Injectable()
 export class AppService {
   constructor(
-    @Inject(StockService) private stockService: StockService,
     @Inject(FinvizService) private finvizService: FinvizService,
     @Inject(BarchartService) private barchartService: BarchartService,
     @Inject(ShortsqueezeService) private squeezeService: ShortsqueezeService,
