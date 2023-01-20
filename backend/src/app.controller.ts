@@ -43,4 +43,24 @@ export class AppController {
     }
     return data;
   }
+
+  @Get('shortsqueeze')
+  @UseFilters(new HttpExceptionFilter())
+  async getShortsqueeze(@Param('ticker') ticker: string) {
+    const data = await this.appService.getShortsqueeze(ticker);
+    if (!data) {
+      throw new NotFoundException();
+    }
+    return data;
+  }
+
+  @Get('tightshorts')
+  @UseFilters(new HttpExceptionFilter())
+  async getTightshorts(@Param('ticker') ticker: string) {
+    const data = await this.appService.getTightshorts(ticker);
+    if (!data) {
+      throw new NotFoundException();
+    }
+    return data;
+  }
 }

@@ -1,10 +1,12 @@
 import { Injectable, Inject } from '@nestjs/common';
 import { BarchartService } from './models/barchart/barchart.service';
-import { IBarchartFinancial } from './models/barchart/interfaces/financial.interface';
-import { IBarchartOverview } from './models/barchart/interfaces/overview.interface';
+import type { IBarchartFinancial } from './models/barchart/interfaces/financial.interface';
+import type { IBarchartOverview } from './models/barchart/interfaces/overview.interface';
 import { FinvizService } from './models/finviz/finviz.service';
 import { IFinviz } from './models/finviz/interfaces/finviz.interface';
+import type { IShortsqueeze } from './models/shortsqueeze/interfaces/shortsqueeze.interface';
 import { ShortsqueezeService } from './models/shortsqueeze/shortsqueeze.service';
+import type { ITightshorts } from './models/tightshorts/interfaces/tightshorts.interface';
 import { TightshortsService } from './models/tightshorts/tightshorts.service';
 
 @Injectable()
@@ -60,6 +62,36 @@ export class AppService {
     }
 
     await this.barchartService.setOverview(ticker, fetched);
+    return fetched;
+  }
+
+  async getShortsqueeze(ticker: string): Promise<IShortsqueeze | null> {
+    const saved = await this.squeezeService.get(ticker);
+    if (saved) {
+      return saved;
+    }
+
+    const fetched = await this.squeezeService.fetch(ticker);
+    if (!fetched) {
+      return null;
+    }
+
+    await this.squeezeService.set(ticker, fetched);
+    return fetched;
+  }
+
+  async getTightshorts(ticker: string): Promise<ITightshorts | null> {
+    const saved = await this.tightshortsService.get(ticker);
+    if (saved) {
+      return saved;
+    }
+
+    const fetched = await this.tightshortsService.fetch(ticker);
+    if (!fetched) {
+      return null;
+    }
+
+    await this.tightshortsService.set(ticker, fetched);
     return fetched;
   }
 }
