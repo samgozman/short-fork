@@ -2,6 +2,14 @@ version: '3.8'
 # Environment for local development
 
 services:
+  backend:
+    build: ./backend
+    restart: always
+    ports:
+      - "3000:3000"
+    depends_on:
+      - redis
+
   redis:
     image: redis:6.2.7-alpine3.16
     restart: always
