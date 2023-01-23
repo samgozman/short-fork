@@ -1,18 +1,12 @@
 <script setup lang="ts">
-import { RouterLink, RouterView } from "vue-router";
+import { RouterView } from "vue-router";
 </script>
 
 <template>
-  <header>
-    <div>
-      <HelloWorld msg="You did it!" />
-
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
-    </div>
-  </header>
-
-  <!-- <RouterView /> -->
+  <main class="container mx-auto">
+    <header>
+      <h1>Header</h1>
+    </header>
+    <RouterView />
+  </main>
 </template>
