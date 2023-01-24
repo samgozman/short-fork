@@ -1,24 +1,26 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import ContentBox from "@/components/layout/ContentBox.vue";
+</script>
 
 <template>
   <div>
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 lg:gap-3">
-      <div class="rounded-md flex">Stock tags</div>
-      <div class="rounded-md flex">Trading view widget</div>
-      <div class="rounded-md flex">Tightshorts</div>
+    <div class="grid grid-cols-1 lg:grid-cols-3">
+      <ContentBox>Stock tags</ContentBox>
+      <ContentBox>Trading view widget</ContentBox>
+      <ContentBox>Tightshorts</ContentBox>
     </div>
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 lg:gap-3">
-      <div class="rounded-md flex row-start-1 row-end-2">Options</div>
-      <div class="rounded-md flex row-start-2 row-end-3">Links</div>
-      <div class="rounded-md flex row-start-1 row-end-3">Analyst</div>
-      <div class="rounded-md flex row-start-1 row-end-3">Income chart</div>
+    <div class="grid grid-cols-1 lg:grid-cols-3">
+      <ContentBox class="lg:row-start-1 lg:row-end-2">Options</ContentBox>
+      <ContentBox class="lg:row-start-2 lg:row-end-3">Links</ContentBox>
+      <ContentBox class="lg:row-start-1 lg:row-end-3">Analyst</ContentBox>
+      <ContentBox class="lg:row-start-1 lg:row-end-3">Income chart</ContentBox>
     </div>
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 lg:gap-3">
-      <div class="rounded-md flex col-span-1 lg:col-span-2">Insider deals</div>
-      <div class="rounded-md flex">Debt to capital chart</div>
+    <div class="grid grid-cols-1 lg:grid-cols-3">
+      <ContentBox class="col-span-1 lg:col-span-2">Insider deals</ContentBox>
+      <ContentBox>Debt to capital chart</ContentBox>
     </div>
-    <div class="grid grid-cols-1 gap-4 lg:gap-3">
-      <div class="rounded-md flex h-full">Trading view big chart</div>
+    <div class="grid grid-cols-1">
+      <ContentBox>Trading view big chart</ContentBox>
     </div>
   </div>
 </template>
