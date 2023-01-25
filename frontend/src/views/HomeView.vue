@@ -1,11 +1,12 @@
 <script setup lang="ts">
 import ContentBox from "@/components/layout/ContentBox.vue";
+import MainWidget from "@/components/widgets/MainWidget.vue";
 </script>
 
 <template>
   <div>
     <div class="grid grid-cols-1 lg:grid-cols-3">
-      <ContentBox>Stock tags</ContentBox>
+      <ContentBox><MainWidget /></ContentBox>
       <ContentBox>Trading view widget</ContentBox>
       <ContentBox>Tightshorts</ContentBox>
     </div>
