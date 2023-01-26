@@ -5,5 +5,6 @@ module.exports = {
   theme: {
     extend: {},
   },
+  darkMode: "class", // To toggle dark mode manually by applying class="dark" to <html> tag
   plugins: [],
 };
