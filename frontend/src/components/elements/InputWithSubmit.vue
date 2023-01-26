@@ -21,11 +21,12 @@ import StockSuggestionBadge from "./StockSuggestionBadge.vue";
 
     <div class="flex w-full leading-4">
       <span class="mr-2">Example:</span>
-      <div class="flex flex-wrap justify-around w-full">
+      <div class="flex flex-wrap justify-between w-full">
         <StockSuggestionBadge
           v-for="ticker in ['AAPL', 'MSFT', 'AMZN', 'GOOG', 'FB', 'TSLA']"
           :key="ticker"
           :ticker="ticker"
+          @click.prevent="stock = ticker"
         />
       </div>
     </div>
