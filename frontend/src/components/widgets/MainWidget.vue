@@ -5,7 +5,7 @@ import KeyValueTag from "@/components/elements/KeyValueTag.vue";
 
 <template>
   <div class="w-full">
-    <InputWithSubmit @submitStock="submitStock" />
+    <InputWithSubmit @submitStock="submitStock" class="mb-4" />
     <div class="w-full">
       <p>Some general info</p>
     </div>
