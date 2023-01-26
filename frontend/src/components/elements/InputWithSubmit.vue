@@ -1,14 +1,14 @@
 <template>
   <div class="flex justify-start w-full">
     <button
-      class="bg-gray-800 text-white h-8 px-4 rounded-l"
+      class="bg-gray-800 text-white h-10 px-4 rounded-l"
       @click.prevent="submit"
     >
       Enter
     </button>
     <input
       placeholder="Ticker"
-      class="w-full max-w-full h-8 px-4 line leading-6 rounded-r border border-gray-800 uppercase focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
+      class="w-full max-w-full h-10 px-4 line leading-7 rounded-r border border-gray-800 uppercase focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
       v-model="stock"
       @keypress.enter.prevent="submit"
     />
