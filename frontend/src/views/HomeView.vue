@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import ContentBox from "@/components/layout/ContentBox.vue";
 import MainWidget from "@/components/widgets/MainWidget.vue";
+import LinksWidget from "@/components/widgets/LinksWidget.vue";
 </script>
 
 <template>
@@ -12,7 +13,9 @@ import MainWidget from "@/components/widgets/MainWidget.vue";
     </div>
     <div class="grid grid-cols-1 lg:grid-cols-3">
       <ContentBox class="lg:row-start-1 lg:row-end-2">Options</ContentBox>
-      <ContentBox class="lg:row-start-2 lg:row-end-3">Links</ContentBox>
+      <ContentBox class="lg:row-start-2 lg:row-end-3">
+        <LinksWidget ticker="AAPL" exchange="NASDAQ" />
+      </ContentBox>
       <ContentBox class="lg:row-start-1 lg:row-end-3">Analyst</ContentBox>
       <ContentBox class="lg:row-start-1 lg:row-end-3">Income chart</ContentBox>
     </div>
