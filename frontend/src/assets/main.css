@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 body {
-	height: 100%;
+	height: max-content;
   touch-action: pan-y;
   overscroll-behavior: none;
 }
