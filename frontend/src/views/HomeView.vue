@@ -2,6 +2,7 @@
 import ContentBox from "@/components/layout/ContentBox.vue";
 import MainWidget from "@/components/widgets/MainWidget.vue";
 import LinksWidget from "@/components/widgets/LinksWidget.vue";
+import InsidersTableWidget from "@/components/widgets/InsidersTableWidget.vue";
 </script>
 
 <template>
@@ -20,7 +21,60 @@ import LinksWidget from "@/components/widgets/LinksWidget.vue";
       <ContentBox class="lg:row-start-1 lg:row-end-3">Income chart</ContentBox>
     </div>
     <div class="grid grid-cols-1 lg:grid-cols-3">
-      <ContentBox class="col-span-1 lg:col-span-2">Insider deals</ContentBox>
+      <ContentBox class="col-span-1 lg:col-span-2">
+        <InsidersTableWidget
+          :insidersTrades="[
+            {
+              insider: 'John Doe',
+              date: 'Nov 21',
+              transaction: 'Buy',
+              value: '$1000',
+            },
+            {
+              insider: 'John Doe Junior',
+              date: 'Oct 23',
+              transaction: 'Buy',
+              value: '$54000',
+            },
+            {
+              insider: 'John Doe',
+              date: 'Nov 21',
+              transaction: 'Buy',
+              value: '$1000',
+            },
+            {
+              insider: 'John Doe Junior',
+              date: 'Oct 23',
+              transaction: 'Sell',
+              value: '$54000',
+            },
+            {
+              insider: 'John Doe',
+              date: 'Nov 21',
+              transaction: 'Buy',
+              value: '$1000',
+            },
+            {
+              insider: 'John Doe Junior',
+              date: 'Oct 23',
+              transaction: 'Sell',
+              value: '$54000',
+            },
+            {
+              insider: 'John Doe',
+              date: 'Nov 21',
+              transaction: 'Sell',
+              value: '$1000',
+            },
+            {
+              insider: 'John Doe Junior',
+              date: 'Oct 23',
+              transaction: 'Sell',
+              value: '$54000',
+            },
+          ]"
+        />
+      </ContentBox>
       <ContentBox>Debt to capital chart</ContentBox>
     </div>
     <div class="grid grid-cols-1">
