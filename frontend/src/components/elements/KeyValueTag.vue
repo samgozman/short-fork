@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import type { TagElement } from "@/components/interfaces/TagElement.interface";
+import type { ITagElement } from "@/components/interfaces/TagElement.interface";
 import { TagThemes } from "@/components/enums/TagThemes.enum";
 
 const props = defineProps<{
-  element: TagElement;
+  element: ITagElement;
 }>();
 const modalId = "modal_" + props.element.key.replace(/\W+/g, "_");
 </script>
@@ -11,7 +11,7 @@ const modalId = "modal_" + props.element.key.replace(/\W+/g, "_");
 <template>
   <div class="w-full flex h-6">
     <button
-      class="bg-gray-700 text-gray-100 dark:bg-gray-700 dark:text-gray-100 text-xs font-medium rounded-l w-full leading-6 pl-2"
+      class="bg-gray-700 text-gray-100 dark:bg-gray-700 dark:text-gray-100 text-xs text-left font-medium rounded-l w-full leading-6 pl-2"
       :data-modal-target="modalId"
       :data-modal-toggle="modalId"
     >
