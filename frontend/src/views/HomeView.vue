@@ -3,6 +3,7 @@ import ContentBox from "@/components/layout/ContentBox.vue";
 import MainWidget from "@/components/widgets/MainWidget.vue";
 import LinksWidget from "@/components/widgets/LinksWidget.vue";
 import InsidersTableWidget from "@/components/widgets/InsidersTableWidget.vue";
+import OptionsWidget from "@/components/widgets/OptionsWidget.vue";
 </script>
 
 <template>
@@ -13,7 +14,9 @@ import InsidersTableWidget from "@/components/widgets/InsidersTableWidget.vue";
       <ContentBox>Tightshorts</ContentBox>
     </div>
     <div class="grid grid-cols-1 lg:grid-cols-3">
-      <ContentBox class="lg:row-start-1 lg:row-end-2">Options</ContentBox>
+      <ContentBox class="lg:row-start-1 lg:row-end-2">
+        <OptionsWidget ticker="AAPL" />
+      </ContentBox>
       <ContentBox class="lg:row-start-2 lg:row-end-3">
         <LinksWidget ticker="AAPL" exchange="NASDAQ" />
       </ContentBox>
