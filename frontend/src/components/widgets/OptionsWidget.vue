@@ -18,7 +18,7 @@ defineProps<{
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import type { TagElement } from "@/components/elements/interfaces/TagElement.interface";
+import type { TagElement } from "@/components/interfaces/TagElement.interface";
 
 export default defineComponent({
   data() {

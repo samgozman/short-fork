@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import type { TagElement } from "@/components/elements/interfaces/TagElement.interface";
-import { TagThemes } from "@/components/elements/interfaces/TagElement.interface";
+import type { TagElement } from "@/components/interfaces/TagElement.interface";
+import { TagThemes } from "@/components/enums/TagThemes.enum";
 
 const props = defineProps<{
   element: TagElement;
