@@ -19,7 +19,7 @@ import StockSuggestionBadge from "./StockSuggestionBadge.vue";
       />
     </div>
 
-    <div class="flex w-full leading-4">
+    <div class="flex w-full leading-6">
       <span class="mr-2">Example:</span>
       <div class="flex flex-wrap justify-between w-full">
         <StockSuggestionBadge
