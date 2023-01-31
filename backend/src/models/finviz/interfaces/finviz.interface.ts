@@ -1,5 +1,5 @@
-import { IEarnings } from './earnings.interface';
-import { IInsider } from './insider.interface';
+import type { IEarnings } from './earnings.interface';
+import type { IInsider } from './insider.interface';
 
 export interface IFinviz {
   name: string;
