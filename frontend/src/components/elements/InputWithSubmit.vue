@@ -43,7 +43,9 @@ export default defineComponent({
   },
   methods: {
     submit() {
-      this.$emit("submitStock", this.stock.toUpperCase());
+      const stock = this.stock.toUpperCase();
+      this.$emit("submitStock", stock);
+      this.$emit("getFinviz", stock);
     },
   },
 });

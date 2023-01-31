@@ -5,7 +5,11 @@ import KeyValueTag from "@/components/elements/KeyValueTag.vue";
 
 <template>
   <div class="w-full">
-    <InputWithSubmit @submitStock="submitStock" class="mb-4" />
+    <InputWithSubmit
+      @submitStock="submitStock"
+      @getFinviz="getFinviz"
+      class="mb-4"
+    />
     <div class="w-full">
       <p>Some general info</p>
     </div>
@@ -22,6 +26,7 @@ import type { ITagElement } from "@/components/interfaces/TagElement.interface";
 import type { IMainTags } from "@/components/interfaces/MainTags.interface";
 import { TagThemes } from "@/components/enums/TagThemes.enum";
 import { getTagColor } from "@/components/utils/getTagColor";
+import { FetchData } from "../utils/FetchData";
 
 interface Data {
   /** To store key:value data from API */
@@ -38,8 +43,39 @@ export default defineComponent({
     };
   },
   methods: {
-    submitStock(stock: string) {
+    async submitStock(stock: string) {
       console.log(stock);
+    },
+    async getFinviz(stock: string) {
+      const finviz = await FetchData.getFinviz(stock);
+      this.tagsValues = Object.assign(this.tagsValues, {
+        name: finviz.name,
+        exchange: finviz.exchange,
+        country: finviz.country,
+        price: finviz.price,
+        pe: finviz.pe,
+        forwardPe: finviz.forwardPe,
+        ps: finviz.ps,
+        pb: finviz.pb,
+        roe: finviz.roe,
+        roa: finviz.roa,
+        debtEq: finviz.debtEq,
+        shortFloat: finviz.shortFloat,
+        targetPercent: finviz.targetPrice
+          ? ((finviz.targetPrice / finviz.price - 1) * 100).toFixed(1)
+          : null,
+        rsi: finviz.rsi,
+        recommendation: finviz.recommendation,
+        site: finviz.site,
+        peg: finviz.peg,
+        dividendPercent: finviz.dividendPercent,
+        instOwn: finviz.instOwn,
+        insiderOwn: finviz.insiderOwn,
+        beta: finviz.beta,
+        shortRatio: finviz.shortRatio,
+      });
+      this.prepareTags();
+
     },
     prepareTags() {
       this.tags = [
@@ -80,7 +116,7 @@ export default defineComponent({
         {
           key: "P/S",
           value: this.tagsValues.ps ?? "",
-          theme: getTagColor(this.tagsValues.forwardPe, {
+          theme: getTagColor(this.tagsValues.ps, {
             best: [0, 1],
             worst: [3, Infinity],
           }),
@@ -140,7 +176,7 @@ export default defineComponent({
           theme: getTagColor(this.tagsValues.roe, {
             best: [0, 40],
             worst: [-Infinity, 0],
-            normal: [40, 100],
+            normal: [40, Infinity],
           }),
           title: "Some title for tag 4",
           description: "some description for tag 4",
@@ -168,7 +204,7 @@ export default defineComponent({
         {
           key: "Short Ratio",
           value: this.tagsValues.shortRatio ?? "",
-          theme: getTagColor(this.tagsValues.roa, {
+          theme: getTagColor(this.tagsValues.shortRatio, {
             best: [0, 4],
             worst: [10, Infinity],
           }),
@@ -194,7 +230,7 @@ export default defineComponent({
         },
         {
           key: "Inst Own",
-          value: this.tagsValues.instOwn ?? "",
+          value: (this.tagsValues.instOwn ?? "") + "%",
           theme: TagThemes.Gray,
           title: "Some title for tag 4",
           description: "some description for tag 4",
@@ -214,7 +250,7 @@ export default defineComponent({
         },
         {
           key: "Insider Own",
-          value: this.tagsValues.insiderOwn ?? "",
+          value: (this.tagsValues.insiderOwn ?? "") + "%",
           theme: TagThemes.Gray,
           title: "Some title for tag 4",
           description: "some description for tag 4",
