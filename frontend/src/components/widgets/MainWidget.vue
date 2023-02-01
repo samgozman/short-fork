@@ -77,7 +77,7 @@ export default defineComponent({
       this.prepareTags();
 
       this.$emit("getInsiders", finviz.insidersDeals);
-
+      this.$emit("stockWithExchange", stock, finviz.exchange);
     },
     prepareTags() {
       this.tags = [

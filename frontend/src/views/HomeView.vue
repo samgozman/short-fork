@@ -9,7 +9,11 @@ import OptionsWidget from "@/components/widgets/OptionsWidget.vue";
 <template>
   <div>
     <div class="grid grid-cols-1 lg:grid-cols-3">
-      <ContentBox><MainWidget @getInsiders="getInsiders" /></ContentBox>
+      <ContentBox
+        ><MainWidget
+          @stockWithExchange="updateLinksAndTradingView"
+          @getInsiders="getInsiders"
+      /></ContentBox>
       <ContentBox>Trading view widget</ContentBox>
       <ContentBox>Tightshorts</ContentBox>
     </div>
@@ -18,7 +22,7 @@ import OptionsWidget from "@/components/widgets/OptionsWidget.vue";
         <OptionsWidget ticker="AAPL" />
       </ContentBox>
       <ContentBox class="lg:row-start-2 lg:row-end-3">
-        <LinksWidget ticker="AAPL" exchange="NASDAQ" />
+        <LinksWidget :ticker="stockTicker" :exchange="stockExchange" />
       </ContentBox>
       <ContentBox class="lg:row-start-1 lg:row-end-3">Analyst</ContentBox>
       <ContentBox class="lg:row-start-1 lg:row-end-3">Income chart</ContentBox>
@@ -42,15 +46,24 @@ import type { IInsider } from "@/components/interfaces/insider.interface";
 interface Data {
   insiders: IInsider[];
   insidersKey: number;
+  stockTicker: string;
+  stockExchange: string;
 }
 export default defineComponent({
   data(): Data {
     return {
       insiders: [],
       insidersKey: 0,
+      stockTicker: "SPY",
+      stockExchange: "AMEX",
     };
   },
   methods: {
+    updateLinksAndTradingView(stock: string, exchange: string) {
+      this.stockTicker = stock;
+      this.stockExchange = exchange === "NASD" ? "NASDAQ" : exchange;
+      // TODO: Update trading view widget and chart
+    },
     getInsiders(insidersTable: IInsider[]) {
       this.insiders = insidersTable;
       this.insidersKey = Math.random(); // to force re-render
