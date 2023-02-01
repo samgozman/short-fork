@@ -1,15 +1,9 @@
 <script setup lang="ts">
 import HeaderH5 from "@/components/layout/typography/HeaderH5.vue";
-
-interface InsiderTrade {
-  insider: string;
-  date: string;
-  transaction: "Buy" | "Sell";
-  value: string;
-}
+import type { IInsider } from "@/components/interfaces/insider.interface";
 
 defineProps<{
-  insidersTrades: InsiderTrade[];
+  insidersTrades: IInsider[];
 }>();
 </script>
 
@@ -31,19 +25,19 @@ defineProps<{
         </thead>
         <tbody>
           <tr
-            v-for="trade in insidersTrades"
-            :key="trade.date"
+            v-for="(trade, i) of insidersTrades"
+            :key="i"
             class="border-b dark:border-gray-700"
             :class="{
+              'bg-red-100': trade.transaction === 'Sale',
               'bg-green-100': trade.transaction === 'Buy',
-              'bg-red-100': trade.transaction === 'Sell',
             }"
           >
             <th
               scope="row"
               class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
             >
-              {{ trade.insider }}
+              {{ trade.insiderTrading }}
             </th>
             <td class="px-6 py-4">{{ trade.date }}</td>
             <td class="px-6 py-4">{{ trade.transaction }}</td>

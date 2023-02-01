@@ -26,7 +26,7 @@ import type { ITagElement } from "@/components/interfaces/TagElement.interface";
 import type { IMainTags } from "@/components/interfaces/MainTags.interface";
 import { TagThemes } from "@/components/enums/TagThemes.enum";
 import { getTagColor } from "@/components/utils/getTagColor";
-import { FetchData } from "../utils/FetchData";
+import { FetchData } from "@/components/utils/FetchData";
 
 interface Data {
   /** To store key:value data from API */
@@ -75,6 +75,8 @@ export default defineComponent({
         shortRatio: finviz.shortRatio,
       });
       this.prepareTags();
+
+      this.$emit("getInsiders", finviz.insidersDeals);
 
     },
     prepareTags() {

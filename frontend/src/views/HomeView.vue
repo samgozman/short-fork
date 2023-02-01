@@ -9,7 +9,7 @@ import OptionsWidget from "@/components/widgets/OptionsWidget.vue";
 <template>
   <div>
     <div class="grid grid-cols-1 lg:grid-cols-3">
-      <ContentBox><MainWidget /></ContentBox>
+      <ContentBox><MainWidget @getInsiders="getInsiders" /></ContentBox>
       <ContentBox>Trading view widget</ContentBox>
       <ContentBox>Tightshorts</ContentBox>
     </div>
@@ -25,58 +25,7 @@ import OptionsWidget from "@/components/widgets/OptionsWidget.vue";
     </div>
     <div class="grid grid-cols-1 lg:grid-cols-3">
       <ContentBox class="col-span-1 lg:col-span-2">
-        <InsidersTableWidget
-          :insidersTrades="[
-            {
-              insider: 'John Doe',
-              date: 'Nov 21',
-              transaction: 'Buy',
-              value: '$1000',
-            },
-            {
-              insider: 'John Doe Junior',
-              date: 'Oct 23',
-              transaction: 'Buy',
-              value: '$54000',
-            },
-            {
-              insider: 'John Doe',
-              date: 'Nov 21',
-              transaction: 'Buy',
-              value: '$1000',
-            },
-            {
-              insider: 'John Doe Junior',
-              date: 'Oct 23',
-              transaction: 'Sell',
-              value: '$54000',
-            },
-            {
-              insider: 'John Doe',
-              date: 'Nov 21',
-              transaction: 'Buy',
-              value: '$1000',
-            },
-            {
-              insider: 'John Doe Junior',
-              date: 'Oct 23',
-              transaction: 'Sell',
-              value: '$54000',
-            },
-            {
-              insider: 'John Doe',
-              date: 'Nov 21',
-              transaction: 'Sell',
-              value: '$1000',
-            },
-            {
-              insider: 'John Doe Junior',
-              date: 'Oct 23',
-              transaction: 'Sell',
-              value: '$54000',
-            },
-          ]"
-        />
+        <InsidersTableWidget :insidersTrades="insiders" :key="insidersKey" />
       </ContentBox>
       <ContentBox>Debt to capital chart</ContentBox>
     </div>
@@ -85,3 +34,27 @@ import OptionsWidget from "@/components/widgets/OptionsWidget.vue";
     </div>
   </div>
 </template>
+
+<script lang="ts">
+import { defineComponent } from "vue";
+import type { IInsider } from "@/components/interfaces/insider.interface";
+
+interface Data {
+  insiders: IInsider[];
+  insidersKey: number;
+}
+export default defineComponent({
+  data(): Data {
+    return {
+      insiders: [],
+      insidersKey: 0,
+    };
+  },
+  methods: {
+    getInsiders(insidersTable: IInsider[]) {
+      this.insiders = insidersTable;
+      this.insidersKey = Math.random(); // to force re-render
+    },
+  },
+});
+</script>
