@@ -46,6 +46,7 @@ export default defineComponent({
       const stock = this.stock.toUpperCase();
       this.$emit("submitStock", stock);
       this.$emit("getFinviz", stock);
+      this.$emit("getShortsqueeze", stock);
     },
   },
 });

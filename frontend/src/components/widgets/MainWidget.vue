@@ -8,6 +8,7 @@ import KeyValueTag from "@/components/elements/KeyValueTag.vue";
     <InputWithSubmit
       @submitStock="submitStock"
       @getFinviz="getFinviz"
+      @getShortsqueeze="getShortsqueeze"
       class="mb-4"
     />
     <div class="w-full">
@@ -78,6 +79,11 @@ export default defineComponent({
 
       this.$emit("getInsiders", finviz.insidersDeals);
       this.$emit("stockWithExchange", stock, finviz.exchange);
+    },
+    async getShortsqueeze(stock: string) {
+      const shortsqueeze = await FetchData.getShortsqueeze(stock);
+      this.tagsValues.shortsqueezeShortFloat = shortsqueeze.shortFlow;
+      this.prepareTags();
     },
     prepareTags() {
       this.tags = [
