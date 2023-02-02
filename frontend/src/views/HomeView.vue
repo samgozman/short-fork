@@ -13,13 +13,17 @@ import OptionsWidget from "@/components/widgets/OptionsWidget.vue";
         ><MainWidget
           @stockWithExchange="updateLinksAndTradingView"
           @getInsiders="getInsiders"
+          @getBarchart="getBarchart"
       /></ContentBox>
       <ContentBox>Trading view widget</ContentBox>
       <ContentBox>Tightshorts</ContentBox>
     </div>
     <div class="grid grid-cols-1 lg:grid-cols-3">
       <ContentBox class="lg:row-start-1 lg:row-end-2">
-        <OptionsWidget ticker="AAPL" />
+        <OptionsWidget
+          :options="barchartOverview.options"
+          :key="barchartOverviewKey"
+        />
       </ContentBox>
       <ContentBox class="lg:row-start-2 lg:row-end-3">
         <LinksWidget :ticker="stockTicker" :exchange="stockExchange" />
@@ -42,12 +46,16 @@ import OptionsWidget from "@/components/widgets/OptionsWidget.vue";
 <script lang="ts">
 import { defineComponent } from "vue";
 import type { IInsider } from "@/components/interfaces/insider.interface";
+import { FetchData } from "@/components/utils/FetchData";
+import type { IBarchartOverview } from "@/components/interfaces/overview.interface";
 
 interface Data {
   insiders: IInsider[];
   insidersKey: number;
   stockTicker: string;
   stockExchange: string;
+  barchartOverview: IBarchartOverview;
+  barchartOverviewKey: number;
 }
 export default defineComponent({
   data(): Data {
@@ -56,6 +64,8 @@ export default defineComponent({
       insidersKey: 0,
       stockTicker: "SPY",
       stockExchange: "AMEX",
+      barchartOverview: {} as IBarchartOverview,
+      barchartOverviewKey: 0,
     };
   },
   methods: {
@@ -67,6 +77,11 @@ export default defineComponent({
     getInsiders(insidersTable: IInsider[]) {
       this.insiders = insidersTable;
       this.insidersKey = Math.random(); // to force re-render
+    },
+    // This route is outside of barchart modules to not to call overview api twice
+    async getBarchart(stock: string) {
+      this.barchartOverview = await FetchData.getBarchartOverview(stock);
+      this.barchartOverviewKey = Math.random(); // to force re-render
     },
   },
 });

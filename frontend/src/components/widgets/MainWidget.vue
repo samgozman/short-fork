@@ -44,8 +44,8 @@ export default defineComponent({
     };
   },
   methods: {
-    async submitStock(stock: string) {
-      console.log(stock);
+    submitStock(stock: string) {
+      this.$emit("getBarchart", stock);
     },
     async getFinviz(stock: string) {
       const finviz = await FetchData.getFinviz(stock);

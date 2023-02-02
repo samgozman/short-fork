@@ -1,4 +1,4 @@
-export interface IOptionsTags {
+export interface IBarchartOptions {
   impliedVolatility: number;
   historicalVolatility: number;
   ivPercentile: number;

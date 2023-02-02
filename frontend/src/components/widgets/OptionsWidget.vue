@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import HeaderH5 from "@/components/layout/typography/HeaderH5.vue";
 import KeyValueTag from "@/components/elements/KeyValueTag.vue";
+import type { IBarchartOptions } from "@/components/interfaces/options.interafce";
 
 defineProps<{
-  ticker: string;
+  options: IBarchartOptions;
 }>();
 </script>
 
@@ -19,13 +20,12 @@ defineProps<{
 <script lang="ts">
 import { defineComponent } from "vue";
 import type { ITagElement } from "@/components/interfaces/TagElement.interface";
-import type { IOptionsTags } from "@/components/interfaces/OptionsTags.interface";
 import { TagThemes } from "@/components/enums/TagThemes.enum";
 import { getTagColor } from "@/components/utils/getTagColor";
 
 interface Data {
   /** To store key:value data from API */
-  tagsValues: IOptionsTags;
+  tagsValues: IBarchartOptions;
   /** To store tags for rendering */
   tags: ITagElement[];
 }
@@ -33,14 +33,11 @@ interface Data {
 export default defineComponent({
   data(): Data {
     return {
-      tagsValues: {} as IOptionsTags,
+      tagsValues: {} as IBarchartOptions,
       tags: [],
     };
   },
   methods: {
-    submitStock(stock: string) {
-      console.log(stock);
-    },
     prepareTags() {
       this.tags = [
         {
@@ -129,6 +126,9 @@ export default defineComponent({
     },
   },
   mounted() {
+    if (this.options) {
+      this.tagsValues = this.options;
+    }
     this.prepareTags();
   },
 });
