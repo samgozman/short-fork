@@ -18,13 +18,13 @@ const modalId = "modal_" + props.element.key.replace(/\W+/g, "_");
       {{ element.key }}
     </button>
     <span
-      class="text-xs font-medium rounded-r w-full leading-6 text-center"
+      class="text-xs rounded-r w-full leading-6 text-center"
       :class="{
         'bg-red-500 text-red-100 dark:bg-red-600 dark:text-red-100':
           element.theme === TagThemes.Red,
         'bg-green-500 text-green-100 dark:bg-green-600 dark:text-green-200':
           element.theme === TagThemes.Green,
-        'bg-yellow-400 text-gray-800 dark:bg-yellow-500 dark:text-gray-700':
+        'bg-yellow-300 text-gray-800 dark:bg-yellow-400 dark:text-gray-700':
           element.theme === TagThemes.Yellow,
         'bg-gray-200 text-gray-700 dark:bg-gray-200 dark:text-gray-700':
           element.theme === TagThemes.Gray,
