@@ -5,6 +5,7 @@ import LinksWidget from "@/components/widgets/LinksWidget.vue";
 import InsidersTableWidget from "@/components/widgets/InsidersTableWidget.vue";
 import OptionsWidget from "@/components/widgets/OptionsWidget.vue";
 import FinancialReportWarning from "@/components/widgets/FinancialReportWarning.vue";
+import NetIncomeChartWidget from "@/components/widgets/NetIncomeChartWidget.vue";
 </script>
 
 <template>
@@ -20,7 +21,8 @@ import FinancialReportWarning from "@/components/widgets/FinancialReportWarning.
           @stockWithExchange="updateLinksAndTradingView"
           @getInsiders="getInsiders"
           @setEarnings="setEarnings"
-          @getBarchart="getBarchart"
+          @getBarchartOverview="getBarchartOverview"
+          @getBarchartFinancials="getBarchartFinancials"
       /></ContentBox>
       <ContentBox>Trading view widget</ContentBox>
       <ContentBox>Tightshorts</ContentBox>
@@ -36,7 +38,13 @@ import FinancialReportWarning from "@/components/widgets/FinancialReportWarning.
         <LinksWidget :ticker="stockTicker" :exchange="stockExchange" />
       </ContentBox>
       <ContentBox class="lg:row-start-1 lg:row-end-3">Analyst</ContentBox>
-      <ContentBox class="lg:row-start-1 lg:row-end-3">Income chart</ContentBox>
+      <ContentBox class="lg:row-start-1 lg:row-end-3">
+        <NetIncomeChartWidget
+          :series="netIncomeChart.series"
+          :xaxis="netIncomeChart.xaxis"
+          :key="netIncomeChartKey"
+        />
+      </ContentBox>
     </div>
     <div class="grid grid-cols-1 lg:grid-cols-3">
       <ContentBox class="col-span-1 lg:col-span-2">
@@ -56,6 +64,7 @@ import type { IInsider } from "@/components/interfaces/insider.interface";
 import { FetchData } from "@/components/utils/FetchData";
 import type { IBarchartOverview } from "@/components/interfaces/overview.interface";
 import type { IEarnings } from "@/components/interfaces/earnings.interface";
+import type { ApexChartSeries } from "@/components/types/apex";
 
 const DaysBeforeEarningsWarning = 14;
 
@@ -68,6 +77,11 @@ interface Data {
   barchartOverviewKey: number;
   earnings: IEarnings;
   showEarningsWarning: boolean;
+  netIncomeChart: {
+    series: ApexChartSeries;
+    xaxis: string[] | number[];
+  };
+  netIncomeChartKey: number;
 }
 export default defineComponent({
   data(): Data {
@@ -80,6 +94,8 @@ export default defineComponent({
       barchartOverviewKey: 0,
       earnings: {} as IEarnings,
       showEarningsWarning: false,
+      netIncomeChart: {} as Data["netIncomeChart"],
+      netIncomeChartKey: 0,
     };
   },
   methods: {
@@ -108,10 +124,27 @@ export default defineComponent({
       this.earnings = {} as IEarnings;
       this.showEarningsWarning = false;
     },
-    // This route is outside of barchart modules to not to call overview api twice
-    async getBarchart(stock: string) {
+    async getBarchartOverview(stock: string) {
       this.barchartOverview = await FetchData.getBarchartOverview(stock);
       this.barchartOverviewKey = Math.random(); // to force re-render
+    },
+    async getBarchartFinancials(stock: string) {
+      const barchartFinancials = await FetchData.getBarchartFinancials(stock);
+      this.netIncomeChart = {
+        series: [
+          {
+            name: "Net Income",
+            data: barchartFinancials.netIncome,
+          },
+          {
+            name: "Revenue",
+            data: barchartFinancials.revenue,
+          },
+        ],
+        xaxis: barchartFinancials.dates,
+      };
+
+      this.netIncomeChartKey = Math.random(); // to force re-render
     },
   },
 });

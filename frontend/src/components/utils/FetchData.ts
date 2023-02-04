@@ -2,6 +2,7 @@ import axios from "axios";
 import type { IFinviz } from "@/components/interfaces/finviz.interface";
 import type { IShortsqueeze } from "@/components/interfaces/shortsqueeze.interface";
 import type { IBarchartOverview } from "@/components/interfaces/overview.interface";
+import type { IBarchartFinancial } from "@/components/interfaces/financial.interface";
 
 export class FetchData {
   private static readonly baseUrl = import.meta.env.VITE_API_URL;
@@ -23,6 +24,15 @@ export class FetchData {
   ): Promise<IBarchartOverview> {
     const { data } = await axios.get(
       `${this.baseUrl}/stock/${ticker}/barchart/overview`
+    );
+    return data;
+  }
+
+  public static async getBarchartFinancials(
+    ticker: string
+  ): Promise<IBarchartFinancial> {
+    const { data } = await axios.get(
+      `${this.baseUrl}/stock/${ticker}/barchart/financial`
     );
     return data;
   }
