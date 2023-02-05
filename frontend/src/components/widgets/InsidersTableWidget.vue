@@ -11,7 +11,7 @@ defineProps<{
   <div class="w-full">
     <HeaderH5>Insiders trades</HeaderH5>
 
-    <div class="relative overflow-x-auto max-h-96 rounded">
+    <div class="relative overflow-x-auto max-h-[29rem] rounded">
       <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
         <thead
           class="text-xs text-gray-700 uppercase border-b-4 dark:text-gray-400"
