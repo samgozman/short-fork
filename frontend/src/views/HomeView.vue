@@ -6,6 +6,7 @@ import InsidersTableWidget from "@/components/widgets/InsidersTableWidget.vue";
 import OptionsWidget from "@/components/widgets/OptionsWidget.vue";
 import FinancialReportWarning from "@/components/widgets/FinancialReportWarning.vue";
 import NetIncomeChartWidget from "@/components/widgets/NetIncomeChartWidget.vue";
+import DebtChartWidget from "@/components/widgets/DebtChartWidget.vue";
 </script>
 
 <template>
@@ -50,7 +51,13 @@ import NetIncomeChartWidget from "@/components/widgets/NetIncomeChartWidget.vue"
       <ContentBox class="col-span-1 lg:col-span-2">
         <InsidersTableWidget :insidersTrades="insiders" :key="insidersKey" />
       </ContentBox>
-      <ContentBox>Debt to capital chart</ContentBox>
+      <ContentBox>
+        <DebtChartWidget
+          :series="debtChart.series"
+          :xaxis="debtChart.xaxis"
+          :key="debtChartKey"
+        />
+      </ContentBox>
     </div>
     <div class="grid grid-cols-1">
       <ContentBox>Trading view big chart</ContentBox>
@@ -82,6 +89,11 @@ interface Data {
     xaxis: string[] | number[];
   };
   netIncomeChartKey: number;
+  debtChart: {
+    series: ApexChartSeries;
+    xaxis: string[] | number[];
+  };
+  debtChartKey: number;
 }
 export default defineComponent({
   data(): Data {
@@ -96,6 +108,8 @@ export default defineComponent({
       showEarningsWarning: false,
       netIncomeChart: {} as Data["netIncomeChart"],
       netIncomeChartKey: 0,
+      debtChart: {} as Data["debtChart"],
+      debtChartKey: 0,
     };
   },
   methods: {
@@ -145,6 +159,22 @@ export default defineComponent({
       };
 
       this.netIncomeChartKey = Math.random(); // to force re-render
+
+      this.debtChart = {
+        series: [
+          {
+            name: "Debt",
+            data: barchartFinancials.longTermDebt,
+          },
+          {
+            name: "Equity",
+            data: barchartFinancials.shareholdersEquity,
+          },
+        ],
+        xaxis: barchartFinancials.dates,
+      };
+
+      this.debtChartKey = Math.random(); // to force re-render
     },
   },
 });
