@@ -91,6 +91,7 @@ export default defineComponent({
       this.$emit("getInsiders", finviz.insidersDeals);
       this.$emit("stockWithExchange", stock, finviz.exchange);
       this.$emit("setEarnings", finviz.earnings);
+      this.ifStockNotFound = false;
     },
     async getShortsqueeze(stock: string) {
       const shortsqueeze = await FetchData.getShortsqueeze(stock);

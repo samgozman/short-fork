@@ -161,6 +161,7 @@ export default defineComponent({
         this.barchartOverview = {} as IBarchartOverview;
       } else {
         this.barchartOverview = overview;
+        this.isBarchartOverviewNotFound = false;
       }
 
       this.barchartOverviewKey = Math.random(); // to force re-render
@@ -208,6 +209,8 @@ export default defineComponent({
       };
 
       this.debtChartKey = Math.random(); // to force re-render
+
+      this.isBarchartFinancialsNotFound = false;
     },
   },
 });
