@@ -44,6 +44,10 @@ export class BarchartService {
       return null;
     }
 
+    if (!barchartFinancialsBalance || barchartFinancialsIncome) {
+      return null;
+    }
+
     if (barchartFinancialsBalance.error || barchartFinancialsIncome.error) {
       return null;
     }
