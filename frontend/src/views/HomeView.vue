@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import ContentBox from "@/components/layout/ContentBox.vue";
+import ErrorText from "@/components/layout/typography/ErrorText.vue";
 import MainWidget from "@/components/widgets/MainWidget.vue";
 import LinksWidget from "@/components/widgets/LinksWidget.vue";
 import InsidersTableWidget from "@/components/widgets/InsidersTableWidget.vue";
@@ -17,14 +18,15 @@ import DebtChartWidget from "@/components/widgets/DebtChartWidget.vue";
       </ContentBox>
     </div>
     <div class="grid grid-cols-1 lg:grid-cols-3">
-      <ContentBox
-        ><MainWidget
+      <ContentBox>
+        <MainWidget
           @stockWithExchange="updateLinksAndTradingView"
           @getInsiders="getInsiders"
           @setEarnings="setEarnings"
           @getBarchartOverview="getBarchartOverview"
           @getBarchartFinancials="getBarchartFinancials"
-      /></ContentBox>
+        />
+      </ContentBox>
       <ContentBox>Trading view widget</ContentBox>
       <ContentBox>Tightshorts</ContentBox>
     </div>
@@ -34,6 +36,9 @@ import DebtChartWidget from "@/components/widgets/DebtChartWidget.vue";
           :options="barchartOverview.options"
           :key="barchartOverviewKey"
         />
+        <ErrorText v-if="isBarchartOverviewNotFound">
+          Error! Data not found
+        </ErrorText>
       </ContentBox>
       <ContentBox class="lg:row-start-2 lg:row-end-3">
         <LinksWidget :ticker="stockTicker" :exchange="stockExchange" />
@@ -45,6 +50,9 @@ import DebtChartWidget from "@/components/widgets/DebtChartWidget.vue";
           :xaxis="netIncomeChart.xaxis"
           :key="netIncomeChartKey"
         />
+        <ErrorText v-if="isBarchartFinancialsNotFound">
+          Error! Data not found
+        </ErrorText>
       </ContentBox>
     </div>
     <div class="grid grid-cols-1 lg:grid-cols-3">
@@ -57,6 +65,9 @@ import DebtChartWidget from "@/components/widgets/DebtChartWidget.vue";
           :xaxis="debtChart.xaxis"
           :key="debtChartKey"
         />
+        <ErrorText v-if="isBarchartFinancialsNotFound">
+          Error! Data not found
+        </ErrorText>
       </ContentBox>
     </div>
     <div class="grid grid-cols-1">
@@ -94,6 +105,8 @@ interface Data {
     xaxis: string[] | number[];
   };
   debtChartKey: number;
+  isBarchartFinancialsNotFound: boolean;
+  isBarchartOverviewNotFound: boolean;
 }
 export default defineComponent({
   data(): Data {
@@ -110,6 +123,8 @@ export default defineComponent({
       netIncomeChartKey: 0,
       debtChart: {} as Data["debtChart"],
       debtChartKey: 0,
+      isBarchartFinancialsNotFound: false,
+      isBarchartOverviewNotFound: false,
     };
   },
   methods: {
@@ -139,11 +154,29 @@ export default defineComponent({
       this.showEarningsWarning = false;
     },
     async getBarchartOverview(stock: string) {
-      this.barchartOverview = await FetchData.getBarchartOverview(stock);
+      const overview = await FetchData.getBarchartOverview(stock);
+
+      if (!overview) {
+        this.isBarchartOverviewNotFound = true;
+        this.barchartOverview = {} as IBarchartOverview;
+      } else {
+        this.barchartOverview = overview;
+      }
+
       this.barchartOverviewKey = Math.random(); // to force re-render
     },
     async getBarchartFinancials(stock: string) {
       const barchartFinancials = await FetchData.getBarchartFinancials(stock);
+
+      if (!barchartFinancials) {
+        this.isBarchartFinancialsNotFound = true;
+        this.netIncomeChart = {} as Data["netIncomeChart"];
+        this.netIncomeChartKey = Math.random();
+        this.debtChart = {} as Data["debtChart"];
+        this.debtChartKey = Math.random();
+        return;
+      }
+
       this.netIncomeChart = {
         series: [
           {

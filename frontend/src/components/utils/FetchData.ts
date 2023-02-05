@@ -7,33 +7,53 @@ import type { IBarchartFinancial } from "@/components/interfaces/financial.inter
 export class FetchData {
   private static readonly baseUrl = import.meta.env.VITE_API_URL;
 
-  public static async getFinviz(ticker: string): Promise<IFinviz> {
-    const { data } = await axios.get(`${this.baseUrl}/stock/${ticker}/finviz`);
-    return data;
+  public static async getFinviz(ticker: string): Promise<IFinviz | null> {
+    try {
+      const { data } = await axios.get(
+        `${this.baseUrl}/stock/${ticker}/finviz`
+      );
+      return data;
+    } catch (error) {
+      return null;
+    }
   }
 
-  public static async getShortsqueeze(ticker: string): Promise<IShortsqueeze> {
-    const { data } = await axios.get(
-      `${this.baseUrl}/stock/${ticker}/shortsqueeze`
-    );
-    return data;
+  public static async getShortsqueeze(
+    ticker: string
+  ): Promise<IShortsqueeze | null> {
+    try {
+      const { data } = await axios.get(
+        `${this.baseUrl}/stock/${ticker}/shortsqueeze`
+      );
+      return data;
+    } catch (error) {
+      return null;
+    }
   }
 
   public static async getBarchartOverview(
     ticker: string
-  ): Promise<IBarchartOverview> {
-    const { data } = await axios.get(
-      `${this.baseUrl}/stock/${ticker}/barchart/overview`
-    );
-    return data;
+  ): Promise<IBarchartOverview | null> {
+    try {
+      const { data } = await axios.get(
+        `${this.baseUrl}/stock/${ticker}/barchart/overview`
+      );
+      return data;
+    } catch (error) {
+      return null;
+    }
   }
 
   public static async getBarchartFinancials(
     ticker: string
-  ): Promise<IBarchartFinancial> {
-    const { data } = await axios.get(
-      `${this.baseUrl}/stock/${ticker}/barchart/financial`
-    );
-    return data;
+  ): Promise<IBarchartFinancial | null> {
+    try {
+      const { data } = await axios.get(
+        `${this.baseUrl}/stock/${ticker}/barchart/financial`
+      );
+      return data;
+    } catch (error) {
+      return null;
+    }
   }
 }

@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import InputWithSubmit from "@/components/elements/InputWithSubmit.vue";
 import KeyValueTag from "@/components/elements/KeyValueTag.vue";
+import ErrorText from "@/components/layout/typography/ErrorText.vue";
 </script>
 
 <template>
@@ -18,6 +19,7 @@ import KeyValueTag from "@/components/elements/KeyValueTag.vue";
     <div class="grid grid-cols-2 gap-2">
       <KeyValueTag v-for="tag in tags" :key="tag.key" :element="tag" />
     </div>
+    <ErrorText v-if="ifStockNotFound">Error! Stock not found!</ErrorText>
   </div>
 </template>
 
@@ -34,6 +36,7 @@ interface Data {
   tagsValues: IMainTags;
   /** To store tags for rendering */
   tags: ITagElement[];
+  ifStockNotFound: boolean;
 }
 
 export default defineComponent({
@@ -41,6 +44,7 @@ export default defineComponent({
     return {
       tagsValues: {} as IMainTags,
       tags: [],
+      ifStockNotFound: false,
     };
   },
   methods: {
@@ -50,6 +54,12 @@ export default defineComponent({
     },
     async getFinviz(stock: string) {
       const finviz = await FetchData.getFinviz(stock);
+
+      if (!finviz) {
+        this.ifStockNotFound = true;
+        return;
+      }
+
       this.tagsValues = Object.assign(this.tagsValues, {
         name: finviz.name,
         exchange: finviz.exchange,
@@ -84,7 +94,9 @@ export default defineComponent({
     },
     async getShortsqueeze(stock: string) {
       const shortsqueeze = await FetchData.getShortsqueeze(stock);
-      this.tagsValues.shortsqueezeShortFloat = shortsqueeze.shortFlow;
+      this.tagsValues.shortsqueezeShortFloat = shortsqueeze
+        ? shortsqueeze.shortFlow
+        : null;
       this.prepareTags();
     },
     prepareTags() {
