@@ -26,6 +26,7 @@ import AnalyticsWidget from "@/components/widgets/AnalyticsWidget.vue";
           @setEarnings="setEarnings"
           @getBarchartOverview="getBarchartOverview"
           @getBarchartFinancials="getBarchartFinancials"
+          @setFinvizRating="setFinvizRating"
         />
       </ContentBox>
       <ContentBox>Trading view widget</ContentBox>
@@ -45,7 +46,10 @@ import AnalyticsWidget from "@/components/widgets/AnalyticsWidget.vue";
         <LinksWidget :ticker="stockTicker" :exchange="stockExchange" />
       </ContentBox>
       <ContentBox class="lg:row-start-1 lg:row-end-3">
-        <AnalyticsWidget />
+        <AnalyticsWidget
+          :barchartAnalytics="barchartAnalytics"
+          :key="barchartAnalyticsKey"
+        />
       </ContentBox>
       <ContentBox class="lg:row-start-1 lg:row-end-3">
         <NetIncomeChartWidget
@@ -86,6 +90,7 @@ import { FetchData } from "@/components/utils/FetchData";
 import type { IBarchartOverview } from "@/components/interfaces/overview.interface";
 import type { IEarnings } from "@/components/interfaces/earnings.interface";
 import type { ApexChartSeries } from "@/components/types/apex";
+import type { IBarchartAnalytics } from "@/components/interfaces/analytics.interface";
 
 const DaysBeforeEarningsWarning = 14;
 
@@ -110,6 +115,9 @@ interface Data {
   debtChartKey: number;
   isBarchartFinancialsNotFound: boolean;
   isBarchartOverviewNotFound: boolean;
+  barchartAnalytics: IBarchartAnalytics | undefined;
+  barchartAnalyticsKey: number;
+  finvizRating: number | null;
 }
 export default defineComponent({
   data(): Data {
@@ -128,6 +136,9 @@ export default defineComponent({
       debtChartKey: 0,
       isBarchartFinancialsNotFound: false,
       isBarchartOverviewNotFound: false,
+      barchartAnalytics: undefined,
+      barchartAnalyticsKey: 0,
+      finvizRating: null,
     };
   },
   methods: {
@@ -156,6 +167,10 @@ export default defineComponent({
       this.earnings = {} as IEarnings;
       this.showEarningsWarning = false;
     },
+    setFinvizRating(rating: number | null) {
+      this.finvizRating = rating;
+      this.barchartAnalyticsKey = Math.random();
+    },
     async getBarchartOverview(stock: string) {
       const overview = await FetchData.getBarchartOverview(stock);
 
@@ -165,6 +180,9 @@ export default defineComponent({
       } else {
         this.barchartOverview = overview;
         this.isBarchartOverviewNotFound = false;
+
+        this.barchartAnalytics = overview.analytics;
+        this.barchartAnalyticsKey = Math.random();
       }
 
       this.barchartOverviewKey = Math.random(); // to force re-render

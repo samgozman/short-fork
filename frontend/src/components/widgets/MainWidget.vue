@@ -91,6 +91,10 @@ export default defineComponent({
       this.$emit("getInsiders", finviz.insidersDeals);
       this.$emit("stockWithExchange", stock, finviz.exchange);
       this.$emit("setEarnings", finviz.earnings);
+      this.$emit(
+        "setFinvizRating",
+        finviz.recommendation ? 6 - finviz.recommendation : null
+      );
       this.ifStockNotFound = false;
     },
     async getShortsqueeze(stock: string) {

@@ -24,7 +24,7 @@ const maxValue = 5;
         }"
         :style="{ width: `${(value / maxValue) * 100}%` }"
       >
-        {{ value }}
+        {{ value.toFixed(2) }}
       </div>
     </div>
   </div>
