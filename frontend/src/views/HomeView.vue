@@ -8,6 +8,7 @@ import OptionsWidget from "@/components/widgets/OptionsWidget.vue";
 import FinancialReportWarning from "@/components/widgets/FinancialReportWarning.vue";
 import NetIncomeChartWidget from "@/components/widgets/NetIncomeChartWidget.vue";
 import DebtChartWidget from "@/components/widgets/DebtChartWidget.vue";
+import AnalyticsWidget from "@/components/widgets/AnalyticsWidget.vue";
 </script>
 
 <template>
@@ -43,7 +44,9 @@ import DebtChartWidget from "@/components/widgets/DebtChartWidget.vue";
       <ContentBox class="lg:row-start-2 lg:row-end-3">
         <LinksWidget :ticker="stockTicker" :exchange="stockExchange" />
       </ContentBox>
-      <ContentBox class="lg:row-start-1 lg:row-end-3">Analyst</ContentBox>
+      <ContentBox class="lg:row-start-1 lg:row-end-3">
+        <AnalyticsWidget />
+      </ContentBox>
       <ContentBox class="lg:row-start-1 lg:row-end-3">
         <NetIncomeChartWidget
           :series="netIncomeChart.series"
