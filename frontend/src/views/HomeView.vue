@@ -48,6 +48,7 @@ import AnalyticsWidget from "@/components/widgets/AnalyticsWidget.vue";
       <ContentBox class="lg:row-start-1 lg:row-end-3">
         <AnalyticsWidget
           :barchartAnalytics="barchartAnalytics"
+          :finvizRating="finvizRating"
           :key="barchartAnalyticsKey"
         />
       </ContentBox>

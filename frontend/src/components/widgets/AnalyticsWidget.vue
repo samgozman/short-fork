@@ -5,7 +5,7 @@ import type { IBarchartAnalytics } from "@/components/interfaces/analytics.inter
 
 defineProps<{
   barchartAnalytics?: IBarchartAnalytics;
-  finvizRating?: number;
+  finvizRating?: number | null;
 }>();
 </script>
 
