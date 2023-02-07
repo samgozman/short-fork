@@ -10,6 +10,7 @@ import ErrorText from "@/components/layout/typography/ErrorText.vue";
       @submitStock="submitStock"
       @getFinviz="getFinviz"
       @getShortsqueeze="getShortsqueeze"
+      @getTightshorts="getTightshorts"
       class="mb-4"
     />
     <div class="w-full">
@@ -103,6 +104,16 @@ export default defineComponent({
         ? shortsqueeze.shortFlow
         : null;
       this.prepareTags();
+    },
+    async getTightshorts(stock: string) {
+      const tightshorts = await FetchData.getTightshorts(stock);
+      if (tightshorts) {
+        this.tagsValues.tightShortsShortVol = Number(
+          tightshorts.currentShortVolume
+        );
+        this.$emit("setTightshortsChart", tightshorts.chart);
+        this.prepareTags();
+      }
     },
     prepareTags() {
       this.tags = [

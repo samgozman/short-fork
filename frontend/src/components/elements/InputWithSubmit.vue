@@ -47,6 +47,7 @@ export default defineComponent({
       this.$emit("submitStock", stock);
       this.$emit("getFinviz", stock);
       this.$emit("getShortsqueeze", stock);
+      this.$emit("getTightshorts", stock);
     },
   },
 });
