@@ -9,6 +9,7 @@ import FinancialReportWarning from "@/components/widgets/FinancialReportWarning.
 import NetIncomeChartWidget from "@/components/widgets/NetIncomeChartWidget.vue";
 import DebtChartWidget from "@/components/widgets/DebtChartWidget.vue";
 import AnalyticsWidget from "@/components/widgets/AnalyticsWidget.vue";
+import TightshortsChartWidget from "@/components/widgets/TightshortsChartWidget.vue";
 </script>
 
 <template>
@@ -27,10 +28,16 @@ import AnalyticsWidget from "@/components/widgets/AnalyticsWidget.vue";
           @getBarchartOverview="getBarchartOverview"
           @getBarchartFinancials="getBarchartFinancials"
           @setFinvizRating="setFinvizRating"
+          @setTightshortsChart="setTightshortsChart"
         />
       </ContentBox>
       <ContentBox>Trading view widget</ContentBox>
-      <ContentBox>Tightshorts</ContentBox>
+      <ContentBox>
+        <TightshortsChartWidget
+          :chart="tightshortsChart"
+          :key="tightshortsChartKey"
+        />
+      </ContentBox>
     </div>
     <div class="grid grid-cols-1 lg:grid-cols-3">
       <ContentBox class="lg:row-start-1 lg:row-end-2">
@@ -92,6 +99,7 @@ import type { IBarchartOverview } from "@/components/interfaces/overview.interfa
 import type { IEarnings } from "@/components/interfaces/earnings.interface";
 import type { ApexChartSeries } from "@/components/types/apex";
 import type { IBarchartAnalytics } from "@/components/interfaces/analytics.interface";
+import type { ITightshortsChart } from "@/components/interfaces/tightshorts/chart.interface";
 
 const DaysBeforeEarningsWarning = 14;
 
@@ -119,6 +127,8 @@ interface Data {
   barchartAnalytics: IBarchartAnalytics | undefined;
   barchartAnalyticsKey: number;
   finvizRating: number | null;
+  tightshortsChart: ITightshortsChart;
+  tightshortsChartKey: number;
 }
 export default defineComponent({
   data(): Data {
@@ -140,6 +150,8 @@ export default defineComponent({
       barchartAnalytics: undefined,
       barchartAnalyticsKey: 0,
       finvizRating: null,
+      tightshortsChart: {} as ITightshortsChart,
+      tightshortsChartKey: 0,
     };
   },
   methods: {
@@ -171,6 +183,10 @@ export default defineComponent({
     setFinvizRating(rating: number | null) {
       this.finvizRating = rating;
       this.barchartAnalyticsKey = Math.random();
+    },
+    setTightshortsChart(chart: ITightshortsChart) {
+      this.tightshortsChart = chart;
+      this.tightshortsChartKey = Math.random();
     },
     async getBarchartOverview(stock: string) {
       const overview = await FetchData.getBarchartOverview(stock);
