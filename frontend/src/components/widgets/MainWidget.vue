@@ -2,6 +2,7 @@
 import InputWithSubmit from "@/components/elements/InputWithSubmit.vue";
 import KeyValueTag from "@/components/elements/KeyValueTag.vue";
 import ErrorText from "@/components/layout/typography/ErrorText.vue";
+import ExternalLink from "@/components/elements/ExternalLink.vue";
 </script>
 
 <template>
@@ -13,8 +14,45 @@ import ErrorText from "@/components/layout/typography/ErrorText.vue";
       @getTightshorts="getTightshorts"
       class="mb-4"
     />
-    <div class="w-full">
-      <p>Some general info</p>
+    <div class="w-full mb-4">
+      <strong>Web site: </strong>
+      <ExternalLink :link="generalInfo.site ?? ''">{{
+        generalInfo.site
+      }}</ExternalLink>
+      <br />
+      <strong>Company: </strong><span>{{ generalInfo.name }}</span> (<span>{{
+        generalInfo.country
+      }}</span
+      >)<br />
+      <strong>Closest earnings report: </strong>
+      <span>{{ generalInfo.earningsDate }}</span> <br />
+      <strong>Reports: </strong
+      ><span>
+        <ExternalLink
+          :link="`https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&amp;CIK=${stock}&amp;type=10-K&amp;dateb=&amp;owner=exclude&amp;count=40`"
+        >
+          10-K
+        </ExternalLink>
+        /
+        <ExternalLink
+          :link="`https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&amp;CIK=${stock}&amp;type=10-Q&amp;dateb=&amp;owner=exclude&amp;count=40`"
+        >
+          10-Q
+        </ExternalLink>
+        /
+        <ExternalLink
+          :link="`https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&amp;CIK=${stock}&amp;type=8-K&amp;dateb=&amp;owner=exclude&amp;count=40`"
+        >
+          8-K
+        </ExternalLink>
+      </span>
+      <br />
+      <strong>Equity research: </strong>
+      <ExternalLink
+        :link="`https://www.google.com/search?q=${stock}+equity+research+filetype%3Apdf`"
+      >
+        Find
+      </ExternalLink>
     </div>
     <!-- Block with tags  -->
     <div class="grid grid-cols-2 gap-2">
@@ -32,12 +70,21 @@ import { TagThemes } from "@/components/enums/TagThemes.enum";
 import { getTagColor } from "@/components/utils/getTagColor";
 import { FetchData } from "@/components/utils/FetchData";
 
+interface GeneralInfo {
+  site?: string;
+  name: string;
+  earningsDate: number | null;
+  country: string;
+}
+
 interface Data {
   /** To store key:value data from API */
   tagsValues: IMainTags;
   /** To store tags for rendering */
   tags: ITagElement[];
   ifStockNotFound: boolean;
+  generalInfo: GeneralInfo;
+  stock: string;
 }
 
 export default defineComponent({
@@ -46,10 +93,18 @@ export default defineComponent({
       tagsValues: {} as IMainTags,
       tags: [],
       ifStockNotFound: false,
+      generalInfo: {
+        site: undefined,
+        name: "",
+        earningsDate: null,
+        country: "",
+      },
+      stock: "",
     };
   },
   methods: {
     submitStock(stock: string) {
+      this.stock = stock;
       this.$emit("getBarchartOverview", stock);
       this.$emit("getBarchartFinancials", stock);
     },
@@ -61,8 +116,14 @@ export default defineComponent({
         return;
       }
 
-      this.tagsValues = Object.assign(this.tagsValues, {
+      this.generalInfo = {
+        site: finviz.site ?? undefined,
         name: finviz.name,
+        earningsDate: finviz.earnings.date,
+        country: finviz.country,
+      };
+
+      this.tagsValues = Object.assign(this.tagsValues, {
         exchange: finviz.exchange,
         country: finviz.country,
         price: finviz.price,
@@ -78,8 +139,6 @@ export default defineComponent({
           ? ((finviz.targetPrice / finviz.price - 1) * 100).toFixed(1)
           : null,
         rsi: finviz.rsi,
-        recommendation: finviz.recommendation,
-        site: finviz.site,
         peg: finviz.peg,
         dividendPercent: finviz.dividendPercent,
         instOwn: finviz.instOwn,
