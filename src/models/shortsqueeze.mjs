@@ -1,7 +1,7 @@
 import mongoose from 'mongoose'
 import StockModule from '../db/StockModule.mjs'
 import timeout from '../utils/timeout.mjs'
-import * as shortsqueeze from 'shortsqueeze'
+import shortsqueeze from 'shortsqueeze'
 
 // Class mongoose.Schema for shortsqueeze instance
 const shortsqueezeSchema = mongoose.Schema({
