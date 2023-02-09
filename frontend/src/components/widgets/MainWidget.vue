@@ -239,7 +239,7 @@ export default defineComponent({
         },
         {
           key: "SV for 24h",
-          value: this.tagsValues.tightShortsShortVol ?? "",
+          value: (this.tagsValues.tightShortsShortVol ?? "") + "%",
           theme: getTagColor(this.tagsValues.tightShortsShortVol, {
             best: [0, 30],
             worst: [70, 100],
