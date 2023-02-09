@@ -6,24 +6,24 @@
   "main": "index.mjs",
   "exports": "./index.mjs",
   "dependencies": {
-    "axios": "^0.24.0",
-    "barchart-dot-com": "^1.0.5",
-    "compression": "^1.7.4",
-    "express": "^4.18.1",
-    "express-handlebars": "^6.0.6",
-    "express-rate-limit": "^6.4.0",
-    "finvizor": "^1.1.1",
-    "helmet": "^5.0.2",
-    "mongoose": "^5.13.9",
-    "node-schedule": "^2.1.0",
-    "p-timeout": "^5.0.2",
+    "axios": "=0.24.0",
+    "barchart-dot-com": "=1.0.5",
+    "compression": "=1.7.4",
+    "express": "=4.18.1",
+    "express-handlebars": "=6.0.6",
+    "express-rate-limit": "=6.4.0",
+    "finvizor": "=1.1.1",
+    "helmet": "=5.0.2",
+    "mongoose": "=5.13.9",
+    "node-schedule": "=2.1.0",
+    "p-timeout": "=5.0.2",
     "shortsqueeze": "=1.1.0",
-    "tinkoff-api-securities": "^1.0.4"
+    "tinkoff-api-securities": "=1.0.4"
   },
   "devDependencies": {
-    "dotenv": "^11.0.0",
-    "eslint": "^8.15.0",
-    "nodemon": "^2.0.16"
+    "dotenv": "=11.0.0",
+    "eslint": "=8.15.0",
+    "nodemon": "=2.0.16"
   },
   "engines": {
     "node": ">=16.0.0"
