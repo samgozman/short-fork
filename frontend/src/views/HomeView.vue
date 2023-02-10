@@ -10,6 +10,7 @@ import NetIncomeChartWidget from "@/components/widgets/NetIncomeChartWidget.vue"
 import DebtChartWidget from "@/components/widgets/DebtChartWidget.vue";
 import AnalyticsWidget from "@/components/widgets/AnalyticsWidget.vue";
 import TightshortsChartWidget from "@/components/widgets/TightshortsChartWidget.vue";
+import TechnicalAnalysisWidget from "@/components/widgets/TechnicalAnalysisWidget.vue";
 </script>
 
 <template>
@@ -31,7 +32,13 @@ import TightshortsChartWidget from "@/components/widgets/TightshortsChartWidget.
           @setTightshortsChart="setTightshortsChart"
         />
       </ContentBox>
-      <ContentBox>Trading view widget</ContentBox>
+      <ContentBox>
+        <TechnicalAnalysisWidget
+          :stock="stockTicker"
+          :exchange="stockExchange"
+          :key="tradingViewKey"
+        />
+      </ContentBox>
       <ContentBox>
         <TightshortsChartWidget
           :chart="tightshortsChart"
@@ -129,6 +136,7 @@ interface Data {
   finvizRating: number | null;
   tightshortsChart: ITightshortsChart;
   tightshortsChartKey: number;
+  tradingViewKey: number;
 }
 export default defineComponent({
   data(): Data {
@@ -152,13 +160,14 @@ export default defineComponent({
       finvizRating: null,
       tightshortsChart: {} as ITightshortsChart,
       tightshortsChartKey: 0,
+      tradingViewKey: 0,
     };
   },
   methods: {
     updateLinksAndTradingView(stock: string, exchange: string) {
       this.stockTicker = stock;
       this.stockExchange = exchange === "NASD" ? "NASDAQ" : exchange;
-      // TODO: Update trading view widget and chart
+      this.tradingViewKey = Math.random();
     },
     getInsiders(insidersTable: IInsider[]) {
       this.insiders = insidersTable;
