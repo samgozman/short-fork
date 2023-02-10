@@ -26,4 +26,3 @@ defineProps<{
     />
   </div>
 </template>
-<!-- :referral_id="referral_id" -->

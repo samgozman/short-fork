@@ -11,6 +11,7 @@ import DebtChartWidget from "@/components/widgets/DebtChartWidget.vue";
 import AnalyticsWidget from "@/components/widgets/AnalyticsWidget.vue";
 import TightshortsChartWidget from "@/components/widgets/TightshortsChartWidget.vue";
 import TechnicalAnalysisWidget from "@/components/widgets/TechnicalAnalysisWidget.vue";
+import TradingviewChartWidget from "@/components/widgets/TradingviewChartWidget.vue";
 </script>
 
 <template>
@@ -93,7 +94,13 @@ import TechnicalAnalysisWidget from "@/components/widgets/TechnicalAnalysisWidge
       </ContentBox>
     </div>
     <div class="grid grid-cols-1">
-      <ContentBox>Trading view big chart</ContentBox>
+      <ContentBox>
+        <TradingviewChartWidget
+          :stock="stockTicker"
+          :exchange="stockExchange"
+          :key="tradingViewKey"
+        />
+      </ContentBox>
     </div>
   </div>
 </template>
