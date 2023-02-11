@@ -9,7 +9,7 @@ defineProps<{
 </script>
 
 <template>
-  <div class="w-full h-full">
+  <div class="w-full h-full min-h-[500px]">
     <HeaderH5>Technical analysis</HeaderH5>
     <TechnicalAnalysis
       :options="{
