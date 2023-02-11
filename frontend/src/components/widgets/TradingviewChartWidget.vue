@@ -32,7 +32,7 @@ defineProps<{
         popup_width: '1000',
         popup_height: '650',
       }"
-      class="h-[80vh]"
+      class="h-[95vh] sm:h-[80vh]"
     />
   </div>
 </template>
