@@ -24,7 +24,6 @@ defineProps<{
         studies: [
           'Volume@tv-basicstudies',
           'RSI@tv-basicstudies',
-          'Stochastic@tv-basicstudies',
           'BB@tv-basicstudies',
           'AwesomeOscillator@tv-basicstudies',
         ],
