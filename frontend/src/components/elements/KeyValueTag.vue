@@ -9,7 +9,7 @@ const modalId = "modal_" + props.element.key.replace(/\W+/g, "_");
 </script>
 
 <template>
-  <div class="w-full flex h-6">
+  <div class="flex h-7">
     <button
       class="bg-gray-700 text-gray-100 dark:bg-gray-700 dark:text-gray-100 text-xs text-left font-medium rounded-l w-full leading-6 pl-2"
       :data-modal-target="modalId"
@@ -18,7 +18,7 @@ const modalId = "modal_" + props.element.key.replace(/\W+/g, "_");
       {{ element.key }}
     </button>
     <span
-      class="text-xs rounded-r w-full leading-6 text-center"
+      class="text-xs rounded-r w-full leading-7 text-center"
       :class="{
         'bg-red-500 text-red-100 dark:bg-red-600 dark:text-red-100':
           element.theme === TagThemes.Red,
@@ -33,7 +33,6 @@ const modalId = "modal_" + props.element.key.replace(/\W+/g, "_");
       {{ element.value }}
     </span>
 
-    <!-- Main modal -->
     <div
       :id="modalId"
       tabindex="-1"
@@ -41,9 +40,7 @@ const modalId = "modal_" + props.element.key.replace(/\W+/g, "_");
       class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-modal md:h-full"
     >
       <div class="relative w-full h-full max-w-2xl md:h-auto">
-        <!-- Modal content -->
         <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-          <!-- Modal header -->
           <div
             class="flex items-start justify-between p-4 border-b rounded-t dark:border-gray-600"
           >
@@ -71,7 +68,6 @@ const modalId = "modal_" + props.element.key.replace(/\W+/g, "_");
               <span class="sr-only">Close modal</span>
             </button>
           </div>
-          <!-- Modal body -->
           <div class="p-6 space-y-6">
             <p
               class="text-base leading-relaxed text-gray-500 dark:text-gray-400"
