@@ -17,10 +17,10 @@ defineProps<{
           class="text-xs text-gray-700 uppercase border-b-4 dark:text-gray-400"
         >
           <tr>
-            <th scope="col" class="px-6 py-3">Insider</th>
-            <th scope="col" class="px-6 py-3">Date</th>
-            <th scope="col" class="px-6 py-3">Transaction</th>
-            <th scope="col" class="px-6 py-3">Value</th>
+            <th scope="col" class="px-2 md:px-6 py-3">Insider</th>
+            <th scope="col" class="px-2 md:px-6 py-3">Date</th>
+            <th scope="col" class="px-2 md:px-6 py-3">Transaction</th>
+            <th scope="col" class="px-2 md:px-6 py-3">Value</th>
           </tr>
         </thead>
         <tbody>
@@ -35,13 +35,13 @@ defineProps<{
           >
             <th
               scope="row"
-              class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+              class="px-2 md:px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
             >
               {{ trade.insiderTrading }}
             </th>
-            <td class="px-6 py-4">{{ trade.date }}</td>
-            <td class="px-6 py-4">{{ trade.transaction }}</td>
-            <td class="px-6 py-4">{{ trade.value }}</td>
+            <td class="px-2 md:px-6 py-4">{{ trade.date }}</td>
+            <td class="px-2 md:px-6 py-4">{{ trade.transaction }}</td>
+            <td class="px-2 md:px-6 py-4">{{ trade.value }}</td>
           </tr>
         </tbody>
       </table>
