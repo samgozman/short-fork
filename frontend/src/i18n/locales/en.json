@@ -1,0 +1,11 @@
+{
+  "nav": {
+    "projects": "🔥 My other projects",
+    "support": "🍺 Support this project",
+    "code": "👾 Browse source code",
+    "theme": {
+      "light": "Light",
+      "dark": "Dark"
+    }
+  }
+}
