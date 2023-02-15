@@ -1,4 +1,8 @@
 {
+  "locale": {
+    "en": "🇬🇧 English",
+    "ru": "🇷🇺 Russian"
+  },
   "nav": {
     "projects": "🔥 My other projects",
     "support": "🍺 Support this project",

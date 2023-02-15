@@ -1,3 +1,7 @@
+<script setup lang="ts">
+import LanguageSwitcher from "@/components/elements/LanguageSwitcher.vue";
+</script>
+
 <template>
   <nav
     class="bg-white border-gray-200 px-2 sm:px-4 py-2 rounded-b dark:bg-gray-900 shadow-sm"
@@ -49,39 +53,8 @@
           </span>
         </div>
 
-        <button
-          type="button"
-          data-dropdown-toggle="language-dropdown-menu"
-          class="inline-flex items-center justify-center px-4 py-4 text-sm text-gray-500 rounded-lg cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white"
-        >
-          🇬🇧 English
-        </button>
-        <!-- Dropdown -->
-        <div
-          class="z-50 hidden text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700"
-          id="language-dropdown-menu"
-        >
-          <ul class="py-2" role="none">
-            <li>
-              <a
-                href="#"
-                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"
-                role="menuitem"
-              >
-                <div class="inline-flex items-center">🇬🇧 English</div>
-              </a>
-            </li>
-            <li>
-              <a
-                href="#"
-                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"
-                role="menuitem"
-              >
-                <div class="inline-flex items-center">🇷🇺 Russian</div>
-              </a>
-            </li>
-          </ul>
-        </div>
+        <LanguageSwitcher />
+
         <button
           data-collapse-toggle="mobile-menu-language-select"
           type="button"
