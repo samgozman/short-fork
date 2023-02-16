@@ -69,6 +69,7 @@ import type { IMainTags } from "@/components/interfaces/MainTags.interface";
 import { TagThemes } from "@/components/enums/TagThemes.enum";
 import { getTagColor } from "@/components/utils/getTagColor";
 import { FetchData } from "@/components/utils/FetchData";
+import tr from "@/i18n/translation";
 
 interface GeneralInfo {
   site?: string;
@@ -107,6 +108,9 @@ export default defineComponent({
       this.stock = stock;
       this.$emit("getBarchartOverview", stock);
       this.$emit("getBarchartFinancials", stock);
+      this.$router.push(
+        tr.i18nRoute({ name: "home", params: { ticker: stock } })
+      );
     },
     async getFinviz(stock: string) {
       const finviz = await FetchData.getFinviz(stock);
@@ -364,6 +368,17 @@ export default defineComponent({
         },
       ];
     },
+  },
+  async beforeMount() {
+    const ticker = this.$route.params.ticker;
+    if (ticker && ticker !== "" && typeof ticker === "string") {
+      this.submitStock(ticker);
+      await Promise.all([
+        this.getFinviz(ticker),
+        this.getShortsqueeze(ticker),
+        this.getTightshorts(ticker),
+      ]);
+    }
   },
   mounted() {
     this.prepareTags();

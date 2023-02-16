@@ -1,4 +1,5 @@
 import i18n from "@/i18n";
+import type { RouteLocationNamedRaw } from "vue-router";
 
 const translations = {
   get supportedLocales() {
@@ -47,6 +48,19 @@ const translations = {
     }
 
     return this.defaultLocale;
+  },
+  get currentLocale(): string {
+    return i18n.global.locale.value;
+  },
+  /** Helper to create navigation links with locale */
+  i18nRoute(to: RouteLocationNamedRaw): RouteLocationNamedRaw {
+    return {
+      ...to,
+      params: {
+        locale: this.currentLocale,
+        ...to.params,
+      },
+    };
   },
 };
 export default translations;

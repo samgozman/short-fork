@@ -27,7 +27,7 @@ const router = createRouter({
       },
       children: [
         {
-          path: "",
+          path: ":ticker?",
           name: "home",
           component: HomeView,
         },
