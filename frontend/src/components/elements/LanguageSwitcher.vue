@@ -5,8 +5,6 @@ const { t, locale } = useI18n();
 
 const supportedLocales = tr.supportedLocales;
 </script>
-<!-- https://lokalise.com/blog/vue-i18n/ Performing locale switching -->
-<!-- Move code lang switcher -->
 <template>
   <select
     @change="switchLanguage"
