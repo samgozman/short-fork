@@ -1,6 +1,7 @@
 import i18n from "@/i18n";
 import type { RouteLocationNamedRaw } from "vue-router";
 
+/** The idea for this realization comes from https://lokalise.com/blog/vue-i18n/ post */
 const translations = {
   get supportedLocales() {
     return import.meta.env.VITE_SUPPORTED_LOCALES.split(",");
