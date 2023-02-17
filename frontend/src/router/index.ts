@@ -14,14 +14,15 @@ const router = createRouter({
         if (
           !paramLocale ||
           typeof paramLocale !== "string" ||
-          paramLocale === ""
+          paramLocale === "" ||
+          !tr.isLocaleSupported(paramLocale)
         ) {
-          return next(tr.guessDefaultLocale());
+          return next({
+            path: tr.guessDefaultLocale(),
+            query: to.query,
+          });
         }
 
-        if (!tr.isLocaleSupported(paramLocale)) {
-          return next(tr.guessDefaultLocale());
-        }
         await tr.switchLanguage(paramLocale);
         return next();
       },
@@ -30,6 +31,24 @@ const router = createRouter({
           path: ":ticker?",
           name: "home",
           component: HomeView,
+          /** Redirect from previous short-fork path `/?stock=` */
+          beforeEnter: (to, _from, next) => {
+            const queryTicker = to.query.stock;
+            if (
+              queryTicker &&
+              typeof queryTicker === "string" &&
+              queryTicker !== ""
+            ) {
+              return next(
+                tr.i18nRoute({
+                  name: "home",
+                  params: { ticker: queryTicker },
+                })
+              );
+            }
+
+            return next();
+          },
         },
       ],
     },
