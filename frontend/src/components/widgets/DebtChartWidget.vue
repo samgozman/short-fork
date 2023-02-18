@@ -41,6 +41,12 @@ export default defineComponent({
       chartOptions: {
         chart: {
           id: "debt-chart",
+          toolbar: {
+            show: false,
+            tools: {
+              download: false,
+            },
+          },
         },
         colors: ["#ef5350", "#2196f3"],
         dataLabels: {

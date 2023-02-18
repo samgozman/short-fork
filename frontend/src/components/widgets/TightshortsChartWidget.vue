@@ -58,6 +58,12 @@ export default defineComponent({
         chart: {
           id: "volume-chart",
           group: "synced-charts",
+          toolbar: {
+            show: false,
+            tools: {
+              download: false,
+            },
+          },
         },
         colors: ["#2196f3", "#ef5350"],
         dataLabels: {
@@ -101,6 +107,12 @@ export default defineComponent({
         chart: {
           id: "percent-chart",
           group: "synced-charts",
+          toolbar: {
+            show: false,
+            tools: {
+              download: false,
+            },
+          },
         },
         fill: {
           type: "gradient",

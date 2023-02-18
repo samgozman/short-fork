@@ -41,6 +41,12 @@ export default defineComponent({
       chartOptions: {
         chart: {
           id: "net-income-chart",
+          toolbar: {
+            show: false,
+            tools: {
+              download: false,
+            },
+          },
         },
         colors: ["#2196f3", "#C4BBAF"],
         dataLabels: {

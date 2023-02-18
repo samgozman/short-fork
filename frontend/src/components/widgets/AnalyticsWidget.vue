@@ -47,6 +47,12 @@ export default defineComponent({
       chartOptions: {
         chart: {
           id: "analytics-chart",
+          toolbar: {
+            show: false,
+            tools: {
+              download: false,
+            },
+          },
         },
         labels: [
           "Strong Buy",
