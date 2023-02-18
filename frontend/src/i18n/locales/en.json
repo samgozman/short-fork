@@ -39,7 +39,13 @@
     "title": "Net income and profit"
   },
   "insidersTrades": {
-    "title": "Insiders trades"
+    "title": "Insiders trades",
+    "table": {
+      "date": "Date",
+      "transaction": "Transaction",
+      "insider": "Insider",
+      "value": "Value"
+    }
   },
   "debtToEquity": {
     "title": "Debt to capital chart"
