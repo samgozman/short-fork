@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { TechnicalAnalysis } from "vue-tradingview-widgets";
 import HeaderH5 from "@/components/layout/typography/HeaderH5.vue";
+import HiddenParagraph from "@/components/layout/typography/HiddenParagraph.vue";
 import { useI18n } from "vue-i18n";
 
 const { locale } = useI18n();
@@ -12,7 +13,7 @@ defineProps<{
 </script>
 
 <template>
-  <div class="w-full h-full min-h-[500px]">
+  <div class="flex flex-col w-full h-full min-h-[600px]">
     <HeaderH5>{{ $t("technicalAnalysis.title") }}</HeaderH5>
     <TechnicalAnalysis
       :options="{
@@ -25,7 +26,18 @@ defineProps<{
         locale: locale,
         colorTheme: 'light',
       }"
-      class="h-[90%]"
+      class="grow"
     />
+    <p class="text-center text-sm py-2">
+      <a
+        href="https://ru.tradingview.com/gopro/?share_your_love=eragonovich"
+        target="_blank"
+        class="text-blue-500 hover:text-blue-600"
+        >{{ $t("technicalAnalysis.copyright") }}&nbsp;</a
+      >TradingView
+    </p>
+    <HiddenParagraph>
+      {{ $t("technicalAnalysis.disclaimer") }}
+    </HiddenParagraph>
   </div>
 </template>

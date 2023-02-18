@@ -24,7 +24,9 @@
     "tickerPlaceholder": "Ticker"
   },
   "technicalAnalysis": {
-    "title": "Technical analysis"
+    "title": "Technical analysis",
+    "copyright": "Technical analysis from",
+    "disclaimer": "The TradingView widget is displayed in real-time. It is not an investment recommendation and can't be used for commercial distribution."
   },
   "tightshorts": {
     "title": "Short volume"
