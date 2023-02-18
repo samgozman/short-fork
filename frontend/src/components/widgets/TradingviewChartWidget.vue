@@ -1,5 +1,8 @@
 <script setup lang="ts">
 import { Chart } from "vue-tradingview-widgets";
+import { useI18n } from "vue-i18n";
+
+const { locale } = useI18n();
 
 defineProps<{
   stock: string;
@@ -16,7 +19,7 @@ defineProps<{
         timezone: 'Etc/UTC',
         theme: 'light',
         style: '1',
-        locale: 'en',
+        locale: locale,
         toolbar_bg: '#f1f3f6',
         enable_publishing: false,
         range: '3M',

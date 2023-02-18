@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { TechnicalAnalysis } from "vue-tradingview-widgets";
 import HeaderH5 from "@/components/layout/typography/HeaderH5.vue";
+import { useI18n } from "vue-i18n";
+
+const { locale } = useI18n();
 
 defineProps<{
   stock: string;
@@ -19,7 +22,7 @@ defineProps<{
         symbol: `${exchange}:${stock}`,
         isTransparent: 'true',
         showIntervalTabs: 'true',
-        locale: 'en',
+        locale: locale,
         colorTheme: 'light',
       }"
       class="h-[90%]"
