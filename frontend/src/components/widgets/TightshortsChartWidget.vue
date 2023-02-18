@@ -10,7 +10,7 @@ defineProps<{
 
 <template>
   <div class="w-full">
-    <HeaderH5>Short volume</HeaderH5>
+    <HeaderH5>{{ $t("tightshorts.title") }}</HeaderH5>
     <apexchart
       height="285"
       width="100%"

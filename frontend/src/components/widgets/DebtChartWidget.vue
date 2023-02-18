@@ -10,7 +10,7 @@ defineProps<{
 
 <template>
   <div class="w-full">
-    <HeaderH5>Debt to capital chart</HeaderH5>
+    <HeaderH5>{{ $t("debtToEquity.title") }}</HeaderH5>
     <apexchart
       height="450"
       type="area"

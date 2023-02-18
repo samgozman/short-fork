@@ -13,7 +13,7 @@ defineProps<{
 
 <template>
   <div class="w-full h-full min-h-[500px]">
-    <HeaderH5>Technical analysis</HeaderH5>
+    <HeaderH5>{{ $t("technicalAnalysis.title") }}</HeaderH5>
     <TechnicalAnalysis
       :options="{
         interval: '1D',

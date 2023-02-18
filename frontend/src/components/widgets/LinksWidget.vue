@@ -9,7 +9,7 @@ defineProps<{
 
 <template>
   <div class="w-full">
-    <HeaderH5>Links</HeaderH5>
+    <HeaderH5>{{ $t("links.title") }}</HeaderH5>
     <LinkButton
       v-for="link in [
         {

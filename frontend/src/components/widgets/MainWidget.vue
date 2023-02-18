@@ -15,18 +15,19 @@ import ExternalLink from "@/components/elements/ExternalLink.vue";
       class="mb-4"
     />
     <div class="w-full mb-4">
-      <strong>Web site: </strong>
+      <strong>{{ $t("mainWidget.website") }}: </strong>
       <ExternalLink :link="generalInfo.site ?? ''">{{
         generalInfo.site
       }}</ExternalLink>
       <br />
-      <strong>Company: </strong><span>{{ generalInfo.name }}</span> (<span>{{
-        generalInfo.country
-      }}</span
-      >)<br />
-      <strong>Closest earnings report: </strong>
+      <strong> {{ $t("mainWidget.company") }}: </strong>
+      <span>{{ generalInfo.name }}</span>
+      (<span>{{ generalInfo.country }}</span
+      >)
+      <br />
+      <strong>{{ $t("mainWidget.closestEarnings") }}: </strong>
       <span>{{ generalInfo.earningsDate }}</span> <br />
-      <strong>Reports: </strong
+      <strong>{{ $t("mainWidget.reports") }}: </strong
       ><span>
         <ExternalLink
           :link="`https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&amp;CIK=${stock}&amp;type=10-K&amp;dateb=&amp;owner=exclude&amp;count=40`"
@@ -47,18 +48,18 @@ import ExternalLink from "@/components/elements/ExternalLink.vue";
         </ExternalLink>
       </span>
       <br />
-      <strong>Equity research: </strong>
+      <strong>{{ $t("mainWidget.equityResearch") }}: </strong>
       <ExternalLink
         :link="`https://www.google.com/search?q=${stock}+equity+research+filetype%3Apdf`"
       >
-        Find
+        {{ $t("mainWidget.findResearch") }}
       </ExternalLink>
     </div>
     <!-- Block with tags  -->
     <div class="grid grid-cols-2 gap-2">
       <KeyValueTag v-for="tag in tags" :key="tag.key" :element="tag" />
     </div>
-    <ErrorText v-if="ifStockNotFound">Error! Stock not found!</ErrorText>
+    <ErrorText v-if="ifStockNotFound">{{ $t("mainWidget.error") }}</ErrorText>
   </div>
 </template>
 

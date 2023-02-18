@@ -11,5 +11,44 @@
       "light": "Light",
       "dark": "Dark"
     }
+  },
+  "mainWidget": {
+    "website": "Website",
+    "company": "Company",
+    "closestEarnings": "Closest earnings report",
+    "reports": "Reports",
+    "equityResearch": "Equity research",
+    "findResearch": "Find",
+    "error": "Error! Stock not found!",
+    "example": "Example",
+    "tickerPlaceholder": "Ticker"
+  },
+  "technicalAnalysis": {
+    "title": "Technical analysis"
+  },
+  "tightshorts": {
+    "title": "Short volume"
+  },
+  "options": {
+    "title": "Options"
+  },
+  "analyst": {
+    "title": "Analyst"
+  },
+  "netIncome": {
+    "title": "Net income and profit"
+  },
+  "insidersTrades": {
+    "title": "Insiders trades"
+  },
+  "debtToEquity": {
+    "title": "Debt to capital chart"
+  },
+  "links": {
+    "title": "Links"
+  },
+  "reportsWarning": {
+    "waring": "Warning",
+    "message": "Earnings report is close"
   }
 }

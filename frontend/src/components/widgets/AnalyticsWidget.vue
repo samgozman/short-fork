@@ -11,7 +11,7 @@ defineProps<{
 
 <template>
   <div class="w-full">
-    <HeaderH5>Analyst</HeaderH5>
+    <HeaderH5>{{ $t("analyst.title") }}</HeaderH5>
     <ProgressBar label="Finviz" :value="finvizRating ?? 0" />
     <ProgressBar label="Barchart" :value="barchartAverage ?? 0" />
 

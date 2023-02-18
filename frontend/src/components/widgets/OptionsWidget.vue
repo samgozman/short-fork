@@ -10,7 +10,7 @@ defineProps<{
 
 <template>
   <div class="w-full">
-    <HeaderH5>Options</HeaderH5>
+    <HeaderH5>{{ $t("options.title") }}</HeaderH5>
     <div class="grid grid-cols-2 gap-2">
       <KeyValueTag v-for="tag in tags" :key="tag.key" :element="tag" />
     </div>

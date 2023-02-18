@@ -9,7 +9,7 @@ defineProps<{
 
 <template>
   <div class="w-full">
-    <HeaderH5>Insiders trades</HeaderH5>
+    <HeaderH5>{{ $t("insidersTrades.title") }}</HeaderH5>
 
     <div class="relative overflow-x-auto max-h-[29rem] rounded">
       <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">

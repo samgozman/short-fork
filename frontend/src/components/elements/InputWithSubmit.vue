@@ -12,7 +12,7 @@ import StockSuggestionBadge from "./StockSuggestionBadge.vue";
         Enter
       </button>
       <input
-        placeholder="Ticker"
+        :placeholder="$t('mainWidget.tickerPlaceholder')"
         class="w-full max-w-full h-10 px-4 line leading-7 rounded-r border border-gray-800 uppercase focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
         v-model="stock"
         @keypress.enter.prevent="submit"
@@ -20,7 +20,7 @@ import StockSuggestionBadge from "./StockSuggestionBadge.vue";
     </div>
 
     <div class="flex w-full leading-6">
-      <span class="mr-2">Example:</span>
+      <span class="mr-2">{{ $t("mainWidget.example") }}:</span>
       <div class="flex flex-wrap justify-between w-full">
         <StockSuggestionBadge
           v-for="ticker in ['AAPL', 'MSFT', 'AMZN', 'GOOGL', 'META', 'TSLA']"

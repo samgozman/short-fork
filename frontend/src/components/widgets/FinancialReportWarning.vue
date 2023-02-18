@@ -8,7 +8,8 @@ defineProps<{
 
 <template>
   <p>
-    <strong>🎰 Warning!</strong> Earnings report is close:
+    <strong>🎰 {{ $t("reportsWarning.waring") }}!</strong>
+    {{ $t("reportsWarning.message") }}:
     {{ new Date(earnings?.date || "").toLocaleDateString("uk-UK") }}
     {{
       earnings?.marketTime === "AMC"
