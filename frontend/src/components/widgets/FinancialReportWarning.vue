@@ -13,8 +13,8 @@ defineProps<{
     {{ new Date(earnings?.date || "").toLocaleDateString("uk-UK") }}
     {{
       earnings?.marketTime === "AMC"
-        ? "after market close"
-        : "before market close"
+        ? $t("reportsWarning.amc")
+        : $t("reportsWarning.bmc")
     }}
   </p>
 </template>

@@ -55,6 +55,8 @@
   },
   "reportsWarning": {
     "waring": "Warning",
-    "message": "Earnings report is close"
+    "message": "Earnings report is close",
+    "amc": "after market close",
+    "bmc": "before market close"
   }
 }
