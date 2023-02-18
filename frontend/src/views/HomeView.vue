@@ -237,11 +237,11 @@ export default defineComponent({
         series: [
           {
             name: "Net Income",
-            data: barchartFinancials.netIncome,
+            data: barchartFinancials.netIncome || [],
           },
           {
             name: "Revenue",
-            data: barchartFinancials.revenue,
+            data: barchartFinancials.revenue || [],
           },
         ],
         xaxis: barchartFinancials.dates,
@@ -253,11 +253,11 @@ export default defineComponent({
         series: [
           {
             name: "Debt",
-            data: barchartFinancials.longTermDebt,
+            data: barchartFinancials.longTermDebt || [],
           },
           {
             name: "Equity",
-            data: barchartFinancials.shareholdersEquity,
+            data: barchartFinancials.shareholdersEquity || [],
           },
         ],
         xaxis: barchartFinancials.dates,
