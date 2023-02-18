@@ -44,7 +44,7 @@ export class BarchartService {
       return null;
     }
 
-    if (!barchartFinancialsBalance || barchartFinancialsIncome) {
+    if (!barchartFinancialsBalance || !barchartFinancialsIncome) {
       return null;
     }
 
