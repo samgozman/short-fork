@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import ContentBox from "@/components/layout/ContentBox.vue";
+import WarningBox from "@/components/layout/WarningBox.vue";
 import ErrorText from "@/components/layout/typography/ErrorText.vue";
 import MainWidget from "@/components/widgets/MainWidget.vue";
 import LinksWidget from "@/components/widgets/LinksWidget.vue";
@@ -17,9 +18,9 @@ import TradingviewChartWidget from "@/components/widgets/TradingviewChartWidget.
 <template>
   <div>
     <div class="grid grid-cols-1">
-      <ContentBox class="bg-yellow-300" v-if="showEarningsWarning">
+      <WarningBox v-if="showEarningsWarning">
         <FinancialReportWarning :earnings="earnings" />
-      </ContentBox>
+      </WarningBox>
     </div>
     <div class="grid grid-cols-1 lg:grid-cols-3">
       <ContentBox>
