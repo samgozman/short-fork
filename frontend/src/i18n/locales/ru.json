@@ -11,5 +11,50 @@
       "light": "Свет",
       "dark": "Мгла"
     }
+  },
+  "mainWidget": {
+    "website": "Сайт",
+    "company": "Компания",
+    "closestEarnings": "Ближайший отчёт",
+    "reports": "Отчёты",
+    "equityResearch": "Проф. обзор",
+    "findResearch": "Найти",
+    "error": "Ошибка! Тикер не найден!",
+    "example": "Пример",
+    "tickerPlaceholder": "Тикер"
+  },
+  "technicalAnalysis": {
+    "title": "Технический анализ"
+  },
+  "tightshorts": {
+    "title": "Объём шортов"
+  },
+  "options": {
+    "title": "Опционы"
+  },
+  "analyst": {
+    "title": "Мнение аналитиков"
+  },
+  "netIncome": {
+    "title": "Выручка и прибыль"
+  },
+  "insidersTrades": {
+    "title": "Сделки инсайдеров",
+    "table": {
+      "date": "Дата",
+      "transaction": "Транзакция",
+      "insider": "Инсайдер",
+      "value": "Сумма"
+    }
+  },
+  "debtToEquity": {
+    "title": "Долг к капиталу"
+  },
+  "links": {
+    "title": "Ссылки"
+  },
+  "reportsWarning": {
+    "waring": "Внимание",
+    "message": "Отчёт близко"
   }
 }
