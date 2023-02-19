@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import HeaderH5 from "@/components/layout/typography/HeaderH5.vue";
 import type { ApexChartSeries } from "@/components/types/apex";
+import HiddenParagraph from "@/components/layout/typography/HiddenParagraph.vue";
 
 defineProps<{
   series?: ApexChartSeries;
@@ -9,7 +10,7 @@ defineProps<{
 </script>
 
 <template>
-  <div class="w-full">
+  <div class="flex flex-col h-full w-full">
     <HeaderH5>{{ $t("netIncome.title") }}</HeaderH5>
     <apexchart
       height="450"
@@ -22,7 +23,11 @@ defineProps<{
       }"
       :options="chartOptions"
       :series="chartSeries"
+      class="grow"
     ></apexchart>
+    <HiddenParagraph>
+      {{ $t("netIncome.disclaimer") }}
+    </HiddenParagraph>
   </div>
 </template>
 

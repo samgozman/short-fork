@@ -42,7 +42,8 @@
     "disclaimer": "Finviz data is updated every 20 minutes, Barchart every 20 minutes. It is not an investment recommendation and can't be used for commercial distribution."
   },
   "netIncome": {
-    "title": "Net income and profit"
+    "title": "Net income and profit",
+    "disclaimer": "Barchart data is updated every 30 days. It is not an investment recommendation and can't be used for commercial distribution."
   },
   "insidersTrades": {
     "title": "Insiders trades",
