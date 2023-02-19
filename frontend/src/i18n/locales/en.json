@@ -29,7 +29,8 @@
     "disclaimer": "The TradingView widget is displayed in real-time. It is not an investment recommendation and can't be used for commercial distribution."
   },
   "tightshorts": {
-    "title": "Short volume"
+    "title": "Short volume",
+    "disclaimer": "The Tightshorts widget is updated once per day (AMC). It is not an investment recommendation and can't be used for commercial distribution."
   },
   "options": {
     "title": "Options"

@@ -2,6 +2,7 @@
 import HeaderH5 from "@/components/layout/typography/HeaderH5.vue";
 import type { ApexChartSeries } from "@/components/types/apex";
 import type { ITightshortsChart } from "@/components/interfaces/tightshorts/chart.interface";
+import HiddenParagraph from "@/components/layout/typography/HiddenParagraph.vue";
 
 defineProps<{
   chart: ITightshortsChart;
@@ -9,11 +10,11 @@ defineProps<{
 </script>
 
 <template>
-  <div class="w-full">
+  <div class="flex flex-col h-full w-full">
     <HeaderH5>{{ $t("tightshorts.title") }}</HeaderH5>
     <apexchart
-      height="285"
       width="100%"
+      height="265"
       type="area"
       :toolbar="{
         show: false,
@@ -25,8 +26,8 @@ defineProps<{
       :series="chartSeries"
     ></apexchart>
     <apexchart
-      height="285"
       width="100%"
+      height="265"
       type="line"
       :toolbar="{
         show: false,
@@ -37,6 +38,17 @@ defineProps<{
       :options="percentChartOptions"
       :series="chartSeriesShort"
     ></apexchart>
+    <HiddenParagraph>
+      {{ $t("tightshorts.disclaimer") }}
+      <a
+        href="https://tightshorts.ru"
+        rel="nofollow"
+        target="_blank"
+        class="underline"
+      >
+        Tightshorts
+      </a>
+    </HiddenParagraph>
   </div>
 </template>
 
