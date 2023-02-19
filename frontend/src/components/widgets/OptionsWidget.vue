@@ -2,6 +2,7 @@
 import HeaderH5 from "@/components/layout/typography/HeaderH5.vue";
 import KeyValueTag from "@/components/elements/KeyValueTag.vue";
 import type { IBarchartOptions } from "@/components/interfaces/options.interafce";
+import HiddenParagraph from "@/components/layout/typography/HiddenParagraph.vue";
 
 defineProps<{
   options: IBarchartOptions;
@@ -9,11 +10,16 @@ defineProps<{
 </script>
 
 <template>
-  <div class="w-full">
+  <div class="flex flex-col h-full w-full">
     <HeaderH5>{{ $t("options.title") }}</HeaderH5>
-    <div class="grid grid-cols-2 gap-2">
-      <KeyValueTag v-for="tag in tags" :key="tag.key" :element="tag" />
+    <div class="grow">
+      <div class="grid grid-cols-2 gap-2 mb-4">
+        <KeyValueTag v-for="tag in tags" :key="tag.key" :element="tag" />
+      </div>
     </div>
+    <HiddenParagraph>
+      {{ $t("options.disclaimer") }}
+    </HiddenParagraph>
   </div>
 </template>
 

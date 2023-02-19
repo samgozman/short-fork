@@ -34,7 +34,8 @@
     "disclaimer": "The Tightshorts data is updated once per day (AMC). It is not an investment recommendation and can't be used for commercial distribution."
   },
   "options": {
-    "title": "Options"
+    "title": "Options",
+    "disclaimer": "Barchart data is updated every 20 minutes. It is not an investment recommendation and can't be used for commercial distribution."
   },
   "analyst": {
     "title": "Analyst"
