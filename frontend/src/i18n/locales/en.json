@@ -67,5 +67,8 @@
     "message": "Earnings report is close",
     "amc": "after market close",
     "bmc": "before market close"
+  },
+  "chart": {
+    "copyright": "Chart from"
   }
 }
