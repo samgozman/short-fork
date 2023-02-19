@@ -38,7 +38,7 @@ defineProps<{
     />
     <p class="text-center text-sm py-2">
       <a
-        href="https://ru.tradingview.com/gopro/?share_your_love=eragonovich"
+        href="https://tradingview.com/gopro/?share_your_love=eragonovich"
         target="_blank"
         class="text-blue-500 hover:text-blue-600"
         >{{ $t("chart.copyright") }}&nbsp;</a
