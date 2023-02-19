@@ -38,7 +38,8 @@
     "disclaimer": "Barchart data is updated every 20 minutes. It is not an investment recommendation and can't be used for commercial distribution."
   },
   "analyst": {
-    "title": "Analyst"
+    "title": "Analyst",
+    "disclaimer": "Finviz data is updated every 20 minutes, Barchart every 20 minutes. It is not an investment recommendation and can't be used for commercial distribution."
   },
   "netIncome": {
     "title": "Net income and profit"

@@ -2,6 +2,7 @@
 import HeaderH5 from "@/components/layout/typography/HeaderH5.vue";
 import ProgressBar from "@/components/elements/ProgressBar.vue";
 import type { IBarchartAnalytics } from "@/components/interfaces/analytics.interface";
+import HiddenParagraph from "@/components/layout/typography/HiddenParagraph.vue";
 
 defineProps<{
   barchartAnalytics?: IBarchartAnalytics;
@@ -10,23 +11,28 @@ defineProps<{
 </script>
 
 <template>
-  <div class="w-full">
+  <div class="flex flex-col h-full w-full">
     <HeaderH5>{{ $t("analyst.title") }}</HeaderH5>
-    <ProgressBar label="Finviz" :value="finvizRating ?? 0" />
-    <ProgressBar label="Barchart" :value="barchartAverage ?? 0" />
+    <div class="grow">
+      <ProgressBar label="Finviz" :value="finvizRating ?? 0" />
+      <ProgressBar label="Barchart" :value="barchartAverage ?? 0" />
 
-    <apexchart
-      width="100%"
-      type="donut"
-      :toolbar="{
-        show: false,
-      }"
-      :zoom="{
-        enabled: false,
-      }"
-      :options="chartOptions"
-      :series="chartSeries"
-    ></apexchart>
+      <apexchart
+        width="100%"
+        type="donut"
+        :toolbar="{
+          show: false,
+        }"
+        :zoom="{
+          enabled: false,
+        }"
+        :options="chartOptions"
+        :series="chartSeries"
+      ></apexchart>
+    </div>
+    <HiddenParagraph>
+      {{ $t("analyst.disclaimer") }}
+    </HiddenParagraph>
   </div>
 </template>
 
