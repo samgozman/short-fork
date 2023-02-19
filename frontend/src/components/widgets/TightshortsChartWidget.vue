@@ -12,32 +12,35 @@ defineProps<{
 <template>
   <div class="flex flex-col h-full w-full">
     <HeaderH5>{{ $t("tightshorts.title") }}</HeaderH5>
-    <apexchart
-      width="100%"
-      height="265"
-      type="area"
-      :toolbar="{
-        show: false,
-      }"
-      :zoom="{
-        enabled: false,
-      }"
-      :options="volumeChartOptions"
-      :series="chartSeries"
-    ></apexchart>
-    <apexchart
-      width="100%"
-      height="265"
-      type="line"
-      :toolbar="{
-        show: false,
-      }"
-      :zoom="{
-        enabled: false,
-      }"
-      :options="percentChartOptions"
-      :series="chartSeriesShort"
-    ></apexchart>
+    <div class="grow">
+      <apexchart
+        width="100%"
+        height="265"
+        type="area"
+        :toolbar="{
+          show: false,
+        }"
+        :zoom="{
+          enabled: false,
+        }"
+        :options="volumeChartOptions"
+        :series="chartSeries"
+      ></apexchart>
+      <apexchart
+        width="100%"
+        height="265"
+        type="line"
+        :toolbar="{
+          show: false,
+        }"
+        :zoom="{
+          enabled: false,
+        }"
+        :options="percentChartOptions"
+        :series="chartSeriesShort"
+      ></apexchart>
+    </div>
+
     <HiddenParagraph>
       {{ $t("tightshorts.disclaimer") }}
       <a
