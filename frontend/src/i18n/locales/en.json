@@ -52,7 +52,8 @@
       "transaction": "Transaction",
       "insider": "Insider",
       "value": "Value"
-    }
+    },
+    "disclaimer": "Finviz data is updated every 20 minutes. It is not an investment recommendation and can't be used for commercial distribution."
   },
   "debtToEquity": {
     "title": "Debt to capital chart",
