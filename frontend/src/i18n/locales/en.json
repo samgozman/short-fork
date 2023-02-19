@@ -55,7 +55,8 @@
     }
   },
   "debtToEquity": {
-    "title": "Debt to capital chart"
+    "title": "Debt to capital chart",
+    "disclaimer": "Barchart data is updated every 30 days. It is not an investment recommendation and can't be used for commercial distribution."
   },
   "links": {
     "title": "Links"
