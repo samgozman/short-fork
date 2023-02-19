@@ -197,7 +197,7 @@ export default defineComponent({
         },
         {
           key: "Price",
-          value: this.tagsValues.price ?? "",
+          value: "$" + (this.tagsValues.price ?? ""),
           theme: TagThemes.Gray,
           title: "Some title for tag 4",
           description: "some description for tag 4",
