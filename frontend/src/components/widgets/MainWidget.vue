@@ -3,10 +3,11 @@ import InputWithSubmit from "@/components/elements/InputWithSubmit.vue";
 import KeyValueTag from "@/components/elements/KeyValueTag.vue";
 import ErrorText from "@/components/layout/typography/ErrorText.vue";
 import ExternalLink from "@/components/elements/ExternalLink.vue";
+import HiddenParagraph from "@/components/layout/typography/HiddenParagraph.vue";
 </script>
 
 <template>
-  <div class="w-full">
+  <div class="flex flex-col h-full w-full">
     <InputWithSubmit
       @submitStock="submitStock"
       @getFinviz="getFinviz"
@@ -14,7 +15,7 @@ import ExternalLink from "@/components/elements/ExternalLink.vue";
       @getTightshorts="getTightshorts"
       class="mb-4"
     />
-    <div class="w-full mb-4">
+    <div class="grow w-full mb-4">
       <strong>{{ $t("mainWidget.website") }}: </strong>
       <ExternalLink :link="generalInfo.site ?? ''">{{
         generalInfo.site
@@ -56,10 +57,13 @@ import ExternalLink from "@/components/elements/ExternalLink.vue";
       </ExternalLink>
     </div>
     <!-- Block with tags  -->
-    <div class="grid grid-cols-2 gap-2">
+    <div class="grid grid-cols-2 gap-2 mb-4">
       <KeyValueTag v-for="tag in tags" :key="tag.key" :element="tag" />
     </div>
     <ErrorText v-if="ifStockNotFound">{{ $t("mainWidget.error") }}</ErrorText>
+    <HiddenParagraph>
+      {{ $t("mainWidget.disclaimer") }}
+    </HiddenParagraph>
   </div>
 </template>
 

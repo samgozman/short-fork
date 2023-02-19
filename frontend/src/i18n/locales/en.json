@@ -21,7 +21,8 @@
     "findResearch": "Find",
     "error": "Error! Stock not found!",
     "example": "Example",
-    "tickerPlaceholder": "Ticker"
+    "tickerPlaceholder": "Ticker",
+    "disclaimer": "Finviz data is updated every 20 minutes, Shortsqueeze every 12 hours. It is not an investment recommendation and can't be used for commercial distribution."
   },
   "technicalAnalysis": {
     "title": "Technical analysis",
@@ -30,7 +31,7 @@
   },
   "tightshorts": {
     "title": "Short volume",
-    "disclaimer": "The Tightshorts widget is updated once per day (AMC). It is not an investment recommendation and can't be used for commercial distribution."
+    "disclaimer": "The Tightshorts data is updated once per day (AMC). It is not an investment recommendation and can't be used for commercial distribution."
   },
   "options": {
     "title": "Options"
