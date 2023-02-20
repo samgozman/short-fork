@@ -16,7 +16,7 @@ import LanguageSwitcher from "@/components/elements/LanguageSwitcher.vue";
       <div
         class="flex justify-between md:justify-end items-center md:order-2 md:w-[160px]"
       >
-        <div class="flex flex-col mr-1">
+        <div class="flex flex-col mr-4">
           <label class="relative inline-flex items-center cursor-pointer">
             <input type="checkbox" value="" class="sr-only peer" checked />
             <div
