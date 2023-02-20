@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { RouterView } from "vue-router";
 import NavBar from "@/components/elements/navigation/NavBar.vue";
+import OctoCat from "@/components/elements/OctoCat.vue";
 </script>
 
 <template>
@@ -11,5 +12,6 @@ import NavBar from "@/components/elements/navigation/NavBar.vue";
     <div class="container mx-auto">
       <RouterView />
     </div>
+    <OctoCat />
   </main>
 </template>
