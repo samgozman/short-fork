@@ -69,5 +69,9 @@
   },
   "chart": {
     "copyright": "Chart from"
+  },
+  "footer": {
+    "created": "Created by",
+    "supportHeader": "Support Short Fork"
   }
 }

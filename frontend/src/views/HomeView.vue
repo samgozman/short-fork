@@ -13,6 +13,7 @@ import AnalyticsWidget from "@/components/widgets/AnalyticsWidget.vue";
 import TightshortsChartWidget from "@/components/widgets/TightshortsChartWidget.vue";
 import TechnicalAnalysisWidget from "@/components/widgets/TechnicalAnalysisWidget.vue";
 import TradingviewChartWidget from "@/components/widgets/TradingviewChartWidget.vue";
+import FooterBlock from "@/components/elements/FooterBlock.vue";
 </script>
 
 <template>
@@ -101,6 +102,11 @@ import TradingviewChartWidget from "@/components/widgets/TradingviewChartWidget.
           :exchange="stockExchange"
           :key="tradingViewKey"
         />
+      </ContentBox>
+    </div>
+    <div class="grid grid-cols-1">
+      <ContentBox class="py-12">
+        <FooterBlock />
       </ContentBox>
     </div>
   </div>

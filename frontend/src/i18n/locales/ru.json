@@ -69,5 +69,9 @@
   },
   "chart": {
     "copyright": "График от"
+  },
+  "footer": {
+    "created": "Создано",
+    "supportHeader": "Поддержать Short Fork"
   }
 }
