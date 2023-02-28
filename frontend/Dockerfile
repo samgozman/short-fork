@@ -5,5 +5,5 @@ RUN npm ci
 COPY . ./
 RUN npm run build
 
-FROM jauderho/nginx-distroless:latest
+FROM nginx:alpine-slim
 COPY --from=builder /app/dist /usr/share/nginx/html
