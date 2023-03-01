@@ -7,4 +7,6 @@ COPY . ./
 RUN npm run build
 
 FROM nginx:alpine-slim
+ENV PORT=80
+ENV NGINX_PORT=${PORT}
 COPY --from=builder /app/dist /usr/share/nginx/html
