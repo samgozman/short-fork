@@ -18,5 +18,6 @@ FROM nginx:alpine-slim
 ENV PORT=80
 ENV NGINX_PORT=${PORT}
 COPY --from=builder /app/dist /usr/share/nginx/html
+COPY ./nginx.conf /etc/nginx/nginx.conf
+RUN rm /etc/nginx/conf.d/default.conf
 EXPOSE ${NGINX_PORT}
-CMD ["nginx", "-g", "daemon off;"]
