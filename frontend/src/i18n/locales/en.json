@@ -73,5 +73,109 @@
   "footer": {
     "created": "Created by",
     "supportHeader": "Support Short Fork"
+  },
+  "tags": {
+    "main": {
+      "pe": {
+        "short": "P/E",
+        "full": "Price / Earnings",
+        "description": "the ratio for valuing a company that measures its current share price relative to its earnings per share (EPS)."
+      },
+      "price": {
+        "short": "Price",
+        "full": "Stock price",
+        "description": "the price at which a share is bought and sold on the stock exchange. The market price is usually formed by trading on the stock exchange and reflects the balance of supply and demand for these shares."
+      },
+      "fpe": {
+        "short": "Forward P/E",
+        "full": "Forward Price / Net Income",
+        "description": "the ratio for valuing a company that measures its current share price relative to its future (expected/predicted) earnings per share (EPS)."
+      },
+      "dividend": {
+        "short": "Dividend",
+        "full": "Dividends",
+        "description": "the portion of profits or free cash flow (FCF) that the company pays out to shareholders."
+      },
+      "ps": {
+        "short": "P/S",
+        "full": "Price / Sales Ratio",
+        "description": "the ratio of a company's capitalization to its sales volume. P/S gives an idea of how much an investor pays for $1 of the company's revenue."
+      },
+      "beta": {
+        "short": "Beta",
+        "full": "Beta volatility coefficient (Beta)",
+        "description": "If Beta is equal to one, this means that the stock fluctuates with the market and its risk is equivalent to the market. A value greater than 1 indicates that the price of the security will be more volatile than the market."
+      },
+      "pb": {
+        "short": "P/B",
+        "full": "Price / Book Value",
+        "description": "shows the ratio of the market price of a stock to its book value. Investors use P/B to understand how much they are paying for the company's net assets."
+      },
+      "sv": {
+        "short": "SV for 1 day",
+        "full": "TightShort.ru Short Volume",
+        "description": "the percentage of short positions in transactions for the previous day according to TightShort.ru. It expresses investors' interest in shorting specific stocks on the last trading day."
+      },
+      "peg": {
+        "short": "PEG",
+        "full": "Price to Earnings Growth",
+        "description": "the PEG multiplier shows how much an investor is willing to pay for a company's growth in future periods."
+      },
+      "sfs": {
+        "short": "Short Float S",
+        "full": "Squeeze Short Float",
+        "description": "the percentage indicator calculated from the total number of shares in free circulation, showing the number of shares currently being traded in short positions (according to shortsqueeze.com)."
+      },
+      "roe": {
+        "short": "ROE",
+        "full": "Return on Equity",
+        "description": "the ratio of net income to the company's equity. It shows how much profit the issuer's capital generates. It allows evaluating the efficiency and potential profitability of the business."
+      },
+      "sff": {
+        "short": "Short Float F",
+        "full": "Finviz Short Float",
+        "description": "this is a percentage indicator calculated from the total number of shares in free circulation, showing the number of shares currently being traded in short positions (according to finviz.com)."
+      },
+      "roa": {
+        "short": "ROA",
+        "full": "Return on Assets",
+        "description": "this is the ratio of net income to a company's assets. It shows the company's ability to efficiently use its assets to generate income. This indicator also reflects the average return obtained on all sources of capital - equity and debt."
+      },
+      "sr": {
+        "short": "Short Ratio",
+        "full": "Short-Interest Ratio",
+        "description": "the number of shares in short positions (short float) divided by the average daily trading volume. It represents the average number of days it takes short sellers to cover their positions."
+      },
+      "de": {
+        "short": "Debt/Eq",
+        "full": "Debt to Equity ratio",
+        "description": "reflects the ratio of debt to equity in a company's assets. If a company's Debt/Equity multiplier is above 1, it means that its assets are predominantly debt, and vice versa, if it is less than 1 - the main part of the company's assets is equity."
+      },
+      "country": {
+        "short": "Country",
+        "full": "Country",
+        "description": "the country in whose jurisdiction the company is located."
+      },
+      "instOwn": {
+        "short": "Inst Own",
+        "full": "Institutional Ownership Percentage",
+        "description": "the number of shares owned by institutional investors divided by the total number of shares outstanding (in percentage terms)."
+      },
+      "targetPrice": {
+        "short": "Target price",
+        "full": "Target price %",
+        "description": "the difference between the target price set by analysts and the current stock price, expressed as a percentage. Typically, the target price is forecasted for a year. Keep in mind that analysts can make mistakes or act in their own interests."
+      },
+      "insiderOwn": {
+        "short": "Insider Own",
+        "full": "Percentage of insider ownership",
+        "description": "the number of shares owned by insiders divided by the total number of shares outstanding (expressed as a percentage)."
+      },
+      "rsi": {
+        "short": "RSI (14)",
+        "full": "Relative Strength Index",
+        "description": "Relative Strength Index measures the strength of the market by comparing the average closing prices of periods in which prices rose to the average closing prices of periods when prices fell. On the website, RSI is calculated using a 14-day period."
+      }
+    }
   }
 }
