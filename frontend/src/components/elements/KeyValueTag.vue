@@ -2,10 +2,10 @@
 import type { ITagElement } from "@/components/interfaces/TagElement.interface";
 import { TagThemes } from "@/components/enums/TagThemes.enum";
 
-const props = defineProps<{
+defineProps<{
   element: ITagElement;
 }>();
-const modalId = "modal_" + props.element.key.replace(/\W+/g, "_");
+const modalId = "modal_" + Math.random().toString(36).slice(2, 8);
 </script>
 
 <template>
