@@ -3,9 +3,9 @@
     <label class="relative inline-flex items-center cursor-pointer">
       <input
         type="checkbox"
-        v-model="theme"
-        true-value="dark"
-        false-value="light"
+        v-model="checked"
+        :true-value="true"
+        :false-value="false"
         class="sr-only peer"
         @change="switchTheme"
       />
@@ -49,12 +49,12 @@ import { defineComponent } from "vue";
 export default defineComponent({
   data() {
     return {
-      theme: "light",
+      checked: false,
     };
   },
   methods: {
     switchTheme() {
-      if (this.theme === "dark") {
+      if (this.checked) {
         document.documentElement.classList.add("dark");
         document.documentElement.classList.remove("light");
         localStorage.setItem("user-theme", "dark");
@@ -67,12 +67,10 @@ export default defineComponent({
   },
   mounted() {
     const stored = localStorage.getItem("user-theme");
-    this.theme =
+    this.checked =
       stored === "dark" ||
       (stored === null &&
-        window.matchMedia("(prefers-color-scheme: dark)").matches)
-        ? "dark"
-        : "light";
+        window.matchMedia("(prefers-color-scheme: dark)").matches);
     this.switchTheme();
   },
 });
