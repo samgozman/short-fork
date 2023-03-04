@@ -6,6 +6,7 @@ import HiddenParagraph from "@/components/layout/typography/HiddenParagraph.vue"
 
 defineProps<{
   options: IBarchartOptions;
+  currentLocale: string;
 }>();
 </script>
 
@@ -42,6 +43,11 @@ export default defineComponent({
       tagsValues: {} as IBarchartOptions,
       tags: [],
     };
+  },
+  watch: {
+    currentLocale() {
+      this.prepareTags();
+    },
   },
   methods: {
     prepareTags() {

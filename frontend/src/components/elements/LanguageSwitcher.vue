@@ -33,9 +33,9 @@ export default defineComponent({
     async switchLanguage(event: Event) {
       const newLocale = (event.target as HTMLSelectElement).value;
       await tr.switchLanguage(newLocale);
-
       try {
         await this.$router.replace({ params: { locale: newLocale } });
+        this.$emit("localeChanged");
       } catch (e) {
         console.error(e);
         this.$router.push("/");

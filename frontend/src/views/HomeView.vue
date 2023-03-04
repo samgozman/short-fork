@@ -14,6 +14,10 @@ import TightshortsChartWidget from "@/components/widgets/TightshortsChartWidget.
 import TechnicalAnalysisWidget from "@/components/widgets/TechnicalAnalysisWidget.vue";
 import TradingviewChartWidget from "@/components/widgets/TradingviewChartWidget.vue";
 import FooterBlock from "@/components/elements/FooterBlock.vue";
+
+defineProps<{
+  currentLocale: string;
+}>();
 </script>
 
 <template>
@@ -26,6 +30,7 @@ import FooterBlock from "@/components/elements/FooterBlock.vue";
     <div class="grid grid-cols-1 lg:grid-cols-3">
       <ContentBox>
         <MainWidget
+          :currentLocale="currentLocale"
           @stockWithExchange="updateLinksAndTradingView"
           @getInsiders="getInsiders"
           @setEarnings="setEarnings"
@@ -53,6 +58,7 @@ import FooterBlock from "@/components/elements/FooterBlock.vue";
       <ContentBox class="lg:row-start-1 lg:row-end-2">
         <OptionsWidget
           :options="barchartOverview.options"
+          :currentLocale="currentLocale"
           :key="barchartOverviewKey"
         />
         <ErrorText v-if="isBarchartOverviewNotFound">

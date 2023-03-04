@@ -53,7 +53,7 @@ import LanguageSwitcher from "@/components/elements/LanguageSwitcher.vue";
           </span>
         </div>
 
-        <LanguageSwitcher />
+        <LanguageSwitcher @localeChanged="localeChanged" />
 
         <button
           data-collapse-toggle="mobile-menu-language-select"
@@ -106,3 +106,14 @@ import LanguageSwitcher from "@/components/elements/LanguageSwitcher.vue";
     </div>
   </nav>
 </template>
+
+<script lang="ts">
+import { defineComponent } from "vue";
+export default defineComponent({
+  methods: {
+    async localeChanged() {
+      this.$emit("localeChanged");
+    },
+  },
+});
+</script>
