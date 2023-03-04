@@ -31,7 +31,16 @@ defineProps<{
       >)
       <br />
       <strong>{{ $t("mainWidget.closestEarnings") }}: </strong>
-      <span>{{ generalInfo.earningsDate }}</span> <br />
+      <span>{{
+        generalInfo.earningsDate
+          ? new Date(generalInfo.earningsDate).toLocaleDateString("en-GB", {
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+            })
+          : ""
+      }}</span>
+      <br />
       <strong>{{ $t("mainWidget.reports") }}: </strong
       ><span>
         <ExternalLink
