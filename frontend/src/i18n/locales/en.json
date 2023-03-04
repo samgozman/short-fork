@@ -176,6 +176,58 @@
         "full": "Relative Strength Index",
         "description": "Relative Strength Index measures the strength of the market by comparing the average closing prices of periods in which prices rose to the average closing prices of periods when prices fell. On the website, RSI is calculated using a 14-day period."
       }
+    },
+    "options": {
+      "iv": {
+        "short": "IV",
+        "full": "Implied Volatility (IV)",
+        "description": "the average expected volatility of the nearest monthly option contract. IV is a forecast of the probability of a change in the price of the underlying asset, with higher IV indicating that the market expects significant price movement, and lower IV indicating that the market expects the price of the underlying asset to remain within the current trading range."
+      },
+      "volatAvg": {
+        "short": "Volat Avg",
+        "full": "20-Day Historical Volatility",
+        "description": "the average deviation from the mean price over the last 20 days. Historical volatility is a measure of how quickly a security changed in price in the past."
+      },
+      "todVol": {
+        "short": "Tod Vol",
+        "full": "Today's Open Interest (OI)",
+        "description": "the total open interest across all option contracts (across all expiration dates). Open interest is a technical indicator whose value is equal to the number of outstanding options whose calculations have not yet been made."
+      },
+      "volAvg": {
+        "short": "Vol Avg",
+        "full": "Volume Avg (30-Day)",
+        "description": "the average volume across all option contracts (across all expiration dates) over the last 30 days."
+      },
+      "todOi": {
+        "short": "Tod OI",
+        "full": "Today's Open Interest (OI)",
+        "description": "the total open interest across all option contracts (across all expiration dates). Open interest is a technical indicator whose value is equal to the number of outstanding options whose calculations have not yet been made."
+      },
+      "oiAvg": {
+        "short": "OI Avg",
+        "full": "Open Int (30-Day)",
+        "description": "the average total open interest across all option contracts (across all expiration dates) over the last 30 days. Open interest is a technical indicator whose value is equal to the number of outstanding options whose calculations have not yet been made."
+      },
+      "pcr": {
+        "short": "PCR",
+        "full": "Put/Call Vol Ratio",
+        "description": "the overall ratio of the Put/Call volume for all option contracts (across all expiration dates). A value less than 1 means that the volume of buyers is greater than sellers."
+      },
+      "pcrOi": {
+        "short": "PCR (OI)",
+        "full": "Put/Call OI Ratio",
+        "description": "the Put/Call open interest ratio for all option contracts (across all expiration dates). Open interest is a technical indicator whose value is equal to the number of outstanding options whose calculations have not yet been made. A value less than 1 means that buyers outnumber sellers."
+      },
+      "ivRank": {
+        "short": "IV Rank",
+        "full": "IV Rank",
+        "description": "the current IV compared to the highest and lowest values over the past year. If the IV rank is 100%, it means that the IV is at its highest level over the past year."
+      },
+      "ivPc": {
+        "short": "IV PC",
+        "full": "IV Percentile",
+        "description": "the percentile of the expected implied volatility based on the previous year's data. If the IV percentile is 100%, it means that the expected implied volatility is at its highest level over the past year."
+      }
     }
   }
 }
