@@ -36,7 +36,7 @@ defineProps<{
       }"
       class="h-[95vh] sm:h-[80vh]"
     />
-    <p class="text-center text-sm py-2">
+    <p class="text-center text-sm py-2 dark:text-gray-300">
       <a
         href="https://tradingview.com/gopro/?share_your_love=eragonovich"
         target="_blank"

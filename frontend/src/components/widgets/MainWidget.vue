@@ -11,7 +11,7 @@ defineProps<{
 </script>
 
 <template>
-  <div class="flex flex-col h-full w-full">
+  <div class="flex flex-col h-full w-full dark:text-white">
     <InputWithSubmit
       @submitStock="submitStock"
       @getFinviz="getFinviz"

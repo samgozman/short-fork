@@ -31,7 +31,7 @@ const { locale } = useI18n();
       </div>
     </div>
     <div class="flex flex-col my-auto text-center mx-auto">
-      <p>
+      <p class="dark:text-gray-300">
         {{ $t("footer.created") }}:
         <a
           href="https://github.com/samgozman"

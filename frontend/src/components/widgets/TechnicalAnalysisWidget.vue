@@ -28,7 +28,7 @@ defineProps<{
       }"
       class="grow"
     />
-    <p class="text-center text-sm py-2">
+    <p class="text-center text-sm py-2 dark:text-gray-300">
       <a
         href="https://tradingview.com/gopro/?share_your_love=eragonovich"
         target="_blank"

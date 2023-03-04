@@ -38,8 +38,8 @@
         ]"
       ></div>
     </label>
-    <span class="text-xs text-center leading-relaxed">
-      {{ $t("nav.theme.light") }}
+    <span class="text-xs text-center leading-relaxed dark:text-gray-300">
+      {{ checked ? $t("nav.theme.dark") : $t("nav.theme.light") }}
     </span>
   </div>
 </template>

@@ -8,7 +8,7 @@ const supportedLocales = tr.supportedLocales;
 <template>
   <select
     @change="switchLanguage"
-    class="inline-flex items-center justify-center px-4 py-4 text-sm text-gray-500 rounded-lg cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white border-0"
+    class="inline-flex items-center justify-center px-4 py-4 text-sm text-gray-500 rounded-lg cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:bg-slate-700 dark:text-gray-300 dark:hover:bg-slate-800 dark:hover:text-white border-0"
   >
     <option
       v-for="sLocale in supportedLocales"
