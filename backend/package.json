@@ -31,7 +31,7 @@
     "barchart-dot-com": "^1.0.5",
     "cache-manager": "^5.1.4",
     "cache-manager-redis-store": "^3.0.1",
-    "finvizor": "^1.1.1",
+    "finvizor": "^1.1.2",
     "joi": "^17.7.0",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.8.0",
