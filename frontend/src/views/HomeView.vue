@@ -14,6 +14,7 @@ import TightshortsChartWidget from "@/components/widgets/TightshortsChartWidget.
 import TechnicalAnalysisWidget from "@/components/widgets/TechnicalAnalysisWidget.vue";
 import TradingviewChartWidget from "@/components/widgets/TradingviewChartWidget.vue";
 import FooterBlock from "@/components/elements/FooterBlock.vue";
+import { currentTheme } from "@/components/elements/themeSwitcher";
 
 defineProps<{
   currentLocale: string;
@@ -44,7 +45,7 @@ defineProps<{
         <TechnicalAnalysisWidget
           :stock="stockTicker"
           :exchange="stockExchange"
-          :key="tradingViewKey"
+          :key="`${tradingViewKey}_${currentTheme}`"
         />
       </ContentBox>
       <ContentBox>
@@ -106,7 +107,7 @@ defineProps<{
         <TradingviewChartWidget
           :stock="stockTicker"
           :exchange="stockExchange"
-          :key="tradingViewKey"
+          :key="`${tradingViewKey}_${currentTheme}`"
         />
       </ContentBox>
     </div>

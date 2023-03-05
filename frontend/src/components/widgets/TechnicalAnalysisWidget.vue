@@ -3,6 +3,7 @@ import { TechnicalAnalysis } from "vue-tradingview-widgets";
 import HeaderH5 from "@/components/layout/typography/HeaderH5.vue";
 import HiddenParagraph from "@/components/layout/typography/HiddenParagraph.vue";
 import { useI18n } from "vue-i18n";
+import { currentTheme } from "@/components/elements/themeSwitcher";
 
 const { locale } = useI18n();
 
@@ -24,7 +25,7 @@ defineProps<{
         isTransparent: 'true',
         showIntervalTabs: 'true',
         locale: locale,
-        colorTheme: 'light',
+        colorTheme: currentTheme || 'light',
       }"
       class="grow"
     />

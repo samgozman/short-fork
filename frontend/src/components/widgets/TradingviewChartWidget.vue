@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { Chart } from "vue-tradingview-widgets";
 import { useI18n } from "vue-i18n";
+import { currentTheme } from "@/components/elements/themeSwitcher";
 
 const { locale } = useI18n();
 
@@ -17,7 +18,7 @@ defineProps<{
         autosize: true,
         symbol: `${exchange}:${stock}`,
         timezone: 'Etc/UTC',
-        theme: 'light',
+        theme: currentTheme || 'light',
         style: '1',
         locale: locale,
         toolbar_bg: '#f1f3f6',

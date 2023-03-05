@@ -46,6 +46,7 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import { currentTheme } from "@/components/elements/themeSwitcher";
 export default defineComponent({
   data() {
     return {
@@ -58,10 +59,12 @@ export default defineComponent({
         document.documentElement.classList.add("dark");
         document.documentElement.classList.remove("light");
         localStorage.setItem("user-theme", "dark");
+        currentTheme.value = "dark";
       } else {
         document.documentElement.classList.add("light");
         document.documentElement.classList.remove("dark");
         localStorage.setItem("user-theme", "light");
+        currentTheme.value = "light";
       }
     },
   },
