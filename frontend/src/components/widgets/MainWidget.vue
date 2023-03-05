@@ -4,10 +4,6 @@ import KeyValueTag from "@/components/elements/KeyValueTag.vue";
 import ErrorText from "@/components/layout/typography/ErrorText.vue";
 import ExternalLink from "@/components/elements/ExternalLink.vue";
 import HiddenParagraph from "@/components/layout/typography/HiddenParagraph.vue";
-
-defineProps<{
-  currentLocale: string;
-}>();
 </script>
 
 <template>

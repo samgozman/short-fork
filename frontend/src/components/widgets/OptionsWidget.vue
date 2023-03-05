@@ -6,7 +6,6 @@ import HiddenParagraph from "@/components/layout/typography/HiddenParagraph.vue"
 
 defineProps<{
   options: IBarchartOptions;
-  currentLocale: string;
 }>();
 </script>
 
