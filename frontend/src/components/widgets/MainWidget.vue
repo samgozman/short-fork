@@ -9,6 +9,7 @@ import HiddenParagraph from "@/components/layout/typography/HiddenParagraph.vue"
 <template>
   <div class="flex flex-col h-full w-full dark:text-white">
     <InputWithSubmit
+      :isLoading="isLoading"
       @submitStock="submitStock"
       @getFinviz="getFinviz"
       @getShortsqueeze="getShortsqueeze"
@@ -100,6 +101,7 @@ interface Data {
   ifStockNotFound: boolean;
   generalInfo: GeneralInfo;
   stock: string;
+  isLoading: boolean;
 }
 
 export default defineComponent({
@@ -115,6 +117,7 @@ export default defineComponent({
         country: "",
       },
       stock: "",
+      isLoading: false,
     };
   },
   methods: {
@@ -127,6 +130,7 @@ export default defineComponent({
       );
     },
     async getFinviz(stock: string) {
+      this.isLoading = true;
       const finviz = await FetchData.getFinviz(stock);
 
       if (!finviz) {
@@ -174,6 +178,7 @@ export default defineComponent({
         finviz.recommendation ? 6 - finviz.recommendation : null
       );
       this.ifStockNotFound = false;
+      this.isLoading = false;
     },
     async getShortsqueeze(stock: string) {
       const shortsqueeze = await FetchData.getShortsqueeze(stock);
