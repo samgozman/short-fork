@@ -135,6 +135,7 @@ export default defineComponent({
 
       if (!finviz) {
         this.ifStockNotFound = true;
+        this.isLoading = false;
         return;
       }
 
