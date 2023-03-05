@@ -19,9 +19,9 @@ import StockSuggestionBadge from "./StockSuggestionBadge.vue";
       />
     </div>
 
-    <div class="flex w-full leading-6">
+    <div class="flex flex-wrap 2xl:flex-nowrap w-full leading-6">
       <span class="mr-2">{{ $t("mainWidget.example") }}:</span>
-      <div class="flex flex-wrap justify-between w-full">
+      <div class="flex flex-wrap justify-around w-full">
         <StockSuggestionBadge
           v-for="ticker in ['AAPL', 'MSFT', 'AMZN', 'GOOGL', 'META', 'TSLA']"
           :key="ticker"
