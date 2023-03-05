@@ -3,6 +3,7 @@ import HeaderH5 from "@/components/layout/typography/HeaderH5.vue";
 import type { ApexChartSeries } from "@/components/types/apex";
 import type { ITightshortsChart } from "@/components/interfaces/tightshorts/chart.interface";
 import HiddenParagraph from "@/components/layout/typography/HiddenParagraph.vue";
+import { currentTheme } from "@/components/elements/themeSwitcher";
 
 defineProps<{
   chart: ITightshortsChart;
@@ -73,6 +74,7 @@ export default defineComponent({
         chart: {
           id: "volume-chart",
           group: "synced-charts",
+          foreColor: currentTheme.value === "light" ? "#373d3f" : "#ccc",
           toolbar: {
             show: false,
             tools: {
@@ -101,6 +103,12 @@ export default defineComponent({
         xaxis: {
           type: "datetime",
           categories: [],
+          labels: {
+            show: true,
+            style: {
+              colors: currentTheme.value === "light" ? "#333" : "#dbdbdb",
+            },
+          },
         },
         grid: {
           xaxis: {
@@ -108,11 +116,13 @@ export default defineComponent({
               show: true,
             },
           },
+          borderColor: currentTheme.value === "light" ? "#e0e0e0" : "#535A6C",
         },
         tooltip: {
           style: {
             fontSize: "9px",
           },
+          theme: currentTheme.value,
         },
         noData: {
           text: "Loading...",
@@ -122,6 +132,7 @@ export default defineComponent({
         chart: {
           id: "percent-chart",
           group: "synced-charts",
+          foreColor: currentTheme.value === "light" ? "#373d3f" : "#ccc",
           toolbar: {
             show: false,
             tools: {
@@ -162,7 +173,10 @@ export default defineComponent({
           },
           style: {
             fontSize: "9px",
-            colors: ["#333", "#333"],
+            colors:
+              currentTheme.value === "light"
+                ? ["#333", "#333"]
+                : ["#dbdbdb", "#dbdbdb"],
           },
           background: {
             enabled: false,
@@ -180,6 +194,15 @@ export default defineComponent({
           categories: [],
           title: {
             text: "Day",
+            style: {
+              color: currentTheme.value === "light" ? "#333" : "#dbdbdb",
+            },
+          },
+          labels: {
+            show: true,
+            style: {
+              colors: currentTheme.value === "light" ? "#333" : "#dbdbdb",
+            },
           },
         },
         yaxis: {
@@ -199,11 +222,13 @@ export default defineComponent({
               show: true,
             },
           },
+          borderColor: currentTheme.value === "light" ? "#e0e0e0" : "#535A6C",
         },
         tooltip: {
           style: {
             fontSize: "9px",
           },
+          theme: currentTheme.value,
         },
         noData: {
           text: "Loading...",

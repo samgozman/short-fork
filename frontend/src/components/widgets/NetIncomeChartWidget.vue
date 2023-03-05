@@ -2,6 +2,7 @@
 import HeaderH5 from "@/components/layout/typography/HeaderH5.vue";
 import type { ApexChartSeries } from "@/components/types/apex";
 import HiddenParagraph from "@/components/layout/typography/HiddenParagraph.vue";
+import { currentTheme } from "@/components/elements/themeSwitcher";
 
 defineProps<{
   series?: ApexChartSeries;
@@ -46,6 +47,7 @@ export default defineComponent({
       chartOptions: {
         chart: {
           id: "net-income-chart",
+          foreColor: currentTheme.value === "light" ? "#373d3f" : "#ccc",
           toolbar: {
             show: false,
             tools: {
@@ -65,6 +67,11 @@ export default defineComponent({
           title: {
             text: "Year",
           },
+          labels: {
+            style: {
+              colors: currentTheme.value === "light" ? "#333" : "#dbdbdb",
+            },
+          },
         },
         yaxis: {
           labels: {
@@ -82,6 +89,12 @@ export default defineComponent({
         },
         noData: {
           text: "Loading...",
+        },
+        grid: {
+          borderColor: currentTheme.value === "light" ? "#e0e0e0" : "#535A6C",
+        },
+        tooltip: {
+          theme: currentTheme.value,
         },
       },
       chartSeries: [],

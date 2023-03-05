@@ -3,6 +3,7 @@ import HeaderH5 from "@/components/layout/typography/HeaderH5.vue";
 import ProgressBar from "@/components/elements/ProgressBar.vue";
 import type { IBarchartAnalytics } from "@/components/interfaces/analytics.interface";
 import HiddenParagraph from "@/components/layout/typography/HiddenParagraph.vue";
+import { currentTheme } from "@/components/elements/themeSwitcher";
 
 defineProps<{
   barchartAnalytics?: IBarchartAnalytics;
@@ -53,6 +54,7 @@ export default defineComponent({
       chartOptions: {
         chart: {
           id: "analytics-chart",
+          foreColor: currentTheme.value === "light" ? "#373d3f" : "#ccc",
           toolbar: {
             show: false,
             tools: {
@@ -70,7 +72,10 @@ export default defineComponent({
         legend: {
           position: "right",
         },
-        colors: ["#48c774", "#C5D86D", "#ffdd57", "#FD6A6A", "#f14668"],
+        colors:
+          currentTheme.value === "light"
+            ? ["#48c774", "#C5D86D", "#ffdd57", "#FD6A6A", "#f14668"]
+            : ["#1ca64c", "#C5D86D", "#ffd324", "#FD6A6A", "#ff0537"],
         responsive: [
           {
             breakpoint: 480,
@@ -90,6 +95,12 @@ export default defineComponent({
         },
         noData: {
           text: "Loading...",
+        },
+        tooltip: {
+          theme: currentTheme.value,
+        },
+        grid: {
+          borderColor: currentTheme.value === "light" ? "#e0e0e0" : "#535A6C",
         },
       },
       chartSeries: [],

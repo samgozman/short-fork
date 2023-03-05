@@ -48,7 +48,7 @@ import { currentLanguage } from "@/components/elements/languageSwitcher";
       <ContentBox>
         <TightshortsChartWidget
           :chart="tightshortsChart"
-          :key="tightshortsChartKey"
+          :key="`${tightshortsChartKey}_${currentTheme}`"
         />
       </ContentBox>
     </div>
@@ -69,14 +69,14 @@ import { currentLanguage } from "@/components/elements/languageSwitcher";
         <AnalyticsWidget
           :barchartAnalytics="barchartAnalytics"
           :finvizRating="finvizRating"
-          :key="barchartAnalyticsKey"
+          :key="`${barchartAnalyticsKey}_${currentTheme}`"
         />
       </ContentBox>
       <ContentBox class="lg:row-start-1 lg:row-end-3">
         <NetIncomeChartWidget
           :series="netIncomeChart.series"
           :xaxis="netIncomeChart.xaxis"
-          :key="netIncomeChartKey"
+          :key="`${netIncomeChartKey}_${currentTheme}`"
         />
         <ErrorText v-if="isBarchartFinancialsNotFound">
           Error! Data not found
@@ -91,7 +91,7 @@ import { currentLanguage } from "@/components/elements/languageSwitcher";
         <DebtChartWidget
           :series="debtChart.series"
           :xaxis="debtChart.xaxis"
-          :key="debtChartKey"
+          :key="`${debtChartKey}_${currentTheme}`"
         />
         <ErrorText v-if="isBarchartFinancialsNotFound">
           Error! Data not found
