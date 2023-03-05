@@ -46,7 +46,7 @@ defineProps<{
       {{ $t("tightshorts.disclaimer") }}
       <a
         href="https://tightshorts.ru"
-        rel="nofollow"
+        rel="noopener"
         target="_blank"
         class="underline"
       >

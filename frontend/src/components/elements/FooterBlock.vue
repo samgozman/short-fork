@@ -38,6 +38,7 @@ const { locale } = useI18n();
         <a
           href="https://github.com/samgozman"
           target="_blank"
+          rel="noopener noreferrer"
           class="text-blue-500 hover:text-blue-600"
         >
           samgozman
@@ -48,6 +49,7 @@ const { locale } = useI18n();
         <a
           href="https://www.tinkoff.ru/invest/social/profile/aqua_disco/"
           target="_blank"
+          rel="noopener noreferrer"
           class="text-blue-500 hover:text-blue-600"
         >
           aqua_disco
