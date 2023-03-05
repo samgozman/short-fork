@@ -6,40 +6,40 @@
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=samgozman_short-fork&metric=alert_status)](https://sonarcloud.io/dashboard?id=samgozman_short-fork)
 ![GitHub](https://img.shields.io/github/license/samgozman/short-fork)
 
-Данный проект нацелен на агрегирование основных финансовых индикаторов американских акций, торгующихся на фондовой бирже. Основной упор приложение делает на данные о количестве шортовых позиций (Short Float и Short Volume).
+This project aims to aggregate the main financial indicators of traded USA stocks.
 
-Изначально делал веб приложение для себя, чтобы выводить самую нужную для меня информацию в читабельном виде на экране смартфона.
+Initially, I created a web application for myself to display the most important information in a readable format on the smartphone screen.
 
-**[Перейти на short fork](https://short-fork.up.railway.app)**
+**[Go to short fork](https://short-fork.up.railway.app)**
 
-## Как пользоваться
+## How to use
 
-Введите тикер компании (например **NVDA**) в поле ТИКЕР и нажмите Enter либо стрелочку слева. На данный момент приложение работает только с иностранными компаниями! Зелёным цветом отмечаются те показатели, по которым компания сейчас дёшева оценена, жёлтым справедливо и красным в переоценке (либо просто неадекватное значение).
+Enter the company ticker (for example, **NVDA**) in the text input field and press Enter. The indicators that show that the company is currently can be undervalued are marked in green, those that are fairly valued are marked in yellow, and those that are overvalued (or simply have an inadequate value) are marked in red.
 
-После этого данные начнут собираться с нескольких источников, что может занять непродолжительное время.
+After that, data will begin to be collected from several sources, which may take some amount of time.
 
-![Первый экран приложения после ввода](doc/img/01.png)
+![The first screen of the application after entering the data](doc/img/01.png)
 
-На первом уровне отображаются основные мультипликаторы финансовых показателей, технический анализ от TradingView и график объёма шортовых позиций.
+The main financial indicator multipliers, technical analysis from TradingView, and a chart of short volumes (from my other project TightShorts) are displayed at the first level.
 
-![Второй экран](doc/img/02.png)
+![Second screen](doc/img/02.png)
 
-Далее располагаются данные по опционной торговле, ссылки на сторонние сервисы, консенсус аналитиков и график изменения выручки и прибыли компании за 5 лет.
+Next, data on options trading, links to third-party services, consensus analysts, and a chart of the company's revenue and profit changes over 5 years are provided.
 
-Если вы не знаете, что означает каждый показатель - просто **кликните на него** и всплывёт подсказка!
+If you do not know what each indicator means, simply **click on it** and a tooltip will appear!
 
-![Третий экран](doc/img/03.png)
+![Third screen](doc/img/03.png)
 
-На третьей срочке находятся данные по инсайдерским продажам и график отношения долга к капиталу компании.
+The third row displays data on insider sales and a chart of the company's debt-to-equity ratio.
 
-![График](doc/img/04.png)
+![Chart](doc/img/04.png)
 
-И под конец - график TradingView с самыми популярными осцилляторами: RSI, STOCH, AO, BB.
+And finally, the TradingView chart with the most popular oscillators: RSI, AO, BB.
 
-## Источники данных
+## Data sources
 
-* [finviz.com](https://finviz.com/) - Название компании, сайт, цена, P/E, P/S, ROE, ROA, Debt/Eq, Short Float %, RSI, recom.
-* [shortsqueeze.com](https://shortsqueeze.com/) - Short Float %. По данному параметру сразу два источника для информативности.
-* [tightshorts.ru](https://tightshorts.ru/) - Short Volume %
-* [tradingview.com](https://ru.tradingview.com/gopro/?share_your_love=eragonovich) - Виджет технического анализа и график цены
-* [www.barchart.com](https://www.barchart.com/) - Долг к капиталу, Выручка и прибыль, Опционы, Мнение аналитиков
+* [finviz.com](https://finviz.com/) - Company name, website, price, P/E, P/S, ROE, ROA, Debt/Eq, Short Float %, RSI, etc.
+* [shortsqueeze.com](https://shortsqueeze.com/) - Short Float %. For this parameter, there are two sources of data.
+* [tightshorts.ru](https://tightshorts.ru/) - Short Volume %.
+* [tradingview.com](https://ru.tradingview.com/gopro/?share_your_love=eragonovich) - Technical analysis widget and price chart.
+* [www.barchart.com](https://www.barchart.com/) - Debt to Equity, Revenue and Earnings, Options, Analyst Opinion.

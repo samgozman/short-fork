@@ -1,0 +1,233 @@
+{
+  "locale": {
+    "en": "🇬🇧 English",
+    "ru": "🇷🇺 Russian"
+  },
+  "nav": {
+    "support": "🍺 Support this project",
+    "code": "👾 Browse source code",
+    "theme": {
+      "light": "Light",
+      "dark": "Dark"
+    }
+  },
+  "mainWidget": {
+    "website": "Website",
+    "company": "Company",
+    "closestEarnings": "Closest earnings report",
+    "reports": "Reports",
+    "equityResearch": "Equity research",
+    "findResearch": "Find",
+    "error": "Error! Stock not found!",
+    "example": "Example",
+    "tickerPlaceholder": "Ticker",
+    "disclaimer": "Finviz data is updated every 20 minutes, Shortsqueeze every 12 hours. It is not an investment recommendation and can't be used for commercial distribution."
+  },
+  "technicalAnalysis": {
+    "title": "Technical analysis",
+    "copyright": "Technical analysis from",
+    "disclaimer": "The TradingView widget is displayed in real-time. It is not an investment recommendation and can't be used for commercial distribution."
+  },
+  "tightshorts": {
+    "title": "Short volume",
+    "disclaimer": "The Tightshorts data is updated once per day (AMC). It is not an investment recommendation and can't be used for commercial distribution."
+  },
+  "options": {
+    "title": "Options",
+    "disclaimer": "Barchart data is updated every 20 minutes. It is not an investment recommendation and can't be used for commercial distribution."
+  },
+  "analyst": {
+    "title": "Analyst",
+    "disclaimer": "Finviz data is updated every 20 minutes, Barchart every 20 minutes. It is not an investment recommendation and can't be used for commercial distribution."
+  },
+  "netIncome": {
+    "title": "Net income and profit",
+    "disclaimer": "Barchart data is updated every 30 days. It is not an investment recommendation and can't be used for commercial distribution."
+  },
+  "insidersTrades": {
+    "title": "Insiders trades",
+    "table": {
+      "date": "Date",
+      "transaction": "Transaction",
+      "insider": "Insider",
+      "value": "Value"
+    },
+    "disclaimer": "Finviz data is updated every 20 minutes. It is not an investment recommendation and can't be used for commercial distribution."
+  },
+  "debtToEquity": {
+    "title": "Debt to capital chart",
+    "disclaimer": "Barchart data is updated every 30 days. It is not an investment recommendation and can't be used for commercial distribution."
+  },
+  "links": {
+    "title": "Links"
+  },
+  "reportsWarning": {
+    "waring": "Warning",
+    "message": "Earnings report is close",
+    "amc": "after market close",
+    "bmc": "before market close"
+  },
+  "chart": {
+    "copyright": "Chart from"
+  },
+  "footer": {
+    "created": "Created by",
+    "supportHeader": "Support Short Fork"
+  },
+  "tags": {
+    "main": {
+      "pe": {
+        "short": "P/E",
+        "full": "Price / Earnings",
+        "description": "the ratio for valuing a company that measures its current share price relative to its earnings per share (EPS)."
+      },
+      "price": {
+        "short": "Price",
+        "full": "Stock price",
+        "description": "the price at which a share is bought and sold on the stock exchange. The market price is usually formed by trading on the stock exchange and reflects the balance of supply and demand for these shares."
+      },
+      "fpe": {
+        "short": "Forward P/E",
+        "full": "Forward Price / Net Income",
+        "description": "the ratio for valuing a company that measures its current share price relative to its future (expected/predicted) earnings per share (EPS)."
+      },
+      "dividend": {
+        "short": "Dividend",
+        "full": "Dividends",
+        "description": "the portion of profits or free cash flow (FCF) that the company pays out to shareholders."
+      },
+      "ps": {
+        "short": "P/S",
+        "full": "Price / Sales Ratio",
+        "description": "the ratio of a company's capitalization to its sales volume. P/S gives an idea of how much an investor pays for $1 of the company's revenue."
+      },
+      "beta": {
+        "short": "Beta",
+        "full": "Beta volatility coefficient (Beta)",
+        "description": "If Beta is equal to one, this means that the stock fluctuates with the market and its risk is equivalent to the market. A value greater than 1 indicates that the price of the security will be more volatile than the market."
+      },
+      "pb": {
+        "short": "P/B",
+        "full": "Price / Book Value",
+        "description": "shows the ratio of the market price of a stock to its book value. Investors use P/B to understand how much they are paying for the company's net assets."
+      },
+      "sv": {
+        "short": "SV for 1 day",
+        "full": "TightShort.ru Short Volume",
+        "description": "the percentage of short positions in transactions for the previous day according to TightShort.ru. It expresses investors' interest in shorting specific stocks on the last trading day."
+      },
+      "peg": {
+        "short": "PEG",
+        "full": "Price to Earnings Growth",
+        "description": "the PEG multiplier shows how much an investor is willing to pay for a company's growth in future periods."
+      },
+      "sfs": {
+        "short": "Short Float S",
+        "full": "Squeeze Short Float",
+        "description": "the percentage indicator calculated from the total number of shares in free circulation, showing the number of shares currently being traded in short positions (according to shortsqueeze.com)."
+      },
+      "roe": {
+        "short": "ROE",
+        "full": "Return on Equity",
+        "description": "the ratio of net income to the company's equity. It shows how much profit the issuer's capital generates. It allows evaluating the efficiency and potential profitability of the business."
+      },
+      "sff": {
+        "short": "Short Float F",
+        "full": "Finviz Short Float",
+        "description": "this is a percentage indicator calculated from the total number of shares in free circulation, showing the number of shares currently being traded in short positions (according to finviz.com)."
+      },
+      "roa": {
+        "short": "ROA",
+        "full": "Return on Assets",
+        "description": "this is the ratio of net income to a company's assets. It shows the company's ability to efficiently use its assets to generate income. This indicator also reflects the average return obtained on all sources of capital - equity and debt."
+      },
+      "sr": {
+        "short": "Short Ratio",
+        "full": "Short-Interest Ratio",
+        "description": "the number of shares in short positions (short float) divided by the average daily trading volume. It represents the average number of days it takes short sellers to cover their positions."
+      },
+      "de": {
+        "short": "Debt/Eq",
+        "full": "Debt to Equity ratio",
+        "description": "reflects the ratio of debt to equity in a company's assets. If a company's Debt/Equity multiplier is above 1, it means that its assets are predominantly debt, and vice versa, if it is less than 1 - the main part of the company's assets is equity."
+      },
+      "country": {
+        "short": "Country",
+        "full": "Country",
+        "description": "the country in whose jurisdiction the company is located."
+      },
+      "instOwn": {
+        "short": "Inst Own",
+        "full": "Institutional Ownership Percentage",
+        "description": "the number of shares owned by institutional investors divided by the total number of shares outstanding (in percentage terms)."
+      },
+      "targetPrice": {
+        "short": "Target price",
+        "full": "Target price %",
+        "description": "the difference between the target price set by analysts and the current stock price, expressed as a percentage. Typically, the target price is forecasted for a year. Keep in mind that analysts can make mistakes or act in their own interests."
+      },
+      "insiderOwn": {
+        "short": "Insider Own",
+        "full": "Percentage of insider ownership",
+        "description": "the number of shares owned by insiders divided by the total number of shares outstanding (expressed as a percentage)."
+      },
+      "rsi": {
+        "short": "RSI (14)",
+        "full": "Relative Strength Index",
+        "description": "Relative Strength Index measures the strength of the market by comparing the average closing prices of periods in which prices rose to the average closing prices of periods when prices fell. On the website, RSI is calculated using a 14-day period."
+      }
+    },
+    "options": {
+      "iv": {
+        "short": "IV",
+        "full": "Implied Volatility (IV)",
+        "description": "the average expected volatility of the nearest monthly option contract. IV is a forecast of the probability of a change in the price of the underlying asset, with higher IV indicating that the market expects significant price movement, and lower IV indicating that the market expects the price of the underlying asset to remain within the current trading range."
+      },
+      "volatAvg": {
+        "short": "Volat Avg",
+        "full": "20-Day Historical Volatility",
+        "description": "the average deviation from the mean price over the last 20 days. Historical volatility is a measure of how quickly a security changed in price in the past."
+      },
+      "todVol": {
+        "short": "Tod Vol",
+        "full": "Today's Open Interest (OI)",
+        "description": "the total open interest across all option contracts (across all expiration dates). Open interest is a technical indicator whose value is equal to the number of outstanding options whose calculations have not yet been made."
+      },
+      "volAvg": {
+        "short": "Vol Avg",
+        "full": "Volume Avg (30-Day)",
+        "description": "the average volume across all option contracts (across all expiration dates) over the last 30 days."
+      },
+      "todOi": {
+        "short": "Tod OI",
+        "full": "Today's Open Interest (OI)",
+        "description": "the total open interest across all option contracts (across all expiration dates). Open interest is a technical indicator whose value is equal to the number of outstanding options whose calculations have not yet been made."
+      },
+      "oiAvg": {
+        "short": "OI Avg",
+        "full": "Open Int (30-Day)",
+        "description": "the average total open interest across all option contracts (across all expiration dates) over the last 30 days. Open interest is a technical indicator whose value is equal to the number of outstanding options whose calculations have not yet been made."
+      },
+      "pcr": {
+        "short": "PCR",
+        "full": "Put/Call Vol Ratio",
+        "description": "the overall ratio of the Put/Call volume for all option contracts (across all expiration dates). A value less than 1 means that the volume of buyers is greater than sellers."
+      },
+      "pcrOi": {
+        "short": "PCR (OI)",
+        "full": "Put/Call OI Ratio",
+        "description": "the Put/Call open interest ratio for all option contracts (across all expiration dates). Open interest is a technical indicator whose value is equal to the number of outstanding options whose calculations have not yet been made. A value less than 1 means that buyers outnumber sellers."
+      },
+      "ivRank": {
+        "short": "IV Rank",
+        "full": "IV Rank",
+        "description": "the current IV compared to the highest and lowest values over the past year. If the IV rank is 100%, it means that the IV is at its highest level over the past year."
+      },
+      "ivPc": {
+        "short": "IV PC",
+        "full": "IV Percentile",
+        "description": "the percentile of the expected implied volatility based on the previous year's data. If the IV percentile is 100%, it means that the expected implied volatility is at its highest level over the past year."
+      }
+    }
+  }
+}

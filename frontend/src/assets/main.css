@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+	height: max-content;
+  touch-action: pan-y;
+  overscroll-behavior: none;
+}
+
+html {
+	height: 100%;
+}
+
+#app {
+	height: 100%;
+}
