@@ -6,7 +6,9 @@ const { locale } = useI18n();
 </script>
 
 <template>
-  <div class="flex flex-col w-full">
+  <div
+    class="flex flex-col w-full bg-white border-gray-200 px-2 sm:px-4 py-14 rounded-t dark:bg-slate-700 shadow-sm"
+  >
     <div class="flex flex-col w-full md:max-w-[300px] mx-auto">
       <HeaderH6 id="support" class="text-center">
         {{ $t("footer.supportHeader") }}:

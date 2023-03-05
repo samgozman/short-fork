@@ -108,9 +108,9 @@ import { currentLanguage } from "@/components/elements/languageSwitcher";
       </ContentBox>
     </div>
     <div class="grid grid-cols-1">
-      <ContentBox class="py-12">
+      <footer class="container mx-auto px-2 pt-1.5">
         <FooterBlock />
-      </ContentBox>
+      </footer>
     </div>
   </div>
 </template>
