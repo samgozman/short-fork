@@ -15,6 +15,7 @@ import TechnicalAnalysisWidget from "@/components/widgets/TechnicalAnalysisWidge
 import TradingviewChartWidget from "@/components/widgets/TradingviewChartWidget.vue";
 import FooterBlock from "@/components/elements/FooterBlock.vue";
 import { currentTheme } from "@/components/elements/themeSwitcher";
+import { currentLanguage } from "@/components/elements/languageSwitcher";
 
 defineProps<{
   currentLocale: string;
@@ -39,6 +40,7 @@ defineProps<{
           @getBarchartFinancials="getBarchartFinancials"
           @setFinvizRating="setFinvizRating"
           @setTightshortsChart="setTightshortsChart"
+          :key="currentLanguage"
         />
       </ContentBox>
       <ContentBox>
@@ -60,7 +62,7 @@ defineProps<{
         <OptionsWidget
           :options="barchartOverview.options"
           :currentLocale="currentLocale"
-          :key="barchartOverviewKey"
+          :key="`${barchartOverviewKey}_${currentLanguage}`"
         />
         <ErrorText v-if="isBarchartOverviewNotFound">
           Error! Data not found

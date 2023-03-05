@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import LanguageSwitcher from "@/components/elements/LanguageSwitcher.vue";
+import LanguageSwitcher from "@/components/elements/languageSwitcher/LanguageSwitcher.vue";
 import ThemeSwitcher from "@/components/elements/themeSwitcher/ThemeSwitcher.vue";
 </script>
 
@@ -18,7 +18,7 @@ import ThemeSwitcher from "@/components/elements/themeSwitcher/ThemeSwitcher.vue
         class="flex justify-between md:justify-end items-center md:order-2 md:w-[160px]"
       >
         <ThemeSwitcher class="mr-4" />
-        <LanguageSwitcher @localeChanged="localeChanged" />
+        <LanguageSwitcher />
 
         <button
           data-collapse-toggle="mobile-menu-language-select"
@@ -71,14 +71,3 @@ import ThemeSwitcher from "@/components/elements/themeSwitcher/ThemeSwitcher.vue
     </div>
   </nav>
 </template>
-
-<script lang="ts">
-import { defineComponent } from "vue";
-export default defineComponent({
-  methods: {
-    async localeChanged() {
-      this.$emit("localeChanged");
-    },
-  },
-});
-</script>

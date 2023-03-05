@@ -44,11 +44,6 @@ export default defineComponent({
       tags: [],
     };
   },
-  watch: {
-    currentLocale() {
-      this.prepareTags();
-    },
-  },
   methods: {
     prepareTags() {
       this.tags = [

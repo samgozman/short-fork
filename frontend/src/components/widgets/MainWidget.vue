@@ -121,11 +121,6 @@ export default defineComponent({
       stock: "",
     };
   },
-  watch: {
-    currentLocale() {
-      this.prepareTags();
-    },
-  },
   methods: {
     submitStock(stock: string) {
       this.stock = stock;

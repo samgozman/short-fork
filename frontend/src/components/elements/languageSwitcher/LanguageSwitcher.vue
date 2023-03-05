@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useI18n } from "vue-i18n";
 import tr from "@/i18n/translation";
+import { currentLanguage } from ".";
 const { t, locale } = useI18n();
 
 const supportedLocales = tr.supportedLocales;
@@ -35,7 +36,7 @@ export default defineComponent({
       await tr.switchLanguage(newLocale);
       try {
         await this.$router.replace({ params: { locale: newLocale } });
-        this.$emit("localeChanged");
+        currentLanguage.value = newLocale;
       } catch (e) {
         console.error(e);
         this.$router.push("/");
