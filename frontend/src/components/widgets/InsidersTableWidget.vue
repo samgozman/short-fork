@@ -17,7 +17,7 @@ defineProps<{
           class="w-full text-sm text-left text-gray-500 dark:text-gray-400"
         >
           <thead
-            class="text-xs text-gray-700 uppercase border-b-4 dark:text-gray-400"
+            class="text-xs text-gray-700 uppercase border-b-4 dark:border-gray-700 dark:text-gray-400"
           >
             <tr>
               <th scope="col" class="px-2 md:px-6 py-3">
@@ -40,8 +40,10 @@ defineProps<{
               :key="i"
               class="border-b dark:border-gray-700"
               :class="{
-                'bg-red-100': trade.transaction === 'Sale',
-                'bg-green-100': trade.transaction === 'Buy',
+                'bg-red-100 dark:bg-transparent dark:text-red-600':
+                  trade.transaction === 'Sale',
+                'bg-green-100 dark:bg-transparent dark:text-green-500':
+                  trade.transaction === 'Buy',
               }"
             >
               <th
