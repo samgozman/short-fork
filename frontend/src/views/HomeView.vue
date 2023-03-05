@@ -185,6 +185,7 @@ export default defineComponent({
       this.stockTicker = stock;
       this.stockExchange = exchange === "NASD" ? "NASDAQ" : exchange;
       this.tradingViewKey = Math.random();
+      document.title = `Short-fork: ${stock}`;
     },
     getInsiders(insidersTable: IInsider[]) {
       this.insiders = insidersTable;
