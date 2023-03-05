@@ -4,6 +4,8 @@ version: '3.8'
 services:
   backend:
     build: ./backend
+    environment:
+      - NODE_ENV=development
     restart: always
     ports:
       - "3000:3000"

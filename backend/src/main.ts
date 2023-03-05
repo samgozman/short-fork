@@ -3,7 +3,15 @@ import { AppModule } from './app.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  app.enableCors();
+  app.enableCors({
+    origin:
+      process.env.NODE_ENV === 'development'
+        ? 'http://localhost:5173'
+        : [
+            'https://short-fork-production.up.railway.app',
+            'https://short-fork.up.railway.app',
+          ],
+  });
   await app.listen(3000);
 }
 bootstrap();
