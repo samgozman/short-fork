@@ -42,7 +42,7 @@ import { currentLanguage } from "@/components/elements/languageSwitcher";
         <TechnicalAnalysisWidget
           :stock="stockTicker"
           :exchange="stockExchange"
-          :key="`${tradingViewKey}_${currentTheme}`"
+          :key="`${tradingViewKey}_${currentTheme}_${currentLanguage}`"
         />
       </ContentBox>
       <ContentBox>
@@ -103,7 +103,7 @@ import { currentLanguage } from "@/components/elements/languageSwitcher";
         <TradingviewChartWidget
           :stock="stockTicker"
           :exchange="stockExchange"
-          :key="`${tradingViewKey}_${currentTheme}`"
+          :key="`${tradingViewKey}_${currentTheme}_${currentLanguage}`"
         />
       </ContentBox>
     </div>
