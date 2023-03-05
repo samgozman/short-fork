@@ -43,7 +43,7 @@ const { locale } = useI18n();
           samgozman
         </a>
       </p>
-      <p v-if="locale === 'ru'">
+      <p v-if="locale === 'ru'" class="dark:text-gray-300">
         Tinkoff pulse:
         <a
           href="https://www.tinkoff.ru/invest/social/profile/aqua_disco/"
