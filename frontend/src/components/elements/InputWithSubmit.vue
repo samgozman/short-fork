@@ -50,5 +50,11 @@ export default defineComponent({
       this.$emit("getTightshorts", stock);
     },
   },
+  beforeMount() {
+    const ticker = this.$route.params.ticker;
+    if (ticker && ticker !== "" && typeof ticker === "string") {
+      this.stock = ticker;
+    }
+  },
 });
 </script>
