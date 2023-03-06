@@ -62,8 +62,6 @@ export class FinvizService {
       };
       return data;
     } catch (error) {
-      // TODO: Log error to sentry, add exception filter
-      console.error(error);
       return null;
     }
   }

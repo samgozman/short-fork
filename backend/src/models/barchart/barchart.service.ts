@@ -40,7 +40,6 @@ export class BarchartService {
         .annual();
       barchartFinancialsIncome = await financials.income(stockTicker).annual();
     } catch (error) {
-      console.error(error);
       return null;
     }
 
@@ -70,12 +69,16 @@ export class BarchartService {
 
     return {
       longTermDebt: longDebt ? [...longDebt].reverse() : null,
-      shareholdersEquity: [
-        ...barchartFinancialsBalance.shareholdersEquity.total,
-      ].reverse(),
-      netIncome: [...barchartFinancialsIncome.netIncome].reverse(),
-      revenue: [...barchartFinancialsIncome.sales].reverse(),
-      dates: [...dates].reverse(),
+      shareholdersEquity: barchartFinancialsBalance.shareholdersEquity.total
+        ? [...barchartFinancialsBalance.shareholdersEquity.total].reverse()
+        : [],
+      netIncome: barchartFinancialsIncome.netIncome
+        ? [...barchartFinancialsIncome.netIncome].reverse()
+        : [],
+      revenue: barchartFinancialsIncome.sales
+        ? [...barchartFinancialsIncome.sales].reverse()
+        : [],
+      dates: dates ? [...dates].reverse() : [],
     };
   }
 
@@ -84,7 +87,6 @@ export class BarchartService {
     try {
       barchartOverview = await quotes.overview(stockTicker);
     } catch (error) {
-      console.error(error);
       return null;
     }
 
