@@ -14,8 +14,11 @@ export class ShortsqueezeService {
     return this.squeezeRepository.set(stockTicker, data);
   }
 
-  async fetch(stockTicker: string): Promise<IShortsqueeze> {
+  async fetch(stockTicker: string): Promise<IShortsqueeze | null> {
     const squeeze = await shortsqueeze(stockTicker);
+    if (!squeeze) {
+      return null;
+    }
 
     return {
       shortFlow: squeeze ? squeeze.shortPercentOfFloat : undefined,
