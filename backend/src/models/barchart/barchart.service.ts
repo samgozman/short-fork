@@ -40,7 +40,6 @@ export class BarchartService {
         .annual();
       barchartFinancialsIncome = await financials.income(stockTicker).annual();
     } catch (error) {
-      console.error(error);
       return null;
     }
 
@@ -88,7 +87,6 @@ export class BarchartService {
     try {
       barchartOverview = await quotes.overview(stockTicker);
     } catch (error) {
-      console.error(error);
       return null;
     }
 
