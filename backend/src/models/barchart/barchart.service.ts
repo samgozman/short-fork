@@ -51,6 +51,10 @@ export class BarchartService {
       return null;
     }
 
+    if (barchartFinancialsIncome.startsWith) {
+      return null;
+    }
+
     const startsWith = barchartFinancialsIncome.startsWith.split('-');
     const dates = [];
     for (let i = 0; i < barchartFinancialsIncome.periods; i++) {
