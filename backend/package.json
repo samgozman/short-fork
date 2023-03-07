@@ -1,6 +1,6 @@
 {
   "name": "short-fork-backend",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Stock market helper: display a Short Float & Volume percentage indicator from three different data sources in one place.",
   "author": "Sam Gozman <sam@gozman.space>",
   "license": "MIT",
