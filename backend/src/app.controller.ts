@@ -6,6 +6,7 @@ import {
   UseFilters,
 } from '@nestjs/common';
 import { AppService } from './app.service';
+import { TickerDto } from './dto/ticker.dto';
 import { HttpExceptionFilter } from './exceptions/http-exception.filter';
 
 @Controller({
@@ -16,8 +17,8 @@ export class AppController {
 
   @Get('finviz')
   @UseFilters(new HttpExceptionFilter())
-  async getFinviz(@Param('ticker') ticker: string) {
-    const data = await this.appService.getFinviz(ticker);
+  async getFinviz(@Param() params: TickerDto) {
+    const data = await this.appService.getFinviz(params.ticker);
     if (!data) {
       throw new NotFoundException();
     }
@@ -26,8 +27,8 @@ export class AppController {
 
   @Get('barchart/financial')
   @UseFilters(new HttpExceptionFilter())
-  async getBarchartFinancial(@Param('ticker') ticker: string) {
-    const data = await this.appService.getBarchartFinancial(ticker);
+  async getBarchartFinancial(@Param() params: TickerDto) {
+    const data = await this.appService.getBarchartFinancial(params.ticker);
     if (!data) {
       throw new NotFoundException();
     }
@@ -36,8 +37,8 @@ export class AppController {
 
   @Get('barchart/overview')
   @UseFilters(new HttpExceptionFilter())
-  async getBarchartOverview(@Param('ticker') ticker: string) {
-    const data = await this.appService.getBarchartOverview(ticker);
+  async getBarchartOverview(@Param() params: TickerDto) {
+    const data = await this.appService.getBarchartOverview(params.ticker);
     if (!data) {
       throw new NotFoundException();
     }
@@ -46,8 +47,8 @@ export class AppController {
 
   @Get('shortsqueeze')
   @UseFilters(new HttpExceptionFilter())
-  async getShortsqueeze(@Param('ticker') ticker: string) {
-    const data = await this.appService.getShortsqueeze(ticker);
+  async getShortsqueeze(@Param() params: TickerDto) {
+    const data = await this.appService.getShortsqueeze(params.ticker);
     if (!data) {
       throw new NotFoundException();
     }
@@ -56,8 +57,8 @@ export class AppController {
 
   @Get('tightshorts')
   @UseFilters(new HttpExceptionFilter())
-  async getTightshorts(@Param('ticker') ticker: string) {
-    const data = await this.appService.getTightshorts(ticker);
+  async getTightshorts(@Param() params: TickerDto) {
+    const data = await this.appService.getTightshorts(params.ticker);
     if (!data) {
       throw new NotFoundException();
     }
