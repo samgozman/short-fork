@@ -51,7 +51,7 @@ export class BarchartService {
       return null;
     }
 
-    if (barchartFinancialsIncome.startsWith) {
+    if (!barchartFinancialsIncome.startsWith) {
       return null;
     }
 
