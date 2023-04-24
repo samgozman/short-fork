@@ -2,3 +2,7 @@
 /db-data/
 
 node_modules/
+
+# Ignore IDE files
+.idea/
+.vscode/
