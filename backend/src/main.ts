@@ -12,6 +12,7 @@ async function bootstrap() {
         : [
             'https://short-fork-production.up.railway.app',
             'https://short-fork.up.railway.app',
+            'https://short-fork.extr.app',
           ],
   });
   await app.listen(3000);
