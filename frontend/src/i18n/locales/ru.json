@@ -9,6 +9,11 @@
     "theme": {
       "light": "Свет",
       "dark": "Мгла"
+    },
+    "attention": {
+      "title": "⚠️ Внимание!",
+      "messageOne": "Short-fork меняет свой адрес на",
+      "messageTwo": "Пожалуйста обновите адрес в закладках."
     }
   },
   "mainWidget": {

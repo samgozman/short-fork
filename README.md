@@ -10,7 +10,7 @@ This project aims to aggregate the main financial indicators of traded USA stock
 
 Initially, I created a web application for myself to display the most important information in a readable format on the smartphone screen.
 
-**[Go to short fork](https://short-fork.up.railway.app)**
+**[Go to short fork](https://short-fork.extr.app)**
 
 ## How to use
 
