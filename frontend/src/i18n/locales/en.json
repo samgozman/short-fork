@@ -9,6 +9,11 @@
     "theme": {
       "light": "Light",
       "dark": "Dark"
+    },
+    "attention": {
+      "title": "⚠️ Attention!",
+      "messageOne": "Short-fork is changing its URL to",
+      "messageTwo": "Please update your bookmarks."
     }
   },
   "mainWidget": {

@@ -8,6 +8,17 @@ import ThemeSwitcher from "@/components/elements/themeSwitcher/ThemeSwitcher.vue
     class="bg-white border-gray-200 px-2 sm:px-4 py-2 rounded-b dark:bg-slate-700 shadow-sm"
   >
     <div class="container flex flex-wrap items-center justify-between mx-auto">
+      <p class="w-full text-center dark:text-white font-medium">
+        <span class="font-bold">{{ $t("nav.attention.title") }}</span>
+        {{ $t("nav.attention.messageOne") }}
+        <a
+          href="https://short-fork.extr.app"
+          class="text-blue-500 hover:text-blue-600"
+          >https://short-fork.extr.app</a
+        >. {{ $t("nav.attention.messageTwo") }}
+      </p>
+    </div>
+    <div class="container flex flex-wrap items-center justify-between mx-auto">
       <a href="#" class="flex items-center md:w-[160px]">
         <span
           class="self-center text-xl font-semibold whitespace-nowrap dark:text-white px-4"
