@@ -28,7 +28,7 @@
     "@nestjs/core": "^9.2.1",
     "@nestjs/platform-express": "^9.2.1",
     "axios": "^1.2.2",
-    "barchart-dot-com": "^1.0.5",
+    "barchart-dot-com": "^1.0.6",
     "cache-manager": "^5.1.4",
     "cache-manager-redis-store": "^3.0.1",
     "class-transformer": "^0.5.1",
