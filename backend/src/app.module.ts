@@ -46,6 +46,7 @@ import { TightshortsService } from './models/tightshorts/tightshorts.service';
           socket: {
             host: config.get('REDIS_HOST'),
             port: config.get('REDIS_PORT'),
+            connectTimeout: 2500,
           },
           username: config.get('REDIS_USER'),
           password: config.get('REDIS_PASSWORD'),
