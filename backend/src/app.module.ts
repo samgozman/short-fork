@@ -52,6 +52,7 @@ import { TightshortsService } from './models/tightshorts/tightshorts.service';
           password: config.get('REDIS_PASSWORD'),
           database: 0,
           ttl: 60,
+          pingInterval: 4 * 60 * 1000,
         });
         return {
           store: () => store,
