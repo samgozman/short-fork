@@ -17,7 +17,7 @@ defineProps<{
           text: 'TradingView: ' + ticker,
         },
         {
-          url: `https://tightshorts.ru/quote/${ticker}`,
+          url: `https://tightshorts.extr.app/quote/${ticker}`,
           text: 'TightShorts: ' + ticker,
         },
         {

@@ -45,7 +45,7 @@ defineProps<{
     <HiddenParagraph>
       {{ $t("tightshorts.disclaimer") }}
       <a
-        href="https://tightshorts.ru"
+        href="https://tightshorts.extr.app"
         rel="noopener"
         target="_blank"
         class="underline"

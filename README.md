@@ -40,6 +40,6 @@ And finally, the TradingView chart with the most popular oscillators: RSI, AO, B
 
 * [finviz.com](https://finviz.com/) - Company name, website, price, P/E, P/S, ROE, ROA, Debt/Eq, Short Float %, RSI, etc.
 * [shortsqueeze.com](https://shortsqueeze.com/) - Short Float %. For this parameter, there are two sources of data.
-* [tightshorts.ru](https://tightshorts.ru/) - Short Volume %.
+* [tightshorts.extr.app](https://tightshorts.extr.app/) - Short Volume %.
 * [tradingview.com](https://ru.tradingview.com/gopro/?share_your_love=eragonovich) - Technical analysis widget and price chart.
 * [www.barchart.com](https://www.barchart.com/) - Debt to Equity, Revenue and Earnings, Options, Analyst Opinion.
