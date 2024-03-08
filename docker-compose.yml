@@ -6,7 +6,6 @@ services:
     build: ./backend
     environment:
       - NODE_ENV=development
-    restart: always
     ports:
       - "3000:3000"
     depends_on:
@@ -14,7 +13,6 @@ services:
 
   redis:
     image: redis:6.2.7-alpine3.16
-    restart: always
     environment:
       REDIS_PASSWORD: 9^ZmT4YWExu8FHPk
     entrypoint: ["/bin/sh", "-c", "redis-server --appendonly yes --requirepass $${REDIS_PASSWORD} --maxmemory 256mb --maxmemory-policy allkeys-lru"]
