@@ -1,9 +1,5 @@
 FROM node:18-alpine as builder
 ENV NODE_OPTIONS=--max-old-space-size=1024
-ENV VITE_API_URL=http://localhost:3000
-ENV VITE_DEFAULT_LOCALE=en
-ENV VITE_FALLBACK_LOCALE=en
-ENV VITE_SUPPORTED_LOCALES=en,ru
 WORKDIR /app
 COPY package*.json ./
 RUN npm ci
