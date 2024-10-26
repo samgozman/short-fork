@@ -10,6 +10,8 @@ async function bootstrap() {
       process.env.NODE_ENV === 'development'
         ? 'http://localhost:5173'
         : [
+            'https://tgc4os04sgs0gkowk408k00w.extr.app',
+            'https://kss0s0kwk8o80kc4ccoc0kcg.extr.app',
             'https://short-fork-production.up.railway.app',
             'https://short-fork.up.railway.app',
             'https://short-fork.extr.app',
