@@ -11,9 +11,9 @@
       "dark": "Dark"
     },
     "attention": {
-      "title": "🤖 Announcement!",
-      "messageOne": "I have created an automatic stock news channel bot for Telegram:",
-      "messageTwo": "Powered by latest LLM models filtering and rewriting system. Free and open source."
+      "title": "⚠️ Attention!",
+      "messageOne": "Short-fork is changing its URL to",
+      "messageTwo": "Please update your bookmarks."
     }
   },
   "mainWidget": {
