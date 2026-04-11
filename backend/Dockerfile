@@ -1,4 +1,5 @@
 FROM node:18-alpine AS build-env
+ENV NODE_ENV=development
 WORKDIR /app
 COPY package*.json ./
 RUN npm ci
