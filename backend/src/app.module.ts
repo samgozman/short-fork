@@ -5,6 +5,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { redisStore } from 'cache-manager-redis-store';
 import { CacheModule, Module } from '@nestjs/common';
 import { AppController } from './app.controller';
+import { HealthController } from './health.controller';
 import { AppService } from './app.service';
 import { FinvizService } from './models/finviz/finviz.service';
 import { FinvizRepository } from './models/finviz/finviz.repository';
@@ -61,7 +62,7 @@ import { TightshortsService } from './models/tightshorts/tightshorts.service';
       inject: [ConfigService],
     }),
   ],
-  controllers: [AppController],
+  controllers: [AppController, HealthController],
   providers: [
     {
       provide: APP_FILTER,
